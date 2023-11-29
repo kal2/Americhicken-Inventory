@@ -1,0 +1,134 @@
+Shipped To Customers
+--------------------
+
+Structure for database: BUYER.DBF
+
+Field  Field Name  Type       Width    Dec
+    1  NAME        Character     32
+    2  BUY_CODE    Character      4
+    3  STREET      Character     28
+    4  CITY        Character     20
+    5  STATE       Character      2
+    6  ZIP         Character      5
+    7  ZIP4        Character      4
+    8  INTERNAT    Character      1
+    9  STREET2     Character     28
+   10  COUNTRY     Character     28
+   11  INT_ZIP     Character      8
+   12  NOTE        Character     60
+   13  AREA_CODE   Character      3
+   14  PHONE       Character      7
+   15  FAX         Character     10
+   16  CONT_NAME   Character     42
+   17  CONT_NAM2   Character     42
+   18  CONT_PH     Character     10
+   19  CONT_FAX    Character     10
+   20  BBUYCODE    Character      4
+   21  CUS_BAL     Numeric       11      2
+   22  FRT_PH      Character     10
+   23  DEL_PH      Character     10
+   24  DEL_MAIL    Character     28
+   25  DEL_TIME    Character     12
+   26  SHIPS_180   Numeric        8
+   27  SHIPS_60    Numeric        8
+   28  SHIPS_EX    Numeric        8
+   29  DAYS_180    Numeric       10
+   30  DAYS_60     Numeric       10
+   31  DAYS_EX     Numeric       10
+   32  USED        Character      1
+   33  GRP_CODE    Character      4
+   34  GRP_DESC    Character     20
+   35  MON_RECV    Character     15
+   36  TUE_RECV    Character     15
+   37  WED_RECV    Character     15
+   38  THU_RECV    Character     15
+   39  FRI_RECV    Character     15
+   40  SAT_RECV    Character     15
+   41  SUN_RECV    Character     15
+** Total **                     604
+
+
+Bill To Customers
+-----------------
+
+Structure for database: BIL_BUY.DBF
+
+Field  Field Name  Type       Width    Dec
+    1  NAME        Character     32
+    2  BBUYCODE    Character      4
+    3  REG_NAME    Character     32
+    4  STREET      Character     28
+    5  CITY        Character     20
+    6  STATE       Character      2
+    7  ZIP         Character      5
+    8  ZIP4        Character      4
+    9  INTERNAT    Character      1
+   10  STREET2     Character     28
+   11  ISTREET     Character     28
+   12  ISTREET2    Character     28
+   13  ICITY       Character     20
+   14  COUNTRY     Character     28
+   15  INT_ZIP     Character      8
+   16  ILINE1      Character     35
+   17  ILINE2      Character     35
+   18  ILINE3      Character     35
+   19  CRED_LIM    Numeric        7
+   20  TERM_DAYS   Numeric        2
+   21  LETTER_C    Character      1
+   22  BEG_DATE    Date           8
+   23  END_DATE    Date           8
+   24  LET_CRD     Numeric        7
+   25  GUARAN      Character     20
+   26  NOTE        Character     60
+   27  NOTE2       Character     60
+   28  AREA_CODE   Character      3
+   29  PHONE       Character      7
+   30  EXTENSION   Character      5
+   31  FAX         Character     10
+   32  FST_SALE    Date           8
+   33  CUS_BAL     Numeric        9      2
+   34  BAL_CALC    Numeric        9      2
+   35  NO_SHRTRPT  Character      1
+   36  DATE_RVWD   Date           8
+   37  DATE_FIN    Date           8
+   38  FIN_PROV    Character      1
+   39  CUST_SW     Character      1
+   40  PO_WARN     Character     20
+   41  HIGH_BAL    Numeric       10      2
+   42  LED_CODE    Character      4
+   43  SHIPS       Numeric       11
+   44  NBR_DAYS    Numeric       11
+   45  SHIPS_25    Numeric       11
+   46  DAYS_25     Numeric       11
+   47  SHIPS_180   Numeric       11
+   48  DAYS_180    Numeric       11
+   49  ACTIVE      Character      1
+   50  CRED_BAL    Character      1
+   51  SHIPS_EX    Numeric       11
+   52  DAYS_EX     Numeric       11
+   53  CRED_RQST   Character     32
+   54  DATE_RQST   Date           8
+   55  PO_ATTN     Character     20
+   56  CREDIT_AP   Character      1
+   57  CREDAP_DT   Date           8
+   58  DB_RPT      Character      1
+   59  DB_DT       Date           8
+   60  REGION      Character     30
+   61  S1_LIM      Numeric        8
+   62  S1_CODE     Character      2
+   63  S1_BAL      Numeric        8
+   64  S2_LIM      Numeric        8
+   65  S2_CODE     Character      2
+   66  S2_BAL      Numeric        8
+   67  S3_LIM      Numeric        8
+   68  S3_CODE     Character      2
+   69  S3_BAL      Numeric        8
+   70  WORKSHIPS   Numeric       11
+   71  WORKDAYS    Numeric       15
+   72  USED        Character      1
+   73  CUS_BAL15   Numeric       11      2
+   74  FED_CUST    Character      1
+   75  INCEN_CD    Character      2
+   76  NO_INCEN    Character      1
+** Total **                     945
+

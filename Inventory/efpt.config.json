@@ -1,0 +1,67 @@
+﻿{
+   "CodeGenerationMode": 3,
+   "ContextClassName": "AmerichickenContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Inventory",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[bil_buy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[buyer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[freight]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[po_head]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[rem_sup]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[salesman]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[supplier]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "miracle\\mssqlserver01.Americhicken.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": true,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
