@@ -12,12 +12,6 @@
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            // Check for specific key presses while Control is active
-            if (keyData == Keys.PageDown)
-            {
-                actionInput.Focus();
-                return true; // Indicate that you handled the key press
-            }
 
             // Call the base method for keys you did not handle
             return base.ProcessCmdKey(ref msg, keyData);

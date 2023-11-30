@@ -6,7 +6,7 @@ namespace Inventory.UI.Menu
     {
         public static string[] UserMenuSelection(string currentMenu, string userSelection)
         {
-            // menuItems default to Main Menu so won't throw compile errors and return user to main after program error
+            //Have menuItems default to Main Menu so won't throw compile errors, and will return user to main after program error
             string[]? menuItems = MenuItemLists.MainMenu();
 
             //Check which menu is currently being displayed
@@ -14,7 +14,6 @@ namespace Inventory.UI.Menu
             {
 
                 //-----------Main Menu-----------//
-
                 case "main":
 
                     //See what menu item the user selected
@@ -33,7 +32,6 @@ namespace Inventory.UI.Menu
                     break;
 
                 //-----------PO Menu----------//
-
                 case "purchase":
 
                     switch (userSelection)
@@ -48,7 +46,6 @@ namespace Inventory.UI.Menu
                     break;
 
                 //-----------File Maintenance Menu----------//
-
                 case "masterfileupdate":
 
                     switch (userSelection)

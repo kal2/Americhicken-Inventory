@@ -9,7 +9,6 @@ namespace Inventory
 {
     public partial class MainWindow : Form, IUserActionInput
     {
-        // -- Constructor -- //
 
         public MainWindow()
         {
@@ -21,8 +20,6 @@ namespace Inventory
             splitContainer2.Panel1.Controls.Add(initialControl);
         }
 
-        // -- Methods -- //
-
         //Displays passed control in the main window
         public void DisplayControl(UserControl control)
         {
@@ -33,7 +30,13 @@ namespace Inventory
             splitContainer2.Panel1.Refresh();
         }
 
-        // -- UserActionInput Interface Methods -- //
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //Passes current date to dateLabel
+            dateLabel.Text = DateTime.Now.Date.ToString("d");
+        }
+
+        // -- Interface Methods -- //
 
         public void SetTextBoxText(string text)
         {
@@ -55,12 +58,9 @@ namespace Inventory
             userActionInputMain.actionInput.KeyDown -= handler;
         }
 
-        // -- Event Listeners -- //
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainWindow_Shown(object sender, EventArgs e)
         {
-            //Passes current date to dateLabel
-            dateLabel.Text = DateTime.Now.Date.ToString("d");
+            userActionInputMain.actionInput.Focus();
         }
     }
 }

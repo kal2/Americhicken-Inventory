@@ -153,6 +153,7 @@
             Name = "MainWindow";
             Text = "AmeriChicken Inventory";
             Load += Form1_Load;
+            Shown += MainWindow_Shown;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
