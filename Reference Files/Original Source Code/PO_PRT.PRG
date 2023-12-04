@@ -1,0 +1,653 @@
+************  
+* Program.: PO_PRT.PRG
+* Author..: Grace Keller
+* Date....: 12/12/94
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: PRINT ORDER                
+*
+* ---OPEN FILES
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+
+SELECT A
+USE
+SELECT D
+USE
+SELECT E
+USE
+SELECT F
+USE
+
+SET CONSOLE OFF
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+ELSE
+   SET PRINT TO LPT1
+ENDIF
+SET DEVICE TO PRINT
+SET PRINT ON
+
+**** DO ALL THE NAME/ADDRESS SEARCHING HERE
+SELECT B
+STORE SALESMAN TO MSALESMAN
+STORE PO_NBR TO MPO_NBR
+STORE PO_SUFFIX TO MPO_SUFFIX
+STORE BBUYNAME TO MBIL_NAME       
+STORE RSUPNAME TO MREM_NAME       
+STORE FRT_NAME TO MFRT_NAME
+STORE FRT_NAME2 TO MFRT_NAME2
+STORE SPACE(32) TO MFRT_NAME3
+
+**************************
+** GET CUSTOMER INFORMATION
+***************************
+IF MPROG_CODE = 2
+   STORE BUYNAME TO MCUS_NAME
+   STORE BUYSTRT TO MCUS_STRT   
+   STORE TRIM(BUYCITY) + ', ' + BUYST + '  ' + BUYZIP TO MCUS_CITYST
+ELSE
+   STORE 'UNKNOWN            '+ SPACE(13) TO MCUS_NAME
+   STORE SPACE(22) TO MCUS_CITYST
+   STORE SPACE(28) TO MCUS_STRT           
+   STORE SPACE(11) TO MCUS_ZIP
+   MCUS_CITYST = TRIM(MCUS_CITYST)
+ENDIF
+
+STORE TRIM(BBUYCITY) + ', ' + BBUYST + '  ' + BBUYZIP TO MBIL_CITYST
+STORE BBUYSTRT  TO MBIL_STRT
+MBIL_CITYST = TRIM(MBIL_CITYST)
+
+***************************
+** GET SUPPLIER INFORMATION
+***************************
+
+IF MPROG_CODE = 2
+   STORE SUPNAME TO MSUP_NAME
+   STORE SUPSTRT TO MSUP_STRT   
+   STORE TRIM(SUPCITY) + ', ' + SUPST + '  ' + SUPZIP TO MSUP_CITYST
+ELSE
+   STORE 'UNKNOWN                 '+ SPACE(8) TO MSUP_NAME
+   STORE SPACE(22) TO MSUP_CITYST
+   STORE SPACE(28) TO MSUP_STRT           
+   STORE SPACE(11) TO MSUP_ZIP
+   MSUP_CITYST = TRIM(MSUP_CITYST)
+ENDIF
+
+STORE TRIM(RSUPCITY) + ', ' + RSUPST + '  ' + RSUPZIP TO MREM_CITYST
+STORE RSUPSTRT  TO MREM_STRT           
+MREM_CITYST = TRIM(MREM_CITYST)
+
+SELECT F
+DO FOX_USE WITH "&MMASTDBF.SALESMAN INDEX &MMASTDBF.SAL_CODE", .F.
+SEEK MSALESMAN
+IF .NOT. EOF()
+   MSAL_NAME = NAME
+ELSE
+   MSAL_NAME = 'SALESPERSON NAME NOT ON FILE' + SPACE(4)
+ENDIF
+USE
+
+SELECT B
+** THIS IS THE PRINT ROUTINE
+? SPACE(3) + 'PRINT DATE'
+
+*** FONT ARIAL BOLD
+?? CHR(27) + '(s1p10v0s3b16602T'
+
+*** POINT HEIGHT 20 - DEFAULT IS 12
+?? CHR(27) + '(s20V'
+
+IF MFRT_COPY
+   ??  SPACE(20) + '  FREIGHT COPY   ' + SPACE(15)
+ELSE
+   ??  SPACE(20) + 'AMERICHICKEN, INC' + SPACE(15)
+ENDIF
+
+IF SALESMAN <> SPACE(2)
+   ?? SALESMAN + '-'
+ELSE
+   ?? SPACE(3)
+ENDIF
+?? PO_NBR
+IF PO_SUFFIX <> ' '
+   ?? '-' + PO_SUFFIX
+ENDIF
+
+*** FONT LETTER GOTHIC
+?? CHR(27) + '(s0p10h0s3b4102T'
+
+*** PRINT IN 6 LINES PER IN/VERTICAL
+?? chr(27) + '&l6D'
+
+?
+? SPACE(3)   
+?? SPACE(1) + DTOC(DATE())
+
+IF B->COR_FLG = 'Y' .AND. B->COR_HEAD = 'C'
+   ?? SPACE(3) + '*C*C*C*'   + SPACE(5)
+ELSE
+   ?? SPACE(15)
+ENDIF
+
+IF B->COR_FLG = 'Y'
+   ?? '  *CORRECTION*'
+ENDIF
+
+?
+? SPACE(3) + 'ORDER: ' + DTOC(ORD_DATE) + SPACE(2)
+?? 'SHIP: ' + DTOC(SHIP_DATE) + SPACE(2)
+?? 'DELV: ' + DTOC(DEL_REQD) + SPACE(2)
+?? 'CUST PO#: ' + BUYER_PO + SPACE(2)   
+
+IF SALESMAN = '44' .OR. SALESMAN = '39' .OR. SALESMAN = '88' .OR. SALESMAN = '50'
+   IF IPO_NBR <> SPACE(4)
+      ?? 'INTRA PO: ' + ISALESMAN + '-' + IPO_NBR + '-' + IPO_SUFFIX
+   ENDIF
+   IF PU_LOC <> SPACE(20) .OR.  PU_NBR <> SPACE(10)
+      ? SPACE(3) + 'SUPPLIER P/U LOCATION: ' + PU_LOC + SPACE(5) + 'P/U NBR: ' + PU_NBR
+   ENDIF
+ELSE  
+   ?
+ENDIF
+
+? SPACE(3) 
+?? 'SHIPPED FROM SUPPLIER:'+ SPACE(10)           
+
+?? SPACE(10)
+
+?? 'REMIT TO SUPPLIER:' + SPACE(14)
+
+? SPACE(3) + MSUP_NAME + SPACE(10) + MREM_NAME
+? SPACE(3) + MSUP_STRT + SPACE(14) + MREM_STRT
+? SPACE(3) + MSUP_CITYST + SPACE(42-LEN(MSUP_CITYST)) + MREM_CITYST
+
+?
+? SPACE(3)
+?? 'SHIPPED TO CUSTOMER:' + SPACE(12)          
+?? SPACE(10) 
+?? 'BILL TO CUSTOMER: ' + SPACE(15)
+
+? SPACE(3) + MCUS_NAME + SPACE(10) + MBIL_NAME
+? SPACE(3) + MCUS_STRT + SPACE(14) + MBIL_STRT
+? SPACE(3) + MCUS_CITYST + SPACE(42-LEN(MCUS_CITYST)) + MBIL_CITYST
+
+MSAL_NAME = TRIM(MSAL_NAME)
+MSPACEIT = 93 - LEN(MSAL_NAME)
+DO CASE
+CASE MSALESMAN <> '  ' .AND. VAL(MSALESMAN) >= 25 .AND. VAL(MSALESMAN) <= 29
+   ? SPACE(3) + SPACE(MSPACEIT) + MSAL_NAME
+OTHERWISE
+   ?
+ENDCASE
+
+? SPACE(3) + REPLICATE('=',93)
+? SPACE(3) + 'ITM  CS PRODUCT / PACKAGING / SIZE DESCRIPTION'
+?? SPACE(19) + 'QTY SHIP   $ PURCH    $ SELL'
+? SPACE(3) + REPLICATE('=',93)
+MTOT_SELL = 0
+MTOT_PUR  = 0
+MTOT_FRT  = 0
+MTOT_LBS  = 0
+SELECT C
+SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+MCOUNT = 0
+MLINE = 20
+
+DO WHILE .NOT. EOF() .AND. MSALESMAN = SALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+   IF PROD_DESC = SPACE(4)                           
+      SKIP
+      LOOP
+   ENDIF
+   MCOUNT = MCOUNT + 1
+   
+   STORE SPACE(6) TO MPART1
+   STORE SPACE(8) TO MPART2, MPART3, MPART6
+   STORE SPACE(9) TO MPART3_X
+   STORE SPACE(20) TO MPART4
+   STORE SPACE(13) TO MPART5
+   
+   SELECT F
+   DO FOX_USE WITH "&MDBFLOC.PRODUCTS INDEX &MDBFLOC.PRODUCTS", .F.
+   IF C->FRH_FRZ <> SPACE(2)
+      SEEK 'F' + C->FRH_FRZ
+      IF .NOT. EOF()
+         STORE SUBSTR(DESC,1,6) TO MPART1
+      ENDIF
+   ENDIF
+   
+   IF C->GRADE <> SPACE(1)
+      SEEK 'G' + C->GRADE
+      IF .NOT. EOF()
+         STORE SUBSTR(DESC,1,8) TO MPART2
+      ENDIF
+   ENDIF
+   
+   IF SUBSTR(C->PACKAGED,1,1) <> SPACE(1)
+      SEEK 'D' + SUBSTR(C->PACKAGED,1,1)
+      IF .NOT. EOF()
+         STORE SUBSTR(DESC,1,8) TO MPART3
+      ENDIF
+   ENDIF
+   
+   IF SUBSTR(C->PACKAGED,2) <> SPACE(1)
+      SEEK 'K' + SUBSTR(C->PACKAGED,2)
+      IF .NOT. EOF()
+         STORE SUBSTR(DESC,1,9) TO MPART3_X
+      ENDIF
+   ENDIF
+   
+   IF MPART3 = SPACE(8)
+      MPART3 = MPART3_X             
+   ELSE
+      MPART3 = TRIM(MPART3) + ' ' + MPART3_X  
+   ENDIF
+   
+   SEEK 'R' + C->PROD_DESC
+   IF .NOT. EOF()
+      STORE DESC TO MPART4 
+   ENDIF
+   
+   IF C->SIZE <> SPACE(5)
+      SEEK 'Z' + C->SIZE
+      IF .NOT. EOF()
+         STORE SUBSTR(DESC,1,13) TO MPART5
+      ENDIF
+   ENDIF
+   
+   IF C->PACKED <> SPACE(8)
+      SEEK 'S' + C->PACKED
+      IF .NOT. EOF()
+         STORE SUBSTR(DESC,1,11) TO MPART6
+      ENDIF
+   ENDIF
+   
+   SELECT C
+   ? SPACE(3) + SUBSTR(ITEM_NBR,2) + '. ' + TRANSFORM(QTY, '@Z 9999') + SPACE(1)
+   MLINE = MLINE + 1
+   
+   MPRT_LINE = ' '
+   MPART1 = TRIM(MPART1)
+   MPART2 = TRIM(MPART2)
+   MPART3 = TRIM(MPART3)
+   MPART4 = TRIM(MPART4)
+   MPART5 = TRIM(MPART5)
+   MPART6 = TRIM(MPART6)
+   
+   MLEN1 = LEN(MPART1)
+   MLEN2 = LEN(MPART2)
+   MLEN3 = LEN(MPART3)
+   MLEN4 = LEN(MPART4)
+   MLEN5 = LEN(MPART5)
+   MLEN6 = LEN(MPART6)
+   IF MLEN1 <> 0
+      MPRT_LINE = MPRT_LINE + MPART1 + ' '
+   ENDIF
+   IF MLEN2 <> 0
+      MPRT_LINE = MPRT_LINE + MPART2 + ' '
+   ENDIF
+   IF MLEN4 <> 0
+      MPRT_LINE = MPRT_LINE + MPART4 + ' '
+   ENDIF
+   IF MLEN5 <> 0
+      MPRT_LINE = MPRT_LINE + MPART5 + ' '
+   ENDIF
+   IF MLEN6 <> 0
+      MPRT_LINE = MPRT_LINE + MPART6 + ' '
+   ENDIF
+   IF MLEN3 <> 0
+      MPRT_LINE = MPRT_LINE + MPART3 + ' '
+   ENDIF
+   
+   MPRT_LINE = TRIM(SUBSTR(MPRT_LINE,2))
+   MTOT_LEN = LEN(MPRT_LINE)
+   
+   IF MTOT_LEN > 56
+      ?? SUBSTR(MPRT_LINE,1,56)
+      MTOT_LEN = 56
+   ELSE
+      ?? MPRT_LINE
+   ENDIF
+   
+   MDIFF = 56 - MTOT_LEN
+   ?? SPACE(MDIFF)             
+   
+   ?? TRANSFORM(LBS, '999999.99')
+   ?? SPACE(1) + TRANSFORM(TOT_PURCH, '999999.99')
+   ?? SPACE(1) + TRANSFORM(TOT_SELL, '999999.99')                
+   *IF SUP_PCODE <> SPACE(10)  
+   *   ? SPACE(3) + SPACE(8) + 'VENDOR CODE #: ' + SUP_PREFX + SUP_PCODE
+   *   MLINE = MLINE + 1
+   *ENDIF                  
+   
+   ? SPACE(3) + REPLICATE('-',93)
+   MLINE = MLINE + 1
+   
+   **?? SPACE(4) + TRANSFORM(PUR_PRICE, '99.9999')
+   **?? SPACE(4) + TRANSFORM(SEL_PRICE, '99.9999')
+   
+   *? SPACE(3)
+   *?? CHR(27) + '-' + '1'
+   *??  SPACE(65) 
+   *?? SPACE(06)                          
+   *?? SPACE(1) + TRANSFORM(TOT_PURCH, '999,999.99')
+   *?? SPACE(1) + TRANSFORM(TOT_SELL, '999,999.99') + SPACE(2)
+   *?? CHR(27) + '-' + '0'
+   *?
+   MTOT_SELL = MTOT_SELL + TOT_SELL
+   MTOT_PUR  = MTOT_PUR  + TOT_PURCH
+   MTOT_LBS  = MTOT_LBS  + LBS
+   SKIP
+ENDDO
+
+
+?
+? SPACE(3)
+??  SPACE(51) 
+?? 'TOTALS:'                          
+?? SPACE(6)
+?? TRANSFORM(MTOT_LBS, '999999.99')
+?? SPACE(1) + TRANSFORM(MTOT_PUR, '999999.99')
+?? SPACE(1) + TRANSFORM(MTOT_SELL, '999999.99')            
+?
+MLINE = MLINE + 3
+
+IF (MCOUNT*3)+5+MLINE > 54
+   ? SPACE(3) + '*********>  ORDER CONTINUED ON NEXT PAGE  <*********'
+   ?
+   EJECT
+   ?? SPACE(3) + 'PRINT DATE'
+   
+   *** FONT ARIAL BOLD
+   ?? CHR(27) + '(s1p10v0s3b16602T'
+   
+   *** POINT HEIGHT 20 - DEFAULT IS 12
+   ?? CHR(27) + '(s20V'
+   
+   IF MFRT_COPY
+      ??  SPACE(20) + '  FREIGHT COPY   ' + SPACE(15)
+   ELSE
+      ??  SPACE(20) + 'AMERICHICKEN, INC' + SPACE(15)
+   ENDIF
+   
+   IF SALESMAN <> SPACE(2)
+      ?? SALESMAN + '-'
+   ELSE
+      ?? SPACE(3)
+   ENDIF
+   ?? PO_NBR
+   IF PO_SUFFIX <> ' '
+      ?? '-' + PO_SUFFIX
+   ENDIF
+   
+   *** FONT LETTER GOTHIC
+   ?? CHR(27) + '(s0p10h0s3b4102T'
+   
+   *** PRINT IN 6 LINES PER IN/VERTICAL
+   ?? chr(27) + '&l6D'
+   
+   ?? SPACE(2) + 'PAGE: 2'
+   ?
+ENDIF
+
+SELECT C
+SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+? SPACE(3) + REPLICATE('=',93)
+? SPACE(3) 
+?? '|' + 'ITEM ' + '|' + ' CASE ' + '|' + 'UNIT PACK ' + '|' + 'FR/Z' + '|' + 'PTY' +  '|' + 'REF'      
+??  '|' + 'PAK' + '|' + 'PRODCT' + '|' + ' SIZE  '+ '|' + 'SHIPPED QTY'  
+?? '|' + '  PUR PRICE'+  '|' + ' SELL PRICE' +  '|'
+*** BLANK LINE
+? SPACE(3) + '|' + SPACE(5) + '|' + SPACE(6) + '|'+ SPACE(10) + '|' + SPACE(4) + '|' + SPACE(3) +  '|' + SPACE(3)   
+??  '|' + SPACE(3) + '|' + SPACE(6) + '|' + SPACE(7) + '|' + SPACE(11)
+?? '|' + SPACE(11) +  '|' + SPACE(11) +  '|'
+
+
+DO WHILE .NOT. EOF() .AND. MSALESMAN = SALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+   IF PROD_DESC = SPACE(4)                           
+      SKIP
+      LOOP
+   ENDIF
+   
+   ? SPACE(3) + '|' +  ' ' + ITEM_NBR
+   *DO CASE
+   *CASE MCOMPANY = 'DIVISION 15' .OR. MPROG_CODE = 2 .OR. MSALESMAN = '44' .OR. MSALESMAN = '39'
+   IF B->COR_FLG = 'Y' .AND. C->COR_ITM  = 'C'
+      ?? '*C'                      
+   ELSE
+      ?? '. '
+   ENDIF
+   *OTHERWISE
+   *   ?? '. '
+   *ENDCASE
+   ?? '|'+ ' ' + TRANSFORM(QTY,'9999') + ' ' + '|'+ ' ' + PACKED + ' ' + '|'
+   ?? ' ' + FRH_FRZ + ' ' + '|' + ' '
+   ?? GRADE + ' ' + '|' + ' ' + SUBSTR(PACKAGED,1,1) + ' '
+   ??  '|' + ' ' + SUBSTR(PACKAGED,2) + ' ' +  '|' + ' ' + PROD_DESC 
+   ?? ' ' + '|' + ' ' + SIZE
+   ?? ' ' + '|' + '  ' + TRANSFORM(LBS,'999999.99')     
+   ??   '|' + '   ' + TRANSFORM(PUR_PRICE,'99.9999') + ' ' +  '|' + '   '
+   ?? TRANSFORM(SEL_PRICE,'99.9999')+ ' ' +  '|'
+   
+   ? SPACE(3) + '|' + SPACE(5) + '|' + SPACE(6) + '|'
+   IF LOT_NBR <> SPACE(10)
+      **?? 'L:' + LOT_NBR 
+      ?? LOT_NBR 
+   ELSE
+      ?? SPACE(10)
+   ENDIF
+   ?? '|'
+   
+   IF SUP_PCODE <> SPACE(10)
+      ?? 'VEND #: ' + SUP_PREFX+SUP_PCODE             
+      SELECT F
+      DO FOX_USE WITH "&MDBFLOC.SUP_PROD INDEX &MDBFLOC.SUP_PROD", .F.
+      SEEK C->SUP_PREFX+C->SUP_PCODE
+      ?? ' ' + DESCRIP
+      ?? ' ' + '|'
+      SELECT C
+   ELSE
+      ?? SPACE(4) + '|' + SPACE(3)
+      ??  '|' + SPACE(3)   
+      ?? '|' + SPACE(3) + '|' + SPACE(6) 
+      ?? '|' + SPACE(7) + '|'
+      ?? SPACE(11) + '|'+ SPACE(11)
+      ?? '|' + SPACE(11) +  '|'
+   ENDIF
+   *** BLANK LINE
+   ? SPACE(3) + '|' + REPLICATE('-',91) + '|'
+   
+   SKIP
+ENDDO
+
+? SPACE(3) + REPLICATE('=',93)
+?
+SELECT B
+
+MPRT_ADJ = .T.
+IF MPRT_ADJ
+   IF CUS_AMT1 <> 0 .OR. CUS_AMT2 <> 0 .OR. CUS_PALL <> 0
+      ?  SPACE(3) + '1. CUSTOMER ADJUSTMENT: ' + CUS_REAS1 + SPACE(5) + TRANSFORM(CUS_AMT1, '9,999,999.99') + SPACE(5)
+      ?? '2. CUSTOMER ADJUSTMENT: ' + CUS_REAS2 + SPACE(5) + TRANSFORM(CUS_AMT2, '9,999,999.99')
+      ? SPACE(3) + 'CUSTOMER PALLETS        ' + SPACE(15) + SPACE(05) + TRANSFORM(SUP_PALL, '9,999,999.99')
+      MTOT_SELL = MTOT_SELL + + CUS_AMT1 + CUS_AMT2 + CUS_PALL
+      *DO CASE
+      *CASE MCOMPANY = 'DIVISION 15' .OR. MPROG_CODE = 2 .OR. MSALESMAN = '44' .OR. MSALESMAN = '39'
+      IF B->COR_FLG = 'Y' .AND. B->COR_CADJ  = 'C'
+         ? SPACE(3) + REPLICATE('*C',47)
+      ELSE
+         ? SPACE(3) + REPLICATE('=',94)
+      ENDIF
+      *OTHERWISE
+      *   ? SPACE(3) + REPLICATE('=',94)
+      *ENDCASE
+   ENDIF
+   
+   IF SUP_AMT1 <> 0 .OR. SUP_AMT2 <> 0 .OR. SUP_PALL <> 0
+      ? SPACE(3) + '1. SUPPLIER ADJUSTMENT: ' + SUP_REAS1 + SPACE(5) + TRANSFORM(SUP_AMT1, '9,999,999.99') + SPACE(5)
+      ?? '2. SUPPLIER ADJUSTMENT: ' + SUP_REAS2 + SPACE(5) + TRANSFORM(SUP_AMT2, '9,999,999.99')
+      ? SPACE(3) + '   SUPPLIER PALLETS        ' + SPACE(15) + SPACE(05) + TRANSFORM(SUP_PALL, '9,999,999.99')
+      MTOT_PUR  = MTOT_PUR  + SUP_AMT1 + SUP_AMT2 + SUP_PALL
+      *DO CASE
+      *CASE MCOMPANY = 'DIVISION 15' .OR. MPROG_CODE = 2 .OR. MSALESMAN = '44' .OR. MSALESMAN = '39'
+      IF B->COR_FLG = 'Y' .AND. B->COR_SADJ  = 'C'
+         ? SPACE(3) + REPLICATE('*C',47)
+      ELSE
+         ? SPACE(3) + REPLICATE('=',94)
+      ENDIF
+      *OTHERWISE
+      *   ? SPACE(3) + REPLICATE('=',94)
+      *ENDCASE
+   ENDIF
+ENDIF
+MPRT_FRT = .T.
+IF MPRT_FRT
+   IF MFRT_NAME <> SPACE(32) .AND. MFRT_NAME <> 'NONE'
+      ************************************
+      **** NOW DO FREIGHT INFORMATION ****
+      ************************************
+      ? SPACE(3) + 'FREIGHT CARRIER:   '  + MFRT_NAME + SPACE(05) + 'AMOUNT: ' + SPACE(5) + TRANSFORM(B->FRT_AMT1, '9999999.99')
+      IF REF_PO1 <> SPACE(9) .OR. REF_PO2 <> SPACE(9) .OR. REF_PO3 <> SPACE(9) .OR. REF_PO4 <> SPACE(9) .OR. REF_PO5 <> SPACE(9) .OR. REF_PO6 <> SPACE(9)
+         ? SPACE(3) + 'SHIPPED WITH: ' + REF_PO1
+         IF REF_PO2 <> SPACE(9)
+            ?? '; ' + REF_PO2
+         ENDIF
+         IF REF_PO3 <> SPACE(9)
+            ?? '; ' + REF_PO3
+         ENDIF
+         IF REF_PO4 <> SPACE(9)
+            ?? '; ' + REF_PO4
+         ENDIF
+         IF REF_PO5 <> SPACE(9)
+            ?? '; ' + REF_PO5
+         ENDIF
+         IF REF_PO5 <> SPACE(9)
+            ?? '; ' + REF_PO5
+         ENDIF
+      ENDIF
+      IF FRT1_RS1 <> SPACE(10) .OR. FRT1_RS2 <> SPACE(10) .OR. FRT1_ADJ1 <> 0 .OR. FRT1_ADJ2 <> 0
+         ? SPACE(3) + '1. FREIGHT ADJUSTMENT:  ' + FRT1_RS1  +SPACE(05) + TRANSFORM(FRT1_ADJ1, '9999999.99') + SPACE(5)
+         ?? '2. FREIGHT ADJUSTMENT:  ' + FRT1_RS2  + SPACE(5) + TRANSFORM(FRT1_ADJ2, '9999999.99')
+      ENDIF
+      IF FRT_PALL <> 0
+         ? SPACE(3) + '   FREIGHT PALLETS:     ' + SPACE(15)  + SPACE(5) + TRANSFORM(FRT_PALL, '9999999.99')
+      ENDIF
+   ENDIF
+   *IF MSALESMAN = '44'
+   IF MFRT_NAME2 <> SPACE(32) .AND. MFRT_NAME2 <> 'NONE'
+      ? SPACE(3) + 'FREIGHT CARR #2:   '  + MFRT_NAME2 + SPACE(05) + 'AMOUNT: ' + SPACE(5) + TRANSFORM(B->FRT_AMT2, '9999999.99')
+   ENDIF
+   *ENDIF
+   IF MPROG_CODE = 2
+      *IF MFRT_NAME2 <> SPACE(32) .AND. MFRT_NAME2 <> 'NONE'
+      *   ? SPACE(3) + 'FREIGHT CARR #2:   '  + MFRT_NAME2 + SPACE(05) + 'AMOUNT: ' + SPACE(5) + TRANSFORM(B->FRT_AMT2, '9999999.99')
+      *ENDIF
+      IF MFRT_NAME3 <> SPACE(32) .AND. MFRT_NAME3 <> 'NONE'
+         ? SPACE(3) + 'FREIGHT CARR #3:   '  + MFRT_NAME3 + SPACE(05) + 'AMOUNT: ' + SPACE(5) + TRANSFORM(B->FRT_AMT3, '9999999.99')
+      ENDIF
+      
+   ENDIF
+   
+   *DO CASE
+   *CASE MCOMPANY = 'DIVISION 15' .OR. MPROG_CODE = 2 .OR. MSALESMAN = '44'  .OR. MSALESMAN = '39'
+   IF B->COR_FLG = 'Y' .AND. B->COR_FRT  = 'C'
+      ? SPACE(3) + REPLICATE('*C',47)
+   ELSE
+      ? SPACE(3) + REPLICATE('=',94)
+   ENDIF
+   *OTHERWISE
+   *   ? SPACE(3) + REPLICATE('=',94)
+   *ENDCASE
+ENDIF
+
+IF MISC_AMT1 <> 0 .OR. MISC_AMT2 <> 0 
+   **** NOW DO MISCELLANEOUS ADJUSTMENTS
+   ? SPACE(3) + '1. MISCELLANEOUS ADJUST:' + SPACE(15)  + TRANSFORM(MISC_AMT1, '9999999.99') + SPACE(5)
+   ?? '2. MISCELLANEOUS ADJUST:' + SPACE(15)  + SPACE(05) + TRANSFORM(MISC_AMT2, '9999999.99')
+   *DO CASE
+   *CASE MCOMPANY = 'DIVISION 15' .OR. MPROG_CODE = 2 .OR. MSALESMAN = '44' .OR. MSALESMAN = '39'
+   IF B->COR_FLG = 'Y' .AND. B->COR_MISC  = 'C'
+      ? SPACE(3) + REPLICATE('*C',47)
+   ELSE
+      ? SPACE(3) + REPLICATE('=',94)
+   ENDIF
+   *OTHERWISE
+   *   ? SPACE(3) + REPLICATE('=',94)
+   *ENDCASE
+ENDIF
+
+IF MCOMPANY = 'DIVISION 15'
+   IF HOLD_STOR <> ' ' .OR. (B->COR_FLG = 'Y' .AND. B->COR_MISC = 'C')
+      **** NOW DO HOLD STORAGE                
+      ? SPACE(3) + 'HOLD STORAGE FLAG: ' 
+      IF HOLD_STOR = 'Y'
+         ?? HOLD_STOR
+      ELSE
+         ?? 'N'
+      ENDIF
+      IF B->COR_FLG = 'Y' .AND. B->COR_MISC  = 'C'
+         ? SPACE(3) + REPLICATE('*C',47)
+      ELSE
+         ? SPACE(3) + REPLICATE('=',94)
+      ENDIF
+   ENDIF
+ENDIF
+
+IF MPROG_CODE = 2
+   IF MISC_AMT3 <> 0                       
+      **** NOW DO MISCELLANEOUS ADJUSTMENTS
+      ? SPACE(3) + '3. MISCELLANEOUS ADJUST:' + SPACE(15)  + TRANSFORM(MISC_AMT3, '9999999.99') + SPACE(5)
+      ? SPACE(3) + REPLICATE('=',94)
+   ENDIF
+ENDIF
+
+IF COMM_NAME <> SPACE(32)
+   **** NOW DO THIRD PARTY COMMISSION PEOPLE
+   IF MCOMPANY = 'DIVISION 15'
+      IF COMM_ENT = 0
+         ? SPACE(3) + COMM_NAME + SPACE(5) + 'CENTS/LB: ' + TRANSFORM(COMM_CENT, '99.9999')
+      ELSE
+         ? SPACE(3) + COMM_NAME + SPACE(5) + 'COM AMOUNT:' + TRANSFORM(COMM_CENT, '99.9999')
+      ENDIF
+   ELSE
+      IF COMM_AMT <> 0
+         ? SPACE(3) + COMM_NAME + SPACE(5) + 'AMOUNT: ' + TRANSFORM(COMM_AMT, '9999.9999')
+      ELSE
+         ? SPACE(3) + COMM_NAME + SPACE(5) + 'CENTS/LB: ' + TRANSFORM(COMM_CENT, '99.9999')
+      ENDIF
+   ENDIF
+   *DO CASE
+   *CASE MCOMPANY = 'DIVISION 15'  .OR. MPROG_CODE = 2 .OR. MSALESMAN = '44' .OR. MSALESMAN = '39'
+   IF B->COR_FLG = 'Y' .AND. B->COR_COMM  = 'C'
+      ? SPACE(3) + REPLICATE('*C',47)
+   ELSE
+      ? SPACE(3) + REPLICATE('=',94)
+   ENDIF
+   *OTHERWISE
+   *   ? SPACE(3) + REPLICATE('=',94)
+   *ENDCASE
+ENDIF
+IF SALESMAN = '44' .OR. SALESMAN = '39' .OR. SALESMAN = '88' .OR. SALESMAN = '50'
+   IF NOTE1 <> SPACE(70)                   
+      **** NOW DO THE NOTE
+      ? SPACE(3) + 'NOTE: ' + NOTE1
+      ? SPACE(3) + REPLICATE('=',94)
+   ENDIF
+ENDIF
+
+?      
+EJECT
+**** ALL DONE PRINTING NOW
+**** PRINT SOME TOTALS HERE FOR CHECKING
+
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+IF MPRINTER3 <> 'DONOTPRINT'
+   RUN &MPRINTIT3
+ENDIF
+
+RETURN
+
+* EOF: PO_PRT.PRG
+*Formatted by: ToolBox Ver. 1.2  on 12/22/15 at 3:12 PM.

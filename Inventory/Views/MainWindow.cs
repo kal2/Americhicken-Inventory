@@ -25,6 +25,7 @@ namespace Inventory
         {
             control.Visible = true;
             control.Dock = DockStyle.Fill;
+            control.Anchor = AnchorStyles.Top;
             splitContainer2.Panel1.Controls.Add(control);
             control.BringToFront();
             splitContainer2.Panel1.Refresh();
@@ -36,7 +37,22 @@ namespace Inventory
             dateLabel.Text = DateTime.Now.Date.ToString("d");
         }
 
+        private void MainWindow_Shown(object sender, EventArgs e)
+        {
+            //Sets focus to user input field
+            userActionInputMain.actionInput.Focus();
+        }
+
         // -- Interface Methods -- //
+        public void SetProgramLabel(string title)
+        {
+            programLabel.Text = title;
+        }
+
+        public void FocusTextBox()
+        {
+            userActionInputMain.actionInput.Focus();
+        }
 
         public void SetTextBoxText(string text)
         {
@@ -46,6 +62,21 @@ namespace Inventory
         public string GetTextBoxText()
         {
             return userActionInputMain.actionInput.Text;
+        }
+
+        public void ClearTextBox()
+        {
+            userActionInputMain.actionInput.Clear();
+        }
+
+        public void SetTextBoxLabel(string text)
+        {
+            userActionInputMain.textBoxLabel.Text = text;
+        }
+
+        public void SetCommandsLabel(string text)
+        {
+            userActionInputMain.userActionCommandsLabel.Text = text;
         }
 
         public void AttachTextBoxKeyDownHandler(KeyEventHandler handler)
@@ -58,9 +89,12 @@ namespace Inventory
             userActionInputMain.actionInput.KeyDown -= handler;
         }
 
-        private void MainWindow_Shown(object sender, EventArgs e)
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            userActionInputMain.actionInput.Focus();
+            if (e.KeyCode == Keys.PageDown)
+            {
+                FocusTextBox();
+            }
         }
     }
 }

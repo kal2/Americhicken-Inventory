@@ -1,0 +1,584 @@
+************
+* Program.: SPECIAL7.PRG
+* Author..: GRACE KELLER
+* Date....: 
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: REPORT SPECIAL7
+*
+* ---SET environment.
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+
+SET CENTURY ON
+SET DELETED ON
+SET TALK OFF
+SET ECHO OFF
+SET BELL OFF
+SET MENU OFF
+SET SAFETY OFF
+SET ESCAPE ON
+SET SCOREBOARD ON
+SET STATUS OFF
+SET EXCLUSIVE OFF
+SET PATH TO \AMERIFOX   
+SET DECIMALS TO 5
+SET DEVICE TO SCREEN
+
+CLIPPER = .F.
+FOXBASE = .T.
+MMONO   = .F.
+
+* ---SET COLOR TO values.   (If changed, change other one farther down too)
+IF .NOT. MMONO .AND. ISCOLOR()
+   SET COLOR TO W+/B,W+/R
+ELSE
+   SET COLOR TO W/N,N/W
+ENDIF
+
+CLOSE ALL
+SET DEVICE TO SCREEN
+
+**** FINISHES THE READ WHEN DOING A PAGE DOWN
+
+SELECT A
+DO FOX_USE WITH "C:\COMPINFO\SCREEN", .F.
+MSCRNSIZE = SCRNSIZE
+USE
+
+DO CASE
+   *** TEST
+CASE MSCRNSIZE = 'T'
+   DEFINE WINDOW MWINDOW ;
+      FROM 2,24 TO 40,252 ;
+      FONT "LUCIDA CONSOLE", 18 ;
+      COLOR W+/B, W+/R ;
+      NONE
+   *** Jeni
+CASE MSCRNSIZE = 'J'
+   **GOOD - FROM 2,10 TO 35,200  
+   **BETTER-  FROM 2,5 TO 35,210
+   DEFINE WINDOW MWINDOW ;
+      FROM 2,5 TO 40,210 ;
+      FONT "LUCIDA CONSOLE", 16 ;
+      COLOR W+/B, W+/R ;
+      NONE
+   *** WIDESCREEN
+CASE MSCRNSIZE = 'W'
+   DEFINE WINDOW MWINDOW ;
+      FROM 5,30 TO 57,272 ;
+      FONT "LUCIDA CONSOLE", 20 ;
+      COLOR W+/B, W+/R ;
+      NONE
+   *** LAPTOP
+CASE MSCRNSIZE = 'L'
+   DEFINE WINDOW MWINDOW ;
+      FROM 2,23 TO 54,265 ;
+      FONT "LUCIDA CONSOLE", 20 ;
+      COLOR W+/B, W+/R ;
+      NONE
+   *** OTHER - SQUARE 
+OTHERWISE
+   DEFINE WINDOW MWINDOW ;
+      FROM 5,4 TO 57,200 ;
+      FONT "LUCIDA CONSOLE", 19 ;
+      COLOR W+/B, W+/R ;
+      NONE
+ENDCASE
+
+ACTIVATE WINDOW "MWINDOW"
+
+* ---MAIN PROCESSING LOOP
+CLEAR
+SET COLOR TO W/W,W/W
+SET COLOR TO W+/B+,W+/R+
+CLEAR
+
+
+**********************************************************************
+**** THIS WORKS - BUT GIVES AN EXTRA EJECT AT THE END OF JOB**********
+**** ORIGINALLY HAD THIS WAY FOR STODDARD COUNTY
+**MPRINTIT = "PRINT.EXE /D:" + MPRINTER + " C:\COMPINFO\PRT_FILE.TXT"
+**********************************************************************
+
+****TESTING************
+****MPRINTIT = "PRINT.EXE /D:\\GRACE64-HP\HP4250 \COMPINFO\PRTFILE.TXT"
+****MPRINTIT = "PRINT.EXE /D:\\GINGER-PC\HP940C \REPORTS\PRTFILE.TXT"
+*** END OF TESTING*****
+************************************************************************
+
+* ---Initialize global variables.
+SELECT A
+DO FOX_USE WITH "COMPANY", .F.
+MCOMPANY = TRIM(COMPANY)
+MMASTDBF = TRIM(MASTDBF)
+MDBFLOC = TRIM(DBFLOC)
+USE
+
+SELECT A
+DO FOX_USE WITH "&MMASTDBF.CONTROL", .F.
+MPROGRAM = TRIM(PROGRAM)
+MPROG_CODE = PROG_CODE
+USE
+
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SELECT A
+   DO FOX_USE WITH "C:\COMPINFO\PRINTERS", .F.
+   MPRINTER  = TRIM(PRINTER1)
+   MPRINTER2 = TRIM(PRINTER2)
+   MPRINTER3 = TRIM(PRINTER3)
+   USE
+ELSE
+   MPRINTER  = 'DONOTPRINT'
+   MPRINTER2 = 'DONOTPRINT'
+   MPRINTER3 = 'DONOTPRINT'
+ENDIF  
+
+MPRINTIT  = 'COPY C:\COMPINFO\PRT_FILE.TXT ' + MPRINTER
+MPRINTIT2 = 'COPY C:\COMPINFO\PRT_FILE.TXT ' + MPRINTER2
+MPRINTIT3 = 'COPY C:\COMPINFO\PRT_FILE.TXT ' + MPRINTER3
+
+
+**********************************************************************
+**** THIS WORKS - BUT GIVES AN EXTRA EJECT AT THE END OF JOB**********
+**** ORIGINALLY HAD THIS WAY FOR STODDARD COUNTY
+**MPRINTIT = "PRINT.EXE /D:" + MPRINTER + " C:\COMPINFO\PRT_FILE.TXT"
+**********************************************************************
+
+****TESTING************
+****MPRINTIT = "PRINT.EXE /D:\\GRACE64-HP\HP4250 \COMPINFO\PRTFILE.TXT"
+****MPRINTIT = "PRINT.EXE /D:\\GINGER-PC\HP940C \REPORTS\PRTFILE.TXT"
+*** END OF TESTING*****
+************************************************************************
+
+STORE 'BROKER SYSTEM' TO MPROGRAM
+
+STORE .T. TO MONO
+
+MPASSWORD = 'ADM99'
+MUSER = 'SUPERVISOR'
+MSECURITY = .T.
+
+ON KEY LABEL PGUP CLEAR READ
+ON KEY LABEL PGDN CLEAR READ
+
+CLEAR
+@ 00,00 SAY MCOMPANY
+@ 01,68 SAY DATE()
+@ 01,00 SAY MPROGRAM + ' - REPORT SPECIAL7'
+@ 2,0 to 24,79
+
+@ 4,1 CLEAR TO 22,78
+@ 24,0 CLEAR
+SELECT C
+USE TEMPPROD EXCLUSIVE
+DELETE ALL
+PACK
+INDEX ON BBUYCODE + PROD_DESC + SALESMAN+ PO_NBR+PO_SUFFIX TO TEMPPROD
+DO FOX_USE WITH "TEMPPROD INDEX TEMPPROD", .F.
+DO FILELOCK
+STORE ' ' TO MCHOICE
+**** GET FIRST AND LAST DATES FOR THIS REPORT
+STORE CTOD(' ') TO MSTART, MLAST
+STORE 'P' TO MDISP_PRT
+STORE SPACE(10) TO MPROD
+STORE ' ' TO MCHOICE1, MCHOICE2, MCHOICE3, MCHOICE4
+STORE SPACE(2) TO MTRAN_MO
+STORE SPACE(4) TO MTRAN_YR
+STORE CTOD('') TO MBEGIN, MEND
+STORE 'D' TO MTOT_DET
+STORE 2 TO MACTION
+STORE ' ' TO MSUP_CUST
+DO WHILE MACTION = 2
+   @ 03,5 SAY 'Totals by Product for: ' 
+   @ 5,2 say 'Begin Ship Date: ' get mbegin
+   @ 7,2 say 'End   Ship Date: ' get mend
+   @ 13,1 SAY 'PRODUCT CODE: ' get mprod picture '@!'
+   @ 14,1 say '(Optional - Leave product blank if report for all products.)'
+   @ 16,1 SAY 'Select info for Suppliers (S) or Customers (C): ' GET MSUP_CUST PICTURE '@!' VALID(MSUP_CUST = ' ' .OR. MSUP_CUST = 'S' .OR. MSUP_CUST = 'C')
+   
+   STORE 1 TO MACTION
+   @ 24,00 CLEAR
+   @ 24,01 SAY 'Action: ' + STR(MACTION,1)
+   @ 24,13 SAY '1. Continue    2.  Edit    3. Cancel Report'                     
+   
+   READ
+   
+   @24,09 GET MACTION PICTURE '9' RANGE 1,3
+   READ               
+ENDDO
+IF MACTION = 3 .OR. MSUP_CUST = ' '
+   QUIT
+ENDIF  
+STORE SPACE(4) TO MBBUYCODE, MRSUPCODE, MBUY_CODE, MSUP_CODE
+
+DO CASE
+CASE MSUP_CUST = 'C'
+   @ 17,1 SAY 'Optionally select specific Customers - select with an "X"'
+   @ 18,3 SAY 'Bill to Customer:'
+   @ 19,3 SAY 'Ship to Customer:'
+   @ 18,25 GET MCHOICE3 PICTURE '@!'
+   @ 19,25 GET MCHOICE4 PICTURE '@!'
+   READ
+   IF MCHOICE3 = 'X'
+      CLEAR
+      MWAIT = ' '
+      @ 5,1 SAY 'PRESS ENTER TO SELECT BILL TO CUSTOMER' GET MWAIT
+      READ
+      MNAME_FD = .F.
+      DO BBUYSEL3
+      IF .NOT. MNAME_FD
+         MCHOICE3 = ' '
+      ELSE
+         STORE BBUYCODE TO MBBUYCODE
+         STORE NAME TO MBIL_NAME
+         STORE CITY TO MBIL_CITY
+         STORE STATE TO MBIL_STATE
+      ENDIF
+      USE
+   ENDIF
+   IF MCHOICE4 = 'X'
+      CLEAR
+      MWAIT = ' '
+      @ 5,1 SAY 'PRESS ENTER TO SELECT SHIP TO CUSTOMER' GET MWAIT
+      READ
+      MNAME_FD = .F.
+      SET PROC TO BUY_PROC
+      DO BUY_SEL1
+      IF MNAME_FD
+         STORE BUY_CODE TO MBUY_CODE
+         STORE NAME TO MBUY_NAME
+         STORE CITY TO MBUY_CITY
+         STORE STATE TO MBUY_STATE
+      ELSE
+         MCHOICE4 = ' '
+      ENDIF
+      SET PROC TO 
+      USE
+   ENDIF
+   
+   IF MBBUYCODE = SPACE(4) .AND. MBUY_CODE = SPACE(4)
+      MNAME = 'NO SUPPLIER/CUSTOMER SELECTED'
+      MCITY = SPACE(20)
+      MSTATE = SPACE(2)
+   ENDIF
+OTHERWISE
+   @ 17,1 SAY 'Optionally select specific Suppliers - select with an "X"'
+   @ 18,2 SAY 'Remit to     Supplier:'
+   @ 19,2 SAY 'Shipped from Supplier:'
+   @ 18,25 GET MCHOICE1 PICTURE '@!'
+   @ 19,25 GET MCHOICE2 PICTURE '@!'
+   READ
+   IF MCHOICE1 = 'X'
+      CLEAR
+      MWAIT = ' '
+      @ 5,1 SAY 'PRESS ENTER TO SELECT REMIT TO SUPPLIER' GET MWAIT
+      READ
+      MNAME_FD = .F.
+      DO RSUPSEL3
+      IF .NOT. MNAME_FD
+         MCHOICE1 = ' '
+      ELSE
+         STORE RSUPCODE TO MRSUPCODE
+         STORE NAME TO MREM_NAME
+         STORE CITY TO MREM_CITY
+         STORE STATE TO MREM_STATE
+      ENDIF
+   ENDIF
+   
+   IF MCHOICE2 = 'X'
+      CLEAR
+      MWAIT = ' '
+      @ 5,1 SAY 'PRESS ENTER TO SELECT SHIPPED FROM SUPPLIER' GET MWAIT
+      READ
+      MNAME_FD = .F.
+      SET PROC TO SUP_PROC
+      DO SUP_SEL1
+      IF MNAME_FD 
+         STORE SUP_CODE TO MSUP_CODE
+         STORE NAME TO MSUP_NAME
+         STORE CITY TO MSUP_CITY
+         STORE STATE TO MSUP_STATE
+      ELSE
+         STORE ' ' TO MCHOICE2
+      ENDIF
+      SET PROC TO
+      USE
+   ENDIF
+   
+   IF MRSUPCODE = SPACE(4) .AND. MSUP_CODE = SPACE(4)
+      MNAME = 'NO SUPPLIER SELECTED'
+      MCITY = SPACE(20)
+      MSTATE = SPACE(2)
+   ENDIF
+   
+ENDCASE
+
+@ 4,1 CLEAR TO 22,78
+@ 24,0 CLEAR
+
+MTITLE = ' - PRODUCT LISTING'
+CLEAR
+@  1, 1  SAY MCOMPANY
+@  1,68 SAY DATE()
+@  2, 0 SAY MPROGRAM + MTITLE
+@ 3,0 to 25,79
+
+SELECT C
+DO FILELOCK
+
+*** REPORT IS TOTALED BY CUSTOMER/BY PRODUCT
+MPRT_ACT = 'C'
+
+IF MDISP_PRT = 'P'
+   DO PRT_SET
+   
+   IF MPRT_ACT <> 'C'
+      QUIT
+   ENDIF
+   MPAGE_LEN = 56
+ELSE
+   MPAGE_LEN = 20
+ENDIF
+
+SELECT A 
+DO FOX_USE WITH "PO_HEAD INDEX PO_SHIP", .F.
+SELECT B
+DO FOX_USE WITH "PO_DTL INDEX  PO_DTL", .F.
+
+MSUB = 0
+STORE SUBSTR(DTOC(MBEGIN),7) TO MTRAN_YR
+STORE SUBSTR(DTOC(MBEGIN),1,2) TO MTRAN_MO
+SELECT A
+SEEK MTRAN_YR + MTRAN_MO
+DO WHILE .NOT. EOF() .AND. SHIP_DATE < MBEGIN    
+   SKIP
+ENDDO
+
+MPAGE_NO = 0
+MLINE = 99 
+@ 19,16 SAY 'PROCESSING........'
+IF MDISP_PRT = 'P'
+   SET CONSOLE OFF
+   IF FILE("C:\COMPINFO\PRINTERS.DBF")
+      SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+   ELSE
+      SET PRINT TO LPT3
+   ENDIF
+   SET DEVICE TO PRINT
+   SET PRINT ON
+   
+   *** PRINT IN 10 CPI
+   ?? chr(27) + '&k0S'
+   
+   *** BOLDED PRINT
+   ?? CHR(27) + '(s4B'
+   
+   *** LETTER SIZE PAPER
+   ?? CHR(27) + '&l2A'
+   
+   *** PORTRAIT MODE
+   ?? CHR(27) + '&l0O'
+   
+ENDIF
+
+DO WHILE .NOT. EOF() .AND. SHIP_DATE <= MEND   
+   IF MRSUPCODE <> SPACE(4)
+      IF RSUPCODE <> MRSUPCODE
+         SKIP
+         LOOP
+      ENDIF
+   ENDIF
+   IF MSUP_CODE <> SPACE(4)
+      IF SUP_CODE <> MSUP_CODE
+         SKIP
+         LOOP
+      ENDIF
+   ENDIF
+   IF MBBUYCODE <> SPACE(4)
+      IF BBUYCODE <> MBBUYCODE
+         SKIP
+         LOOP
+      ENDIF
+   ENDIF
+   IF MBUY_CODE <> SPACE(4)
+      IF BUY_CODE <> MBUY_CODE
+         SKIP
+         LOOP
+      ENDIF
+   ENDIF
+   
+   IF RSUPCODE = 'INVN' .AND. BBUYCODE = 'INVN'
+      SKIP
+      LOOP
+   ENDIF
+   IF TOT_SELL = 0 .AND. TOT_PURCH = 0
+      SKIP
+      LOOP
+   ENDIF
+   IF BBUYCODE = 'NONE' .OR. BBUYCODE = 'INVN' 
+      SKIP
+      LOOP
+   ENDIF
+   
+   SELECT B
+   SEEK A->SALESMAN + A->PO_NBR + A->PO_SUFFIX
+   DO WHILE .NOT. EOF() .AND. SALESMAN = A->SALESMAN .AND. PO_NBR = A->PO_NBR .AND. PO_SUFFIX = A->PO_SUFFIX
+      IF PROD_DESC = SPACE(4)
+         SKIP
+         LOOP
+      ENDIF
+      IF MPROD <> SPACE(10)
+         IF MPROD <> PROD_DESC
+            SKIP
+            LOOP
+         ENDIF
+      ENDIF
+      
+      SELECT C
+      APPEND BLANK
+      IF MSUP_CUST = 'C'
+         REPLACE BBUYCODE  WITH A->BBUYCODE
+         REPLACE INV_PRI WITH B->SEL_PRICE
+         REPLACE TOT_SELL WITH B->TOT_SELL
+      ELSE
+         REPLACE BBUYCODE  WITH A->RSUPCODE
+         REPLACE INV_PRI WITH B->PUR_PRICE
+         REPLACE TOT_SELL WITH B->TOT_PURCH
+      ENDIF
+      
+      REPLACE BUYER_PO  WITH A->BUYER_PO
+      REPLACE PROD_DESC WITH B->PROD_DESC
+      REPLACE SALESMAN WITH B->SALESMAN
+      REPLACE PO_NBR   WITH B->PO_NBR
+      REPLACE PO_SUFFIX WITH B->PO_SUFFIX
+      REPLACE LBS_SOLD WITH B->QTY
+      REPLACE SHIP_DATE WITH A->SHIP_DATE
+      SELECT B
+      SKIP
+   ENDDO
+   SELECT A
+   SKIP
+ENDDO
+SELECT A
+USE
+SELECT B
+USE
+
+MFIRST = .T.
+MTOT_SELL = 0
+MTOT_QTY = 0
+SELECT C
+GOTO TOP
+DO WHILE .NOT. EOF()
+   STORE BBUYCODE TO MBBUYCODE
+   DO WHILE .NOT. EOF() .AND. BBUYCODE = MBBUYCODE
+      STORE PROD_DESC TO MPROD_DESC
+      STORE 0 TO MPROD_QTY, MPROD_AMT
+      DO WHILE .NOT. EOF() .AND. BBUYCODE = MBBUYCODE .AND. PROD_DESC = MPROD_DESC
+         
+         IF MLINE > MPAGE_LEN
+            IF MDISP_PRT = 'D'
+               IF MLINE = 99
+                  CLEAR
+               ELSE
+                  MCONT = 'C'
+                  @ 24,1 SAY "PRESS 'ENTER' TO CONTINUE OR 'A' TO CANCEL REPORT " GET MCONT PICTURE '@!'
+                  READ
+                  IF MCONT = 'A'
+                     SELECT C
+                     GOTO BOTTOM
+                     SKIP
+                     LOOP
+                  ELSE
+                     CLEAR
+                  ENDIF
+               ENDIF
+            ENDIF
+            MPAGE_NO = MPAGE_NO + 1
+            @ 1,25 SAY MCOMPANY
+            @ 1,1 SAY 'Page'
+            @ 1,06 say mpage_no picture '99'
+            @ 1,58 SAY DTOC(DATE())
+            @ 2,16 SAY '         PRODUCT TOTALS FOR ' + DTOC(MBEGIN) + ' - ' + DTOC(MEND)
+            MLINE = 3
+            IF MCHOICE1 = 'X' .AND. MRSUPCODE <> SPACE(4)
+               @ MLINE,16 SAY '  REMIT TO   SUPPLIER: ' + MREM_NAME
+               MLINE = MLINE + 1
+            ENDIF
+            IF MCHOICE2 = 'X' .AND. MSUP_CODE <> SPACE(4)
+               @ MLINE,16 SAY 'SHIPPED FROM SUPPLIER: ' + MSUP_NAME
+               MLINE = MLINE + 1
+            ENDIF
+            
+            IF MCHOICE3 = 'X' .AND. MBBUYCODE <> SPACE(4)
+               @ MLINE,16 SAY '     BILL TO CUSTOMER: ' + MBIL_NAME
+               MLINE = MLINE + 1
+            ENDIF
+            IF MCHOICE4 = 'X' .AND. MBUY_CODE <> SPACE(4)
+               @ MLINE,16 SAY '     SHIP TO CUSTOMER: ' + MBUY_NAME
+               MLINE = MLINE + 1
+            ENDIF
+            MLINE = MLINE + 2
+            @ MLINE,1 SAY 'PRODUCT     QTY     PRICE      AMOUNT    PO NBR      SHIP DATE    CUST PO NBR'
+            **                                                      XX-XXXX-X   XX/XX/XXXX   XXXXXXXXXXXX            
+            **             XXXX     XXXXXX   XX.XXXX    XXXXX.XX
+            ***            1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+            ***                    10        20        30        40        50        60        70        80        90         
+            IF MDISP_PRT = 'P'
+               @ MLINE,01 SAY REPLICATE('_',78)
+            ENDIF
+            MLINE = MLINE + 2
+         ENDIF
+         
+         @ MLINE,1 SAY SUBSTR(PROD_DESC,1,4)
+         @ MLINE,10 SAY LBS_SOLD PICTURE '999999'
+         @ MLINE,19 SAY INV_PRI  PICTURE '99.9999'
+         @ MLINE,30 SAY TOT_SELL PICTURE '99999.99'
+         MPROD_QTY = MPROD_QTY + LBS_SOLD
+         MPROD_AMT = MPROD_AMT + TOT_SELL
+         MTOT_SELL = MTOT_SELL + TOT_SELL
+         MTOT_QTY  = MTOT_QTY  + LBS_SOLD
+         @ MLINE,42 SAY SALESMAN + '-' + PO_NBR
+         IF PO_SUFFIX <> ' '
+            @ MLINE,49 SAY '-' + PO_SUFFIX
+         ENDIF
+         @ MLINE,54 SAY SHIP_DATE
+         @ MLINE,67 SAY BUYER_PO
+         MLINE = MLINE + 1
+         SKIP
+      ENDDO
+      MLINE = MLINE + 1
+      @ MLINE,1 SAY SUBSTR(MPROD_DESC,1,4) + ' TOT'
+      @ MLINE,10 SAY MPROD_QTY PICTURE '999999'
+      @ MLINE,30 SAY MPROD_AMT PICTURE '99999.99'
+      MLINE = MLINE + 2
+   ENDDO
+ENDDO
+IF MDISP_PRT = 'P'
+   MLINE = MLINE + 1
+   **@ mline+1,1 say ' '
+   @ MLINE,1 SAY 'TOTAL:'
+   @ MLINE,09 SAY MTOT_QTY PICTURE '9999999'
+   @ MLINE,28 SAY MTOT_SELL PICTURE '9999999.99'
+   EJECT
+   SET DEVICE TO SCREEN
+   SET PRINT OFF
+   SET PRINT TO
+   SET CONSOLE ON
+   IF MPRINTER3 <> 'DONOTPRINT'
+      RUN &MPRINTIT3
+   ENDIF
+ELSE
+   @ 23,0 CLEAR
+   @ 23,1 SAY 'TOTAL:'
+   @ 23,28 SAY MTOT_SELL PICTURE '9999999.99'
+   MPRT_SEL = ' '
+   @ 24,00 SAY 'End Of Report - Press Return to Continue ' GET MPRT_SEL
+   READ
+ENDIF
+
+CLOSE DATA
+QUIT  
+
+*Formatted by: ToolBox Ver. 1.2  on 12/17/15 at 11:13 AM.
+

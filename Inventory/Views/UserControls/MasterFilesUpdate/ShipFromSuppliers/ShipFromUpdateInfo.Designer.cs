@@ -65,16 +65,12 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            label15 = new Label();
-            actionInput = new TextBox();
-            label16 = new Label();
             searchPanel = new Panel();
             supplierInfoPanel.SuspendLayout();
             SuspendLayout();
             // 
             // supplierInfoPanel
             // 
-            supplierInfoPanel.BorderStyle = BorderStyle.Fixed3D;
             supplierInfoPanel.Controls.Add(shipFromZipTextBox);
             supplierInfoPanel.Controls.Add(shipFromStateTextBox);
             supplierInfoPanel.Controls.Add(shipFromCityTextBox);
@@ -115,6 +111,7 @@
             supplierInfoPanel.Name = "supplierInfoPanel";
             supplierInfoPanel.Size = new Size(1290, 536);
             supplierInfoPanel.TabIndex = 101;
+            supplierInfoPanel.Visible = false;
             // 
             // shipFromZipTextBox
             // 
@@ -513,48 +510,12 @@
             label1.TabIndex = 100;
             label1.Text = "SUPPLIER NAME:";
             // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label15.ForeColor = Color.White;
-            label15.Location = new Point(199, 555);
-            label15.Margin = new Padding(1, 0, 1, 0);
-            label15.Name = "label15";
-            label15.Size = new Size(630, 30);
-            label15.TabIndex = 104;
-            label15.Text = "1. Save Updates    2. Edit Screen    3. Delete Supplier    4. Cancel";
-            // 
-            // actionInput
-            // 
-            actionInput.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            actionInput.ForeColor = Color.Black;
-            actionInput.Location = new Point(116, 552);
-            actionInput.Margin = new Padding(0);
-            actionInput.MaxLength = 2;
-            actionInput.Name = "actionInput";
-            actionInput.Size = new Size(40, 36);
-            actionInput.TabIndex = 102;
-            actionInput.KeyDown += actionInput_KeyDown;
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label16.ForeColor = Color.White;
-            label16.Location = new Point(18, 555);
-            label16.Margin = new Padding(1, 0, 1, 0);
-            label16.Name = "label16";
-            label16.Size = new Size(97, 30);
-            label16.TabIndex = 103;
-            label16.Text = "ACTION:";
-            // 
             // searchPanel
             // 
-            searchPanel.BorderStyle = BorderStyle.Fixed3D;
+            searchPanel.AutoSize = true;
             searchPanel.Location = new Point(0, 0);
             searchPanel.Name = "searchPanel";
-            searchPanel.Size = new Size(1290, 536);
+            searchPanel.Size = new Size(1290, 600);
             searchPanel.TabIndex = 138;
             searchPanel.Visible = false;
             // 
@@ -562,14 +523,12 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackColor = Color.Blue;
-            Controls.Add(label15);
-            Controls.Add(actionInput);
-            Controls.Add(label16);
             Controls.Add(supplierInfoPanel);
             Controls.Add(searchPanel);
             Name = "ShipFromUpdateInfo";
-            Size = new Size(1290, 600);
+            Size = new Size(1293, 603);
             supplierInfoPanel.ResumeLayout(false);
             supplierInfoPanel.PerformLayout();
             ResumeLayout(false);
@@ -591,9 +550,6 @@
         private Label label11;
         private Label label10;
         private Label label9;
-        private Label label15;
-        private TextBox actionInput;
-        private Label label16;
         private Label label18;
         private Label label17;
         private Label label20;

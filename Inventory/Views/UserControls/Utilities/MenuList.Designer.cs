@@ -35,6 +35,7 @@
             // 
             menuListBox.BackColor = Color.Blue;
             menuListBox.BorderStyle = BorderStyle.None;
+            menuListBox.Dock = DockStyle.Fill;
             menuListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             menuListBox.ForeColor = Color.White;
             menuListBox.FormattingEnabled = true;
@@ -43,18 +44,19 @@
             menuListBox.Items.AddRange(new object[] { "1 - PURCHASE ORDERS", "2 - CUSTOMER INVOICES", "3 - DISBURSEMENTS / SUPPLIER INVOICES", "4 - RECEIPTS", "5 - JOURNAL/LEDGER POSTING", "6 - REPORTS", "7 - INVENTORY - REPORTS/VIEW ACTIVITY", "8 - FILE MAINTENANCE", "9 - EXIT" });
             menuListBox.Location = new Point(0, 0);
             menuListBox.Name = "menuListBox";
-            menuListBox.Size = new Size(1290, 448);
+            menuListBox.Size = new Size(1293, 451);
             menuListBox.TabIndex = 0;
             // 
             // MenuList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackColor = Color.Blue;
             Controls.Add(menuListBox);
             ForeColor = Color.White;
             Name = "MenuList";
-            Size = new Size(1290, 451);
+            Size = new Size(1293, 451);
             ResumeLayout(false);
         }
 

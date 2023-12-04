@@ -1,0 +1,408 @@
+***************
+* Program.: SALECOMP.PRG
+* Author..: GRACE KELLER
+* Date....: 03/21/91
+* Notice..: Copyright (C) 1991, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: SALESPERSON PERCENTAGE COMPARISON
+*
+MTITLE = ' - PERCENTAGE COMPARISON REPORT'   
+CLEAR
+@  1, 1  SAY MCOMPANY
+@  1,68 SAY DATE()
+@  2, 0 SAY MPROGRAM + MTITLE
+@ 3,0 TO 22,79
+MCHOICE = ' '
+STORE 'P' TO MANS
+STORE 2 TO MACTION      
+DO WHILE MACTION = 2      
+   
+   @ 11,2 SAY  'Calculate (C) or Print (P) ' get mans picture '@!'
+   STORE 1 TO MACTION
+   @ 24,00 CLEAR
+   @ 24,01 SAY 'Action: ' + STR(MACTION,1)
+   @ 24,13 SAY '1. Continue    2.  Edit    3. Cancel Report/Finished'             
+   
+   READ
+   
+   @24,09 GET MACTION PICTURE '9' RANGE 1,3
+   READ               
+ENDDO
+IF MACTION = 3
+   RETURN
+ENDIF
+DO CASE
+CASE MANS = 'P'
+   SET CONSOLE OFF
+   IF FILE("C:\COMPINFO\PRINTERS.DBF")
+      SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+   ELSE
+      SET PRINT TO LPT3
+   ENDIF
+   SET DEVICE TO PRINT
+   SET PRINT ON
+   
+   *** PRINT IN 12 CPI
+   ?? chr(27) + '&k4S'
+   
+   *** LETTER GOTHIC AND BOLDED PRINT
+   ?? chr(27) + '(s4102T' + chr(27) + '(s3B'
+   
+   *** LETTER SIZE PAPER
+   ?? CHR(27) + '&l2A'
+   
+   *** PORTRAIT MODE
+   ?? CHR(27) + '&l0O'
+   
+   SELECT A
+   DO FOX_USE WITH "TOTALS INDEX TMP_TOT", .F.
+   
+   @ 2,78 SAY DTOC(DATE())
+   @ 2,32 SAY MCOMPANY                  
+   MTRAN_YR = TRAN_YR
+   MTRAN_MO = TRAN_MO
+   MBEG_MONTH = TRIM(CMONTH(CTOD(MTRAN_MO+'/01/'+MTRAN_YR)))
+   MEND_YR  = END_YR
+   MEND_MO  = END_MO
+   MEND_MONTH = TRIM(CMONTH(CTOD(MEND_MO+'/01/'+MEND_YR)))
+   
+   SUM LBS +INTRA_LBS TO TLBS 
+   SUM INTRA_LBS TO TINTRA_LBS
+   SUM TOT_BUS TO TTOT_BUS 
+   SUM COMM TO TCOMM 
+   SUM NET TO TNET 
+   TGROSS = TCOMM+TNET
+   
+   @ 3,32 SAY 'PERCENTAGE COMPARISONS'
+   @ 4,30 SAY  MBEG_MONTH + " '" + MTRAN_YR + ' THRU ' + MEND_MONTH + " '" + MEND_YR
+   @ 7,1 SAY 'SALESPERSON        POUNDS SOLD  $ GROSS SALES      $ COMM    $ MW NET  $ GROSS PROFIT   PROFIT/LB'
+   
+   **         1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234556789012345678901234567890
+   **                  10        20        30        40        50        60        70        80        90
+   **SALESPERSON        POUNDS SOLD  $ GROSS SALES      $ COMM    $ MW NET  $ GROSS PROFIT   PROFIT/LB'
+   **ANY OLD SALESPE  9,999,999,999  9,999,999,999  99,999,999  99,999,999   9,999,999,999     XXX.XX
+   
+   @ 8,01 SAY REPLICATE('_',96)
+   MLINE = 10 
+   
+   **** REPORT # 3
+   
+   SELECT B 
+   DO FOX_USE WITH "&MMASTDBF.SALESMAN INDEX &MMASTDBF.SAL_CODE", .F.
+   
+   DO WHILE .NOT. EOF()
+      STORE NAME TO MNAME
+      SELECT A
+      SEEK B->SALE_CODE 
+      IF EOF()
+         SELECT B
+         SKIP
+         LOOP
+      ENDIF
+      @ MLINE,1 SAY SUBSTR(MNAME,1,15)        
+      SELECT A
+      
+      IF (LBS + INTRA_LBS) = 0 .OR. TLBS = 0      
+         MLBS_PER = 0
+      ELSE
+         MLBS_PER = ((LBS+INTRA_LBS) / (TLBS)) * 100
+      ENDIF
+      IF TOT_BUS = 0 .OR. TTOT_BUS = 0
+         MBUS_PER = 0
+      ELSE
+         MBUS_PER = (TOT_BUS / (TTOT_BUS)) * 100
+      ENDIF
+      IF COMM = 0 .OR. TCOMM = 0
+         MCOMM_PER = 0
+      ELSE
+         MCOMM_PER = (COMM / (TCOMM)) * 100
+      ENDIF
+      IF NET = 0 .OR. TNET = 0
+         MNET_PER = 0
+      ELSE
+         MNET_PER = (NET / (TNET)) * 100
+      ENDIF
+      IF COMM+NET = 0 .OR. TGROSS = 0
+         MGROSS_PER = 0
+      ELSE
+         MGROSS_PER = ((COMM+NET) / TGROSS) * 100
+      ENDIF
+      IF COMM+NET = 0 .OR. LBS = 0
+         MAVG = 0
+      ELSE
+         MAVG =  ROUND((COMM+NET) / LBS,4)    
+      ENDIF
+      
+      @ MLINE,18 SAY LBS+INTRA_LBS PICTURE '9,999,999,999'
+      @ MLINE,33 SAY TOT_BUS PICTURE '9,999,999,999'
+      @ MLINE,48 SAY COMM PICTURE '99,999,999'
+      @ MLINE,60 SAY NET PICTURE '99,999,999'
+      @ MLINE,73 SAY COMM+NET PICTURE '9,999,999,999'
+      @ MLINE,90 SAY MAVG PICTURE '99.9999'
+      
+      MLINE = MLINE + 1
+      @ MLINE,21 SAY ' (      %)      (      %)   (      %)   (      %)       (      %)'
+      @ MLINE,23 SAY TRANSFORM(MLBS_PER, '99.9') 
+      @ MLINE,38 SAY TRANSFORM(MBUS_PER, '99.9') 
+      @ MLINE,51 SAY TRANSFORM(MCOMM_PER, '99.9')
+      @ MLINE,63 SAY TRANSFORM(MNET_PER, '99.9') 
+      @ MLINE,78 SAY TRANSFORM(MGROSS_PER, '99.9')
+      
+      MLINE = MLINE + 3
+      
+      SELECT B
+      SKIP
+   ENDDO
+   
+   MLINE = MLINE + 1
+   
+   @ MLINE,1 SAY 'TOTALS:    '
+   @ MLINE,1 SAY REPLICATE('_',11)
+   IF TGROSS = 0 .OR. TLBS = 0
+      MAVG = 0
+   ELSE
+      MAVG = ROUND((TGROSS) / TLBS,3)
+   ENDIF
+   
+   @ MLINE,18 SAY TLBS PICTURE '9,999,999,999'
+   @ MLINE,33 SAY TTOT_BUS PICTURE '9,999,999,999'
+   @ MLINE,48 SAY TCOMM PICTURE '99,999,999'
+   @ MLINE,60 SAY TNET PICTURE '99,999,999'
+   @ MLINE,73 SAY TGROSS PICTURE '9,999,999,999'
+   @ MLINE,90 SAY MAVG PICTURE '99.9999'
+   @ MLINE+1,0 SAY ' '
+   EJECT
+   
+   SET DEVICE TO SCREEN
+   SET PRINT OFF
+   SET PRINT TO
+   SET CONSOLE ON
+   IF MPRINTER3 <> 'DONOTPRINT'
+      RUN &MPRINTIT3
+   ENDIF
+   CLOSE DATA
+OTHERWISE
+   MTITLE = ' - PERCENTAGE COMPARISON REPORTS'   
+   CLEAR
+   @  1, 1  SAY MCOMPANY
+   @  1,68 SAY DATE()
+   @  2, 0 SAY MPROGRAM + MTITLE
+   @ 3,0 TO 22,79
+   **** GET FIRST AND LAST DATES FOR THIS REPORT
+   STORE SPACE(2) TO MTRAN_MO, MEND_MO
+   STORE SPACE(4) TO MTRAN_YR, MEND_YR           
+   STORE SPACE(2) TO MOPT_SALES
+   @ 7,2 say  '  STARTING BUSINESS MONTH/YEAR:    /'   
+   @ 9,2 SAY  '    ENDING BUSINESS MONTH/YEAR:    /' 
+   @ 11,2 SAY  ' (OPTIONAL) SALESPERSON CODE: '
+   STORE 'PLEASE SELECT REPORT OPTIONS....' TO MGET
+   @ 20,16 GET MGET
+   CLEAR GETS
+   STORE 2 TO MACTION      
+   DO WHILE MACTION = 2      
+      @ 07,34 GET MTRAN_MO PICTURE '##'
+      @ 07,39 GET MTRAN_YR PICTURE '####'
+      @ 09,34 GET MEND_MO PICTURE '##'
+      @ 09,39 GET MEND_YR PICTURE '####'
+      @ 11,32 GET MOPT_SALES PICTURE '##'
+      STORE 1 TO MACTION
+      @ 24,00 CLEAR
+      @ 24,01 SAY 'Action: ' + STR(MACTION,1)
+      @ 24,13 SAY '1. Continue    2.  Edit    3. Cancel Report/Finished'             
+      
+      READ
+      
+      @24,09 GET MACTION PICTURE '9' RANGE 1,3
+      READ               
+      
+      IF MACTION = 1
+         IF MTRAN_MO = '  ' .OR. MTRAN_YR = '    ' .OR. MEND_MO = '  ' .OR. MEND_YR = '    '
+            @ 23,0 CLEAR
+            mwait = ' '
+            @ 23,1 SAY 'Only One Date Entered - Both Begin and End Dates Must be Entered'
+            @ 24,1 say 'Press Any Key to Reenter ' get mwait
+            READ
+            MACTION = 2
+            @ 23,0 clear
+            RETURN
+         ENDIF
+      ENDIF
+   ENDDO
+   IF MACTION = 3
+      MNOT_DONE = .F.
+      RETURN
+   ENDIF  
+   @ 20,1 SAY SPACE(77)
+   @ 20,16 SAY 'PROCESSING........'
+   MLINE = 99
+   SELECT C
+   DO FOX_USE WITH "DAILYJRN INDEX JRN_MO", .F.
+   SELECT A 
+   DO FOX_USE WITH "PO_HEAD INDEX  PO_HEAD", .F.
+   
+   SELECT B 
+   DO FOX_USE WITH "TOTALS", .F.
+   DO FILELOCK
+   USE TOTALS EXCLUSIVE
+   DELETE ALL
+   PACK
+   INDEX ON SALESMAN TO TMP_TOT
+   DO FOX_USE WITH "TOTALS INDEX TMP_TOT", .F.
+   DO FILELOCK
+   MPOS = 0
+   MNEG = 0
+   MEND_DATE = VAL(MEND_YR+MEND_MO)
+   SELECT C
+   SEEK MTRAN_YR + MTRAN_MO 
+   DO WHILE .NOT. EOF() .AND. VAL(TRAN_YR + TRAN_MO) <= MEND_DATE
+      SELECT A
+      SEEK C->SALESMAN + C->PO_NBR + C->PO_SUFFIX
+      **IF SALESMAN = '30' .OR. SALESMAN = '44' .OR. SALESMAN = '66' .OR. SALESMAN = '99'
+      IF SALESMAN = '  '
+         DO CASE
+         CASE BROK_NAME = 'KEN' .OR. BROK_NAME = ' KEN'
+            MSALESMAN = '01'
+         CASE BROK_NAME = 'BOB' .OR. BROK_NAME = ' BOB'
+            MSALESMAN = '01'
+         OTHERWISE
+            MSALESMAN = '  '
+         ENDCASE
+      ELSE
+         MSALESMAN = SALESMAN
+      ENDIF
+      
+      SELECT B
+      SEEK MSALESMAN
+      IF EOF()
+         APPEND BLANK
+         REPLACE TRAN_YR WITH MTRAN_YR
+         REPLACE TRAN_MO WITH MTRAN_MO
+         REPLACE END_YR  WITH MEND_YR
+         REPLACE END_MO  WITH MEND_MO
+         REPLACE SALESMAN WITH MSALESMAN
+      ENDIF
+      
+      REPLACE NET WITH NET + C->TOT_NET
+      REPLACE COMM WITH COMM + C->SALE_COMM
+      IF C->BBUYCODE <> 'NONE' .AND. C->BBUYCODE <> 'INVN'
+         REPLACE TOT_BUS WITH TOT_BUS + (C->TOT_SELL + C->CUS_PALL)
+      ENDIF
+      *** ONLY ADD IN POUNDS ON THE INVOICE ENTRY
+      IF C->INV_COR = 'I'
+         REPLACE LBS WITH LBS + A->TOT_LBS
+      ENDIF
+      **ENDIF
+      SELECT A
+      IF SAL_CODE2 = '30' .OR. SAL_CODE2 = '44' .OR. SAL_CODE2 = '66' .OR. SAL_CODE2 = '99'
+         IF SALE2_NET <> 0 .OR. SALE2_AMT <> 0
+            STORE SAL_CODE2 TO MSALESMAN
+            SELECT B
+            SEEK MSALESMAN
+            IF EOF()
+               APPEND BLANK
+               REPLACE TRAN_YR WITH MTRAN_YR
+               REPLACE TRAN_MO WITH MTRAN_MO
+               REPLACE END_YR  WITH MEND_YR
+               REPLACE END_MO  WITH MEND_MO
+               REPLACE SALESMAN WITH MSALESMAN
+            ENDIF
+            REPLACE NET WITH NET + C->SALE2_NET 
+            REPLACE COMM WITH COMM + C->SALE2_AMT 
+            IF C->INV_COR = 'I'
+               REPLACE INTRA_LBS WITH INTRA_LBS + A->TOT_LBS
+            ENDIF
+         ENDIF
+         IF SALE3_NET <> 0 .OR. SALE3_AMT <> 0
+            STORE SAL_CODE3 TO MSALESMAN
+            SELECT B
+            SEEK MSALESMAN
+            IF EOF()
+               APPEND BLANK
+               REPLACE TRAN_YR WITH MTRAN_YR
+               REPLACE TRAN_MO WITH MTRAN_MO
+               REPLACE END_YR  WITH MEND_YR
+               REPLACE END_MO  WITH MEND_MO
+               REPLACE SALESMAN WITH MSALESMAN
+            ENDIF
+            REPLACE NET WITH NET + C->SALE3_NET 
+            REPLACE COMM WITH COMM + C->SALE3_AMT 
+            IF C->INV_COR = 'I'
+               REPLACE INTRA_LBS WITH INTRA_LBS + A->TOT_LBS
+            ENDIF
+         ENDIF
+      ENDIF
+      SELECT C
+      SKIP
+   ENDDO
+   
+   CLOSE ALL
+   
+   
+   **** NOW I NEED TO DO THE LAND O FROST DATABASE
+   SELECT C
+   DO FOX_USE WITH "L:DAILYJRN INDEX L:JRN_MO", .F.
+   SELECT A 
+   DO FOX_USE WITH "L:PO_HEAD INDEX  L:PO_HEAD", .F.
+   SELECT B 
+   DO FOX_USE WITH "&MMASTDBF.TOTALS INDEX &MMASTDBF.TMP_TOT", .F.
+   DO FILELOCK
+   MPOS = 0
+   MNEG = 0
+   SELECT C
+   MTRAN_MO = '02'
+   MTRAN_YR = '92'
+   SEEK MTRAN_YR + MTRAN_MO 
+   DO WHILE .NOT. EOF() .AND. VAL(TRAN_YR + TRAN_MO) <= MEND_DATE
+      
+      SELECT A
+      SEEK C->SALESMAN + C->PO_NBR + C->PO_SUFFIX
+      IF SAL_CODE2 = '30' .OR. SAL_CODE2 = '44' .OR. SAL_CODE2 = '66' .OR. SAL_CODE2 = '99'
+         IF SALE2_NET <> 0 .OR. SALE2_AMT <> 0
+            STORE SAL_CODE2 TO MSALESMAN
+            SELECT B
+            SEEK MSALESMAN
+            IF EOF()
+               APPEND BLANK
+               REPLACE TRAN_YR WITH MTRAN_YR
+               REPLACE TRAN_MO WITH MTRAN_MO
+               REPLACE END_YR  WITH MEND_YR
+               REPLACE END_MO  WITH MEND_MO
+               REPLACE SALESMAN WITH MSALESMAN
+            ENDIF
+            REPLACE NET WITH NET + C->SALE2_NET 
+            REPLACE COMM WITH COMM + C->SALE2_AMT 
+            IF C->INV_COR = 'I'
+               REPLACE INTRA_LBS WITH INTRA_LBS + A->TOT_LBS
+            ENDIF
+         ENDIF
+         IF SALE3_NET <> 0 .OR. SALE3_AMT <> 0
+            STORE SAL_CODE3 TO MSALESMAN
+            SELECT B
+            SEEK MSALESMAN
+            IF EOF()
+               APPEND BLANK
+               REPLACE TRAN_YR WITH MTRAN_YR
+               REPLACE TRAN_MO WITH MTRAN_MO
+               REPLACE END_YR  WITH MEND_YR
+               REPLACE END_MO  WITH MEND_MO
+               REPLACE SALESMAN WITH MSALESMAN
+            ENDIF
+            REPLACE NET WITH NET + C->SALE3_NET 
+            REPLACE COMM WITH COMM + C->SALE3_AMT 
+            IF C->INV_COR = 'I'
+               REPLACE INTRA_LBS WITH INTRA_LBS + A->TOT_LBS
+            ENDIF
+         ENDIF
+      ENDIF
+      SELECT C
+      SKIP
+   ENDDO
+   CLOSE DATA
+ENDCASE
+
+RETURN
+
+
+
+*Formatted by: ToolBox Ver. 1.2  on 12/10/15 at 3:54 PM.
+

@@ -1,0 +1,798 @@
+************
+* Program.: INV_RPT2.PRG
+* Author..: GRACE KELLER
+* Date....: 10/01/2013
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: PROGRAM FOR AMERICHICKEN INVENTORY        
+*
+* ---SET environment.
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+
+SET CENTURY ON
+SET DELETED ON
+SET TALK OFF
+SET ECHO OFF
+SET BELL OFF
+SET MENU OFF
+SET SAFETY OFF
+SET ESCAPE ON
+SET SCOREBOARD ON
+SET STATUS OFF
+SET EXCLUSIVE OFF
+SET PATH TO \AMERIFOX   
+SET DECIMALS TO 5
+SET DEVICE TO SCREEN
+
+CLIPPER = .F.
+FOXBASE = .T.
+MMONO   = .F.
+
+* ---SET COLOR TO values.   (If changed, change other one farther down too)
+IF .NOT. MMONO .AND. ISCOLOR()
+   SET COLOR TO W+/B,W+/R
+ELSE
+   SET COLOR TO W/N,N/W
+ENDIF
+
+CLOSE ALL
+SET DEVICE TO SCREEN
+
+**** FINISHES THE READ WHEN DOING A PAGE DOWN
+
+SELECT A
+DO FOX_USE WITH "C:\COMPINFO\SCREEN", .F.
+MSCRNSIZE = SCRNSIZE
+USE
+
+DO CASE
+*** TEST
+CASE MSCRNSIZE = 'T'
+   DEFINE WINDOW MWINDOW ;
+     FROM 2,24 TO 40,252 ;
+     FONT "LUCIDA CONSOLE", 18 ;
+     COLOR W+/B, W+/R ;
+     NONE
+*** Jeni
+CASE MSCRNSIZE = 'J'
+   **GOOD - FROM 2,10 TO 35,200  
+   **BETTER-  FROM 2,5 TO 35,210
+   DEFINE WINDOW MWINDOW ;
+     FROM 2,5 TO 40,210 ;
+     FONT "LUCIDA CONSOLE", 16 ;
+     COLOR W+/B, W+/R ;
+     NONE
+*** WIDESCREEN
+CASE MSCRNSIZE = 'W'
+   DEFINE WINDOW MWINDOW ;
+     FROM 5,30 TO 57,272 ;
+     FONT "LUCIDA CONSOLE", 20 ;
+     COLOR W+/B, W+/R ;
+     NONE
+*** LAPTOP
+CASE MSCRNSIZE = 'L'
+   DEFINE WINDOW MWINDOW ;
+     FROM 2,23 TO 54,265 ;
+     FONT "LUCIDA CONSOLE", 20 ;
+     COLOR W+/B, W+/R ;
+     NONE
+*** OTHER - SQUARE 
+OTHERWISE
+   DEFINE WINDOW MWINDOW ;
+     FROM 5,4 TO 57,200 ;
+     FONT "LUCIDA CONSOLE", 19 ;
+     COLOR W+/B, W+/R ;
+     NONE
+ENDCASE
+
+ACTIVATE WINDOW "MWINDOW"
+
+* ---MAIN PROCESSING LOOP
+CLEAR
+SET COLOR TO W/W,W/W
+SET COLOR TO W+/B+,W+/R+
+CLEAR
+
+
+**********************************************************************
+**** THIS WORKS - BUT GIVES AN EXTRA EJECT AT THE END OF JOB**********
+**** ORIGINALLY HAD THIS WAY FOR STODDARD COUNTY
+**MPRINTIT = "PRINT.EXE /D:" + MPRINTER + " C:\COMPINFO\PRT_FILE.TXT"
+**********************************************************************
+
+****TESTING************
+****MPRINTIT = "PRINT.EXE /D:\\GRACE64-HP\HP4250 \COMPINFO\PRTFILE.TXT"
+****MPRINTIT = "PRINT.EXE /D:\\GINGER-PC\HP940C \REPORTS\PRTFILE.TXT"
+*** END OF TESTING*****
+************************************************************************
+
+* ---Initialize global variables.
+SELECT A
+DO FOX_USE WITH "COMPANY", .F.
+MCOMPANY = TRIM(COMPANY)
+MMASTDBF = TRIM(MASTDBF)
+MDBFLOC = TRIM(DBFLOC)
+USE
+
+SELECT A
+DO FOX_USE WITH "&MMASTDBF.CONTROL", .F.
+MPROGRAM = TRIM(PROGRAM)
+MPROG_CODE = PROG_CODE
+USE
+
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SELECT A
+   DO FOX_USE WITH "C:\COMPINFO\PRINTERS", .F.
+   MPRINTER  = TRIM(PRINTER1)
+   MPRINTER2 = TRIM(PRINTER2)
+   MPRINTER3 = TRIM(PRINTER3)
+   USE
+ELSE
+   MPRINTER  = 'DONOTPRINT'
+   MPRINTER2 = 'DONOTPRINT'
+   MPRINTER3 = 'DONOTPRINT'
+ENDIF  
+
+MPRINTIT  = 'COPY C:\COMPINFO\PRT_FILE.TXT ' + MPRINTER
+MPRINTIT2 = 'COPY C:\COMPINFO\PRT_FILE.TXT ' + MPRINTER2
+MPRINTIT3 = 'COPY C:\COMPINFO\PRT_FILE.TXT ' + MPRINTER3
+
+
+**********************************************************************
+**** THIS WORKS - BUT GIVES AN EXTRA EJECT AT THE END OF JOB**********
+**** ORIGINALLY HAD THIS WAY FOR STODDARD COUNTY
+**MPRINTIT = "PRINT.EXE /D:" + MPRINTER + " C:\COMPINFO\PRT_FILE.TXT"
+**********************************************************************
+
+****TESTING************
+****MPRINTIT = "PRINT.EXE /D:\\GRACE64-HP\HP4250 \COMPINFO\PRTFILE.TXT"
+****MPRINTIT = "PRINT.EXE /D:\\GINGER-PC\HP940C \REPORTS\PRTFILE.TXT"
+*** END OF TESTING*****
+************************************************************************
+
+STORE 'BROKER SYSTEM' TO MPROGRAM
+
+STORE .T. TO MONO
+
+MPASSWORD = 'ADM99'
+MUSER = 'SUPERVISOR'
+MSECURITY = .T.
+
+ON KEY LABEL PGUP CLEAR READ
+ON KEY LABEL PGDN CLEAR READ
+
+
+CLEAR
+@ 00,00 SAY MCOMPANY
+@ 01,68 SAY DATE()
+@ 01,00 SAY MPROGRAM + ' - PRINT INVENTORY PRODUCT SUMMARY/DETAIL'
+@ 2,0 to 24,79
+MFILE = 'INVNTMP'
+MCUTOFF = CTOD('')  
+MPEND = 'N'
+MTOT_ONLY = 'D'
+MYES_NO = 'Y'
+MACTION = 2
+STORE CTOD('') TO MBEGIN, MENDING
+STORE SPACE(6) TO MSEL_PROD
+MCHOICE4 = ' '
+DO WHILE MACTION = 2
+   @ 04,3 SAY 'Note:  Does NOT include Pending Lots'
+   **@ 06,3 SAY 'Include Pending Lots (Y/N): ' GET MPEND PICTURE '@!' VALID(MPEND = 'Y' .OR. MPEND = 'N')
+   @ 07,3 SAY 'Enter Activity Timeframe '
+   @ 08,3 SAY 'Begin Date:                 Ending Date:'
+   @ 08,15 GET MBEGIN
+   @ 08,44 GET MENDING
+   @ 10,3 SAY 'Print Remaining Dollar Amount (Y/N): ' GET MYES_NO PICTURE '@!' VALID(MYES_NO = 'Y' .OR. MYES_NO = 'N')
+   @ 12,3 SAY 'Print Product Totals Summary (S)  -or-  Detail Lot Info (D): ' GET MTOT_ONLY PICTURE '@!' VALID(MTOT_ONLY = 'S' .OR. MTOT_ONLY = 'D')
+   @ 14,3 SAY 'Optional Product: ' GET MSEL_PROD
+   @ 16,3 SAY 'Optionally select specific Freezer - select with a  "Y" OR "X"'
+   @ 17,3 SAY 'Ship to Freezer:'
+   @ 17,20 GET MCHOICE4 PICTURE '@!' VALID(MCHOICE4 = ' ' .OR. MCHOICE4 = 'Y' .OR. MCHOICE4 = 'X')
+   STORE 1 TO MACTION
+   @ 24,0 SAY 'Action: ' + STR(MACTION,1)
+   @ 24,13 SAY '1. Continue    2. Edit    3. Cancel Report'          
+   READ
+   @ 24,8 GET MACTION PICTURE '#' RANGE 1,3
+   READ
+ENDDO
+IF MACTION = 3                         
+   CLOSE DATA
+   RETURN
+ENDIF
+STORE SPACE(4) TO MBBUYCODE, MRSUPCODE, MBUY_CODE, MSUP_CODE
+IF MCHOICE4 = 'Y'
+   STORE 'X' TO MCHOICE4
+ENDIF
+IF MCHOICE4 = 'X'
+   CLEAR
+   MWAIT = ' '
+   @ 5,1 SAY 'PRESS ENTER TO SELECT SHIP TO FREEZER' GET MWAIT
+   READ
+   MNAME_FD = .F.
+   SET PROC TO BUY_PROC
+   DO BUY_SEL1
+   IF MNAME_FD
+      STORE BUY_CODE TO MBUY_CODE
+      STORE NAME TO MBUY_NAME
+      STORE CITY TO MBUY_CITY
+      STORE STATE TO MBUY_STATE
+   ELSE
+      MCHOICE4 = ' '
+   ENDIF
+   SET PROC TO 
+   USE
+ELSE
+   STORE SPACE(4) TO MBUY_CODE
+   STORE SPACE(32) TO MBUY_NAME
+ENDIF
+
+@ 3,1 CLEAR TO 22,78
+MPRT_DISP = 'P'
+MPRT_ACT = 'C'
+DO PRT_SET
+IF MPRT_ACT <> 'C'
+   CLOSE DATA
+   RETURN
+ENDIF
+
+*** DO SOME CLEANUP HERE
+SELECT B
+DO FOX_USE WITH "HINV_DTL INDEX HDTL_LOT", .F.
+
+SELECT A
+DO FOX_USE WITH "HINVEN", .F.
+SET FILTER TO LOT_NBR <> 'U'
+GOTO TOP
+DO WHILE .NOT. EOF()
+   IF LBS = 0 .AND. CALC_LBS = 0 .AND. CASE_CNT = 0 .AND. CASE_LEFT = 0
+      *** NEED TO DELETE THESE RECORDS - LEFTOVER NO ACTIVITY
+      SELECT B
+      SEEK A->FREEZ_LOC + A->LOT_NBR
+      DO WHILE .NOT. EOF() .AND. FREEZ_LOC = A->FREEZ_LOC .AND. LOT_NBR = A->LOT_NBR
+         DELETE
+         SKIP
+      ENDDO
+      SELECT A
+      DELETE
+   ENDIF
+   SKIP
+ENDDO
+
+*** DO MORE CLEANUP ON LEFTOVER UNDETERMINED LOTS
+SELECT A
+**DO FOX_USE WITH "HINVEN", .F.
+SET FILTER TO LOT_NBR = 'U'
+GOTO TOP
+DO WHILE .NOT. EOF()
+   
+   IF LBS = 0 .AND. CALC_LBS = 0 .AND. CASE_CNT = 0 .AND. CASE_LEFT = 0
+      *** NEED TO DELETE THESE RECORDS - LEFTOVER NO ACTIVITY
+      SELECT B
+      SEEK A->FREEZ_LOC + A->LOT_NBR
+      IF EOF()
+         SELECT A
+         DELETE
+      ELSE
+         IF QTY = 0 .AND. LBS = 0
+            DELETE
+            SELECT A
+            DELETE
+         ENDIF
+      ENDIF
+      
+   ENDIF
+   
+   SELECT A
+   SKIP
+ENDDO
+
+
+SELECT A
+USE
+SELECT B
+USE
+
+
+MPAGE_LEN = 56
+
+MPAGE_NO = 0
+MLINE = 99
+IF MTOT_ONLY = 'S'
+   MTOT_ONLY = 'Y'
+ELSE
+   MTOT_ONLY = 'N'
+ENDIF
+@ 21,16 SAY SPACE(34)
+@ 21,16 SAY 'PROCESSING/PRINTING......'
+SET CONSOLE OFF
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+ELSE
+   SET PRINT TO LPT3
+ENDIF
+SET DEVICE TO PRINT
+SET PRINT ON
+
+*** PRINT IN 12 CPI
+?? chr(27) + '&k4S'
+
+*** BOLDED PRINT
+?? CHR(27) + '(s4B'
+
+*** LETTER SIZE PAPER
+?? CHR(27) + '&l2A'
+
+*** PORTRAIT MODE
+?? CHR(27) + '&l0O'
+
+MCUTOFF = MBEGIN - 1
+SELECT C
+*** INVNTMP3
+MFILENM = MFILE + '3'
+USE &MFILENM EXCLUSIVE               
+DELETE ALL
+PACK
+INDEX ON FREEZ_LOC + PROD_DESC + LOT_NBR TO &MFILENM
+DO FOX_USE WITH "&MFILENM INDEX &MFILENM", .F.
+DO FILELOCK
+SELECT B
+DO FOX_USE WITH "INVN_DTL INDEX DTL_DATE", .F.
+
+SELECT A
+DO FOX_USE WITH "INVEN INDEX INVNSOLD", .F.
+SEEK ' '
+DO WHILE .NOT. EOF() .AND. SOLD_FLG = ' '
+   IF ANIV_DATE > MCUTOFF
+      SKIP
+      LOOP
+   ENDIF
+   SELECT C
+   APPEND BLANK
+   REPLACE LOT_NBR WITH A->LOT_NBR
+   REPLACE FREEZ_LOC WITH A->FREEZ_LOC
+   REPLACE RSUPCODE WITH A->RSUPCODE
+   REPLACE ANIV_DATE WITH A->ANIV_DATE
+   REPLACE SIZE    WITH A->SIZE
+   REPLACE GRADE   WITH A->GRADE
+   REPLACE PROD_DESC WITH A->PROD_DESC
+   REPLACE BOX_SZ    WITH A->BOX_SZ
+   REPLACE CASE_LEFT WITH A->CASE_LEFT
+   REPLACE LBS_LEFT  WITH A->LBS_LEFT
+   REPLACE PRI_LB    WITH A->PRI_LB + A->STOR_LB
+   REPLACE CASE_CNT  WITH A->CASE_CNT
+   REPLACE PACKED    WITH A->PACKED
+   SELECT A
+   SKIP
+ENDDO
+
+SELECT A
+DO FOX_USE WITH "INVEN INDEX INVNLOC", .F.
+
+MTRAN_YR = STR(YEAR(MCUTOFF),4)
+MTRAN_MO = SUBSTR(DTOC(MCUTOFF),1,2)
+SELECT B
+SEEK MTRAN_YR+MTRAN_MO
+IF EOF()
+   SEEK MTRAN_YR
+   IF EOF()
+      GOTO TOP 
+   ENDIF 
+ENDIF
+
+DO WHILE .NOT. EOF()
+   IF ACT_DATE <= MCUTOFF
+      SKIP
+      LOOP
+   ENDIF
+   IF ACTIVITY = 'IN '
+      SKIP
+      LOOP
+   ENDIF
+   
+   SELECT A
+   SEEK B->FREEZ_LOC + B->LOT_NBR
+   IF EOF()
+      STORE SPACE(8) TO MPROD_DESC
+   ELSE
+      STORE PROD_DESC TO MPROD_DESC
+   ENDIF
+   
+   SELECT C
+   SEEK B->FREEZ_LOC + MPROD_DESC + B->LOT_NBR   
+   
+   DO CASE
+   CASE EOF()     
+      SELECT A
+      IF EOF() .OR. ANIV_DATE > MCUTOFF
+         SELECT B
+         SKIP
+         LOOP
+      ENDIF
+      SELECT C
+      *** GET ALL THE DETAIL STUFF
+      APPEND BLANK
+      REPLACE FREEZ_LOC WITH B->FREEZ_LOC
+      REPLACE LOT_NBR WITH B->LOT_NBR
+      REPLACE CASE_LEFT WITH B->QTY * -1
+      REPLACE LBS_LEFT  WITH B->LBS * -1 
+      **** GET ALL THE HEADER STUFF
+      REPLACE SIZE    WITH A->SIZE
+      REPLACE GRADE   WITH A->GRADE
+      REPLACE PROD_DESC WITH A->PROD_DESC
+      REPLACE RSUPCODE WITH A->RSUPCODE
+      REPLACE ANIV_DATE WITH A->ANIV_DATE
+      REPLACE BOX_SZ    WITH A->BOX_SZ
+      REPLACE PACKED    WITH A->PACKED
+      REPLACE PRI_LB    WITH A->PRI_LB + A->STOR_LB
+      REPLACE CASE_CNT  WITH A->CASE_CNT
+   OTHERWISE
+      REPLACE CASE_LEFT WITH CASE_LEFT + B->QTY * -1
+      REPLACE LBS_LEFT  WITH LBS_LEFT + B->LBS * -1 
+   ENDCASE
+   SELECT B
+   SKIP
+ENDDO
+
+CLOSE DATA
+
+*** START THE SECOND PHASE OF DATA GATHERING
+SELECT A
+DO FOX_USE WITH "INVEN INDEX INVNLOC", .F.
+
+SELECT C
+*** INVNTMP3
+USE INVNTMP3 EXCLUSIVE
+INDEX ON FREEZ_LOC + LOT_NBR TO INVNTMP3
+REPLACE ALL BEG_CASE WITH CASE_LEFT
+REPLACE ALL BEG_LBS  WITH LBS_LEFT
+
+USE INVNTMP3 INDEX INVNTMP3 EXCLUSIVE
+
+SELECT B
+DO FOX_USE WITH "INVN_DTL INDEX DTL_DATE", .F.
+SET FILTER TO ACT_DATE >= MBEGIN .AND. ACT_DATE <= MENDING
+GOTO TOP
+DO WHILE .NOT. EOF()
+   DO CASE
+   CASE ACTIVITY = 'IN'
+      SELECT A
+      SEEK B->FREEZ_LOC + B->LOT_NBR
+      
+      SELECT C
+      SEEK B->FREEZ_LOC + B->LOT_NBR   
+      IF EOF()
+         APPEND BLANK
+         REPLACE FREEZ_LOC WITH B->FREEZ_LOC
+         REPLACE LOT_NBR WITH B->LOT_NBR
+         REPLACE PROD_DESC WITH A->PROD_DESC
+         REPLACE PACKED    WITH A->PACKED
+         REPLACE PRI_LB    WITH A->PRI_LB + A->STOR_LB
+         REPLACE ANIV_DATE WITH A->ANIV_DATE
+      ENDIF
+      
+      REPLACE CASE_LEFT WITH CASE_LEFT + B->QTY 
+      REPLACE LBS_LEFT  WITH LBS_LEFT  + B->LBS  
+      REPLACE CASE_IN   WITH CASE_IN   + B->QTY
+      REPLACE LBS_IN    WITH LBS_IN    + B->LBS
+      
+   OTHERWISE
+      SELECT C
+      SEEK B->FREEZ_LOC + B->LOT_NBR   
+      IF EOF()
+         SELECT A
+         SEEK B->FREEZ_LOC + B->LOT_NBR
+         
+         SELECT C
+         APPEND BLANK
+         REPLACE FREEZ_LOC WITH B->FREEZ_LOC
+         REPLACE LOT_NBR WITH B->LOT_NBR
+         REPLACE PROD_DESC WITH A->PROD_DESC
+         REPLACE PACKED    WITH A->PACKED
+         REPLACE PRI_LB    WITH A->PRI_LB + A->STOR_LB
+         REPLACE ANIV_DATE WITH A->ANIV_DATE
+      ENDIF
+      
+      REPLACE CASE_LEFT WITH CASE_LEFT + B->QTY 
+      REPLACE LBS_LEFT  WITH LBS_LEFT  + B->LBS  
+      REPLACE CASE_OUT  WITH CASE_OUT  + B->QTY
+      REPLACE LBS_OUT   WITH LBS_OUT   + B->LBS
+   ENDCASE
+   
+   SELECT B
+   SKIP
+ENDDO
+
+*** DONE WITH SECOND PHASE OF DATA GATHERING
+CLOSE DATA
+
+SELECT A
+*** INVNTMP3
+USE INVNTMP3 EXCLUSIVE
+INDEX ON FREEZ_LOC + PROD_DESC + LOT_NBR TO INVNTMP3
+USE INVNTMP3 INDEX INVNTMP3 EXCLUSIVE
+IF MSEL_PROD <> SPACE(6)
+   IF MBUY_NAME <> SPACE(32)
+      SET FILTER TO PROD_DESC = MSEL_PROD .AND. FREEZ_LOC = MBUY_NAME
+   ELSE
+      SET FILTER TO PROD_DESC = MSEL_PROD
+   ENDIF
+ELSE
+   IF MBUY_NAME <> SPACE(32)
+      SET FILTER TO FREEZ_LOC = MBUY_NAME
+   ENDIF
+ENDIF
+
+GOTO TOP
+
+MPAGE_NO = 0
+MTOT_LBS = 0
+MTOT_CASE = 0
+MTOT_VAL = 0
+
+
+MCANCEL = .F.
+
+DO WHILE .NOT. EOF()
+   STORE FREEZ_LOC TO MFREEZ_LOC
+   MPRT_FREEZ = .T.
+   STORE 0 TO MFREEZ_TOT, MFREEZ_BEG, MFREEZ_OUT, MFREEZ_LFT
+   
+   DO WHILE .NOT. EOF() .AND. FREEZ_LOC = MFREEZ_LOC
+      STORE 0 TO MPROD_TOT, MPROD_BEG, MPROD_OUT, MPROD_LFT
+      STORE PROD_DESC TO MPROD_DESC
+      STORE PACKED TO MPACKED
+      DO WHILE .NOT. EOF() .AND. FREEZ_LOC = MFREEZ_LOC .AND. PROD_DESC = MPROD_DESC
+         IF SOLD_FLG <> ' '
+            SKIP 
+            LOOP
+         ENDIF
+         IF (SUBSTR(LOT_NBR,1,1) = 'P' .OR. SUBSTR(LOT_NBR,1,1) = 'U') .AND. MPEND = 'N'
+            SKIP
+            LOOP
+         ENDIF
+         
+         SELECT C
+         DO FOX_USE WITH "&MDBFLOC.PRODUCTS INDEX &MDBFLOC.PRODUCTS", .F.
+         
+         MPRT_IT = TRIM(A->SIZE)
+         
+         IF A->GRADE <> ' '
+            DO CASE
+            CASE A->GRADE = 'M'
+               MGRADE = 'MAR'               
+            CASE A->GRADE = 'S'
+               MGRADE = 'SMK'              
+            CASE A->GRADE = 'O'
+               MGRADE = 'OVR'               
+            OTHERWISE
+               MGRADE = '   '
+            ENDCASE
+         ELSE
+            MGRADE = '   '
+         ENDIF
+         
+         MGRADE = TRIM(MGRADE)
+         IF LEN(MPRT_IT) > 1
+            IF LEN(MGRADE) > 1
+               MPRT_IT = MPRT_IT + ' ' + MGRADE
+            ENDIF     
+         ELSE
+            MPRT_IT = MGRADE
+         ENDIF
+         
+         MPRT_IT = TRIM(MPRT_IT)
+         IF LEN(MPRT_IT) > 1
+            MPRT_IT = MPRT_IT + ' '
+         ENDIF
+         MLEN = LEN(MPRT_IT)
+         MLEN = 21 - MLEN
+         
+         SEEK 'R' + A->PROD_DESC    
+         IF EOF()       
+            MPRT_PROD = MPRT_IT   
+         ELSE
+            MPRT_PROD = MPRT_IT + SUBSTR(DESC,1,MLEN)
+         ENDIF
+         
+         SELECT A
+         
+         IF MLINE > MPAGE_LEN
+            IF MLINE <> 99
+               EJECT        
+            ENDIF
+            MPAGE_NO = MPAGE_NO + 1
+            @ 1,0 SAY 'PAGE: ' + STR(MPAGE_NO,2)
+            @ 1,20 SAY TRIM(MCOMPANY) + ' INVENTORY' + SPACE(13) + DTOC(DATE())
+            MLINE = 2
+            @ MLINE,15 SAY 'ACTIVITY BETWEEN: ' + DTOC(MBEGIN)  + ' - ' + DTOC(MENDING)
+            MLINE = MLINE + 2
+            IF MYES_NO = 'Y'
+               IF MTOT_ONLY = 'Y'
+                  @ MLINE,0 SAY 'FREEZER/               BOX              CASE    CASE   CASE   CASE               $ AMOUNT'
+               ELSE
+                  @ MLINE,0 SAY 'FREEZER/               BOX              CASE    CASE   CASE   CASE     UNIT      $ AMOUNT'
+               ENDIF
+               MLINE = MLINE + 1
+               IF MTOT_ONLY = 'Y'
+                  @ MLINE,0 SAY 'LOT NBR   PRODUCT     SIZE             BEGIN      IN    OUT   LEFT              REMAINING'
+               ELSE
+                  @ MLINE,0 SAY 'LOT NBR   PRODUCT     SIZE  DATE IN    BEGIN      IN    OUT   LEFT     COST     REMAINING'
+               ENDIF
+            ELSE
+               @ MLINE,0 SAY 'FREEZER/               BOX              CASE    CASE   CASE   CASE'
+               MLINE = MLINE + 1
+               IF MTOT_ONLY = 'Y'
+                  @ MLINE,0 SAY 'LOT NBR    PRODUCT    SIZE             BEGIN      IN    OUT   LEFT'
+               ELSE
+                  @ MLINE,0 SAY 'LOT NBR    PRODUCT    SIZE  DATE IN    BEGIN      IN    OUT   LEFT'
+               ENDIF
+            ENDIF
+            
+            *                        10        20        30        40       50         60       70            
+            *              012345678901234567890123456789012345678901234567890123456789012345678901234567890123456
+            *              12345678  1234567890  XXXX  XX/XX/XX    XXXX    XXXX   XXXX   XXXX  XX.XXXX  X,XXX,XXX.99
+            
+            @ MLINE,0 SAY REPLICATE('_',89)
+            MLINE = MLINE + 2
+            MPRT_FREEZ = .T.      
+         ENDIF
+         
+         IF MTOT_ONLY = 'N'
+            IF MPRT_FREEZ
+               MLINE = MLINE + 1
+               @ MLINE,0 SAY MFREEZ_LOC
+               STORE LEN(TRIM(MFREEZ_LOC)) TO MLEN
+               MPRT_FREEZ = .F.
+               MLINE = MLINE + 2
+            ENDIF
+            @ MLINE,0 SAY LOT_NBR
+            @ MLINE,11 SAY PROD_DESC
+            IF SUBSTR(PACKED,1,1) = 'B'
+               @ MLINE,22 SAY SUBSTR(PACKED,2)
+            ELSE
+               @ MLINE,22 SAY PACKED
+            ENDIF
+            
+            @ MLINE,28 SAY SUBSTR(DTOC(ANIV_DATE),1,6) + SUBSTR(DTOC(ANIV_DATE),9)
+            @ MLINE,40 SAY BEG_CASE PICTURE '9999'
+            
+            *** NOW - FIGURE OUT WHAT IS LEFT
+            MCASE_IN = CASE_LEFT - CASE_OUT - BEG_CASE
+            @ MLINE,48 SAY MCASE_IN PICTURE '9999'
+            IF CASE_OUT = 0
+               @ MLINE,55 SAY CASE_OUT PICTURE '9999'
+            ELSE
+               @ MLINE,55 SAY CASE_OUT * -1 PICTURE '9999'
+            ENDIF
+            @ MLINE,62 SAY CASE_LEFT PICTURE '9999'
+            @ MLINE,68 SAY PRI_LB  PICTURE '99.9999'
+            MFREEZ_BEG = MFREEZ_BEG + BEG_CASE
+            MFREEZ_OUT = MFREEZ_OUT + CASE_OUT
+            MFREEZ_LFT = MFREEZ_LFT + CASE_LEFT
+            IF MYES_NO = 'Y'
+               IF SUBSTR(PACKED,1,1) = 'B' .OR. PRI_LB >= 10 .OR. LOT_NBR = 'H0 '
+                  MVAL_LEFT = ROUND(CASE_LEFT * PRI_LB,2)
+                  @ MLINE,77  SAY ROUND(CASE_LEFT * PRI_LB,2) PICTURE '9,999,999.99'
+                  MTOT_VAL = MTOT_VAL + MVAL_LEFT
+               ELSE
+                  IF PACKED = 'CWT'
+                     MLBS_LEFT = LBS_LEFT
+                     MVAL_LEFT = ROUND(MLBS_LEFT * PRI_LB,2)
+                     @ MLINE,77 SAY MVAL_LEFT PICTURE '9,999,999.99'
+                     MTOT_VAL = MTOT_VAL + MVAL_LEFT
+                  ELSE
+                     MLBS_LEFT = ROUND(CASE_LEFT * BOX_SZ,2)
+                     MVAL_LEFT = ROUND(MLBS_LEFT * PRI_LB,2)
+                     @ MLINE,77 SAY MVAL_LEFT PICTURE '9,999,999.99'
+                     MTOT_VAL = MTOT_VAL + MVAL_LEFT
+                  ENDIF
+               ENDIF
+               MFREEZ_TOT = MFREEZ_TOT + MVAL_LEFT
+            ENDIF
+            MLINE = MLINE + 2
+            
+         ELSE
+            **** DO NOT DO DETAIL TOTALS
+            
+            MFREEZ_BEG = MFREEZ_BEG + BEG_CASE
+            MFREEZ_OUT = MFREEZ_OUT + CASE_OUT
+            MFREEZ_LFT = MFREEZ_LFT + CASE_LEFT
+            
+            MPROD_BEG = MPROD_BEG + BEG_CASE
+            MPROD_OUT = MPROD_OUT + CASE_OUT
+            MPROD_LFT = MPROD_LFT + CASE_LEFT
+            
+            IF MYES_NO = 'Y'
+               IF SUBSTR(PACKED,1,1) = 'B' .OR. PRI_LB >= 10 .OR. LOT_NBR = 'H0 '
+                  MVAL_LEFT = ROUND(CASE_LEFT * PRI_LB,2)
+                  MTOT_VAL = MTOT_VAL + MVAL_LEFT
+               ELSE
+                  IF PACKED = 'CWT'
+                     MLBS_LEFT = LBS_LEFT
+                     MVAL_LEFT = ROUND(MLBS_LEFT * PRI_LB,2)
+                     MTOT_VAL = MTOT_VAL + MVAL_LEFT
+                  ELSE
+                     MLBS_LEFT = ROUND(CASE_LEFT * BOX_SZ,2)
+                     MVAL_LEFT = ROUND(MLBS_LEFT * PRI_LB,2)
+                     MTOT_VAL = MTOT_VAL + MVAL_LEFT
+                  ENDIF
+               ENDIF
+               MFREEZ_TOT = MFREEZ_TOT + MVAL_LEFT
+               MPROD_TOT  = MPROD_TOT + MVAL_LEFT
+            ENDIF
+         ENDIF
+         SKIP
+      ENDDO
+      *** PRINT TOTALS FOR PRODUCT
+      IF MPRT_FREEZ
+         MLINE = MLINE + 1
+         @ MLINE,0 SAY MFREEZ_LOC
+         STORE LEN(TRIM(MFREEZ_LOC)) TO MLEN
+         MPRT_FREEZ = .F.
+         MLINE = MLINE + 2
+      ENDIF
+      @ MLINE,11 SAY MPROD_DESC
+      
+      IF SUBSTR(MPACKED,1,1) = 'B'
+         @ MLINE,22 SAY SUBSTR(MPACKED,2)
+      ELSE
+         @ MLINE,22 SAY MPACKED
+      ENDIF
+      
+      @ MLINE,38 SAY MPROD_BEG PICTURE '999999'
+      *** NOW - FIGURE OUT WHAT IS LEFT
+      MPROD_IN = MPROD_LFT - MPROD_OUT - MPROD_BEG
+      @ MLINE,46 SAY MPROD_IN PICTURE '999999'
+      IF MPROD_OUT = 0
+         @ MLINE,53 SAY MPROD_OUT  PICTURE '999999'
+      ELSE
+         @ MLINE,53 SAY MPROD_OUT * -1 PICTURE '999999'
+      ENDIF
+      @ MLINE,60 SAY MPROD_LFT PICTURE '999999'
+      IF  MYES_NO = 'Y' 
+         @ MLINE,77  SAY MPROD_TOT PICTURE '9,999,999.99'
+      ENDIF
+      MLINE = MLINE + 2
+      
+   ENDDO
+   @ MLINE,0 SAY '********'
+   @ MLINE,11 SAY 'FREEZER TOTAL: '
+   @ MLINE,37 SAY MFREEZ_BEG PICTURE '999,999'
+   
+   *** NOW - FIGURE OUT WHAT IS LEFT
+   MFREEZ_IN = MFREEZ_LFT - MFREEZ_OUT - MFREEZ_BEG
+   @ MLINE,45 SAY MFREEZ_IN PICTURE '999,999'
+   IF MFREEZ_OUT = 0
+      @ MLINE,52 SAY MFREEZ_OUT PICTURE '999,999'
+   ELSE
+      @ MLINE,52 SAY MFREEZ_OUT * -1 PICTURE '999,999'
+   ENDIF
+   @ MLINE,59 SAY MFREEZ_LFT PICTURE '999,999'
+   IF  MYES_NO = 'Y' 
+      @ MLINE,77  SAY MFREEZ_TOT PICTURE '9,999,999.99'
+   ENDIF
+   MLINE = MLINE + 3
+ENDDO
+IF MLINE =  99
+   @ 4,1 SAY 'NO INVENTORY DATA SELECTED FOR REPORT'                            
+ELSE
+   IF MYES_NO = 'Y'
+      MLINE = MLINE + 1
+      @ MLINE,1 SAY 'TOTAL INVENTORY: '
+      @ MLINE,77 SAY MTOT_VAL PICTURE '9,999,999.99'
+   ENDIF
+ENDIF
+EJECT 
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+IF MPRINTER3 <> 'DONOTPRINT'
+   RUN &MPRINTIT3
+ENDIF
+
+CLOSE DATA
+RETURN           
+
+*Formatted by: ToolBox Ver. 1.2  on 7/22/14 at 4:01 PM.

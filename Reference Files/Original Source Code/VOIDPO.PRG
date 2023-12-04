@@ -1,0 +1,456 @@
+*************
+* Program.: VOIDPO.PRG
+* Author..: Grace Keller
+* Date....: 10/26/87
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: PRINT INVOICES SHEDULED
+*
+* ---OPEN FILES
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+MTITLE = ' - DELETE / VOID / ERASE PURCHASE ORDER'
+STORE 1 TO MACTION
+MPO_SEL = .T.
+STORE SPACE(2)    TO MSALESMAN
+STORE SPACE(4)    TO MPO_NBR
+STORE SPACE(1)    TO MPO_SUFFIX
+
+DO WHILE MPO_SEL .AND. MPO_NBR = SPACE(4)
+   STORE SPACE(2)    TO MSALESMAN
+   STORE SPACE(4)    TO MPO_NBR
+   STORE SPACE(1)    TO MPO_SUFFIX
+   CLEAR 
+   @  1, 0 SAY MCOMPANY
+   @  1,68 SAY DATE()
+   MTITLE = ' - SELECT PURCHASE ORDER TO DELETE'
+   @  2, 0 SAY MPROGRAM + MTITLE
+   @ 3,0 TO 22,79
+   
+   @  5, 5 SAY 'Enter Search Field:'
+   @  8, 5 SAY 'Purchase Order Number'
+   @ 10, 5 GET Msalesman PICTURE '##'
+   @ 10,7 say '-'
+   @ 10,8 get mpo_nbr picture '####'
+   @ 10,12 say '-'
+   @ 10,13 get mpo_suffix picture '@!'
+   @ 14,5 SAY 'WARNING !!!!'
+   @ 15,5 SAY 'Use this function with caution. It will erase all traces of'
+   @ 16,5 say 'this Purchase Order out of the computer.  Please make sure'
+   @ 17,5 say 'that is what you want to do before continuing !!!!'
+   STORE 1 TO MACTION
+   @ 24,01 SAY 'Action: ' + STR(MACTION,1)  
+   @ 24,13 SAY '1. Delete PO    2. Edit    3. Cancel'
+   
+   READ
+   
+   @24,09 GET MACTION PICTURE '9' RANGE 1,3
+   READ               
+   
+   IF MACTION = 2
+      LOOP
+   ENDIF
+   IF MACTION = 3
+      STORE SPACE(2)    TO MSALESMAN
+      STORE SPACE(4)    TO MPO_NBR
+      STORE SPACE(1)    TO MPO_SUFFIX
+      MPO_SEL = .F.
+      LOOP
+   ENDIF
+   
+   IF MSALESMAN = SPACE(2) .AND. MPO_NBR = SPACE(4)
+      MPO_SEL = .F.
+      LOOP
+   ENDIF
+   
+   SELECT B
+   SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+   IF EOF() .OR. DELETED()
+      @ 23,0 CLEAR
+      MWAIT = ' '
+      @ 24,10 SAY 'PURCHASE ORDER NOT ON FILE - PRESS RETURN TO SELECT AGAIN ' GET MWAIT
+      READ
+      LOOP
+   ENDIF
+   IF INV_NBR <> SPACE(5)
+      @ 23,0 CLEAR
+      MWAIT = ' '
+      @ 24,10 SAY 'ORDER HAS BEEN INVOICED - CANNOT DELETE - PRESS RETURN ' GET MWAIT
+      READ
+      MSALESMAN = '  '
+      MPO_NBR = SPACE(4)
+      MPO_SUFFIX = ' '
+      LOOP
+   ENDIF
+   
+   ** IF MORE THAN 3 DAYS SINCE ENTRY, MUST ENTER OVERRIDE PW
+   **HERE
+   
+   STORE PO_DTADD TO MPO_DTADD
+   IF DATE() > MPO_DTADD + 4
+      MBUS_DAYS = 5
+   ELSE
+      STORE MPO_DTADD + 4 TO MCHK_DT
+      IF MCHK_DT > DATE()
+         STORE DATE() TO MCHK_DT
+      ENDIF
+      MBUS_DAYS = 0
+      DO WHILE MCHK_DT >= MPO_DTADD
+         IF DOW(MCHK_DT) <> 1 .AND. DOW(MCHK_DT) <> 7
+            MBUS_DAYS = MBUS_DAYS + 1
+         ENDIF
+         MCHK_DT = MCHK_DT - 1
+      ENDDO
+   ENDIF
+   
+   *** END OF HERE
+   
+   IF MBUS_DAYS > 3
+      @ 23,0 CLEAR
+      MWAIT = '      '
+      @ 24,10 SAY 'MORE THAN 3 DAYS SINCE PO ENTRY - ENTER OVERRIDE P/W: '
+      ***SET COLOR TO W/W,W/W
+      SET CONFIRM ON
+      @ 24,65 GET MWAIT
+      READ
+      ***SET COLOR TO W+/B,W+/R
+      SET CONFIRM OFF
+      IF MWAIT <> 'EUGENE' .and. mwait <> 'eugene'
+         @ 23,0 CLEAR
+         MWAIT = ' '
+         @ 24,10 SAY 'INVALID P/W - CANNOT VOID - PRESS RETURN ' GET MWAIT
+         READ
+         MSALESMAN = '  '
+         MPO_NBR = SPACE(4)
+         MPO_SUFFIX = ' '
+         MPO_SEL = .F.
+         LOOP
+      ENDIF
+   ENDIF
+   
+   SELECT E
+   DO FOX_USE WITH "DAILYJRN INDEX JRN_PO", .F.
+   SEEK  MSALESMAN + MPO_NBR + MPO_SUFFIX
+   IF POST_FLG <> ' '
+      @ 23,0 CLEAR
+      MWAIT = ' '
+      @ 24,10 SAY 'PO ALREADY POSTED - MUST ZERO OUT INSTEAD OF VOID !!! ' GET MWAIT
+      READ
+      MSALESMAN = '  '
+      MPO_NBR = SPACE(4)
+      MPO_SUFFIX = ' '
+      MPO_SEL = .F.
+      LOOP
+   ENDIF
+   USE
+ENDDO
+
+
+IF MSALESMAN = SPACE(2) .AND. MPO_NBR = SPACE(4)
+   RETURN
+ENDIF
+
+******
+SELECT E
+DO FOX_USE WITH "&MDBFLOC.BIL_BUY INDEX &MDBFLOC.BBUYCODE", .F.
+SEEK B->BBUYCODE
+DO RECLOCK
+REPLACE CUS_BAL WITH CUS_BAL + B->TOT_SELL + B->CUS_PALL
+UNLOCK
+IF MPROG_CODE = 1
+   DO FOX_USE WITH "OVER_LIM", .F.
+   DO WHILE .NOT. EOF()
+      IF SALESMAN = B->SALESMAN .AND. PO_NBR = B->PO_NBR .AND. PO_SUFFIX = B->PO_SUFFIX
+         DO RECLOCK
+         DELETE 
+         UNLOCK
+      ENDIF
+      SKIP
+   ENDDO
+ENDIF
+USE
+
+******* 
+SELECT B
+STORE INV_NBR TO MINV_NBR
+STORE SHIP_DATE TO MSHIP_DATE
+STORE BUYER_PO TO MBUYER_PO
+STORE BBUYCODE TO MBBUYCODE
+STORE RSUPCODE TO MRSUPCODE
+DO RECLOCK
+DELETE
+UNLOCK
+
+
+DO CASE
+CASE MCOMPANY = 'DIVISION 15'
+   
+   MFREEZ_LOC = 'UNKNOWN' + SPACE(25)
+   IF MBBUYCODE = 'INVN' .OR. MRSUPCODE = 'INVN'
+      DO CASE
+      CASE MBBUYCODE = 'INVN'
+         SELECT F
+         DO FOX_USE WITH "&MDBFLOC.BIL_BUY INDEX &MDBFLOC.BBUYCODE", .F.
+         SEEK MBBUYCODE
+         IF .NOT. EOF()
+            MFREEZ_LOC = NAME
+         ELSE
+            MFREEZ_LOC = 'UNKNOWN' + SPACE(25)
+         ENDIF
+         USE
+      CASE MRSUPCODE = 'INVN'
+         SELECT F
+         DO FOX_USE WITH "&MDBFLOC.rem_sup INDEX &MDBFLOC.rsupcode", .F.
+         SEEK MRSUPCODE
+         IF .NOT. EOF()
+            MFREEZ_LOC = NAME
+         ELSE
+            MFREEZ_LOC = 'UNKNOWN' + SPACE(25)
+         ENDIF
+         USE
+      ENDCASE
+   ENDIF
+   SELECT F
+   USE
+   
+   
+   ******** PO DETAILS
+   SELECT C
+   SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+   DO WHILE .NOT. EOF() .AND. SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      IF LOT_NBR <> SPACE(10)
+         DO CASE
+         CASE MBBUYCODE = 'INVN'
+            SELECT F
+            DO FOX_USE WITH "INVEN INDEX INVNLOC, INVNSOLD, INVNINBR, INVNLOT, INVNPO, INVNANIV, INVNCAT", .F.
+            SEEK MFREEZ_LOC + C->LOT_NBR       
+            IF .NOT. EOF()
+               DO RECLOCK
+               DELETE
+               UNLOCK
+            ENDIF
+            DO FOX_USE WITH "INVN_DTL INDEX INVN_DTL, DTL_LOT, DTL_DATE, IDTL_DTL, INVN_PO, INVNDISP", .F.
+            SEEK C->SALESMAN + C->PO_NBR+C->PO_SUFFIX + C->ITEM_NBR
+            IF .NOT. EOF()
+               DO RECLOCK
+               DELETE
+               UNLOCK
+            ENDIF
+            
+         CASE MRSUPCODE = 'INVN'
+            SELECT F
+            DO FOX_USE WITH "INVN_DTL INDEX INVN_DTL, DTL_LOT, DTL_DATE, IDTL_DTL, INVN_PO, INVNDISP", .F.
+            SEEK C->SALESMAN + C->PO_NBR+C->PO_SUFFIX + C->ITEM_NBR
+            IF .NOT. EOF()
+               DO RECLOCK
+               DELETE
+               UNLOCK
+            ENDIF
+         ENDCASE
+         
+         MX = 0
+         MY = 0
+         MLBS_SOLD = 0
+         MCASE_SOLD = 0
+         MLBS_COM  = 0
+         MCASE_COM = 0
+         
+         SELECT F
+         DO FOX_USE WITH "INVN_DTL INDEX DTL_LOT, INVN_DTL, DTL_DATE, IDTL_DTL, INVN_PO, INVNDISP", .F.
+         SEEK MFREEZ_LOC + C->LOT_NBR 
+         
+         DO WHILE .NOT. EOF() .AND. LOT_NBR = C->LOT_NBR .AND. MFREEZ_LOC = FREEZ_LOC
+            IF ACTIVITY = 'COM'
+               MLBS_COM = MLBS_COM + (LBS * -1)
+               MCASE_COM = MCASE_COM + (QTY * -1)
+               SKIP
+               LOOP
+            ENDIF
+            
+            MX = MX + QTY
+            MY = MY + LBS
+            IF ACTIVITY = 'OUT'
+               MLBS_SOLD = MLBS_SOLD + (LBS * -1)
+               MCASE_SOLD= MCASE_SOLD + (QTY * -1)
+            ENDIF
+            SKIP
+         ENDDO
+         USE
+         
+         SELECT F
+         DO FOX_USE WITH "INVEN INDEX INVNLOC, INVNSOLD, INVNINBR, INVNLOT, INVNPO, INVNANIV, INVNCAT", .F.
+         DO FILELOCK
+         SEEK MFREEZ_LOC + C->LOT_NBR 
+         IF .NOT. EOF()
+            DO RECLOCK
+            REPLACE LBS_SOLD    WITH MLBS_SOLD
+            REPLACE CASE_SOLD   WITH MCASE_SOLD
+            REPLACE LBS_LEFT    WITH MY              
+            REPLACE CASE_LEFT   WITH MX                     
+            REPLACE LBS_COM     WITH MLBS_COM
+            REPLACE CASE_COM    WITH MCASE_COM
+            IF CASE_LEFT <= 0
+               REPLACE SOLD_FLG WITH 'Y'
+            ELSE
+               REPLACE SOLD_FLG WITH ' '
+            ENDIF
+            UNLOCK
+         ENDIF
+      ENDIF
+      SELECT C
+      DO RECLOCK
+      DELETE
+      UNLOCK
+      SKIP
+   ENDDO
+   SELECT F
+   USE
+   
+OTHERWISE
+   ******** PO DETAILS
+   SELECT C
+   SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+   DO WHILE .NOT. EOF() .AND. SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      DO RECLOCK
+      DELETE
+      UNLOCK
+      SKIP
+   ENDDO
+ENDCASE
+
+******** INVOICE RECORD 
+SELECT A
+DO FOX_USE WITH "INV_HEAD INDEX INV_HEAD", .F.
+SEEK MINV_NBR  
+MDELETE = .T.
+DO WHILE .NOT. EOF() .AND. MDELETE .AND. INV_NBR = MINV_NBR
+   IF SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      DO RECLOCK
+      DELETE
+      UNLOCK
+      MDELETE = .F. 
+      LOOP
+   ENDIF
+   SKIP
+ENDDO
+
+DO FOX_USE WITH "CUS_INV INDEX CUSIVNBR", .F.
+SEEK MINV_NBR 
+MDELETE = .T.
+DO WHILE .NOT. EOF() .AND. MDELETE .AND. INV_NBR = MINV_NBR
+   IF SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      DO RECLOCK
+      DELETE
+      UNLOCK
+      MDELETE = .F. 
+      LOOP
+   ENDIF
+   SKIP
+ENDDO
+
+DO FOX_USE WITH "INV_ADJ INDEX INV_ADJ", .F.
+SEEK MINV_NBR
+DO WHILE .NOT. EOF() .AND. INV_NBR = MINV_NBR
+   IF SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      DO RECLOCK
+      DELETE
+      UNLOCK
+   ENDIF
+   SKIP
+ENDDO
+
+DO FOX_USE WITH "DAILYJRN INDEX JRN_PO", .F.
+SEEK  MSALESMAN + MPO_NBR + MPO_SUFFIX
+DO WHILE .NOT. EOF() .AND. MSALESMAN = SALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+   DO RECLOCK
+   DELETE
+   UNLOCK
+   SKIP
+ENDDO
+
+DO FOX_USE WITH "CUST_PO INDEX CUST_PO", .F.
+SEEK MBBUYCODE + MBUYER_PO
+IF .NOT. EOF() .AND. SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX .AND. BBUYCODE = MBBUYCODE
+   DO RECLOCK 
+   DELETE
+   UNLOCK
+ENDIF
+
+DO FOX_USE WITH "SUP_INV", .F.
+DO WHILE .NOT. EOF()
+   IF SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      DO RECLOCK
+      DELETE 
+      UNLOCK
+   ENDIF
+   SKIP
+ENDDO
+
+DO FOX_USE WITH "FRT_INV", .F.
+DO WHILE .NOT. EOF()
+   IF SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      DO RECLOCK
+      DELETE 
+      UNLOCK
+   ENDIF
+   SKIP
+ENDDO
+
+DO FOX_USE WITH "FRT_2ND INDEX FRT2_PO", .F.
+SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+IF .NOT. EOF()
+   DO RECLOCK 
+   DELETE
+   UNLOCK
+ENDIF
+
+DO FOX_USE WITH "COMTHD INDEX COMTHD, COMTDT, COMTPD", .F.
+SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+DO WHILE .NOT. EOF() .AND. SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+   DO RECLOCK
+   DELETE
+   UNLOCK
+   SKIP
+ENDDO
+
+IF MCOMPANY = 'AMERICHICKEN, INC' .OR. MSALESMAN = '11'
+   *** IF AMERICHICKEN - MCOMPANY = 'AMERICHICKEN, INC' .OR. MSALESMAN = '11'
+   *** DELETE FROM HOLDING INVENTORY
+   DO FOX_USE WITH "HINVEN INDEX HINVNLOC, HINVSOLD", .F.
+   DO WHILE .NOT. EOF()
+      IF SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+         DO FILELOCK
+         DELETE
+         UNLOCK
+      ENDIF
+      SKIP
+   ENDDO
+   DO FOX_USE WITH "HINV_DTL INDEX HINV_DTL", .F.
+   SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+   DO WHILE .NOT. EOF() .AND. SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      DO FILELOCK
+      DELETE
+      UNLOCK
+      SKIP
+   ENDDO
+ENDIF
+
+USE SS INDEX SS_YRMO, SS EXCLUSIVE
+DO WHILE .NOT. EOF()
+   IF SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      DELETE 
+   ENDIF
+   SKIP
+ENDDO
+PACK
+
+CLOSE ALL
+
+STORE SPACE(2)    TO MSALESMAN
+STORE SPACE(4)    TO MPO_NBR
+STORE SPACE(1)    TO MPO_SUFFIX
+MPO_SEL = .F.
+
+RETURN
+
+* EOF: VOIDPO.PRG
+*Formatted by: ToolBox Ver. 1.2  on 2/4/19 at 1:14 PM.

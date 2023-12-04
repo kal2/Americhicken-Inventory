@@ -1,0 +1,87 @@
+*************
+* Program.: SIZELIST.PRG
+* Author..: Grace Keller
+* Date....: 11/17/87
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: SIZE LISTING
+*
+* ---OPEN FILES
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+MTITLE = ' - SIZE LISTING'
+
+CLEAR
+@ 01,00 SAY MCOMPANY
+@ 01,68 SAY DATE()
+@  2,0 SAY MPROGRAM + MTITLE
+@ 3,0 TO 22,79
+STORE ' ' TO MACTION
+DO PRT_SET
+IF MACTION <> 'C'
+   RETURN
+ENDIF 
+
+SET CONSOLE OFF
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+ELSE
+   SET PRINT TO LPT3
+ENDIF
+SET DEVICE TO PRINT
+SET PRINT ON
+
+*** PRINT IN 10 CPI
+?? chr(27) + '&k0S'
+
+*** LETTER GOTHIC AND BOLDED PRINT
+?? chr(27) + '(s4102T' + chr(27) + '(s3B'
+
+*** LETTER SIZE PAPER
+?? CHR(27) + '&l2A'
+
+*** PORTRAIT MODE
+?? CHR(27) + '&l0O'
+
+
+SELECT A
+DO FOX_USE WITH "&MDBFLOC.PRODUCTS INDEX &MDBFLOC.PRODUCTS", .F.
+MLINE = 99
+MPAGE_NO = 0
+MFIRST_TM = .T.
+SEEK 'Z'
+DO WHILE .NOT. EOF() .AND. TYPE = 'Z'
+   IF MLINE > 58
+      IF MFIRST_TM
+         MFIRST_TM = .F.
+      ELSE
+         EJECT
+      ENDIF
+      MLINE = 2
+      MPAGE_NO = MPAGE_NO + 1
+      @ MLINE,5 SAY 'PAGE  ' + str(mpage_no,3)
+      @ mline,20 say '  PRODUCT SIZE   ' 
+      @ MLINE,50 SAY DTOC(DATE())
+      MLINE = MLINE + 1
+      @ MLINE,20 SAY '(5 position code)'
+      MLINE = MLINE + 2
+      @ MLINE,10 SAY 'SIZE CODE        DESCRIPTION'
+      MLINE = MLINE + 2
+   ENDIF
+   @ MLINE,13 SAY CODE
+   @ MLINE,27 SAY SUBSTR(DESC,1,13)
+   MLINE = MLINE + 2
+   SKIP
+ENDDO
+EJECT
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+IF MPRINTER3 <> 'DONOTPRINT'
+   RUN &MPRINTIT3
+ENDIF
+RETURN
+* EOF: SIZELIST.PRG
+
+*Formatted by: FoxToolBox Ver. 0.8c on October 28, 1987 at 2:03 PM.
+

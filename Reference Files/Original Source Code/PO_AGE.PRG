@@ -1,0 +1,428 @@
+********************
+* Program.: PO_AGE.PRG
+* Author..: GRACE KELLER
+* Date....: 01/08/88
+* Notice..: Copyright (C) 1988, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: A/R SUMMARY CUST SCREEN - On PO Adds & From PO Screen Option    
+*
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+
+MTITLE = ' - CUSTOMER A/R SUMMARY'
+CLEAR
+@  1, 1  SAY MCOMPANY
+@  1,68 SAY DATE()
+@  2, 0 SAY MPROGRAM + MTITLE
+@ 3,0 TO 23,79
+
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+
+CLEAR
+@  1, 1  SAY MCOMPANY
+@  1,68 SAY DATE()
+@  2, 0 SAY MPROGRAM + MTITLE
+@ 3,0 TO 24,79
+SELECT B
+STORE RECNO() TO MPO_SVREC
+
+SELECT F
+DO FOX_USE WITH "INV_HEAD INDEX INV_HEAD", .F.
+
+SELECT A
+DO FOX_USE WITH "CUS_INV INDEX CUS_DATE, CUSIVNBR", .F.
+
+SET FILTER TO PO_SUFFIX <> 'R'
+GOTO TOP
+
+SEEK ' ' + MBBUYCODE
+
+IF EOF()
+   @ 10,1 SAY 'There Are No Outstanding Invoices To Be Aged'         
+   @ 12,1 SAY ' '
+   WAIT 'Press Return To Continue'
+   SELECT B
+   GOTO MPO_SVREC
+   RETURN
+ENDIF
+
+SELECT E
+DO FOX_USE WITH "&MDBFLOC.BIL_BUY INDEX &MDBFLOC.BBUYCODE", .F.
+SEEK B->BBUYCODE
+
+IF .NOT. EOF()
+   STORE NAME      TO CNAME
+   STORE AREA_CODE TO CAREA_CODE
+   STORE PHONE     TO CPHONE
+   **STORE EXTNSION  TO CEXTNSION
+   STORE NOTE    TO MARNOTE1
+   STORE NOTE2   TO MARNOTE2
+ELSE
+   STORE 'CUSTOMER NOT ON FILE' TO CNAME
+   STORE SPACE(3)  TO CAREA_CODE
+   STORE SPACE(7)  TO CPHONE
+   **STORE SPACE(5)  TO CEXTNSION
+   STORE SPACE(60) TO MARNOTE1, MARNOTE2
+ENDIF
+USE
+
+SELECT E
+DO FOX_USE WITH "INV_ADJ INDEX INV_ADJ", .F.
+
+***DISPLAY THIS INFO ON THE SCREEN
+
+@ 4,1 SAY CNAME
+@ 4,46 SAY CAREA_CODE + '-' + SUBSTR(CPHONE,1,3) + '-' + SUBSTR(CPHONE,4)
+
+@ 5,1  SAY 'INV #'
+@ 5,8 SAY 'INV AMOUNT'
+@ 5,20 SAY 'DUE AMOUNT'
+@ 5,35 SAY 'CUST PO #'
+@ 5,54 SAY 'PO #'
+@ 5,65 SAY 'DELV DT'
+@ 5,75 SAY 'AGE'
+
+CDATE     = DATE()
+GTOT_INV  = 0
+GTOT_PEND = 0
+OTOT_INV  = 0
+
+MLINE = 6
+
+SELECT A
+DO WHILE .NOT. EOF() .AND. PAID_FLG = ' ' .AND. BBUYCODE = MBBUYCODE .AND. MLINE <= 20
+   CTOT_OUT = 0
+   
+   STORE INV_NBR   TO CINV_NBR
+   STORE SALESMAN  TO CSALESMAN
+   STORE PO_NBR    TO CPO_NBR
+   STORE PO_SUFFIX TO CPO_SUFFIX
+   STORE TOT_SELL + CUS_PALL TO CPO_AMT
+   
+   SELECT B
+   SEEK CSALESMAN + CPO_NBR + CPO_SUFFIX
+   
+   *** IF A SHIPPED WITH ORDER - JUST SKIP IT
+   IF .NOT. EOF() .AND. SHIP_NBR <> SPACE(4)
+      SELECT A
+      SKIP
+      LOOP
+   ENDIF
+   
+   IF EOF()
+      STORE SPACE(15) TO CBUYER_PO
+      STORE SHIP_DATE TO CTRAN_DATE
+   ELSE
+      STORE BUYER_PO  TO CBUYER_PO
+      STORE DEL_REQD  TO CTRAN_DATE
+   ENDIF
+   *** GET THE ACTUAL INVOICED AMOUNT
+   
+   SELECT F
+   SEEK A->INV_NBR
+   IF EOF()
+      STORE 0 TO CTOT_INV       
+   ELSE
+      STORE TOT_SELL TO CTOT_INV        
+   ENDIF
+   
+   IF A->DEB_CRD = ' '
+      SELECT E
+      SEEK CINV_NBR
+      DO WHILE .NOT. EOF() .AND. INV_NBR = CINV_NBR
+         CPO_AMT = CPO_AMT + ADJ_AMT
+         SKIP
+      ENDDO
+   ENDIF
+   
+   SELECT A
+   
+   MSTILL_DUE = CPO_AMT - AMT_PAID
+   
+   IF MSTILL_DUE <= 0
+      SELECT A
+      SKIP
+      LOOP
+   ENDIF
+   
+   **
+   CTOT_OUT  = CTOT_OUT + MSTILL_DUE
+   MNBR_DAYS = CDATE   - CTRAN_DATE
+   
+   MDOTHIS = .F.
+   IF MDOTHIS
+      IF MAIN_SHIP = 'Y'
+         STORE MAIN_SHIP TO CMAIN_SHIP
+         
+         STORE SPACE(4) TO CPO_SHIP1, CPO_SHIP2, CPO_SHIP3, CPO_SHIP3, CPO_SHIP4, CPO_SHIP5, CPO_SHIP6
+         STORE SPACE(1) TO CPO_SUFF1, CPO_SUFF2, CPO_SUFF3, CPO_SUFF3, CPO_SUFF4, CPO_SUFF5, CPO_SUFF6
+         
+         SELECT E
+         DO FOX_USE WITH "SHIPWITH INDEX SHIPWITH", .F.
+         SEEK CSALESMAN + CPO_NBR + CPO_SUFFIX
+         IF .NOT. EOF()         
+            STORE PO_SHIP1 TO CPO_SHIP1
+            STORE PO_SHIP2 TO CPO_SHIP2
+            STORE PO_SHIP3 TO CPO_SHIP3
+            STORE PO_SHIP4 TO CPO_SHIP4
+            STORE PO_SHIP5 TO CPO_SHIP5
+            STORE PO_SHIP6 TO CPO_SHIP6
+            STORE PO_SUFF1 TO CPO_SUFF1
+            STORE PO_SUFF2 TO CPO_SUFF2
+            STORE PO_SUFF3 TO CPO_SUFF3
+            STORE PO_SUFF4 TO CPO_SUFF4
+            STORE PO_SUFF5 TO CPO_SUFF5
+            STORE PO_SUFF6 TO CMPO_SUFF6
+         ENDIF
+         *** RESET BACK TO INVOICE ADJUSTMENT
+         DO FOX_USE WITH "INV_ADJ INDEX INV_ADJ", .F.
+         
+      ELSE
+         IF SHIP_NBR <> SPACE(4)
+            STORE 'S' TO CMAIN_SHIP
+         ELSE
+            STORE ' ' TO CMAIN_SHIP
+         ENDIF
+      ENDIF
+      
+      IF CMAIN_SHIP = 'Y'
+         SELECT A
+         STORE RECNO() TO CRECNO
+         
+         ** GO GET ALL THE OTHER INFO FOR THE SHIPPED WITH PO'S
+         I = 1
+         DO WHILE I<= 6
+            MI = STR(I,1)
+            IF CPO_SHIP&MI <> SPACE(4)
+               SELECT E
+               SEEK CSALESMAN + CPO_SHIP&MI + CPO_SUFF&MI
+               IF EOF()
+                  I = I + 1
+                  LOOP
+               ENDIF
+               
+               STORE TOT_SELL + CUS_PALL TO MAMT
+               
+               SELECT F
+               SEEK E->INV_NBR
+               IF EOF()
+                  STORE 0 TO MTOT_SELL       
+               ELSE
+                  STORE TOT_SELL TO MTOT_SELL        
+               ENDIF
+               
+               IF A->DEB_CRD = ' '
+                  SELECT  E
+                  SEEK E->INV_NBR
+                  DO WHILE .NOT. EOF() .AND. INV_NBR = E->INV_NBR
+                     MAMT = MAMT + ADJ_AMT
+                     SKIP
+                  ENDDO
+               ENDIF
+               
+               SELECT A
+               **** FIND THE NEW RECORD
+               SET ORDER TO 2
+               SEEK E->INV_NBR
+               IF .NOT. EOF()
+                  MSTILL_DUE = MAMT - AMT_PAID
+               ELSE
+                  MSTILL_DUE = 0
+               ENDIF
+               
+               SET ORDER TO 1
+               GOTO CRECNO
+               
+               **
+               IF MSTILL_DUE > 0         
+                  MBALANCE   = MBALANCE + MSTILL_DUE
+                  CTOT_SELL  = CTOT_SELL + MTOT_SELL
+                  CSTILL_DUE = CSTILL_DUE + MSTILL_DUE            
+               ENDIF
+            ENDIF
+            *******
+            I = I + 1
+         ENDDO
+      ENDIF
+      IF MAIN_SHIP = ' '
+         IF CSALESMAN <> '  '
+            @ MLINE,1 SAY CSALESMAN + '-'
+         ENDIF
+      ELSE
+         IF MAIN_SHIP = 'Y'
+            @ MLINE,1 SAY '(M)'
+         ELSE
+            @ MLINE,1 SAY '(S)'
+         ENDIF
+      ENDIF
+      IF SALESMAN <> '  '
+         @ MLINE,1 SAY SALESMAN + '-'
+      ENDIF
+      
+   ENDIF
+   **** END OF SHIP WITH STUFF
+   
+   IF MNBR_DAYS > 14
+      @ MLINE,1  GET CINV_NBR
+      @ MLINE,8 GET CTOT_INV PICTURE '999,999.99'
+      @ MLINE,20 GET CTOT_OUT PICTURE '999,999.99'
+      @ MLINE,35 GET CBUYER_PO
+      IF CSALESMAN <> '  '
+         @ MLINE,51 GET CSALESMAN
+         @ MLINE, 53 SAY '-'
+      ENDIF
+      @ MLINE,54 GET CPO_NBR
+      IF CPO_SUFFIX <> SPACE(1)
+         @ MLINE,58 SAY '-'
+         @ MLINE,59 GET CPO_SUFFIX
+      ENDIF
+      STORE DTOC(CTRAN_DATE) TO DTRAN_DATE
+      STORE SUBSTR(DTRAN_DATE,1,6) + SUBSTR(DTRAN_DATE,9,2) TO DTRAN_DATE
+      @ MLINE,65 GET DTRAN_DATE
+      @ MLINE,75 GET MNBR_DAYS PICTURE '999'
+      
+   ELSE
+      
+      @ MLINE,1  SAY CINV_NBR
+      @ MLINE,8 SAY CTOT_INV PICTURE '999,999.99'
+      @ MLINE,20 SAY CTOT_OUT PICTURE '999,999.99'
+      @ MLINE,35 SAY CBUYER_PO
+      IF CSALESMAN <> '  '
+         @ MLINE,51 SAY CSALESMAN + '-'
+      ENDIF
+      @ MLINE,54 SAY CPO_NBR
+      IF CPO_SUFFIX <> SPACE(1)
+         @ MLINE,58 SAY '-' + CPO_SUFFIX
+      ENDIF
+      SET CENTURY OFF
+      @ MLINE,65 SAY CTRAN_DATE
+      SET CENTURY ON
+      @ MLINE,75 SAY MNBR_DAYS PICTURE '999'
+   ENDIF
+   
+   GTOT_INV   = GTOT_INV + CTOT_OUT
+   IF MNBR_DAYS > 14
+      OTOT_INV   = OTOT_INV + CTOT_OUT
+   ENDIF
+   MLINE = MLINE + 1
+   
+   **********************************
+   
+   SELECT A
+   SKIP
+ENDDO
+
+
+
+SELECT A
+MMORE_INV = .F.
+
+IF .NOT. EOF() .AND. PAID_FLG = ' ' .AND. BBUYCODE = MBBUYCODE
+   MMORE_INV = .T.
+ENDIF
+
+
+SELECT F
+USE
+SELECT E
+USE
+SELECT A
+USE
+
+SELECT B
+
+SET ORDER TO 2
+SEEK ' '
+MFIRST_TM = .T.
+
+DO WHILE .NOT. EOF() .AND. INV_FLG = ' ' .AND. MLINE <= 20
+   *IF HOLD_FLG <> 'H'
+   *   SKIP
+   *   LOOP
+   *ENDIF
+   
+   IF BBUYCODE <> MBBUYCODE
+      SKIP
+      LOOP
+   ENDIF
+   
+   ** SKIP THE CURRENT PO BEING ADDED
+   IF SALESMAN + PO_NBR + PO_SUFFIX = MSALESMAN+MPO_NBR+MPO_SUFFIX
+      SKIP
+      LOOP
+   ENDIF
+   
+   IF MFIRST_TM
+      MLINE = MLINE + 1
+      MFIRST_TM = .F.
+   ENDIF
+   
+   @ MLINE,20 SAY TOT_SELL + CUS_PALL PICTURE '999,999.99'
+   GTOT_PEND = GTOT_PEND + TOT_SELL + CUS_PALL
+   @ MLINE,35 SAY BUYER_PO
+   IF SALESMAN <> '  '
+      @ MLINE,51 SAY SALESMAN + '-'
+   ENDIF
+   @ MLINE,54 SAY PO_NBR
+   IF CPO_SUFFIX <> SPACE(1)
+      @ MLINE,58 SAY '-' + PO_SUFFIX
+   ENDIF
+   SET CENTURY OFF
+   @ MLINE,65 SAY SHIP_DATE
+   SET CENTURY ON
+   @ MLINE,76 SAY 'PE'
+   MLINE = MLINE + 1
+   SKIP
+ENDDO
+
+@ 21,1 SAY 'Note 1. ' + MARNOTE1
+@ 22,1 SAY '     2. ' + MARNOTE2
+
+** PO_HEAD FILE
+SELECT B
+SET ORDER TO 1
+GOTO MPO_SVREC
+
+IF OTOT_INV <> 0
+   STORE 'OVERDUE:' TO MWAIT
+   @ 23,1  GET MWAIT
+   @ 23,18 GET OTOT_INV      PICTURE '9,999,999.99'
+ENDIF
+
+IF MMORE_INV
+   @ 23,60 SAY 'More Invoices' 
+ENDIF
+
+@ 24,1  SAY 'TOTAL DUE:'
+@ 24,18 SAY GTOT_INV      PICTURE '9,999,999.99'
+IF GTOT_PEND <> 0
+   @ 24,35 SAY 'PENDING: '
+   @ 24,44 SAY GTOT_PEND      PICTURE '9,999,999.99'
+ENDIF
+CLEAR GETS
+
+MWAIT = ' '
+@ 24,60 SAY "Enter or (N)otes" GET MWAIT PICTURE '@!'
+READ
+IF MWAIT = 'N'
+   @ 21,9 GET MARNOTE1 PICTURE '@!'
+   @ 22,9 GET MARNOTE2 PICTURE '@!'
+   READ
+   SELECT E
+   DO FOX_USE WITH "&MDBFLOC.BIL_BUY INDEX &MDBFLOC.BBUYCODE", .F.
+   SEEK B->BBUYCODE
+
+   IF .NOT. EOF()
+      DO RECLOCK
+      REPLACE NOTE   WITH MARNOTE1
+      REPLACE NOTE2  WITH MARNOTE2
+      UNLOCK
+   ENDIF
+   USE
+   SELECT B
+ENDIF
+
+RETURN
+*Formatted by: ToolBox Ver. 1.2  on 10/15/18 at 9:12 AM.

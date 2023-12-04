@@ -1,0 +1,33 @@
+**********
+* Program.: TOTUNDER.PRG
+* Author..: Grace Keller
+* Date....: 03/09/88
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: CALCUALTE UNDERBILLING    
+*
+* ---OPEN FILES
+MTOT = 0
+MTOT_BILL = 0
+SELECT C
+SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+DO WHILE MSALESMAN = SALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX 
+   MTOT = MTOT + TOT_PURCH
+   IF TOT_BILL <> 0
+      MTOT_BILL = MTOT_BILL + TOT_BILL
+   ELSE
+      MTOT_BILL = MTOT_BILL + TOT_PURCH
+   ENDIF
+   SKIP
+ENDDO
+SELECT B
+MBILL_ADJ =  MTOT_BILL - MTOT
+DO RECLOCK
+REPLACE BILL_ADJ WITH MBILL_ADJ
+UNLOCK
+RETURN
+* EOF: UNDERBIL.PRG
+*Formatted by: FoxToolBox Ver. 0.8c on October 28, 1987 at 2:05 PM.
+
+
+

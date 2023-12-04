@@ -36,9 +36,6 @@
             STATE = new ColumnHeader();
             label2 = new Label();
             selectedItemNumber = new TextBox();
-            actionInput = new TextBox();
-            label3 = new Label();
-            label4 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -61,7 +58,7 @@
             resultSelectionListView.Location = new Point(0, 35);
             resultSelectionListView.MultiSelect = false;
             resultSelectionListView.Name = "resultSelectionListView";
-            resultSelectionListView.Size = new Size(1290, 447);
+            resultSelectionListView.Size = new Size(1290, 514);
             resultSelectionListView.TabIndex = 1;
             resultSelectionListView.UseCompatibleStateImageBehavior = false;
             resultSelectionListView.View = View.Details;
@@ -90,7 +87,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(3, 502);
+            label2.Location = new Point(3, 558);
             label2.Name = "label2";
             label2.Size = new Size(273, 32);
             label2.TabIndex = 2;
@@ -99,57 +96,26 @@
             // selectedItemNumber
             // 
             selectedItemNumber.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            selectedItemNumber.Location = new Point(282, 499);
+            selectedItemNumber.Location = new Point(282, 555);
             selectedItemNumber.Name = "selectedItemNumber";
             selectedItemNumber.Size = new Size(45, 39);
             selectedItemNumber.TabIndex = 3;
             selectedItemNumber.TextChanged += selectedItemNumber_TextChanged;
             selectedItemNumber.KeyDown += selectedItemNumber_KeyDown;
             // 
-            // actionInput
-            // 
-            actionInput.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            actionInput.Location = new Point(96, 549);
-            actionInput.Name = "actionInput";
-            actionInput.Size = new Size(45, 39);
-            actionInput.TabIndex = 5;
-            actionInput.KeyDown += textBox2_KeyDown;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(3, 552);
-            label3.Name = "label3";
-            label3.Size = new Size(87, 32);
-            label3.TabIndex = 4;
-            label3.Text = "Action:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(165, 552);
-            label4.Name = "label4";
-            label4.Size = new Size(629, 30);
-            label4.TabIndex = 6;
-            label4.Text = "1. NextPg   2. PreviousPg   3. FirstPg   4. Add Supplier   5. Cancel";
-            // 
             // MatchSelect
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackColor = Color.Blue;
-            Controls.Add(label4);
-            Controls.Add(actionInput);
-            Controls.Add(label3);
             Controls.Add(selectedItemNumber);
             Controls.Add(label2);
             Controls.Add(resultSelectionListView);
             Controls.Add(label1);
             ForeColor = Color.White;
             Name = "MatchSelect";
-            Size = new Size(1290, 600);
+            Size = new Size(1293, 600);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -163,9 +129,6 @@
         private ColumnHeader STATE;
         private Label label2;
         private TextBox selectedItemNumber;
-        private TextBox actionInput;
-        private Label label3;
-        private Label label4;
         private ColumnHeader NUM;
     }
 }

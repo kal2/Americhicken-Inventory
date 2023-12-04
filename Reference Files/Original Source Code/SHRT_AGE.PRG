@@ -1,0 +1,519 @@
+********************
+* Program.: SHRT_AGE.PRG
+* Author..: GRACE KELLER
+* Date....: 01/08/88
+* Notice..: Copyright (C) 1988, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: SHORT AGING REPORT     
+*
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+**** DO ALL THE PRINT ROUTINE STUFF
+MTITLE = ' - SHORT AGING REPORT'                    
+CLEAR
+@  1, 1  SAY MCOMPANY
+@  1,68 SAY DATE()
+@  2, 0 SAY MPROGRAM + MTITLE
+@ 3,0 TO 22,79
+CLOSE DATA
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+CLEAR
+@  1, 1  SAY MCOMPANY
+@  1,68 SAY DATE()
+@  2, 0 SAY MPROGRAM + MTITLE
+@ 3,0 TO 22,79
+MRPT_TYPE = 'REGULAR'
+MSEL_BBUY = SPACE(4)
+MYES_NO = '   '
+
+MSEL_DAYS = 0   
+STORE '**' TO MOPT_SALES
+@ 09,5 SAY 'SELECT OPTIONAL SALESPERSON CODE: ' GET MOPT_SALES PICTURE '##'
+@ 10,5 SAY '(Leave ** if all to be printed)'
+READ
+
+MPRT_ACT = 'C'
+DO PRT_SET
+IF MPRT_ACT <> 'C'
+   SET PROC TO
+   RETURN
+ENDIF
+
+SELECT E
+DO FOX_USE WITH "PO_HEAD INDEX PO_HEAD, TMP_BUY", .F.
+
+SELECT F
+DO FOX_USE WITH "INV_HEAD INDEX INV_HEAD", .F.
+
+SELECT C
+DO FOX_USE WITH "&MDBFLOC.BIL_BUY INDEX &MDBFLOC.BBUYCODE", .F.
+
+SELECT B
+DO FOX_USE WITH "INV_ADJ INDEX INV_ADJ", .F.
+
+SELECT D
+USE TEMP_AGE EXCLUSIVE         
+DELETE ALL
+PACK
+USE
+
+SELECT D
+DO FOX_USE WITH "TEMP_AGE", .F.
+INDEX ON NAME + RSUPCODE + STR(99999-NBR_DAYS,5) TO TEMP_AGE
+DO FOX_USE WITH "TEMP_AGE INDEX TEMP_AGE", .F.
+
+SELECT A
+DO FOX_USE WITH "CUS_INV INDEX CUS_DATE, CUSIVNBR", .F.
+
+SEEK ' '            
+IF EOF()
+   @ 14,1 SAY 'THERE ARE NO OUTSTANDING INVOICES TO BE AGED'         
+   @ 16,1 SAY ' '
+   WAIT 'PRESS RETURN TO CONTINUE'
+   RETURN
+ENDIF
+
+*MDATE = MRPT_DATE - 7 
+MRPT_DATE = DATE()
+
+MDATE = MRPT_DATE - MSEL_DAYS
+GTOTAL = 0
+DO WHILE .NOT. EOF() .AND. PAID_FLG = ' '
+   IF BBUYCODE = 'CRED'
+      SKIP
+      LOOP
+   ENDIF
+   IF SALESMAN = '06' .AND. PO_NBR = '0830' .AND. PO_SUFFIX <> ' '
+      SKIP
+      LOOP
+   ENDIF
+   STORE BBUYCODE TO MBBUYCODE
+   SELECT C
+   SEEK MBBUYCODE
+   
+   IF .NOT. EOF()
+      STORE NAME TO MNAME
+   ELSE 
+      STORE 'CUSTOMER NOT ON FILE' TO MNAME
+   ENDIF
+   
+   SELECT A
+   MOVERDUE = 0             
+   MBALANCE = 0
+   DO WHILE .NOT. EOF() .AND. PAID_FLG = ' ' .AND. BBUYCODE = MBBUYCODE
+      IF MOPT_SALES <> '**'
+         IF SALESMAN <> MOPT_SALES
+            SKIP
+            LOOP
+         ENDIF
+      ENDIF
+      IF SALESMAN = '06' .AND. PO_NBR = '0830' .AND. PO_SUFFIX <> ' '
+         SKIP
+         LOOP
+      ENDIF
+      STORE INV_NBR TO MINV_NBR
+      STORE SALESMAN TO MSALESMAN
+      STORE PO_NBR TO MPO_NBR
+      STORE PO_SUFFIX TO MPO_SUFFIX
+      STORE TOT_SELL + CUS_PALL TO MAMT
+      
+      SELECT E
+      SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+      
+      *** 10/14/2005
+      *** IF A SHIPPED WITH ORDER - JUST SKIP IT
+      IF MCOMPANY = 'AMERICHICKEN, INC' .OR. MSALESMAN = '11'
+         IF .NOT. EOF() .AND. SHIP_NBR <> SPACE(4)
+            SELECT A
+            SKIP
+            LOOP
+         ENDIF
+      ENDIF
+      *** THIS IS A NEW CHECK
+      
+      IF EOF()
+         STORE SPACE(12) TO MBUYER_PO
+         STORE SHIP_DATE TO MTRAN_DATE
+      ELSE
+         STORE BUYER_PO TO MBUYER_PO
+         STORE DEL_REQD TO MTRAN_DATE
+      ENDIF
+      
+      IF MCOMPANY = 'AMERICHICKEN, INC' .OR. MSALESMAN = '11'
+         IF MAIN_SHIP = 'Y'
+            STORE MAIN_SHIP TO MMAIN_SHIP
+            
+            STORE SPACE(4) TO MPO_SHIP1, MPO_SHIP2, MPO_SHIP3, MPO_SHIP3, MPO_SHIP4, MPO_SHIP5, MPO_SHIP6
+            STORE SPACE(1) TO MPO_SUFF1, MPO_SUFF2, MPO_SUFF3, MPO_SUFF3, MPO_SUFF4, MPO_SUFF5, MPO_SUFF6
+            
+            SELECT B
+            DO FOX_USE WITH "SHIPWITH INDEX SHIPWITH", .F.
+            SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+            IF .NOT. EOF()         
+               STORE PO_SHIP1 TO MPO_SHIP1
+               STORE PO_SHIP2 TO MPO_SHIP2
+               STORE PO_SHIP3 TO MPO_SHIP3
+               STORE PO_SHIP4 TO MPO_SHIP4
+               STORE PO_SHIP5 TO MPO_SHIP5
+               STORE PO_SHIP6 TO MPO_SHIP6
+               STORE PO_SUFF1 TO MPO_SUFF1
+               STORE PO_SUFF2 TO MPO_SUFF2
+               STORE PO_SUFF3 TO MPO_SUFF3
+               STORE PO_SUFF4 TO MPO_SUFF4
+               STORE PO_SUFF5 TO MPO_SUFF5
+               STORE PO_SUFF6 TO MPO_SUFF6
+            ENDIF
+            *** RESET BACK TO INVOICE ADJUSTMENT
+            DO FOX_USE WITH "INV_ADJ INDEX INV_ADJ", .F.
+            
+         ELSE
+            IF SHIP_NBR <> SPACE(4)
+               STORE 'S' TO MMAIN_SHIP
+            ELSE
+               STORE ' ' TO MMAIN_SHIP
+            ENDIF
+         ENDIF
+      ELSE
+         STORE ' ' TO MMAIN_SHIP
+      ENDIF
+      
+      SELECT F
+      SEEK A->INV_NBR
+      IF EOF()
+         STORE 0 TO MTOT_SELL       
+      ELSE
+         STORE TOT_SELL TO MTOT_SELL        
+      ENDIF
+      
+      IF A->DEB_CRD = ' '
+         SELECT B
+         SEEK MINV_NBR
+         DO WHILE .NOT. EOF() .AND. INV_NBR = MINV_NBR
+            MAMT = MAMT + ADJ_AMT
+            SKIP
+         ENDDO
+      ENDIF
+      SELECT A
+      MSTILL_DUE = MAMT - AMT_PAID
+      
+      **
+      IF MSTILL_DUE > 0         
+         MBALANCE = MBALANCE + MSTILL_DUE
+         *IF DTOC(SHIP_DATE) <> '  /  /  '
+         *   STORE SHIP_DATE TO MTRAN_DATE    
+         *ELSE
+         *   STORE INV_DATE TO MTRAN_DATE   
+         *ENDIF
+         SELECT D
+         DO FILELOCK
+         APPEND BLANK
+         REPLACE NAME WITH MNAME
+         REPLACE RSUPCODE WITH MBBUYCODE
+         REPLACE SALESMAN WITH MSALESMAN
+         REPLACE TOT_SELL WITH MTOT_SELL
+         REPLACE STILL_DUE WITH MSTILL_DUE            
+         REPLACE TRAN_DATE WITH MTRAN_DATE
+         MNBR_DAYS = MRPT_DATE - TRAN_DATE
+         REPLACE NBR_DAYS WITH MNBR_DAYS
+         REPLACE REGION WITH C->REGION
+         REPLACE MAIN_SHIP WITH MMAIN_SHIP         
+         IF MTRAN_DATE <= MDATE
+            REPLACE INV_NBR WITH MINV_NBR
+            REPLACE PO_NBR WITH MPO_NBR
+            REPLACE PO_SUFFIX WITH MPO_SUFFIX
+            REPLACE BUYER_PO WITH MBUYER_PO
+            MOVERDUE = MOVERDUE + MSTILL_DUE       
+         ENDIF
+         UNLOCK
+      ELSE
+         MBALANCE = MBALANCE + MSTILL_DUE
+         *IF DTOC(SHIP_DATE) <> '  /  /  '
+         *   STORE SHIP_DATE TO MTRAN_DATE    
+         *ELSE
+         *   STORE INV_DATE TO MTRAN_DATE   
+         *ENDIF
+         SELECT D
+         DO FILELOCK
+         APPEND BLANK
+         REPLACE NAME WITH MNAME
+         REPLACE RSUPCODE WITH MBBUYCODE
+         REPLACE SALESMAN WITH MSALESMAN
+         REPLACE TOT_SELL WITH MTOT_SELL
+         REPLACE STILL_DUE WITH MSTILL_DUE            
+         REPLACE TRAN_DATE WITH MTRAN_DATE
+         MNBR_DAYS = MRPT_DATE - TRAN_DATE
+         REPLACE NBR_DAYS WITH MNBR_DAYS
+         REPLACE REGION WITH C->REGION
+         REPLACE MAIN_SHIP WITH MMAIN_SHIP   
+         IF MTRAN_DATE <= MDATE
+            REPLACE INV_NBR WITH MINV_NBR
+            REPLACE PO_NBR WITH MPO_NBR
+            REPLACE PO_SUFFIX WITH MPO_SUFFIX
+            REPLACE BUYER_PO WITH MBUYER_PO
+            MOVERDUE = MOVERDUE + MSTILL_DUE       
+         ENDIF
+         UNLOCK
+      ENDIF
+      
+      IF MMAIN_SHIP = 'Y'
+         SELECT A
+         STORE RECNO() TO MRECNO
+         
+         ** GO GET ALL THE OTHER INFO FOR THE SHIPPED WITH PO'S
+         I = 1
+         DO WHILE I<= 6
+            MI = STR(I,1)
+            IF MPO_SHIP&MI <> SPACE(4)
+               SELECT E
+               SEEK MSALESMAN + MPO_SHIP&MI + MPO_SUFF&MI
+               IF EOF()
+                  I = I + 1
+                  LOOP
+               ENDIF
+               
+               STORE INV_NBR TO MINV_NBR
+               STORE TOT_SELL + CUS_PALL TO MAMT
+               
+               SELECT F
+               SEEK MINV_NBR
+               IF EOF()
+                  STORE 0 TO MTOT_SELL       
+               ELSE
+                  STORE TOT_SELL TO MTOT_SELL        
+               ENDIF
+               
+               IF A->DEB_CRD = ' '
+                  SELECT B
+                  SEEK MINV_NBR
+                  DO WHILE .NOT. EOF() .AND. INV_NBR = MINV_NBR
+                     MAMT = MAMT + ADJ_AMT
+                     SKIP
+                  ENDDO
+               ENDIF
+               
+               SELECT A
+               **** FIND THE NEW RECORD
+               SET ORDER TO 2
+               SEEK MINV_NBR
+               IF .NOT. EOF()
+                  MSTILL_DUE = MAMT - AMT_PAID
+               ELSE
+                  MSTILL_DUE = 0
+               ENDIF
+               
+               SET ORDER TO 1
+               GOTO MRECNO
+               
+               **
+               IF MSTILL_DUE <> 0         
+                  MBALANCE = MBALANCE + MSTILL_DUE
+                  SELECT D
+                  DO RECLOCK
+                  REPLACE TOT_SELL WITH TOT_SELL + MTOT_SELL
+                  REPLACE STILL_DUE WITH STILL_DUE + MSTILL_DUE            
+                  IF MTRAN_DATE <= MDATE
+                     MOVERDUE = MOVERDUE + MSTILL_DUE       
+                  ENDIF
+                  
+                  UNLOCK
+                  
+               ENDIF
+            ENDIF
+            *******
+            I = I + 1
+         ENDDO
+      ENDIF
+      
+      SELECT A
+      SKIP
+   ENDDO
+   
+   SELECT A
+ENDDO
+
+CLOSE DATA
+
+MPAGE_NO = 0
+MLINE = 99 
+MPAGE_LEN = 56
+
+SET CONSOLE OFF
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+ELSE
+   SET PRINT TO LPT3
+ENDIF
+SET DEVICE TO PRINT
+SET PRINT ON
+
+*** PRINT IN 12 CPI
+?? chr(27) + '&k4S'
+
+*** LETTER GOTHIC AND BOLDED PRINT
+?? chr(27) + '(s4102T' + chr(27) + '(s3B'
+
+*** LETTER SIZE PAPER
+?? CHR(27) + '&l2A'
+
+*** PORTRAIT MODE
+?? CHR(27) + '&l0O'
+
+SELECT C
+DO FOX_USE WITH "&MDBFLOC.BIL_BUY INDEX &MDBFLOC.BBUYCODE", .F.
+
+SELECT D
+DO FOX_USE WITH "TEMP_AGE INDEX TEMP_AGE", .F.
+STORE 0 TO M0_6DAYS, M7_14DAYS, M15_21DAYS, M22_30DAYS, MOVER_30
+IF .NOT. EOF()
+   SET PROC TO PO
+ENDIF
+
+DO WHILE .NOT. EOF()
+   
+   IF PO_NBR = SPACE(4)
+      SKIP
+      LOOP
+   ENDIF
+   
+   STORE RSUPCODE TO MBBUYCODE
+   STORE NAME TO MNAME      
+   SELECT C
+   SEEK MBBUYCODE
+   IF .NOT. EOF()
+      STORE '(' + AREA_CODE + ')' + SUBSTR(PHONE,1,3) + '-' + SUBSTR(PHONE,4) TO MPHONE
+      STORE CRED_LIM TO MCRED_LIM
+      MCRED_LIM1 = SPACE(10)       
+      IF MCRED_LIM = 0
+         DO CASE
+         CASE SUBSTR(NOTE,1,3) = 'L/C' .OR. SUBSTR(NOTE,1,3) = 'CAD' .OR. SUBSTR(NOTE,1,3) = 'COD'
+            STORE SUBSTR(NOTE,1,3) TO MCRED_LIM1
+         CASE SUBSTR(NOTE,1,6) = 'C.O.D.'
+            STORE SUBSTR(NOTE,1,6) TO MCRED_LIM1
+         CASE SUBSTR(NOTE,1,9) = 'NO CREDIT'
+            STORE SUBSTR(NOTE,1,9) TO MCRED_LIM1
+         CASE SUBSTR(NOTE,1,10) = 'LOAD BASIS' .OR. SUBSTR(NOTE,1,10) = 'LOAD-BASIS'
+            STORE SUBSTR(NOTE,1,10) TO MCRED_LIM1
+         CASE SUBSTR(NOTE,1,10) = 'INV TO INV' .OR. SUBSTR(NOTE,1,10) = 'INV-TO-INV'
+            STORE SUBSTR(NOTE,1,10) TO MCRED_LIM1
+         OTHERWISE
+            STORE 'NO CREDIT ' TO MCRED_LIM1
+         ENDCASE
+      ENDIF
+      IF SHIPS_25 <> 0 .AND. DAYS_25 <> 0
+         MAVG_25 = DAYS_25/SHIPS_25
+      ELSE
+         MAVG_25 = 0
+      ENDIF
+      IF SHIPS_180 <> 0 .AND. DAYS_180 <> 0
+         MAVG_180 = DAYS_180/SHIPS_180
+      ELSE
+         MAVG_180 = 0
+      ENDIF
+   ELSE
+      STORE SPACE(13) TO MPHONE        
+      MCRED_LIM = 0
+      MCRED_LIM1 = 'NO CREDIT '
+      STORE 0 TO MAVG_25, MAVG_180
+   ENDIF
+   
+   MTOTAL   = 0
+   MOVERDUE = 0
+   MPRT_CUST = .T.
+   SELECT D
+   DO WHILE .NOT. EOF() .AND. RSUPCODE = MBBUYCODE .AND. NAME = MNAME
+      IF PO_NBR = SPACE(4)
+         SKIP
+         LOOP
+      ENDIF
+      IF MLINE > MPAGE_LEN
+         MPRT_CUST = .T.
+         DO AGE_HEAD
+      ELSE 
+         IF MPRT_CUST
+            @ MLINE,1 SAY MNAME
+            @ MLINE,45 SAY MPHONE
+            MPRT_CUST = .F.
+            MLINE = MLINE + 1
+            IF MLINE > MPAGE_LEN
+               MPRT_CUST = .T.
+               DO AGE_HEAD
+            ENDIF
+         ENDIF
+      ENDIF
+      
+      IF MAIN_SHIP = ' '
+         IF SALESMAN <> '  '
+            @ MLINE,1 SAY SALESMAN + '-'
+         ENDIF
+      ELSE
+         IF MAIN_SHIP = 'Y'
+            @ MLINE,1 SAY '(M)'
+         ELSE
+            @ MLINE,1 SAY '(S)'
+         ENDIF
+      ENDIF
+      
+      @ MLINE,4 SAY INV_NBR
+      IF MPROG_CODE <> 2 
+         @ MLINE,12 SAY TOT_SELL PICTURE '999,999.99'
+      ENDIF
+      @ MLINE,25 SAY STILL_DUE PICTURE '999,999.99'
+      @ MLINE,40 SAY BUYER_PO
+      IF SALESMAN <> '  '
+         @ MLINE,56 SAY SALESMAN + '-'
+      ENDIF
+      @ MLINE,59 SAY PO_NBR
+      IF PO_SUFFIX <> SPACE(1)
+         @ MLINE,63 SAY '-' + PO_SUFFIX
+      ENDIF
+      @ MLINE,70 SAY TRAN_DATE
+      STORE MRPT_DATE - TRAN_DATE TO MDAYS
+      @ MLINE,82 SAY MDAYS PICTURE '999'
+      STORE MDATE - TRAN_DATE TO MLATE_DAYS
+      @ MLINE,92 SAY MLATE_DAYS PICTURE '999'
+      MTOTAL   = MTOTAL   + STILL_DUE       
+      GTOTAL   = GTOTAL + STILL_DUE
+      IF MDAYS > 7
+         MOVERDUE = MOVERDUE + STILL_DUE
+      ENDIF
+      MLINE = MLINE + 1
+      SKIP
+   ENDDO
+   @ MLINE,1 SAY 'TOTAL DUE:'
+   @ MLINE,23 SAY MTOTAL   PICTURE '9,999,999.99'
+   MLINE= MLINE + 1
+   @ MLINE,1 SAY 'OVERDUE BALANCE:'
+   @ MLINE,23 SAY MOVERDUE PICTURE '9,999,999.99'
+   @ MLINE,40 SAY 'CRED LIM: ' 
+   IF MCRED_LIM <> 0
+      @ MLINE,50 SAY MCRED_LIM PICTURE '9,999,999.99' 
+   ELSE
+      @ MLINE,50 SAY MCRED_LIM1
+   ENDIF
+   IF MCOMPANY = 'AMERICHICKEN, INC'
+      @ MLINE,67 SAY 'LAST 120 DAY AVGPAY: '+ TRANSFORM(MAVG_180, '999')
+   ELSE
+      @ MLINE,67 SAY 'LAST 25 DAYS AVGPAY: '+ TRANSFORM(MAVG_25, '999')
+   ENDIF
+   MLINE = MLINE + 2
+ENDDO
+SET PROC TO
+MLINE = MLINE + 1
+@ MLINE,1 SAY 'GRAND TOTAL DUE:'
+@ MLINE,23 SAY GTOTAL   PICTURE '9,999,999.99'
+@ MLINE+1,1 SAY ' '
+
+EJECT
+
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+IF MPRINTER3 <> 'DONOTPRINT'
+   RUN &MPRINTIT3
+ENDIF
+CLOSE DATA
+RETURN
+*Formatted by: ToolBox Ver. 1.2  on 12/10/15 at 4:58 PM.

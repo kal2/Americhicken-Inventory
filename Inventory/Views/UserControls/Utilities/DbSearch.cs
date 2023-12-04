@@ -6,11 +6,12 @@ namespace Inventory.Views.UserControls
 {
     public partial class DbSearch : UserControl
     {
-    
+
         // -- Class Variables -- //
 
-        string selectedTable = string.Empty;
         private MainWindow _mainWindow;
+        string selectedTable = string.Empty;
+        string programLabel = string.Empty;
 
         // -- Event Handlers -- //
 
@@ -33,43 +34,92 @@ namespace Inventory.Views.UserControls
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-        }
 
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
+            //Attaches keydown event handler to user input field
+            _mainWindow.AttachTextBoxKeyDownHandler(actionInput_KeyDown);
 
-            //Change focus to desired field after User Control change.
-            searchQuereyTextBox.Focus();
+            _mainWindow.SetCommandsLabel("1. Continue    2. Edit    3. Cancel");
+            _mainWindow.SetTextBoxLabel("ACTION:");
         }
 
         // -- Methods -- //
 
         public void SetTable(string tableName)
         {
-            selectedTable = tableName;
-        }
+            if (tableName == string.Empty)
+            {
+                MessageBox.Show("ERROR: No db table selected to search, please contact developer");
+                return;
+            }
 
+            else if (tableName != "supplier" && tableName != "remitTo")
+            {
+                MessageBox.Show("ERROR: Invalid db table name, please contact developer");
+                return;
+            }
+
+            else
+            {
+                selectedTable = tableName;
+
+                if (selectedTable == "supplier")
+                {
+                    programLabel = "SUPPLIER";
+                }
+                else if (selectedTable == "remitTo")
+                {
+                    programLabel = "REMIT TO";
+                }
+                else
+                {
+                    programLabel = "ERROR";
+                }
+                _mainWindow.SetProgramLabel("SEARCH FOR " + programLabel);
+            }
+        }
+         
         public void SearchDatabase(string searchInput)
         {
-            using (var context = new AmerichickenContext())
+            if (searchInput == string.Empty)
             {
-                var searchResults = new List<object>();
-                switch (selectedTable)
+                MessageBox.Show("Please enter a search query.");
+                return;
+            }
+
+            else
+            {
+                searchInput = searchInput.Trim();
+
+                using (var context = new AmerichickenContext())
                 {
-                    case "supplier":
-                        searchResults = context.supplier.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
-                        break;
+                    var searchResults = new List<object>();
+                    switch (selectedTable)
+                    {
+                        case "supplier":
+                            searchResults = context.supplier.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
+                            break;
 
-                    case "remitTo":
-                        searchResults = context.rem_sup.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
-                        break;
+                        case "remitTo":
+                            searchResults = context.rem_sup.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
+                            break;
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
+                    if (searchResults.Count == 0)
+                    {
+                        MessageBox.Show("No results found");
+                        return;
+                    }
+                    else
+                    {
+                        //Sends search results to the SearchResultsEventArgs handler's listener
+                        SearchCompleted?.Invoke(this, new SearchResultsEventArgs(searchResults, selectedTable));
+
+                        //Removes keydown event handler from user input field
+                        _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
+                    }
                 }
-                //Sends search results to the SearchResultsEventArgs handler's listener
-                SearchCompleted?.Invoke(this, new SearchResultsEventArgs(searchResults, selectedTable));
             }
         }
 
@@ -84,12 +134,12 @@ namespace Inventory.Views.UserControls
 
         private void actionInput_KeyDown(object sender, KeyEventArgs e)
         {
-            //Collects user input and format for processing
-            string userInput = actionInput.Text.Trim();
-
             //Waits to execute code until enter key is pressed in input area
             if (e.KeyCode == Keys.Enter)
             {
+                //Collects user input and format for processing
+                string userInput = _mainWindow.GetTextBoxText().Trim();
+
                 switch (userInput)
                 {
                     //accepts the user's input and searches the db table selected from Program Switcher
@@ -97,12 +147,24 @@ namespace Inventory.Views.UserControls
                         SearchDatabase(searchQuereyTextBox.Text);
                         break;
 
+                    case "2":
+                        searchQuereyTextBox.Clear();
+                        searchQuereyTextBox.Focus();
+                        break;
+
                     //returns user to main menu
                     case "3":
-                    //    _mainWindow.ProgramSwitcher("menuList");
+                        _mainWindow.DisplayControl(new MenuList(_mainWindow));
+                        _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
+                        break;
+
+                    default:
+                        MessageBox.Show("Invalid input. Please try again.");
+                        _mainWindow.ClearTextBox();
                         break;
                 }
             }
+            _mainWindow.ClearTextBox();
         }
 
         private void searchQueryTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -112,6 +174,11 @@ namespace Inventory.Views.UserControls
             {
                 SearchDatabase(searchQuereyTextBox.Text);
             }
+        }
+
+        private void DbSearch_Load(object sender, EventArgs e)
+        {
+            BeginInvoke(() => searchQuereyTextBox.Focus());
         }
     }
 }

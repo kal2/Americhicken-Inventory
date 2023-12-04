@@ -1,0 +1,92 @@
+*************
+* Program.: RSUPLIST.PRG
+* Author..: Grace Keller
+* Date....: 10/26/87
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: REMIT TO SUPPLIER LISTING 
+*
+* ---OPEN FILES
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+MTITLE = ' - REMIT TO SUPPLIER LISTING'
+
+CLEAR
+@ 01,00 SAY MCOMPANY
+@ 01,68 SAY DATE()
+@  2,0 SAY MPROGRAM + MTITLE
+@ 3,0 TO 22,79
+STORE ' ' TO MACTION
+DO PRT_SET
+IF MACTION <> 'C'
+   RETURN
+ENDIF 
+SET CONSOLE OFF
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+ELSE
+   SET PRINT TO LPT3
+ENDIF
+SET DEVICE TO PRINT
+SET PRINT ON
+
+*** PRINT IN 10 CPI
+?? chr(27) + '&k0S'
+
+*** LETTER GOTHIC AND BOLDED PRINT
+?? chr(27) + '(s4102T' + chr(27) + '(s3B'
+
+*** LETTER SIZE PAPER
+?? CHR(27) + '&l2A'
+
+*** PORTRAIT MODE
+?? CHR(27) + '&l0O'
+
+SELECT A
+DO FOX_USE WITH "&MDBFLOC.REM_SUP INDEX &MDBFLOC.RSUPNAME", .F.
+MLINE = 99
+MPAGE_NO = 0
+MFIRST_TM = .T.
+DO WHILE .NOT. EOF()
+   IF MLINE > 58
+      IF MFIRST_TM
+         MFIRST_TM = .F.
+      ELSE
+         EJECT
+      ENDIF
+      MLINE = 2
+      MPAGE_NO = MPAGE_NO + 1
+      @ MLINE,5 SAY 'PAGE  ' + str(mpage_no,3)
+      @ mline,27 say 'REMIT TO SUPPLIER LISTING' 
+      @ MLINE,65 SAY DTOC(DATE())
+      MLINE = MLINE + 2
+      @ MLINE,5 SAY 'NAME/ADDRESS'
+      @ MLINE,45 SAY 'PHONE'    
+      MLINE = MLINE + 2
+   ENDIF
+   @ MLINE,5 SAY NAME       
+   @ MLINE,45 SAY '(' + AREA_CODE + ')' + TRANSFORM(PHONE, '@R 999-9999')
+   MLINE = MLINE + 1
+   @ MLINE,5 SAY STREET
+   IF ZIP4 = SPACE(4)
+      STORE ZIP TO MZIP
+   ELSE
+      STORE ZIP + '-' + ZIP4 TO MZIP
+   ENDIF
+   @ MLINE,45 SAY TRIM(CITY) + ', ' + STATE + '  ' + MZIP
+   MLINE = MLINE + 2
+   SKIP
+ENDDO
+EJECT
+
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+IF MPRINTER3 <> 'DONOTPRINT'
+   RUN &MPRINTIT3
+ENDIF
+RETURN
+* EOF: RSUPLIST.PRG
+
+*Formatted by: ToolBox Ver. 1.2  on 7/23/14 at 1:41 PM.
+

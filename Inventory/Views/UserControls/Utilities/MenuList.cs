@@ -56,7 +56,6 @@ namespace Inventory
 
                     //Resumes paiting in Menu Box with the above changes made
                     menuListBox.EndUpdate();
-                    _mainWindow.SetTextBoxText("");
                 }
                 else
                 {
@@ -89,9 +88,12 @@ namespace Inventory
                         default:
                             throw new ArgumentException($"Unknown program: {programName}", nameof(programName));
                     }
+
                     //Passes selectedControl to MainWindow to be displayed
                     _mainWindow.DisplayControl(selectedControl);
                 }
+                //Clears user input field
+                _mainWindow.ClearTextBox();
             }
         }
     }

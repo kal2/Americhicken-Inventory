@@ -28,21 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label14 = new Label();
+            userActionCommandsLabel = new Label();
             actionInput = new TextBox();
-            label13 = new Label();
+            textBoxLabel = new Label();
             SuspendLayout();
             // 
-            // label14
+            // userActionCommandsLabel
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label14.Location = new Point(197, 26);
-            label14.Margin = new Padding(1, 0, 1, 0);
-            label14.Name = "label14";
-            label14.Size = new Size(554, 30);
-            label14.TabIndex = 48;
-            label14.Text = "1. Item Page    2. Edit    3. Cancel Add    4. Update Notes";
+            userActionCommandsLabel.AutoSize = true;
+            userActionCommandsLabel.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            userActionCommandsLabel.Location = new Point(197, 26);
+            userActionCommandsLabel.Margin = new Padding(1, 0, 1, 0);
+            userActionCommandsLabel.Name = "userActionCommandsLabel";
+            userActionCommandsLabel.Size = new Size(0, 30);
+            userActionCommandsLabel.TabIndex = 48;
             // 
             // actionInput
             // 
@@ -54,25 +53,25 @@
             actionInput.Size = new Size(40, 36);
             actionInput.TabIndex = 46;
             // 
-            // label13
+            // textBoxLabel
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label13.Location = new Point(16, 26);
-            label13.Margin = new Padding(1, 0, 1, 0);
-            label13.Name = "label13";
-            label13.Size = new Size(97, 30);
-            label13.TabIndex = 47;
-            label13.Text = "ACTION:";
+            textBoxLabel.AutoSize = true;
+            textBoxLabel.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxLabel.Location = new Point(16, 26);
+            textBoxLabel.Margin = new Padding(1, 0, 1, 0);
+            textBoxLabel.Name = "textBoxLabel";
+            textBoxLabel.Size = new Size(96, 30);
+            textBoxLabel.TabIndex = 47;
+            textBoxLabel.Text = "CHOICE:";
             // 
             // UserActionInput
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Blue;
-            Controls.Add(label14);
+            Controls.Add(userActionCommandsLabel);
             Controls.Add(actionInput);
-            Controls.Add(label13);
+            Controls.Add(textBoxLabel);
             ForeColor = Color.White;
             Name = "UserActionInput";
             Size = new Size(1309, 86);
@@ -81,9 +80,8 @@
         }
 
         #endregion
-
-        private Label label14;
-        private Label label13;
         public TextBox actionInput;
+        public Label userActionCommandsLabel;
+        public Label textBoxLabel;
     }
 }

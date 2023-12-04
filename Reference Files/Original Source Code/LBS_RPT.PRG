@@ -1,0 +1,301 @@
+****************
+* Program.: LBS_RPT.PRG
+* Author..: GRACE KELLER
+* Date....: 05/12/95
+* Notice..: Copyright (C) 1988, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: POUNDS SUMMARY         
+*
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion      
+SET PROCEDURE TO PRODRPTS 
+CLEAR
+@ 00,00 SAY MCOMPANY
+@ 01,68 SAY DATE()
+@ 01,00 SAY MPROGRAM + ' - PRINT PRODUCT TOTALS'                 
+@ 2,0 to 22,79
+
+MBEGIN  = CTOD('')  
+MEND    = CTOD('')
+MSEL_PREFX = '  '
+MSEL_PCODE = SPACE(10)
+MSEL_PROD = SPACE(4)
+MSEL_INV = '   '
+MPAPER = SPACE(6)
+MACTION = 2
+DO WHILE MACTION = 2
+   @ 05,3 SAY 'Wide (WIDE) or Narrow (NARROW) Paper Format: ' get mpaper picture '@!'
+   @ 07,3 SAY '           Enter Begin Report Date: ' GET MBEGIN 
+   @ 09,3 SAY '          Enter Ending Report Date: ' GET MEND              
+   @ 12,3 say 'Enter Optional Vendor Product Code: '
+   @ 12,40 GET MSEL_PREFX PICTURE '@!'
+   @ 12,43 GET MSEL_PCODE PICTURE '@!'
+   @ 14,3 say ' OR  Optional Midwest Product Code: ' GET MSEL_PROD PICTURE '@!'
+   @ 16,3 say '      Select ALL Shipments or'                
+   @ 17,3 SAY 'Only Shipments from INVentory (ALL/INV): ' GET MSEL_INV PICTURE '@!'
+   @ 19,3 SAY "(Note: Will not include the bill back orders to suppliers.)"
+   STORE 1 TO MACTION
+   @ 24,0 SAY 'Action: ' + STR(MACTION,1)
+   @ 24,13 SAY '1. Continue    2. Edit    3. Cancel Report'          
+   READ
+   @ 24,8 GET MACTION PICTURE '#' RANGE 1,3
+   READ
+ENDDO
+IF MACTION = 3                         
+   SET PROCEDURE TO
+   RETURN
+ENDIF
+IF MSEL_INV <> 'INV'
+   MSEL_INV = 'ALL'
+ENDIF
+@ 3,1 CLEAR TO 21,78
+MPRT_DISP = 'P'
+MPRT_ACT = 'C'
+DO PRT_SET
+IF MPRT_ACT <> 'C'
+   SET PROCEDURE TO
+   RETURN
+ENDIF
+MPAGE_LEN = 56
+
+MPAGE_NO = 0
+MLINE = 99
+
+@ 21,16 SAY SPACE(34)
+@ 21,16 SAY 'PROCESSING/PRINTING......'
+
+SET CONSOLE OFF
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+ELSE
+   SET PRINT TO LPT3
+ENDIF
+SET DEVICE TO PRINT
+SET PRINT ON
+
+*** PRINT IN 12 CPI
+?? chr(27) + '&k4S'
+
+*** LETTER GOTHIC AND BOLDED PRINT
+?? chr(27) + '(s4102T' + chr(27) + '(s3B' + chr(27) + '(s3B'
+
+*** LETTER SIZE PAPER
+?? CHR(27) + '&l2A'
+
+*** PORTRAIT MODE
+?? CHR(27) + '&l0O'
+
+SELECT C
+USE INVNTMP9 EXCLUSIVE               
+DELETE ALL
+PACK
+INDEX ON SUP_PREFX+SUP_PCODE TO INVNTMP9
+DO FOX_USE WITH "INVNTMP9 INDEX INVNTMP9", .F.
+DO FILELOCK
+SELECT B
+DO FOX_USE WITH "PO_DTL INDEX PO_DTL", .F.
+SELECT A
+DO FOX_USE WITH "PO_HEAD INDEX PO_SHIP", .F.
+MBEG_MO = SUBSTR(DTOC(MBEGIN),1,2)
+MBEG_YR = STR(YEAR(MBEGIN),4)
+
+SEEK MBEG_YR + MBEG_MO
+IF EOF()
+   SEEK MBEG_YR
+   IF EOF()
+      GOTO TOP
+   ENDIF
+ENDIF
+DO WHILE .NOT. EOF() .AND. SHIP_DATE < MBEGIN             
+   SKIP
+ENDDO
+
+DO WHILE .NOT. EOF() .AND. SHIP_DATE <= MEND
+   IF BBUYCODE = 'INVN'
+      SKIP
+      LOOP
+   ENDIF
+   IF MSEL_INV = 'INV'
+      IF RSUPCODE <> 'INVN'
+         SKIP
+         LOOP
+      ENDIF
+   ENDIF
+   SELECT B
+   SEEK A->SALESMAN+A->PO_NBR+A->PO_SUFFIX
+   DO WHILE .NOT. EOF() .AND. A->SALESMAN = SALESMAN .AND. A->PO_NBR = PO_NBR .AND. A->PO_SUFFIX = PO_SUFFIX
+      ** THESE ARE PRICE BILL BACKS TO GEORGES - NOT REALLY SALES
+      IF PO_SUFFIX = '1' .AND. PUR_PRICE = 0
+         SKIP
+         LOOP
+      ENDIF
+      DO CASE
+      CASE MSEL_PREFX <> '  ' .OR. MSEL_PCODE <> SPACE(10)
+         DO CASE
+         CASE MSEL_PREFX <> '  ' .AND. MSEL_PCODE <> SPACE(1)
+            IF MSEL_PREFX+MSEL_PCODE <> SUP_PREFX+SUP_PCODE
+               SKIP
+               LOOP
+            ENDIF
+            MSEARCH = SUP_PREFX + SUP_PCODE
+            
+         CASE MSEL_PREFX <> '  '
+            IF MSEL_PREFX <> SUP_PREFX
+               SKIP
+               LOOP
+            ENDIF
+            MSEARCH = SUP_PREFX + SUP_PCODE
+            
+         OTHERWISE                 
+            IF MSEL_PCODE <> SUP_PCODE
+               SKIP
+               LOOP
+            ENDIF
+            MSEARCH = SUP_PREFX + SUP_PCODE
+         ENDCASE
+         
+      CASE MSEL_PROD <> SPACE(4)
+         IF MSEL_PROD <> PROD_DESC
+            SKIP
+            LOOP
+         ENDIF
+         MSEARCH = SPACE(2) + SUBSTR(PROD_DESC,1,4) + SPACE(6)
+      OTHERWISE
+         IF SUP_PREFX+SUP_PCODE <> SPACE(12)
+            MSEARCH = SUP_PREFX+SUP_PCODE
+         ELSE  
+            MSEARCH = '  ' + SUBSTR(PROD_DESC,1,4) + SPACE(6)
+         ENDIF
+      ENDCASE
+      
+      *** WRITE THE RECORD
+      SELECT C
+      SEEK MSEARCH
+      IF EOF()
+         APPEND BLANK
+         REPLACE SUP_PREFX WITH SUBSTR(MSEARCH,1,2)
+         REPLACE SUP_PCODE WITH SUBSTR(MSEARCH,3)
+      ENDIF
+      REPLACE CASE_LEFT WITH CASE_LEFT + B->QTY       
+      IF SUBSTR(B->PACKED,1,1) = 'B'
+         REPLACE LBS_LEFT  WITH LBS_LEFT + (B->QTY * VAL(SUBSTR(B->PACKED,2)))
+      ELSE
+         REPLACE LBS_LEFT  WITH LBS_LEFT + B->LBS      
+      ENDIF
+      REPLACE TOT_SELL WITH TOT_SELL + B->TOT_SELL
+      REPLACE TOT_NET WITH TOT_NET + (B->TOT_SELL - B->TOT_PURCH)
+      
+      SELECT B
+      SKIP
+   ENDDO
+   SELECT A
+   SKIP  
+ENDDO
+
+SELECT A   
+USE     
+SELECT B
+USE
+SELECT A
+DO FOX_USE WITH "&MDBFLOC.PRODUCTS INDEX &MDBFLOC.PRODUCTS", .F.
+SELECT B
+DO FOX_USE WITH "&MDBFLOC.SUP_PROD INDEX &MDBFLOC.SUP_PROD", .F.
+
+SELECT C
+GOTO TOP
+SUM LBS_LEFT TO MTOTAL
+SUM TOT_SELL TO MTOTALX
+SUM TOT_NET TO  MTOTALY
+GOTO TOP
+MTOT_LBS = 0
+MTOT_CASE = 0
+MTOT_SELL = 0
+MTOT_NET  = 0
+MCANCEL = .F.
+DO WHILE .NOT. EOF()                                          
+   
+   DO CASE
+   CASE SUP_PREFX = '  '
+      SELECT A                 
+      SEEK 'R' + SUBSTR(C->SUP_PCODE,1,4)
+      IF EOF()       
+         MPRT_PROD = C->SUP_PCODE
+      ELSE
+         MPRT_PROD = SUBSTR(DESC,1,45)
+      ENDIF
+   OTHERWISE
+      SELECT B
+      SEEK C->SUP_PREFX + C->SUP_PCODE
+      IF EOF()
+         MPRT_PROD = C->SUP_PREFX + C->SUP_PCODE
+      ELSE
+         MPRT_PROD = SUBSTR(DESCRIP,1,45)
+      ENDIF
+   ENDCASE
+   
+   SELECT C
+   
+   IF MLINE > MPAGE_LEN
+      IF MLINE <> 99
+         EJECT        
+      ENDIF
+      IF MPAPER = 'WIDE'
+         DO PROD_HD1
+      ELSE
+         DO PROD_HD2
+      ENDIF
+   ENDIF
+   @ MLINE,0 SAY SUP_PREFX
+   @ MLINE,3 SAY SUP_PCODE
+   @ MLINE,14 SAY MPRT_PROD
+   IF MPAPER = 'WIDE'
+      *@ MLINE,60 SAY CASE_LEFT PICTURE '999,999'
+      @ MLINE,60 SAY ROUND(LBS_LEFT/MTOTAL*100,1) PICTURE '999.9' 
+      @ MLINE,66 SAY '%'
+      @ MLINE,68 SAY LBS_LEFT PICTURE '99,999,999'
+      @ MLINE,81 SAY ROUND(TOT_SELL/MTOTALX*100,1) PICTURE '999.9'
+      @ MLINE,87 SAY '%'
+      @ MLINE,79+9 SAY TOT_SELL PICTURE '9,999,999'
+      @ MLINE,89+9 SAY TOT_NET PICTURE '999,999'
+   ELSE
+      @ MLINE,60 SAY CASE_LEFT PICTURE '999,999'
+      @ MLINE,72 SAY ROUND(TOT_SELL/MTOTALX*100,1) PICTURE '999.9'
+      @ MLINE,78 SAY '%'
+      @ MLINE,84 SAY ROUND(TOT_NET/MTOTALY*100,1) PICTURE '999.9'
+      @ MLINE,90 SAY '%'
+   ENDIF
+   MTOT_CASE = MTOT_CASE + CASE_LEFT
+   MTOT_LBS  = MTOT_LBS  + LBS_LEFT
+   MTOT_SELL = MTOT_SELL + TOT_SELL
+   MTOT_NET  = MTOT_NET  + TOT_NET
+   MLINE = MLINE + 2
+   SKIP
+ENDDO
+IF MLINE =  99     
+   @ 4,1 SAY 'NO DATA SELECTED FOR REPORT'                            
+ELSE
+   MLINE = MLINE + 1
+   @ MLINE,14 SAY 'PRODUCT TOTALS: '
+   IF MPAPER = 'WIDE'
+      *@ MLINE,60 SAY MTOT_CASE  PICTURE '999,999'
+      @ MLINE,68 SAY MTOT_LBS  PICTURE '99,999,999'
+      @ MLINE,79 SAY MTOT_SELL PICTURE '9,999,999'
+      @ MLINE,89 SAY MTOT_NET PICTURE '999,999'
+   ELSE
+      @ MLINE,60 SAY MTOT_CASE  PICTURE '999,999'
+   ENDIF
+ENDIF
+EJECT 
+
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+IF MPRINTER3 <> 'DONOTPRINT'
+   RUN &MPRINTIT3
+ENDIF
+
+CLOSE DATA
+SET PROCEDURE TO
+RETURN
+*Formatted by: ToolBox Ver. 1.2  on 12/10/15 at 10:57 AM.
+

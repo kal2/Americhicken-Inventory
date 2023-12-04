@@ -1,0 +1,106 @@
+*****************
+* Program.: AUTO_FRT.PRG
+* Author..: Grace Keller
+* Date....: 05/01/97
+* Notes...: AUTOMATICALLY APPROVE FREIGHT INVOICES FOR CHECK PRINT
+*
+
+SELECT D
+DO FOX_USE WITH "&MDBFLOC.FREIGHT INDEX &MDBFLOC.FRT_CODE", .F.
+
+SELECT B
+DO FOX_USE WITH "PO_HEAD INDEX PO_HEAD, PO_FRT", .F.
+
+SELECT C
+DO FOX_USE WITH "FRT_INV INDEX FRT_INV", .F.
+*SET FILTER TO FRT_SEQ <> '2' .AND. APRVDFLG = ' '
+*** ADDED 12/29/2003
+SET FILTER TO APRVDFLG = ' '
+
+GOTO TOP
+DO WHILE .NOT. EOF()
+
+   IF DUE_DATE > MFRT_DATE
+      SKIP
+      LOOP
+   ENDIF
+
+   SELECT D
+   SEEK C->FRT_CODE
+   *** THIS FRT CARRIER IS ON HOLD, SKIP AROUND ANY APPROVING
+   IF .NOT. EOF() .AND. ACTIVE = 'H'
+      SELECT C
+      SKIP
+      LOOP
+   ENDIF
+
+   SELECT C
+   DO RECLOCK
+   REPLACE APRVDFLG WITH 'Y'
+   UNLOCK  
+   SKIP
+ENDDO
+
+SELECT D
+USE
+
+********************************************************
+**** NOW UNAPPROVE FOR AMOUNTS < 0  AND FOR AMOUNTS = 0
+********************************************************
+SELECT C
+***SET FILTER TO FRT_SEQ <> '2' .AND. APRVDFLG = 'Y'
+*** ADDED 12/29/2003
+SET FILTER TO APRVDFLG = 'Y' 
+GOTO TOP
+DO WHILE .NOT. EOF()
+   MFRT_CODE = FRT_CODE
+   STORE RECNO() TO MRECNO
+   MPAYMENT = 0
+
+   DO WHILE .NOT. EOF() .AND. FRT_CODE = MFRT_CODE
+      MADJ_TOT = 0
+      IF DEB_CRD <>  ' ' .OR. FRT_SEQ <> '1'
+         STORE AMT_DUE TO MPAID
+      ELSE
+         SELECT B
+         SEEK C->SALESMAN + C->PO_NBR + C->PO_SUFFIX
+         IF .NOT. EOF()
+            MADJ_TOT = FRT1_ADJ1 + FRT1_ADJ2
+            IF FRT_PALL < 0
+               MADJ_TOT = MADJ_TOT + FRT_PALL
+            ENDIF
+            MPAID = C->AMT_DUE + MADJ_TOT 
+         ENDIF
+      ENDIF
+      MPAYMENT = MPAYMENT + MPAID
+      SELECT C
+      SKIP
+   ENDDO
+
+
+   DO CASE
+   CASE MPAYMENT < 0
+      GOTO MRECNO
+      DO WHILE .NOT. EOF() .AND. FRT_CODE = MFRT_CODE
+         DO RECLOCK
+         REPLACE APRVDFLG WITH ' '
+         UNLOCK
+         SKIP
+      ENDDO
+
+   CASE MPAYMENT = 0
+      GOTO MRECNO
+      DO WHILE .NOT. EOF() .AND. FRT_CODE = MFRT_CODE
+         DO RECLOCK
+         DELETE
+         UNLOCK
+         SKIP
+      ENDDO
+   ENDCASE
+
+ENDDO
+CLOSE DATA
+
+RETURN
+* EOF: AUTO_FRT.PRG
+*Formatted by: ToolBox Ver. 1.2  on 5/1/97 at 1:17 PM.

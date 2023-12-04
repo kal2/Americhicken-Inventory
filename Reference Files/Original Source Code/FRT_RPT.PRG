@@ -1,0 +1,387 @@
+**********
+* Program.: FRT_RPT.PRG
+* Author..: GRACE KELLER
+* Date....: 10/04/87
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: FREIGHT ADJUSTMENT REPORT
+*
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+
+CLOSE DATA
+CLEAR
+@ 1,00 SAY MCOMPANY
+@ 01,68 SAY DATE()
+@ 02,00 SAY MPROGRAM + ' - FREIGHT ADJUSTMENT REPORT'
+@ 03,00 TO 23,79 
+
+
+STORE SPACE(3)  TO MSEL_BUY, MSEL_FRT
+STORE SPACE(4)  TO MBUY_CODE, MFRT_CODE
+STORE CTOD('')  TO MBEG_DATE, MEND_DATE
+STORE SPACE(15) TO MFRT_RS1, MFRT_RS2
+STORE 0 TO MTOTAL, MTOT_CUST, MTOT_FRT
+
+MACTION = 2
+DO WHILE MACTION = 2
+   
+   
+   @ 05,5 say 'Beginning Delivery Date:' get mbeg_date
+   @ 06,5 say 'Ending    Delivery Date:' get mend_date
+   
+   @ 08,5 say 'Freight Reason 1:' get mfrt_rs1 picture '@!'
+   @ 09,5 say 'Freight Reason 2:' get mfrt_rs2 picture '@!'
+   
+   
+   @ 12,5 SAY 'Select a specific Ship To Customer (YES/NO)? ' get Msel_buy picture '@!'
+   @ 15,5 SAY 'Select a specific Freight Carrier  (YES/NO)? ' get Msel_frt picture '@!'
+   
+   
+   STORE 1 TO MACTION
+   @ 24,01 SAY 'Action: ' + STR(MACTION,1)  
+   @ 24,13 SAY '1. Continue    2. Edit     3. Finished'                                     
+   
+   READ
+   
+   @24,09 GET MACTION PICTURE '9' RANGE 1,3
+   READ               
+ENDDO
+
+IF MACTION = 3
+   RETURN
+ENDIF
+STORE SPACE(32) TO MBUY_NAME
+STORE SPACE(20) TO MBUY_CITY
+STORE SPACE(2)  TO MBUY_ST
+IF MSEL_BUY = 'YES'
+   MNAME_FD = .F.
+   SET PROC TO BUY_PROC
+   STORE SPACE(32) TO MNAME
+   SAVE SCREEN TO MGRACE
+   DO BUY_SEL1
+   RESTORE SCREEN FROM MGRACE
+   IF MNAME_FD
+      STORE BUY_CODE TO MBUY_CODE
+      STORE NAME TO MBUY_NAME
+      STORE STREET TO MBUY_STRT
+      STORE CITY TO MBUY_CITY
+      STORE STATE TO MBUY_ST
+   ENDIF
+   SET PROC TO 
+ENDIF
+USE
+STORE SPACE(32) TO MFRT_NAME
+IF MSEL_FRT = 'YES'
+   MNAME_FD = .F.
+   STORE SPACE(32) TO MNAME
+   SAVE SCREEN TO MGRACE
+   DO FRT_SEL1
+   RESTORE SCREEN FROM MGRACE
+   IF MNAME_FD
+      STORE FRT_CODE TO MFRT_CODE
+      STORE NAME TO MFRT_NAME
+      STORE STREET TO MFRT_STRT
+      STORE CITY TO MFRT_CITY
+      STORE STATE TO MFRT_ST
+   ENDIF
+ENDIF
+
+STORE ' ' TO MPRT_ACT
+DO PRT_SET
+IF MPRT_ACT <> 'C'
+   RETURN
+ENDIF 
+
+*** NOW SETUP THE TEMPORARY FILE
+SELECT C
+DO FOX_USE WITH "TMP_FRT", .T.
+DELETE ALL
+PACK
+
+SELECT B
+DO FOX_USE WITH "PO_HEAD INDEX PO_HEAD", .F.
+SET FILTER TO DEL_REQD >= MBEG_DATE .AND. DEL_REQD <= MEND_DATE 
+GOTO TOP
+
+
+DO WHILE .NOT. EOF()
+   IF MBUY_CODE <> SPACE(4)
+      IF MBUY_CODE <> BUY_CODE
+         SKIP
+         LOOP
+      ENDIF
+   ENDIF
+   
+   IF MFRT_CODE <> SPACE(4)
+      IF MFRT_CODE <> FRT_CODE1
+         SKIP
+         LOOP
+      ENDIF
+   ENDIF
+   
+   
+   IF MFRT_RS1 <> SPACE(15)
+      IF MFRT_RS1 = FRT1_RS1 .AND. FRT1_ADJ1 <> 0
+         SELECT C
+         APPEND BLANK
+         REPLACE FRT_CODE WITH B->FRT_CODE1
+         REPLACE BUY_CODE WITH B->BUY_CODE
+         REPLACE SALESMAN WITH B->SALESMAN
+         REPLACE PO_NBR   WITH B->PO_NBR
+         REPLACE PO_SUFFIX WITH B->PO_SUFFIX
+         REPLACE DEL_REQD  WITH B->DEL_REQD
+         REPLACE FRT_RS    WITH B->FRT1_RS1
+         REPLACE FRT_AMT   WITH B->FRT1_ADJ1
+         REPLACE BUYER_PO WITH B->BUYER_PO
+         SELECT B
+      ENDIF
+      IF MFRT_RS1 = FRT1_RS2  .AND. FRT1_ADJ2 <> 0
+         SELECT C
+         APPEND BLANK
+         REPLACE FRT_CODE WITH B->FRT_CODE1
+         REPLACE BUY_CODE WITH B->BUY_CODE
+         REPLACE SALESMAN WITH B->SALESMAN
+         REPLACE PO_NBR   WITH B->PO_NBR
+         REPLACE PO_SUFFIX WITH B->PO_SUFFIX
+         REPLACE DEL_REQD  WITH B->DEL_REQD
+         REPLACE FRT_RS    WITH B->FRT1_RS2
+         REPLACE FRT_AMT   WITH B->FRT1_ADJ2
+         REPLACE BUYER_PO WITH B->BUYER_PO
+         SELECT B
+      ENDIF
+      
+   ENDIF
+   
+   IF MFRT_RS2 <> '     '
+      IF MFRT_RS2 = FRT1_RS1 .AND. FRT1_ADJ1 <> 0
+         SELECT C
+         APPEND BLANK
+         REPLACE FRT_CODE WITH B->FRT_CODE1
+         REPLACE BUY_CODE WITH B->BUY_CODE
+         REPLACE SALESMAN WITH B->SALESMAN
+         REPLACE PO_NBR   WITH B->PO_NBR
+         REPLACE PO_SUFFIX WITH B->PO_SUFFIX
+         REPLACE DEL_REQD  WITH B->DEL_REQD
+         REPLACE FRT_RS    WITH B->FRT1_RS1
+         REPLACE FRT_AMT   WITH B->FRT1_ADJ1
+         REPLACE BUYER_PO WITH B->BUYER_PO
+         SELECT B
+      ENDIF
+      IF MFRT_RS2 = FRT1_RS2 .AND. FRT1_ADJ2 <> 0
+         SELECT C
+         APPEND BLANK
+         REPLACE FRT_CODE WITH B->FRT_CODE1
+         REPLACE BUY_CODE WITH B->BUY_CODE
+         REPLACE SALESMAN WITH B->SALESMAN
+         REPLACE PO_NBR   WITH B->PO_NBR
+         REPLACE PO_SUFFIX WITH B->PO_SUFFIX
+         REPLACE DEL_REQD  WITH B->DEL_REQD
+         REPLACE FRT_RS    WITH B->FRT1_RS2
+         REPLACE FRT_AMT   WITH B->FRT1_ADJ2
+         REPLACE BUYER_PO WITH B->BUYER_PO
+         SELECT B
+      ENDIF
+      
+   ENDIF
+   
+   SKIP
+ENDDO
+
+SET CONSOLE OFF
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+ELSE
+   SET PRINT TO LPT3
+ENDIF
+
+SET DEVICE TO PRINT
+SET PRINT ON
+
+*** PRINT IN 12 CPI
+?? chr(27) + '&k4S'
+
+*** LETTER GOTHIC AND BOLDED PRINT
+?? chr(27) + '(s4102T' + chr(27) + '(s3B' + chr(27) + '(s3B'
+
+*** LETTER SIZE PAPER
+?? CHR(27) + '&l2A'
+
+*** PORTRAIT MODE
+?? CHR(27) + '&l0O'
+
+MLINE = 99
+MPAGE_LEN = 56
+MPAGE_NO = 0
+SELECT C
+INDEX ON BUY_CODE + FRT_CODE + DTOC(DEL_REQD) TO TMP_FRT
+DO FOX_USE WITH "TMP_FRT INDEX TMP_FRT", .T.
+
+DO WHILE .NOT. EOF()
+   STORE BUY_CODE TO MBUY_CODE
+   STORE 0 TO MTOT_CUST
+   SELECT A
+   DO FOX_USE WITH "&MDBFLOC.BUYER INDEX &MDBFLOC.BUY_CODE", .F.
+   SEEK MBUY_CODE
+   STORE NAME TO MBUY_NAME
+   STORE CITY TO MBUY_CITY
+   STORE STATE TO MBUY_ST
+   SELECT C
+   IF MLINE+2 > MPAGE_LEN
+      IF MLINE <> 99
+         EJECT
+      ENDIF
+      
+      MPAGE_NO = MPAGE_NO + 1
+      @ 1,25 SAY MCOMPANY + ' - FREIGHT ADJUSTMENT REPORT'
+      @ 1,80 SAY DTOC(DATE())
+      @ 2,1 SAY 'Page'
+      @ 2,06 say MPAGE_NO picture '99'
+      @ 2,25 SAY '      FOR ' + DTOC(MBEG_DATE) + ' - ' + DTOC(MEND_DATE)
+      @ 2,80 SAY TIME()
+      @ 4,1 SAY 'FRT ADJ REASON    PO NUMBER   DELV DATE     CUST PO NBR        AMOUNT'
+      @ 4,01 SAY REPLICATE('_',69)
+      MLINE = 6
+      MPRT_BUY = .T.
+      MPRT_FRT = .T.
+   ELSE
+      MLINE = MLINE + 2
+      MPRT_BUY = .T.
+   ENDIF   
+   
+   IF MPRT_BUY
+      @ MLINE,1 SAY TRIM(MBUY_NAME) + ', ' + TRIM(MBUY_CITY) + ', ' + MBUY_ST
+      MLINE = MLINE + 1
+      MPRT_BUY = .F.
+   ENDIF
+   
+   
+   DO WHILE .NOT. EOF() .AND. MBUY_CODE = BUY_CODE
+      STORE FRT_CODE TO MFRT_CODE
+      STORE 0 TO MTOT_FRT
+      SELECT A
+      DO FOX_USE WITH "&MDBFLOC.FREIGHT INDEX &MDBFLOC.FRT_CODE", .F.
+      SEEK MFRT_CODE
+      STORE NAME TO MFRT_NAME
+      SELECT C
+      IF MLINE + 2 > MPAGE_LEN
+         IF MLINE <> 99
+            EJECT
+         ENDIF
+         
+         MPAGE_NO = MPAGE_NO + 1
+         @ 1,25 SAY MCOMPANY + ' - FREIGHT ADJUSTMENT REPORT'
+         @ 1,80 SAY DTOC(DATE())
+         @ 2,1 SAY 'Page'
+         @ 2,06 say MPAGE_NO picture '99'
+         @ 2,25 SAY '      FOR ' + DTOC(MBEG_DATE) + ' - ' + DTOC(MEND_DATE)
+         @ 2,80 SAY TIME()
+         @ 4,1 SAY 'FRT ADJ REASON    PO NUMBER   DELV DATE     CUST PO NBR        AMOUNT'
+         @ 4,01 SAY REPLICATE('_',69)
+         
+         MLINE = 6
+         MPRT_BUY = .T.
+         MPRT_FRT = .T.
+      ELSE
+         MPRT_FRT = .T.
+      ENDIF
+      IF MPRT_BUY
+         @ MLINE,1 SAY TRIM(MBUY_NAME) + ', ' + TRIM(MBUY_CITY) + ', ' + MBUY_ST
+         MLINE = MLINE + 1
+         MPRT_BUY = .F.
+      ENDIF
+      IF MPRT_FRT
+         @ MLINE,1 SAY TRIM(MFRT_NAME)
+         MLINE = MLINE + 1
+         MPRT_FRT = .F.
+      ENDIF
+      
+      DO WHILE .NOT. EOF() .AND. BUY_CODE = MBUY_CODE .AND. FRT_CODE = MFRT_CODE
+         
+         IF MLINE > MPAGE_LEN
+            IF MLINE <> 99
+               EJECT
+            ENDIF
+            
+            MPAGE_NO = MPAGE_NO + 1
+            
+            @ 1,25 SAY MCOMPANY + ' - FREIGHT ADJUSTMENT REPORT'
+            @ 1,80 SAY DTOC(DATE())
+            @ 2,1 SAY 'Page'
+            @ 2,06 say MPAGE_NO picture '99'
+            @ 2,25 SAY '      FOR ' + DTOC(MBEG_DATE) + ' - ' + DTOC(MEND_DATE)
+            @ 2,80 SAY TIME()
+            @ 4,1 SAY 'FRT ADJ REASON    PO NUMBER   DELV DATE     CUST PO NBR        AMOUNT'
+            @ 4,01 SAY REPLICATE('_',69)
+            
+            MLINE = 6
+            MPRT_BUY = .T.
+            MPRT_FRT = .T.
+         ENDIF
+         IF MPRT_BUY
+            @ MLINE,1 SAY TRIM(MBUY_NAME) + ', ' + TRIM(MBUY_CITY) + ', ' + MBUY_ST
+            MLINE = MLINE + 1
+            MPRT_BUY = .F.
+         ENDIF
+         IF MPRT_FRT
+            @ MLINE,1 SAY TRIM(MFRT_NAME)
+            MLINE = MLINE + 1
+            MPRT_FRT = .F.
+         ENDIF
+         
+         @ MLINE,1 SAY FRT_RS
+         IF SALESMAN = '  '
+            @ MLINE,19 SAY PO_NBR
+            IF PO_SUFFIX <> ' '
+               @ MLINE,23 SAY '-' + PO_SUFFIX
+            ENDIF
+         ELSE
+            @ MLINE,19 SAY SALESMAN + '-' + PO_NBR
+            IF PO_SUFFIX <> ' '
+               @ MLINE,25 SAY '-' + PO_SUFFIX
+            ENDIF
+         ENDIF
+         @ MLINE,31 SAY DTOC(DEL_REQD)
+         @ MLINE,45 SAY BUYER_PO
+         @ MLINE,61 SAY FRT_AMT PICTURE '99,999.99'
+         MTOTAL = MTOTAL + FRT_AMT
+         MTOT_CUST = MTOT_CUST + FRT_AMT
+         MTOT_FRT  = MTOT_FRT  + FRT_AMT
+         MLINE = MLINE + 1
+         SKIP
+      ENDDO
+      IF MTOT_FRT <> 0
+         MLINE = MLINE + 1
+         @ MLINE,1 SAY 'TOTAL FRT CARRIER:'
+         @ MLINE,60 SAY MTOT_FRT PICTURE '999,999.99'
+         MLINE = MLINE + 2
+      ENDIF
+   ENDDO
+   IF MTOT_CUST <> 0
+      MLINE = MLINE + 1
+      @ MLINE,1 SAY 'TOTAL CUSTOMER:'
+      @ MLINE,60 SAY MTOT_CUST PICTURE '999,999.99'
+      MLINE = MLINE + 2
+   ENDIF
+ENDDO
+
+IF MTOTAL <> 0
+   MLINE = MLINE + 2
+   @ MLINE,1 SAY 'TOTAL ADJUSTMENTS:'
+   @ MLINE,60 SAY MTOTAL PICTURE '999,999.99'
+ENDIF
+
+@ MLINE,1 SAY ' '
+EJECT
+
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+IF MPRINTER3 <> 'DONOTPRINT'
+   RUN &MPRINTIT3
+ENDIF
+
+CLOSE DATA
+RETURN
+
+*Formatted by: ToolBox Ver. 1.2  on 10/20/20 at 1:52 PM.

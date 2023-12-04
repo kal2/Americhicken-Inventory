@@ -1,0 +1,194 @@
+************  
+* Program.: PRT_1FRT.PRG
+* Author..: Grace Keller
+* Date....: 01/21/97
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: PRINT FREIGHT COPY OF ORDER
+*
+* ---OPEN FILES
+*  MULTI-USER RECORD/FILE LOCKING  +(M1)  FoxPro   Multi-User Code Insertion     
+
+SET CONSOLE OFF
+IF FILE("C:\COMPINFO\PRINTERS.DBF")
+   SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+ELSE
+   SET PRINT TO LPT1
+ENDIF
+SET DEVICE TO PRINT
+SET PRINT ON
+
+SELECT B
+? SPACE(3)
+
+*** FONT ARIAL BOLD
+?? CHR(27) + '(s1p10v0s3b16602T'
+
+*** POINT HEIGHT 20 - DEFAULT IS 12
+?? CHR(27) + '(s20V'
+?? REPLICATE('**FREIGHT COPY',3)                       
+?? '**'
+
+?
+?
+?
+?
+?? SPACE(60) 
+?? 'ORDER #: '
+?? MSALESMAN + '-' 
+?? MPO_NBR     
+IF MPO_SUFFIX <> ' '
+   ?? '-' + MPO_SUFFIX
+ENDIF
+
+** GOTHIC 12 BOLD
+?? CHR(27) + '(s0p12h0s3b4102T'
+
+?
+? SPACE(3) + 'PRINT DATE ' + DTOC(DATE()) + SPACE(15)
+?
+MSAL_NAME = TRIM(MSAL_NAME)
+? SPACE(3) + 'SALESPERSON: ' + MSAL_NAME
+
+?
+?
+
+? SPACE(3) + 'ORDER DATE: ' + DTOC(ORD_DATE) + SPACE(3)
+?? 'SHIP DATE: ' + DTOC(SHIP_DATE) + SPACE(3)
+?? 'DELIV DATE: ' + DTOC(DEL_REQD) 
+?? SPACE(5) + 'CUST PO#: ' + BUYER_PO              
+?
+?
+?
+IF MFRT_NAME1 <> SPACE(32) .AND. MFRT_NAME1 <> 'NONE'
+   ************************************
+   **** NOW DO FREIGHT INFORMATION ****
+   ************************************
+   *** FONT ARIAL BOLD
+   ?? CHR(27) + '(s1p10v0s3b16602T'
+   
+   *** POINT HEIGHT 20 - DEFAULT IS 12
+   ?? CHR(27) + '(s20V'
+   
+   ? SPACE(3) + 'FREIGHT CARRIER:   '  + MFRT_NAME1 
+   ?
+   ? SPACE(3) + 'FREIGHT AMOUNT:    ' + SPACE(5) + TRANSFORM(B->FRT_AMT1, '9999999.99')
+   
+   ** GOTHIC 12 BOLD
+   ?? CHR(27) + '(s0p12h0s3b4102T'
+   
+   IF REF_PO1 <> SPACE(9) .OR. REF_PO2 <> SPACE(9) .OR. REF_PO3 <> SPACE(9) .OR. REF_PO4 <> SPACE(9) .OR. REF_PO5 <> SPACE(9) .OR. REF_PO6 <> SPACE(9)
+      ?
+      ? SPACE(3) + 'SHIPPED WITH: ' + REF_PO1
+      IF REF_PO2 <> SPACE(9)
+         ?? '; ' + REF_PO2
+      ENDIF
+      IF REF_PO3 <> SPACE(9)
+         ?? '; ' + REF_PO3
+      ENDIF
+      IF REF_PO4 <> SPACE(9)
+         ?? '; ' + REF_PO4
+      ENDIF
+      IF REF_PO5 <> SPACE(9)
+         ?? '; ' + REF_PO5
+      ENDIF
+      IF REF_PO6 <> SPACE(9)
+         ?? '; ' + REF_PO6
+      ENDIF
+   ENDIF
+   IF FRT1_RS1 <> SPACE(10) .OR. FRT1_RS2 <> SPACE(10) .OR. FRT1_ADJ1 <> 0 .OR. FRT1_ADJ2 <> 0
+      ?
+      ? SPACE(3) + '1. FRT ADJUST:  ' + FRT1_RS1  +SPACE(2) + TRANSFORM(FRT1_ADJ1, '9999999.99') + SPACE(5)
+      ?? '2. FRT ADJUST:  ' + FRT1_RS2  + SPACE(2) + TRANSFORM(FRT1_ADJ2, '9999999.99')
+   ENDIF
+   IF FRT_PALL <> 0
+      ? SPACE(3) + '   FREIGHT PALLETS:     ' + SPACE(15)  + SPACE(5) + TRANSFORM(FRT_PALL, '9999999.99')
+   ENDIF
+ENDIF
+
+?
+?
+?
+? SPACE(3) 
+
+?? 'SHIPPED FROM SUPPLIER:'+ SPACE(10)   + space(10)
+IF MCOMPANY = 'AMERICHICKEN, INC' .OR. MSALESMAN = '11'
+   ?? 'PICKUP LOCATION'
+ENDIF
+
+? SPACE(3) + MSUP_NAME 
+IF MCOMPANY = 'AMERICHICKEN, INC' .OR. MSALESMAN = '11'
+   ?? B->PU_LOC
+ENDIF
+? SPACE(3) + MSUP_STRT
+? SPACE(3) + MSUP_CITYST
+?
+
+?
+? SPACE(3)
+?? 'SHIPPED TO CUSTOMER:' + SPACE(12)          
+
+? SPACE(3) + MCUS_NAME 
+? SPACE(3) + MCUS_STRT 
+? SPACE(3) + MCUS_CITYST
+?
+?
+
+?      
+SELECT F
+USE NOTES INDEX NOTES
+STORE SPACE(78) TO MNOTE1, MNOTE2, MNOTE3, MNOTE4, MNOTE5, MNOTE6
+SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX 
+
+DO WHILE .NOT. EOF() .AND. SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+   STORE SEQ TO MSEQ
+   STORE NOTE TO MNOTE&MSEQ
+   SKIP
+ENDDO
+
+I = 1
+DO WHILE I<= 6
+   MI = STR(I,1)
+   IF MNOTE&MI <> SPACE(78)
+      ? SPACE(3) + MNOTE&MI
+   ENDIF
+   I = I + 1
+ENDDO
+
+USE
+SELECT B
+
+? SPACE(3)
+
+*** FONT ARIAL BOLD
+?? CHR(27) + '(s1p10v0s3b16602T'
+
+*** POINT HEIGHT 20 - DEFAULT IS 12
+?? CHR(27) + '(s20V'
+?? REPLICATE('**FREIGHT COPY',3)                       
+?? '**'
+
+** GOTHIC 12 BOLD
+?? CHR(27) + '(s0p12h0s3b4102T'
+
+? ' '
+
+EJECT
+**** ALL DONE PRINTING NOW
+**** PRINT SOME TOTALS HERE FOR CHECKING
+
+SET DEVICE TO SCREEN
+SET PRINT OFF
+SET PRINT TO
+SET CONSOLE ON
+IF MPRINTER <> 'DONOTPRINT'
+   RUN &MPRINTIT
+ENDIF
+
+SELECT E
+USE
+SELECT F
+USE
+RETURN
+*Formatted by: ToolBox Ver. 1.2  on 1/7/16 at 11:43 AM.
+

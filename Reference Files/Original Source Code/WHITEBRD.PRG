@@ -1,0 +1,380 @@
+************
+* Program.: WHITEBRD.PRG
+* Author..: GRACE KELLER
+* Date....: 10/25/2010
+* Notice..: Copyright 1987, Solid Software, Inc., All Rights Reserved
+* Version.: FOXPRO
+* Notes...: WHITE BOARD REPORT - SHIPPED/NOT SHIPPED ORDERS                   
+*
+
+MTITLE = ' - WHITE BOARD SUMMARY'
+CLEAR
+@  1, 1  SAY MCOMPANY
+@  1,68 SAY DATE()
+@  2, 0 SAY MPROGRAM + MTITLE
+@ 3,0 to 24,79
+STORE SPACE(4) TO MYEAR
+STORE 0 TO MMONTH, MLBS, MCASES, MSHIP_LBS, MSHIP_CASE
+STORE 'D' TO MCHOICE
+STORE 'Y' TO MTOT_ONLY
+STORE 'D' TO MPRT_DSP
+STORE 2 TO MACTION
+
+DO WHILE MACTION = 2
+   @ 09,2 say 'Select Report Year: ' GET MYEAR PICTURE '####'
+   @ 11,2 say '      Select Month: ' GET MMONTH PICTURE '##'
+   @ 13,1 SAY 'Not Delv/Delv (N/D): ' GET MCHOICE PICTURE '@!' VALID(MCHOICE = 'D' .OR. MCHOICE = 'N') 
+   @ 15,1 SAY 'Totals Only (Y/N): ' GET MTOT_ONLY PICTURE '@!' VALID(MTOT_ONLY = 'N' .OR. MTOT_ONLY = 'Y')
+   
+   STORE 1 TO MACTION
+   @ 24,00 CLEAR
+   @ 24,01 SAY 'Action: ' + STR(MACTION,1)
+   @ 24,13 SAY '1. Continue    2.  Edit    3. Cancel Report'                     
+   READ
+   @24,09 GET MACTION PICTURE '9' RANGE 1,3
+   READ
+   IF MACTION = 1
+      IF VAL(MYEAR) > YEAR(DATE()) + 1
+         @ 24,0 CLEAR
+         STORE 'INVALID YEAR SELECTED - PRESS RETURN TO REENTER' TO MWAIT
+         @ 24,1 GET MWAIT
+         READ
+         @ 24,0 CLEAR
+         MACTION = 2
+         LOOP
+      ENDIF
+   ENDIF
+ENDDO
+IF MACTION = 3
+   RETURN 
+ENDIF  
+IF MMONTH <= 0
+   MMONTH = 1
+ENDIF
+IF MTOT_ONLY = 'Y'
+   @ 17,1 SAY 'Print (P) -or- Display (D): ' GET MPRT_DSP PICTURE '@!' VALID(MPRT_DSP = 'P' .OR. MPRT_DSP = 'D')
+   READ
+ELSE
+   MPRT_DSP = 'P' 
+ENDIF
+
+SELECT D 
+DO FOX_USE WITH "WTEMP", .T.
+DELETE ALL
+PACK
+
+SELECT C
+DO FOX_USE WITH "&MDBFLOC.BUYER INDEX &MDBFLOC.BUY_CODE", .F.
+
+SELECT B 
+DO FOX_USE WITH "PO_DTL INDEX  PO_DTL", .F.
+
+SELECT A 
+DO FOX_USE WITH "PO_HEAD INDEX PO_SHIP", .F.
+
+SEEK MYEAR
+MPRT_ACT = 'C'
+
+
+IF MPRT_DSP <> 'D'
+   DO PRT_SET
+   IF MPRT_ACT <> 'C'
+      CLOSE DATA
+      RETURN
+   ENDIF
+ELSE
+   @ 4,1 CLEAR TO 22,78
+ENDIF
+
+DO WHILE .NOT. EOF() .AND. YEAR(SHIP_DATE) <= VAL(MYEAR)
+   *** TEMPORARY
+   IF PO_NBR = '6122' .AND. MONTH(SHIP_DATE) = 8
+      SKIP
+      LOOP
+   ENDIF
+   
+   *** TEMPORARY
+   
+   IF MONTH(SHIP_DATE) <> MMONTH
+      SKIP
+      LOOP
+   ENDIF
+   *** IF ONLY PUTTING INTO INVENTORY - SKIP - DONT COUNT AS SALE
+   IF BBUYCODE = 'INVN' .OR. BBUYCODE = 'NONE'
+      SKIP
+      LOOP
+   ENDIF
+   ** IGNORE ANYTHING PO_SUFFIX NOT BETWEEN 1 AND 9
+   DO CASE
+   CASE PO_SUFFIX = ' ' .OR. PO_SUFFIX = '0'
+   CASE PO_SUFFIX = '1' .OR. PO_SUFFIX = '2' .OR. PO_SUFFIX = '3'
+   CASE PO_SUFFIX = '4' .OR. PO_SUFFIX = '5' .OR. PO_SUFFIX = '6'
+   CASE PO_SUFFIX = '7' .OR. PO_SUFFIX = '8' .OR. PO_SUFFIX = '9'
+   OTHERWISE
+      SKIP
+      LOOP
+   ENDCASE
+   MORD_LBS = 0
+   MORD_CASE = 0
+   
+   STORE SALESMAN TO MSALESMAN
+   STORE PO_NBR TO MPO_NBR
+   STORE PO_SUFFIX TO MPO_SUFFIX
+   
+   SELECT B
+   
+   SEEK MSALESMAN + MPO_NBR + MPO_SUFFIX
+   DO WHILE .NOT. EOF() .AND. SALESMAN = MSALESMAN .AND. PO_NBR = MPO_NBR .AND. PO_SUFFIX = MPO_SUFFIX
+      
+      IF QTY <= 0 .OR. LBS <= 0
+         SKIP
+         LOOP
+      ENDIF
+      
+      IF SUBSTR(PACKED,1,1) = 'B' .OR. SUBSTR(PACKED,1,1) = 'H'
+         MITM_LBS = (VAL(SUBSTR(B->PACKED,2))*B->QTY)
+      ELSE
+         MITM_LBS = LBS
+      ENDIF
+      
+      MITM_CASE = QTY
+      MORD_LBS = MORD_LBS + MITM_LBS
+      MORD_CASE = MORD_CASE + MITM_CASE
+      
+      IF A->BROKERAGE = 'H'
+         MLBS = MLBS + MITM_LBS
+      ELSE
+         MSHIP_LBS = MSHIP_LBS + MITM_LBS
+      ENDIF
+      
+      IF A->BROKERAGE = 'H'
+         MCASES = MCASES + MITM_CASE
+      ELSE
+         MSHIP_CASE = MSHIP_CASE + MITM_CASE
+      ENDIF
+      SKIP
+   ENDDO
+   IF MORD_LBS = 0 .OR. MORD_CASE = 0
+      SELECT A
+      SKIP
+      LOOP
+   ENDIF
+   IF MCHOICE = 'N' .AND. A->BROKERAGE = 'H'
+      SELECT D
+      APPEND BLANK
+      REPLACE SHIP_DATE  WITH A->SHIP_DATE
+      REPLACE FRT_CODE   WITH A->FRT_CODE1
+      REPLACE DEL_REQD   WITH A->DEL_REQD
+      REPLACE SALESMAN   WITH A->SALESMAN
+      REPLACE PO_NBR     WITH A->PO_NBR
+      REPLACE PO_SUFFIX  WITH A->PO_SUFFIX
+      REPLACE ORD_LBS    WITH MORD_LBS
+      REPLACE ORD_CASE   WITH MORD_CASE
+      SELECT C
+      SEEK A->BUY_CODE
+      IF .NOT. EOF()
+         STORE SUBSTR(NAME,1,15) TO MNAME       
+      ELSE
+         STORE 'CUSTNOTFILE    ' TO MNAME
+      ENDIF
+      
+      SELECT D
+      REPLACE NAME WITH MNAME
+      IF NAME = 'SYSCO'
+         REPLACE FRT_CODE WITH 'SYS '
+      ELSE
+         REPLACE SORT_DATE WITH A->SHIP_DATE
+      ENDIF
+      
+   ELSE
+      IF MCHOICE = 'D' .AND. A->BROKERAGE <> 'H'
+         SELECT D
+         APPEND BLANK
+         REPLACE SHIP_DATE  WITH A->SHIP_DATE
+         REPLACE FRT_CODE   WITH A->FRT_CODE1
+         REPLACE DEL_REQD   WITH A->DEL_REQD
+         REPLACE SALESMAN   WITH A->SALESMAN
+         REPLACE PO_NBR     WITH A->PO_NBR
+         REPLACE PO_SUFFIX  WITH A->PO_SUFFIX
+         REPLACE ORD_LBS    WITH MORD_LBS
+         REPLACE ORD_CASE   WITH MORD_CASE
+         SELECT C
+         SEEK A->BUY_CODE
+         IF .NOT. EOF()
+            STORE SUBSTR(NAME,1,15) TO MNAME       
+         ELSE
+            STORE 'CUSTNOTFILE    ' TO MNAME
+         ENDIF
+         
+         SELECT D
+         REPLACE NAME WITH MNAME
+         IF NAME = 'SYSCO'
+            REPLACE FRT_CODE WITH 'SYS '
+         ELSE
+            REPLACE SORT_DATE WITH A->SHIP_DATE
+         ENDIF
+         
+      ENDIF
+   ENDIF
+   
+   SELECT A
+   SKIP
+   
+ENDDO
+
+SELECT D
+INDEX ON STR(YEAR(SORT_DATE),4) + SUBSTR(DTOC(SORT_DATE),1,5) + STR(YEAR(SHIP_DATE),4) + SUBSTR(DTOC(SHIP_DATE),1,5) + FRT_CODE + STR(YEAR(DEL_REQD),4) + SUBSTR(DTOC(DEL_REQD),1,5) TO WTEMP
+DO FOX_USE WITH "WTEMP INDEX WTEMP", .T.
+GOTO TOP
+
+MPAGE_LEN = 60
+MLINE = 99
+MPAGE_NO = 1
+IF MPRT_DSP <> 'D'
+   SET CONSOLE OFF
+   IF FILE("C:\COMPINFO\PRINTERS.DBF")
+      SET PRINT TO C:\COMPINFO\PRT_FILE.TXT
+   ELSE
+      SET PRINT TO LPT3
+   ENDIF
+   SET DEVICE TO PRINT
+   SET PRINT ON
+   
+   *** PRINT IN 10 CPI
+   ?? chr(27) + '&k0S'
+   
+   *** LETTER GOTHIC AND BOLDED PRINT
+   ?? chr(27) + '(s4102T' + chr(27) + '(s3B'
+   
+   *** LETTER SIZE PAPER
+   ?? CHR(27) + '&l2A'
+   
+   *** PORTRAIT MODE
+   ?? CHR(27) + '&l0O'
+   
+ENDIF
+
+DO WHILE .NOT. EOF()
+   STORE SHIP_DATE TO MSHIP_DATE
+   STORE FRT_CODE TO MFRT_CODE
+   STORE DEL_REQD TO MDEL_REQD
+   DO WHILE SHIP_DATE = MSHIP_DATE .AND. DEL_REQD = MDEL_REQD .AND. FRT_CODE = MFRT_CODE .AND. .NOT. EOF()
+      IF MPRT_DSP <> 'D' .AND. MTOT_ONLY <> 'Y'
+         IF MLINE > 56
+            IF MLINE <> 99
+               EJECT
+            ENDIF
+            @ 1,5 SAY 'Page: ' + str(mpage_no,2)
+            @ 1,25 SAY 'MONTHLY SHIPPING SUMMARY ' + STR(MMONTH,2) + '/' + MYEAR
+            @ 1,68 SAY DATE()
+            IF MCHOICE = 'D'
+               @ 2,30 SAY '    Delivered Orders'
+            ELSE
+               @ 2,30 say '  Orders Not Delivered'
+            ENDIF
+            MLINE = 4
+            @ MLINE,4 SAY 'PO NBR'
+            @ MLINE,15 SAY 'CUSTOMER'
+            @ MLINE,41 SAY '  CASES'
+            @ MLINE,52 SAY ' POUNDS'
+            @ MLINE,63 SAY 'SHIP DATE'
+            @ MLINE,75 SAY 'DELV DATE'
+            MLINE = MLINE + 2
+            MPAGE_NO = MPAGE_NO + 1
+         ENDIF
+         
+         IF SALESMAN <> SPACE(2)
+            @ MLINE,2 SAY SALESMAN + '-'
+         ENDIF
+         @ MLINE,5 SAY PO_NBR
+         IF PO_SUFFIX <> ' '
+            @ MLINE,9 SAY '-' + PO_SUFFIX
+         ENDIF
+         
+         @ MLINE,15 SAY NAME
+         @ MLINE,41 SAY ORD_CASE PICTURE '999,999'
+         @ MLINE,52 SAY ORD_LBS PICTURE '999,999'
+         @ MLINE,63 SAY SHIP_DATE
+         @ MLINE,75 SAY DEL_REQD
+         MLINE = MLINE + 1
+         IF SORT_DATE = CTOD('')
+            MLINE = MLINE + 1
+         ENDIF   
+      ENDIF
+      SKIP
+   ENDDO
+   IF MPRT_DSP <> 'D' .AND. MTOT_ONLY <> 'Y'
+      MLINE = MLINE + 1
+   ENDIF
+ENDDO
+
+*** DO TOTALS HERE
+IF MPRT_DSP = 'D'
+   @ 5,20 SAY 'MONTHLY SHIPPING SUMMARY '  + STR(MMONTH,2) + '/' + MYEAR
+   @ 5,65 SAY DATE()
+   MLINE = 8
+   @ MLINE,41 SAY '  CASES'
+   @ MLINE,52 SAY ' POUNDS'
+   MLINE = MLINE + 2
+   @ MLINE,2  SAY 'Totals To Ship/Not Confirmed:'
+   @ MLINE,41 SAY MCASES PICTURE '999,999'
+   @ MLINE,50 SAY MLBS PICTURE '9,999,999'
+   MLINE = MLINE + 3
+   
+   @ MLINE,2  SAY 'Totals Delivered:'
+   @ MLINE,41 SAY MSHIP_CASE PICTURE '999,999'
+   @ MLINE,50 SAY MSHIP_LBS PICTURE '9,999,999'
+   
+   MLINE = MLINE + 3
+   @ MLINE,2  SAY 'Grand Totals:'
+   @ MLINE,41 SAY MCASES + MSHIP_CASE PICTURE '999,999'
+   @ MLINE,50 SAY MLBS + MSHIP_LBS PICTURE '9,999,999'
+   MLINE = MLINE + 3
+   STORE ' ' TO MCONT
+   @ MLINE,2 SAY 'Enter "C" to Continue: ' get mcont picture '@!'
+   READ
+ELSE
+   IF MLINE > 52
+      IF MLINE <> 99
+         EJECT
+      ENDIF
+      @ 1,5 SAY 'Page: ' + str(mpage_no,2)
+      @ 1,25 SAY 'MONTHLY SHIPPING SUMMARY ' + STR(MMONTH,2) + '/' + MYEAR
+      @ 1,68 SAY DATE()
+      MLINE = 3
+      @ MLINE,4 SAY 'PO NBR'
+      @ MLINE,15 SAY 'CUSTOMER'
+      @ MLINE,41 SAY '  CASES'
+      @ MLINE,52 SAY ' POUNDS'
+      @ MLINE,63 SAY 'SHIP DATE'
+      @ MLINE,75 SAY 'DELV DATE'
+      MLINE = MLINE + 2
+      MPAGE_NO = MPAGE_NO + 1
+   ENDIF
+   MLINE = MLINE + 1
+   @ MLINE,2  SAY 'Totals To Ship/Not Confirmed:'
+   @ MLINE,41 SAY MCASES PICTURE '999,999'
+   @ MLINE,50 SAY MLBS PICTURE '9,999,999'
+   MLINE = MLINE + 3
+   
+   @ MLINE,2  SAY 'Totals Delivered:'
+   @ MLINE,41 SAY MSHIP_CASE PICTURE '999,999'
+   @ MLINE,50 SAY MSHIP_LBS PICTURE '9,999,999'
+   
+   MLINE = MLINE + 3
+   @ MLINE,2  SAY 'Grand Totals:'
+   @ MLINE,41 SAY MCASES + MSHIP_CASE PICTURE '999,999'
+   @ MLINE,50 SAY MLBS + MSHIP_LBS PICTURE '9,999,999'
+   EJECT
+   SET DEVICE TO SCREEN
+   SET PRINT OFF
+   SET PRINT TO
+   SET CONSOLE ON
+   IF MPRINTER3 <> 'DONOTPRINT'
+      RUN &MPRINTIT3
+   ENDIF
+ENDIF
+CLOSE DATA
+RETURN
+*Formatted by: ToolBox Ver. 1.2  on 12/17/15 at 11:19 AM.
+

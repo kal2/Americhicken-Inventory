@@ -96,9 +96,10 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(splitContainer2);
-            splitContainer1.Size = new Size(1324, 686);
+            splitContainer1.Size = new Size(1324, 861);
             splitContainer1.SplitterDistance = 56;
             splitContainer1.TabIndex = 8;
+            splitContainer1.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -127,9 +128,10 @@
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(userActionInputMain);
-            splitContainer2.Size = new Size(1324, 626);
-            splitContainer2.SplitterDistance = 529;
-            splitContainer2.TabIndex = 0;
+            splitContainer2.Size = new Size(1324, 801);
+            splitContainer2.SplitterDistance = 703;
+            splitContainer2.TabIndex = 1;
+            splitContainer2.TabStop = false;
             // 
             // userActionInputMain
             // 
@@ -138,7 +140,7 @@
             userActionInputMain.ForeColor = Color.White;
             userActionInputMain.Location = new Point(0, 0);
             userActionInputMain.Name = "userActionInputMain";
-            userActionInputMain.Size = new Size(1324, 93);
+            userActionInputMain.Size = new Size(1324, 94);
             userActionInputMain.TabIndex = 0;
             // 
             // MainWindow
@@ -146,14 +148,16 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Blue;
-            ClientSize = new Size(1324, 686);
+            ClientSize = new Size(1324, 861);
             Controls.Add(splitContainer1);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ForeColor = SystemColors.ButtonFace;
             Name = "MainWindow";
             Text = "AmeriChicken Inventory";
+            WindowState = FormWindowState.Maximized;
             Load += Form1_Load;
             Shown += MainWindow_Shown;
+            KeyDown += MainWindow_KeyDown;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();

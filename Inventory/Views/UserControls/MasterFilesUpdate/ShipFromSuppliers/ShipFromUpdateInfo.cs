@@ -55,9 +55,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 noteTextBox.Text = supplierObject.note?.ToString().Trim() ?? "";
 
                 // If the supplier has a remit to code, get the remit to data and display it
-                if (supplierObject.sup_code != null)
+                if (supplierObject.rsupcode != null)
                 {
-                    remitToObject = dbContext.rem_sup.SingleOrDefault(s => s.rsupcode == supplierObject.sup_code);
+                    remitToObject = dbContext.rem_sup.SingleOrDefault(s => s.rsupcode == supplierObject.rsupcode);
 
                     if (remitToObject != null)
                     {
@@ -98,7 +98,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         existingSupplier.state = shipFromStateTextBox.Text.ToUpper().Trim();
                         existingSupplier.zip = shipFromZipTextBox.Text.Trim();
                         existingSupplier.note = noteTextBox.Text.Trim();
-                        existingSupplier.sup_code = remitToObject.rsupcode;
+                        existingSupplier.rsupcode = remitToObject.rsupcode;
 
                         dbContext.SaveChanges(); // Save changes to the database
                     }
@@ -130,7 +130,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             }
             rem_sup remitToClass = null;
 
-            if (supplierData.sup_code != null)
+            if (supplierData.rsupcode != null)
             {
                 remitToClass = remitToObject;
             }
@@ -148,7 +148,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                    shipFromCityTextBox.Text != supplierData.city ||
                    shipFromStateTextBox.Text != supplierData.state ||
                    shipFromZipTextBox.Text != supplierData.zip ||
-                   remitToClass.rsupcode != supplierData.sup_code;
+                   remitToClass.rsupcode != supplierData.rsupcode;
         }
 
         //--------Event Listeners--------//
@@ -156,7 +156,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         private void actionInput_KeyDown(object sender, KeyEventArgs e)
         {
             //Collects user input and format for processing
-            string userInput = actionInput.Text.Trim();
+            string userInput = _mainWindow.GetTextBoxText().Trim();
 
             //Waits to execute code until enter key is pressed in input area
             if (e.KeyCode == Keys.Enter)
@@ -207,32 +207,33 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 dbSearchInstance.SearchCompleted += HandleSearchCompleted;
                 dbSearchInstance.PerformSearch("remitTo", userInput);
                 dbSearchInstance.Dispose();
-                searchPanel.BringToFront();
-                searchPanel.Visible = true;
-                searchPanel.Refresh();
             }
         }
+
         //Store the search results along with the db table searched in order to load the appropriate program and pass the data to display/edit
         private void HandleSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
         {
+            foreach (Control control in searchPanel.Controls)
+            {
+                control.Dispose();
+            }
+
             MatchSelect matchSelectInstance = new MatchSelect(_mainWindow);
 
             if (e.TableSelected == "supplier")
             { 
                 matchSelectInstance.SelectedSearchResult += HandleSelectedShipFromSearchResult;
+                matchSelectInstance.SetMatchSelectLabel("Supplier");
+                matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
+                searchPanel.Controls.Add(matchSelectInstance);
+                searchPanel.Refresh();
             }
             else if (e.TableSelected == "remitTo")
             {
                 matchSelectInstance.SelectedSearchResult += HandleSelectedRemitToSearchResult;
+                matchSelectInstance.SetMatchSelectLabel("Remit To");
+                matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
             }
-
-            matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
-            foreach (Control control in searchPanel.Controls)
-            {
-                control.Dispose();
-            }
-            searchPanel.Controls.Add(matchSelectInstance);
-            searchPanel.Refresh();
         }
         private void HandleSelectedShipFromSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
         {
@@ -245,6 +246,10 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 control.Dispose();
             }
             searchPanel.SendToBack();
+            supplierInfoPanel.BringToFront();
+            supplierInfoPanel.Visible = true;
+            _mainWindow.SetProgramLabel("View/Edit Ship From Supplier Info");
+
         }
         private void HandleSelectedRemitToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
         {
@@ -256,6 +261,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 control.Dispose();
             }
             searchPanel.SendToBack();
+            _mainWindow.SetProgramLabel("View/Edit Ship From Supplier Info");
 
             DisplayRemitData(selectedResult);
         }
