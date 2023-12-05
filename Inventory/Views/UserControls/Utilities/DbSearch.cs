@@ -35,6 +35,10 @@ namespace Inventory.Views.UserControls
             InitializeComponent();
             _mainWindow = mainWindow;
 
+            this.Disposed += (s, a) =>
+            {
+                _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
+            };
             //Attaches keydown event handler to user input field
             _mainWindow.AttachTextBoxKeyDownHandler(actionInput_KeyDown);
 
@@ -64,17 +68,17 @@ namespace Inventory.Views.UserControls
 
                 if (selectedTable == "supplier")
                 {
-                    programLabel = "SUPPLIER";
+                    programLabel = "Supplier";
                 }
                 else if (selectedTable == "remitTo")
                 {
-                    programLabel = "REMIT TO";
+                    programLabel = "Remit To";
                 }
                 else
                 {
                     programLabel = "ERROR";
                 }
-                _mainWindow.SetProgramLabel("SEARCH FOR " + programLabel);
+                _mainWindow.SetProgramLabel("Search for " + programLabel);
             }
         }
          

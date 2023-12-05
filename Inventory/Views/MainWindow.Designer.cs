@@ -125,6 +125,10 @@
             splitContainer2.Name = "splitContainer2";
             splitContainer2.Orientation = Orientation.Horizontal;
             // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Padding = new Padding(10);
+            // 
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(userActionInputMain);

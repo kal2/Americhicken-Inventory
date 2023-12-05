@@ -512,10 +512,10 @@
             // 
             // searchPanel
             // 
-            searchPanel.AutoSize = true;
+            searchPanel.Dock = DockStyle.Fill;
             searchPanel.Location = new Point(0, 0);
             searchPanel.Name = "searchPanel";
-            searchPanel.Size = new Size(1290, 600);
+            searchPanel.Size = new Size(1293, 539);
             searchPanel.TabIndex = 138;
             searchPanel.Visible = false;
             // 
@@ -523,16 +523,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
             BackColor = Color.Blue;
             Controls.Add(supplierInfoPanel);
             Controls.Add(searchPanel);
             Name = "ShipFromUpdateInfo";
-            Size = new Size(1293, 603);
+            Size = new Size(1293, 539);
             supplierInfoPanel.ResumeLayout(false);
             supplierInfoPanel.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion

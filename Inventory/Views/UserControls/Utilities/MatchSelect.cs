@@ -31,6 +31,11 @@ namespace Inventory.Views.UserControls
             InitializeComponent();
             _mainWindow = mainWindow;
 
+            this.Disposed += (s, a) =>
+            {
+                _mainWindow.DetachTextBoxKeyDownHandler(textBox2_KeyDown);
+            };
+
             //Attaches keydown event handler to user input field
             _mainWindow.AttachTextBoxKeyDownHandler(textBox2_KeyDown);
         }

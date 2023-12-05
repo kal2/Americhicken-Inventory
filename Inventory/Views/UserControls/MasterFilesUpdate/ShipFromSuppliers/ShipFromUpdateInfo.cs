@@ -32,6 +32,13 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         //--------Methods--------//
 
+        private void SetProgramLabels()
+        {
+            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
+            _mainWindow.SetTextBoxLabel("ACTION:");
+            _mainWindow.SetProgramLabel("View/Edit Ship From Supplier Info");
+        }
+
         public void GetShipFromData(object shipFromData)
         {
             if (shipFromData is supplier supplierObject)
@@ -128,12 +135,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             {
                 return false; // Nothing to compare
             }
-            rem_sup remitToClass = null;
-
-            if (supplierData.rsupcode != null)
-            {
-                remitToClass = remitToObject;
-            }
 
             // Compare the user interface values with the original data, return true if differences are detected
             return supnameTextBox.Text != supplierData.name ||
@@ -148,7 +149,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                    shipFromCityTextBox.Text != supplierData.city ||
                    shipFromStateTextBox.Text != supplierData.state ||
                    shipFromZipTextBox.Text != supplierData.zip ||
-                   remitToClass.rsupcode != supplierData.rsupcode;
+                   remitToObject.rsupcode != supplierData.rsupcode;
         }
 
         //--------Event Listeners--------//
@@ -197,12 +198,13 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private void remitToNameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            //Collects user input and format for processing
-            string userInput = remitToNameTextBox.Text.Trim();
 
             //Waits to execute code until enter key is pressed in input area
             if (e.KeyCode == Keys.Enter)
             {
+                _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
+                //Collects user input and format for processing
+                string userInput = remitToNameTextBox.Text.Trim();
                 DbSearch dbSearchInstance = new DbSearch(_mainWindow);
                 dbSearchInstance.SearchCompleted += HandleSearchCompleted;
                 dbSearchInstance.PerformSearch("remitTo", userInput);
@@ -224,15 +226,21 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             { 
                 matchSelectInstance.SelectedSearchResult += HandleSelectedShipFromSearchResult;
                 matchSelectInstance.SetMatchSelectLabel("Supplier");
-                matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
-                searchPanel.Controls.Add(matchSelectInstance);
-                searchPanel.Refresh();
             }
             else if (e.TableSelected == "remitTo")
             {
                 matchSelectInstance.SelectedSearchResult += HandleSelectedRemitToSearchResult;
                 matchSelectInstance.SetMatchSelectLabel("Remit To");
-                matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
+            }
+
+            matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
+
+            if (e.SearchResults.Count > 1)
+            {
+                searchPanel.Controls.Add(matchSelectInstance);
+                searchPanel.Visible = true;
+                searchPanel.BringToFront();
+                searchPanel.Refresh();
             }
         }
         private void HandleSelectedShipFromSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
@@ -248,7 +256,8 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             searchPanel.SendToBack();
             supplierInfoPanel.BringToFront();
             supplierInfoPanel.Visible = true;
-            _mainWindow.SetProgramLabel("View/Edit Ship From Supplier Info");
+            SetProgramLabels();
+            _mainWindow.AttachTextBoxKeyDownHandler(actionInput_KeyDown);
 
         }
         private void HandleSelectedRemitToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
@@ -261,7 +270,8 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 control.Dispose();
             }
             searchPanel.SendToBack();
-            _mainWindow.SetProgramLabel("View/Edit Ship From Supplier Info");
+            _mainWindow.AttachTextBoxKeyDownHandler(actionInput_KeyDown);
+            SetProgramLabels();
 
             DisplayRemitData(selectedResult);
         }

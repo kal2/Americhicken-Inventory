@@ -23,10 +23,10 @@ namespace Inventory
         //Displays passed control in the main window
         public void DisplayControl(UserControl control)
         {
+            splitContainer2.Panel1.Controls.Add(control);
             control.Visible = true;
             control.Dock = DockStyle.Fill;
-            control.Anchor = AnchorStyles.Top;
-            splitContainer2.Panel1.Controls.Add(control);
+            control.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             control.BringToFront();
             splitContainer2.Panel1.Refresh();
         }
