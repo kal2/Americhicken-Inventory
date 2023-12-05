@@ -23,6 +23,10 @@ namespace Inventory
         //Displays passed control in the main window
         public void DisplayControl(UserControl control)
         {
+            foreach (Control old in splitContainer2.Panel1.Controls)
+            {
+                old.Dispose();
+            }
             splitContainer2.Panel1.Controls.Add(control);
             control.Visible = true;
             control.Dock = DockStyle.Fill;

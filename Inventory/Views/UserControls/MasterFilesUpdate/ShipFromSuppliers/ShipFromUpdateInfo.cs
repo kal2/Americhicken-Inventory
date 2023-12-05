@@ -21,6 +21,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _mainWindow = mainWindow;
             dbContext = new AmerichickenContext();
 
+            this.Disposed += (s, a) =>
+            {
+                _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
+            };
+
             DbSearch dbSearchInstance = new DbSearch(_mainWindow);
             dbSearchInstance.SetTable("supplier");
             dbSearchInstance.SearchCompleted += HandleSearchCompleted;
@@ -190,7 +195,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
                     //returns user to main menu
                     case "4":
-                      //  _mainWindow.ProgramSwitcher("menuList");
+
+                        _mainWindow.DisplayControl(new MenuList(_mainWindow));
+                        _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
+                        break;
+
+                    default:
+                        MessageBox.Show("Invalid input. Please try again.");
+                        _mainWindow.ClearTextBox();
                         break;
                 }
             }

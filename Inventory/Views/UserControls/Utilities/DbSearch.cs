@@ -1,5 +1,6 @@
 ﻿using Inventory.Models;
 using Inventory.Views.UserControls;
+using Inventory.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Views.UserControls
@@ -84,10 +85,22 @@ namespace Inventory.Views.UserControls
          
         public void SearchDatabase(string searchInput)
         {
-            if (searchInput == string.Empty)
+            if (ValidationHelper.IsEmpty(searchInput))
             {
-                MessageBox.Show("Please enter a search query.");
-                return;
+                DialogResult dialogResult = MessageBox.Show("SearchBox is Empty. Do you want to add a new entry?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    //hide search box
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    //do nothing
+                }
+                else
+                {
+                    //error or nothing
+                }
             }
 
             else
