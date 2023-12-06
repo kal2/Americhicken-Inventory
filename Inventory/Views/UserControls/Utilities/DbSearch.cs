@@ -2,6 +2,7 @@
 using Inventory.Views.UserControls;
 using Inventory.Services;
 using Microsoft.EntityFrameworkCore;
+using System.DirectoryServices;
 
 namespace Inventory.Views.UserControls
 {
@@ -28,6 +29,8 @@ namespace Inventory.Views.UserControls
                 TableSelected = tableSelected;
             }
         }
+        public delegate void HideSearchPanelDelegate();
+        public event HideSearchPanelDelegate HideSearchPanel;
 
         // -- Constructor -- //
 
@@ -91,15 +94,17 @@ namespace Inventory.Views.UserControls
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    //hide search box
+                    //hide searchpanel
+                    OnHideSearchPanel();
                 }
                 else if (dialogResult == DialogResult.No)
                 {
-                    //do nothing
+                    return;
                 }
                 else
                 {
-                    //error or nothing
+                    MessageBox.Show("ERROR: Something went wrong checking searchbox text, please contact developer");
+                    return;
                 }
             }
 
@@ -145,6 +150,11 @@ namespace Inventory.Views.UserControls
         {
             SetTable(dbTable);
             SearchDatabase(searchQuery);
+        }
+
+        private void OnHideSearchPanel()
+        {
+            HideSearchPanel?.Invoke();
         }
 
         // -- Event Listeners -- //

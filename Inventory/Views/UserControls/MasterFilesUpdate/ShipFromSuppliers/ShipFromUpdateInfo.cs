@@ -28,6 +28,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
             DbSearch dbSearchInstance = new DbSearch(_mainWindow);
             dbSearchInstance.SetTable("supplier");
+            dbSearchInstance.HideSearchPanel += HideSearchPanelHandler;
             dbSearchInstance.SearchCompleted += HandleSearchCompleted;
             dbSearchInstance.Dock = DockStyle.Fill;
             searchPanel.Controls.Add(dbSearchInstance);
@@ -114,6 +115,47 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
                         dbContext.SaveChanges(); // Save changes to the database
                     }
+                    else
+                    {
+                        MessageBox.Show("ERROR: Supplier not found in database. Please try again or contact developer.");
+                    }
+                }
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("You are about to add a new supplier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    //Grab user inputs and save to new supplier in db table
+                    supplier newSupplier = new supplier
+                    {
+                        name = supnameTextBox.Text.Trim(),
+                        area_code = phoneMaskTextBox.Text.Trim().Substring(0, 3),
+                        phone = phoneMaskTextBox.Text.Trim().Substring(3),
+                        fax = faxMaskTextBox.Text.Trim(),
+                        cont_name = contactNameTextBox.Text.Trim(),
+                        cont_phone = contactPhoneMaskTextBox.Text.Trim(),
+                        cont_fax = contactFaxMaskTextBox.Text.Trim(),
+                        freight_phone = freightPhoneMaskTextBox.Text.Trim(),
+                        fright_email = freightEmailTextBox.Text.Trim(),
+                        street = shipFromStreetTextBox.Text.Trim(),
+                        city = shipFromCityTextBox.Text.Trim(),
+                        state = shipFromStateTextBox.Text.ToUpper().Trim(),
+                        zip = shipFromZipTextBox.Text.Trim(),
+                        note = noteTextBox.Text.Trim(),
+                        rsupcode = remitToObject.rsupcode
+                    };
+                    dbContext.supplier.Add(newSupplier);
+                    dbContext.SaveChanges();
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Something went wrong adding a new supplier, please contact developer");
+                    return;
                 }
             }
         }
@@ -136,13 +178,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private bool IsDataModified(supplier supplierData)
         {
-            if (supplierData == null)
-            {
-                return false; // Nothing to compare
-            }
 
             // Compare the user interface values with the original data, return true if differences are detected
-            return supnameTextBox.Text != supplierData.name ||
+            return supplierData == null || supnameTextBox.Text != supplierData.name ||
                    phoneMaskTextBox.Text != supplierData.area_code + supplierData.phone ||
                    faxMaskTextBox.Text != supplierData.fax ||
                    contactNameTextBox.Text != supplierData.cont_name ||
@@ -222,6 +260,16 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 dbSearchInstance.PerformSearch("remitTo", userInput);
                 dbSearchInstance.Dispose();
             }
+        }
+
+        private void HideSearchPanelHandler()
+        {
+            // Method to hide the searchPanel
+            searchPanel.Visible = false;
+            searchPanel.SendToBack();
+            supplierInfoPanel.BringToFront();
+            supplierInfoPanel.Visible = true;
+            SetProgramLabels();
         }
 
         //Store the search results along with the db table searched in order to load the appropriate program and pass the data to display/edit
