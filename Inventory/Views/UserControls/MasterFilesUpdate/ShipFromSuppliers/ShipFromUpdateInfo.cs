@@ -1,5 +1,6 @@
 ﻿using Inventory.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.DirectoryServices;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
@@ -230,18 +231,19 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             {
                 switch (userInput)
                 {
-                    //accepts the user's input and searches the db table selected from Program Switcher
                     case "1":
+                        //add or update supplier
                         UpdateSupplier(supplierData);
                         break;
 
                     case "2":
+                        //return to edit supplier info
                         supnameTextBox.Focus();
                         break;
 
+
                     case "3":
                         //delete supplier
-
                         DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this supplier?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                         if (dialogResult == DialogResult.Yes)
@@ -258,8 +260,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         }
                         break;
 
-                    //returns user to main menu
+                    
                     case "4":
+                        //returns user to main menu
                         _mainWindow.DisplayControl(new MenuList(_mainWindow));
                         _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
                         break;
@@ -274,12 +277,15 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private void remitToNameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-
             //Waits to execute code until enter key is pressed in input area
             if (e.KeyCode == Keys.Enter)
             {
+                if (remitToNameTextBox.Text.Trim() == string.Empty)
+                {
+                    MessageBox.Show("Please enter a remit to name.");
+                    return;
+                }
                 _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
-                //Collects user input and format for processing
                 string userInput = remitToNameTextBox.Text.Trim();
                 DbSearch dbSearchInstance = new DbSearch(_mainWindow);
                 dbSearchInstance.SearchCompleted += HandleSearchCompleted;
