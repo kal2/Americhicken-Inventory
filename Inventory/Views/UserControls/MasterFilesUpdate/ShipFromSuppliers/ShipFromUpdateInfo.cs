@@ -8,7 +8,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
     {
         //--------Class Variables--------//
 
-        private object supplierData = null;
+        private supplier supplierData = null;
         private rem_sup remitToObject;
         private MainWindow _mainWindow;
         private AmerichickenContext dbContext;
@@ -147,6 +147,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     };
                     dbContext.supplier.Add(newSupplier);
                     dbContext.SaveChanges();
+                    supplierData = newSupplier;
                 }
                 else if (dialogResult == DialogResult.No)
                 {
@@ -157,6 +158,28 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     MessageBox.Show("ERROR: Something went wrong adding a new supplier, please contact developer");
                     return;
                 }
+            }
+        }
+
+        private void DeleteSupplier(supplier supplierData)
+        {
+            if (supplierData != null)
+            {
+                // Delete the supplier from the database
+                var existingSupplier = dbContext.supplier.Find(supplierData.PK_supplier);
+                if (existingSupplier != null)
+                {
+                    dbContext.supplier.Remove(existingSupplier);
+                    dbContext.SaveChanges(); // Save changes to the database
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Supplier not found in database. Please try again or contact developer.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Supplier not found on client side. Please try again or contact developer.");
             }
         }
 
@@ -209,7 +232,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 {
                     //accepts the user's input and searches the db table selected from Program Switcher
                     case "1":
-                        UpdateSupplier(supplierData as supplier);
+                        UpdateSupplier(supplierData);
                         break;
 
                     case "2":
@@ -223,26 +246,29 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
                         if (dialogResult == DialogResult.Yes)
                         {
-
+                            DeleteSupplier(supplierData);
                         }
                         else if (dialogResult == DialogResult.No)
                         {
-
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR: Something went wrong deleting the supplier, please contact developer");
                         }
                         break;
 
                     //returns user to main menu
                     case "4":
-
                         _mainWindow.DisplayControl(new MenuList(_mainWindow));
                         _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
                         break;
 
                     default:
                         MessageBox.Show("Invalid input. Please try again.");
-                        _mainWindow.ClearTextBox();
                         break;
                 }
+                _mainWindow.ClearTextBox();
             }
         }
 
