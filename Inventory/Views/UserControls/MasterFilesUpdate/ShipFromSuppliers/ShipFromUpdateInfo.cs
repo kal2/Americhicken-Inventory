@@ -22,11 +22,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _mainWindow = mainWindow;
             dbContext = new AmerichickenContext();
 
-            this.Disposed += (s, a) =>
-            {
-                _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
-            };
-
             DbSearch dbSearchInstance = new DbSearch(_mainWindow);
             dbSearchInstance.SetTable("supplier");
             dbSearchInstance.HideSearchPanel += HideSearchPanelHandler;
@@ -260,11 +255,10 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         }
                         break;
 
-                    
+
                     case "4":
                         //returns user to main menu
                         _mainWindow.DisplayControl(new MenuList(_mainWindow));
-                        _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
                         break;
 
                     default:
@@ -285,7 +279,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     MessageBox.Show("Please enter a remit to name.");
                     return;
                 }
-                _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
                 string userInput = remitToNameTextBox.Text.Trim();
                 DbSearch dbSearchInstance = new DbSearch(_mainWindow);
                 dbSearchInstance.SearchCompleted += HandleSearchCompleted;
@@ -315,7 +308,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             MatchSelect matchSelectInstance = new MatchSelect(_mainWindow);
 
             if (e.TableSelected == "supplier")
-            { 
+            {
                 matchSelectInstance.SelectedSearchResult += HandleSelectedShipFromSearchResult;
                 matchSelectInstance.SetMatchSelectLabel("Supplier");
             }
@@ -339,7 +332,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         {
             supplier selectedResult = e.SelectedResult as supplier;
 
-            GetShipFromData(selectedResult); 
+            GetShipFromData(selectedResult);
             searchPanel.Visible = false;
             foreach (Control control in searchPanel.Controls)
             {
@@ -349,7 +342,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             supplierInfoPanel.BringToFront();
             supplierInfoPanel.Visible = true;
             SetProgramLabels();
-            _mainWindow.AttachTextBoxKeyDownHandler(actionInput_KeyDown);
 
         }
         private void HandleSelectedRemitToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
@@ -362,10 +354,21 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 control.Dispose();
             }
             searchPanel.SendToBack();
-            _mainWindow.AttachTextBoxKeyDownHandler(actionInput_KeyDown);
             SetProgramLabels();
 
             DisplayRemitData(selectedResult);
+        }
+
+        private void supplierInfoPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (supplierInfoPanel.Visible == true)
+            {
+                _mainWindow.AttachTextBoxKeyDownHandler(actionInput_KeyDown);
+            }
+            else
+            {
+                _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
+            }
         }
     }
 }

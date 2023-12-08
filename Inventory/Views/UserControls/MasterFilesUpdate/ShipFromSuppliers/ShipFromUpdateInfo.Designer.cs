@@ -112,6 +112,7 @@
             supplierInfoPanel.Size = new Size(1290, 536);
             supplierInfoPanel.TabIndex = 101;
             supplierInfoPanel.Visible = false;
+            supplierInfoPanel.VisibleChanged += supplierInfoPanel_VisibleChanged;
             // 
             // shipFromZipTextBox
             // 
@@ -122,7 +123,7 @@
             shipFromZipTextBox.MaxLength = 40;
             shipFromZipTextBox.Name = "shipFromZipTextBox";
             shipFromZipTextBox.Size = new Size(117, 36);
-            shipFromZipTextBox.TabIndex = 137;
+            shipFromZipTextBox.TabIndex = 11;
             // 
             // shipFromStateTextBox
             // 
@@ -133,7 +134,7 @@
             shipFromStateTextBox.MaxLength = 40;
             shipFromStateTextBox.Name = "shipFromStateTextBox";
             shipFromStateTextBox.Size = new Size(45, 36);
-            shipFromStateTextBox.TabIndex = 136;
+            shipFromStateTextBox.TabIndex = 10;
             // 
             // shipFromCityTextBox
             // 
@@ -144,7 +145,7 @@
             shipFromCityTextBox.MaxLength = 40;
             shipFromCityTextBox.Name = "shipFromCityTextBox";
             shipFromCityTextBox.Size = new Size(230, 36);
-            shipFromCityTextBox.TabIndex = 135;
+            shipFromCityTextBox.TabIndex = 9;
             // 
             // shipFromStreetTextBox
             // 
@@ -155,7 +156,7 @@
             shipFromStreetTextBox.MaxLength = 40;
             shipFromStreetTextBox.Name = "shipFromStreetTextBox";
             shipFromStreetTextBox.Size = new Size(493, 36);
-            shipFromStreetTextBox.TabIndex = 134;
+            shipFromStreetTextBox.TabIndex = 8;
             // 
             // remitToCityStateZipLabel
             // 
@@ -188,7 +189,7 @@
             noteTextBox.MaxLength = 50;
             noteTextBox.Name = "noteTextBox";
             noteTextBox.Size = new Size(670, 36);
-            noteTextBox.TabIndex = 131;
+            noteTextBox.TabIndex = 13;
             // 
             // label13
             // 
@@ -210,7 +211,7 @@
             remitToNameTextBox.MaxLength = 40;
             remitToNameTextBox.Name = "remitToNameTextBox";
             remitToNameTextBox.Size = new Size(493, 36);
-            remitToNameTextBox.TabIndex = 129;
+            remitToNameTextBox.TabIndex = 12;
             remitToNameTextBox.KeyDown += remitToNameTextBox_KeyDown;
             // 
             // label21
@@ -255,7 +256,7 @@
             freightEmailTextBox.MaxLength = 50;
             freightEmailTextBox.Name = "freightEmailTextBox";
             freightEmailTextBox.Size = new Size(559, 36);
-            freightEmailTextBox.TabIndex = 125;
+            freightEmailTextBox.TabIndex = 7;
             // 
             // freightPhoneMaskTextBox
             // 
@@ -265,7 +266,7 @@
             freightPhoneMaskTextBox.Mask = "(999) 000-0000";
             freightPhoneMaskTextBox.Name = "freightPhoneMaskTextBox";
             freightPhoneMaskTextBox.Size = new Size(147, 36);
-            freightPhoneMaskTextBox.TabIndex = 124;
+            freightPhoneMaskTextBox.TabIndex = 6;
             freightPhoneMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // contactFaxMaskTextBox
@@ -276,7 +277,7 @@
             contactFaxMaskTextBox.Mask = "(999) 000-0000";
             contactFaxMaskTextBox.Name = "contactFaxMaskTextBox";
             contactFaxMaskTextBox.Size = new Size(147, 36);
-            contactFaxMaskTextBox.TabIndex = 123;
+            contactFaxMaskTextBox.TabIndex = 5;
             contactFaxMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // contactPhoneMaskTextBox
@@ -287,7 +288,7 @@
             contactPhoneMaskTextBox.Mask = "(999) 000-0000";
             contactPhoneMaskTextBox.Name = "contactPhoneMaskTextBox";
             contactPhoneMaskTextBox.Size = new Size(147, 36);
-            contactPhoneMaskTextBox.TabIndex = 122;
+            contactPhoneMaskTextBox.TabIndex = 4;
             contactPhoneMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // contactNameTextBox
@@ -299,7 +300,7 @@
             contactNameTextBox.MaxLength = 40;
             contactNameTextBox.Name = "contactNameTextBox";
             contactNameTextBox.Size = new Size(450, 36);
-            contactNameTextBox.TabIndex = 121;
+            contactNameTextBox.TabIndex = 3;
             // 
             // faxMaskTextBox
             // 
@@ -309,7 +310,7 @@
             faxMaskTextBox.Mask = "(999) 000-0000";
             faxMaskTextBox.Name = "faxMaskTextBox";
             faxMaskTextBox.Size = new Size(147, 36);
-            faxMaskTextBox.TabIndex = 120;
+            faxMaskTextBox.TabIndex = 2;
             faxMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // phoneMaskTextBox
@@ -320,7 +321,7 @@
             phoneMaskTextBox.Mask = "(999) 000-0000";
             phoneMaskTextBox.Name = "phoneMaskTextBox";
             phoneMaskTextBox.Size = new Size(147, 36);
-            phoneMaskTextBox.TabIndex = 119;
+            phoneMaskTextBox.TabIndex = 1;
             phoneMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // supnameTextBox
@@ -332,7 +333,7 @@
             supnameTextBox.MaxLength = 40;
             supnameTextBox.Name = "supnameTextBox";
             supnameTextBox.Size = new Size(450, 36);
-            supnameTextBox.TabIndex = 118;
+            supnameTextBox.TabIndex = 0;
             // 
             // label20
             // 

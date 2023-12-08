@@ -7,7 +7,7 @@ using Inventory.Interfaces;
 
 namespace Inventory
 {
-    public partial class MainWindow : Form, IUserActionInput
+    public partial class MainWindow : Form
     {
 
         public MainWindow()
@@ -47,7 +47,7 @@ namespace Inventory
             userActionInputMain.actionInput.Focus();
         }
 
-        // -- Interface Methods -- //
+        // -- Utility Methods -- //
         public void SetProgramLabel(string title)
         {
             programLabel.Text = title;
