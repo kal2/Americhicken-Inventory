@@ -112,7 +112,6 @@
             supplierInfoPanel.Size = new Size(1290, 536);
             supplierInfoPanel.TabIndex = 101;
             supplierInfoPanel.Visible = false;
-            supplierInfoPanel.VisibleChanged += supplierInfoPanel_VisibleChanged;
             // 
             // shipFromZipTextBox
             // 

@@ -4,35 +4,42 @@ using Inventory.Views.UserControls;
 using Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers;
 using System.DirectoryServices;
 using Inventory.Interfaces;
+using Inventory.Services;
+using System.Windows.Forms.VisualStyles;
 
 namespace Inventory
 {
     public partial class MainWindow : Form
     {
 
+        // -- Class Variables -- //
+        private ActiveControlManager _activeControlManager;
+
         public MainWindow()
         {
             InitializeComponent();
 
+            _activeControlManager = new ActiveControlManager(this);
+
             //Sets the initial control to the MenuList
-            UserControl initialControl = new MenuList(this);
-            initialControl.Dock = DockStyle.Fill;
-            splitContainer2.Panel1.Controls.Add(initialControl);
+            _activeControlManager.SetActiveControl(new MenuList(this, _activeControlManager));
         }
 
         //Displays passed control in the main window
         public void DisplayControl(UserControl control)
         {
-            foreach (Control old in splitContainer2.Panel1.Controls)
-            {
-                old.Dispose();
-            }
             splitContainer2.Panel1.Controls.Add(control);
             control.Visible = true;
             control.Dock = DockStyle.Fill;
             control.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             control.BringToFront();
             splitContainer2.Panel1.Refresh();
+        }
+
+        public void DisposeControl(UserControl control)
+        {
+            splitContainer2.Panel1.Controls.Remove(control);
+            control.Dispose();
         }
 
         private void Form1_Load(object sender, EventArgs e)

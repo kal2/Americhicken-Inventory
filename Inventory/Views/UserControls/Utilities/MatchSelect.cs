@@ -1,13 +1,16 @@
 ﻿using Inventory.Models;
 using Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers;
+using Inventory.Services;
+using Inventory.Interfaces;
 
 namespace Inventory.Views.UserControls
 {
-    public partial class MatchSelect : UserControl
+    public partial class MatchSelect : UserControl, IActiveControlManager
     {
         // -- Class Variables -- //
 
         private MainWindow _mainWindow;
+        private ActiveControlManager _activeControlManager;
         private string matchSelectLabel = string.Empty;
 
         // -- Event Handlers -- //
@@ -26,18 +29,11 @@ namespace Inventory.Views.UserControls
 
         // -- Constructor -- //
 
-        public MatchSelect(MainWindow mainWindow)
+        public MatchSelect(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-
-            this.Disposed += (s, a) =>
-            {
-                _mainWindow.DetachTextBoxKeyDownHandler(textBox2_KeyDown);
-            };
-
-            //Attaches keydown event handler to user input field
-            _mainWindow.AttachTextBoxKeyDownHandler(textBox2_KeyDown);
+            _activeControlManager = activeControlManager;
         }
         protected override void OnLoad(EventArgs e)
         {
@@ -45,10 +41,6 @@ namespace Inventory.Views.UserControls
 
             //Change focus to desired field after User Control change.
             selectedItemNumber.Focus();
-
-            _mainWindow.SetCommandsLabel("1. Next Pg    2. Previous Pg    3. First Pg    4. Add " + matchSelectLabel + "    5. Cancel");
-            _mainWindow.SetTextBoxLabel("ACTION:");
-            _mainWindow.SetProgramLabel(matchSelectLabel + " Match Select");
         }
 
         // -- Methods -- //
@@ -73,7 +65,7 @@ namespace Inventory.Views.UserControls
             else if (results.Count == 1)
             {
                 SelectedSearchResult?.Invoke(this, new SelectedSearchResultEventArgs(results[0]));
-                _mainWindow.DetachTextBoxKeyDownHandler(textBox2_KeyDown);
+                _mainWindow.DisposeControl(this);
                 return;
             }
             else
@@ -127,44 +119,38 @@ namespace Inventory.Views.UserControls
 
         // -- Event Listeners -- //
 
-        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        public void PerformAction(string userInput)
         {
-            //Collects user input and format for processing
-            string userInput = _mainWindow.GetTextBoxText().Trim();
-
-            //Waits to execute code until enter key is pressed in input area
-            if (e.KeyCode == Keys.Enter)
+            switch (userInput)
             {
-                if (userInput == "4" || userInput == "5")
-                {
-                    SelectedSearchResult?.Invoke(this, new SelectedSearchResultEventArgs(userInput));
-                    _mainWindow.DetachTextBoxKeyDownHandler(textBox2_KeyDown);
-                    return;
-                }   
-                switch (userInput)
-                {
-                    case "1":
-                        //next page
-                        break;
+                case "1":
+                    //next page
+                    break;
 
-                    case "2":
-                        //previous page
-                        break;
+                case "2":
+                    //previous page
+                    break;
 
-                    case "3":
-                        //first page
-                        break;
+                case "3":
+                    //first page
+                    break;
 
-                    case "4":
-                        //add new (add label through the calling user control to customize verbiage)
-                        break;
+                case "4":
+                    //add new (add label through the calling user control to customize verbiage)
+                    break;
 
-                    case "5":
-                        //cancel
-                        break;
-                }
-                _mainWindow.ClearTextBox();
+                case "5":
+                    //cancel
+                    break;
             }
+            _mainWindow.ClearTextBox();
+        }
+
+        public void SetProgramLabels()
+        {
+            _mainWindow.SetCommandsLabel("1. Next Pg    2. Previous Pg    3. First Pg    4. Add " + matchSelectLabel + "    5. Cancel");
+            _mainWindow.SetTextBoxLabel("ACTION:");
+            _mainWindow.SetProgramLabel(matchSelectLabel + " Match Select");
         }
 
         private void selectedItemNumber_TextChanged(object sender, EventArgs e)
@@ -184,11 +170,10 @@ namespace Inventory.Views.UserControls
             {
                 if (resultSelectionListView.SelectedItems.Count > 0)
                 {
-                    // Retrieve the selected object from the Tag property
-                    Panel currentPanel = this.Parent as Panel;
                     object selectedObject = resultSelectionListView.SelectedItems[0].Tag;
 
                     SelectedSearchResult?.Invoke(this, new SelectedSearchResultEventArgs(selectedObject));
+                    _mainWindow.DisposeControl(this);
                 }
             }
         }

@@ -1,40 +1,36 @@
-﻿using Inventory.Models;
+﻿using Inventory.Interfaces;
+using Inventory.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.DirectoryServices;
+using Inventory.Services;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
-    public partial class ShipFromUpdateInfo : UserControl
+    public partial class ShipFromUpdateInfo : UserControl, IActiveControlManager
     {
         //--------Class Variables--------//
 
+        private MainWindow _mainWindow;
+        private ActiveControlManager _activeControlManager;
         private supplier supplierData = null;
         private rem_sup remitToObject;
-        private MainWindow _mainWindow;
         private AmerichickenContext dbContext;
 
         //--------Constructor--------//
 
-        public ShipFromUpdateInfo(MainWindow mainWindow)
+        public ShipFromUpdateInfo(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            dbContext = new AmerichickenContext();
+            _activeControlManager = activeControlManager;
 
-            DbSearch dbSearchInstance = new DbSearch(_mainWindow);
-            dbSearchInstance.SetTable("supplier");
-            dbSearchInstance.HideSearchPanel += HideSearchPanelHandler;
-            dbSearchInstance.SearchCompleted += HandleSearchCompleted;
-            dbSearchInstance.Dock = DockStyle.Fill;
-            searchPanel.Controls.Add(dbSearchInstance);
-            searchPanel.Visible = true;
-            searchPanel.BringToFront();
+            dbContext = new AmerichickenContext();
         }
 
         //--------Methods--------//
 
-        private void SetProgramLabels()
+        public void SetProgramLabels()
         {
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
             _mainWindow.SetTextBoxLabel("ACTION:");
@@ -216,57 +212,48 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         //--------Event Listeners--------//
 
-        private void actionInput_KeyDown(object sender, KeyEventArgs e)
+        public void PerformAction(string userInput)
         {
-            //Collects user input and format for processing
-            string userInput = _mainWindow.GetTextBoxText().Trim();
-
-            //Waits to execute code until enter key is pressed in input area
-            if (e.KeyCode == Keys.Enter)
+            switch (userInput)
             {
-                switch (userInput)
-                {
-                    case "1":
-                        //add or update supplier
-                        UpdateSupplier(supplierData);
-                        break;
+                case "1":
+                    //add or update supplier
+                    UpdateSupplier(supplierData);
+                    break;
 
-                    case "2":
-                        //return to edit supplier info
-                        supnameTextBox.Focus();
-                        break;
+                case "2":
+                    //return to edit supplier info
+                    supnameTextBox.Focus();
+                    break;
 
+                case "3":
+                    //delete supplier
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this supplier?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                    case "3":
-                        //delete supplier
-                        DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this supplier?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            DeleteSupplier(supplierData);
-                        }
-                        else if (dialogResult == DialogResult.No)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            MessageBox.Show("ERROR: Something went wrong deleting the supplier, please contact developer");
-                        }
-                        break;
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        DeleteSupplier(supplierData);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: Something went wrong deleting the supplier, please contact developer");
+                    }
+                    break;
 
 
-                    case "4":
-                        //returns user to main menu
-                        _mainWindow.DisplayControl(new MenuList(_mainWindow));
-                        break;
+                case "4":
+                    //returns user to main menu
+                    break;
 
-                    default:
-                        MessageBox.Show("Invalid input. Please try again.");
-                        break;
-                }
-                _mainWindow.ClearTextBox();
+                default:
+                    MessageBox.Show("Invalid input. Please try again.");
+                    break;
             }
+            _mainWindow.ClearTextBox();
         }
 
         private void remitToNameTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -280,32 +267,17 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     return;
                 }
                 string userInput = remitToNameTextBox.Text.Trim();
-                DbSearch dbSearchInstance = new DbSearch(_mainWindow);
+                DbSearch dbSearchInstance = new DbSearch(_mainWindow, _activeControlManager);
                 dbSearchInstance.SearchCompleted += HandleSearchCompleted;
                 dbSearchInstance.PerformSearch("remitTo", userInput);
                 dbSearchInstance.Dispose();
             }
         }
 
-        private void HideSearchPanelHandler()
-        {
-            // Method to hide the searchPanel
-            searchPanel.Visible = false;
-            searchPanel.SendToBack();
-            supplierInfoPanel.BringToFront();
-            supplierInfoPanel.Visible = true;
-            SetProgramLabels();
-        }
-
         //Store the search results along with the db table searched in order to load the appropriate program and pass the data to display/edit
-        private void HandleSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
+        public void HandleSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
         {
-            foreach (Control control in searchPanel.Controls)
-            {
-                control.Dispose();
-            }
-
-            MatchSelect matchSelectInstance = new MatchSelect(_mainWindow);
+            MatchSelect matchSelectInstance = new MatchSelect(_mainWindow, _activeControlManager);
 
             if (e.TableSelected == "supplier")
             {
@@ -322,10 +294,12 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
             if (e.SearchResults.Count > 1)
             {
-                searchPanel.Controls.Add(matchSelectInstance);
-                searchPanel.Visible = true;
-                searchPanel.BringToFront();
-                searchPanel.Refresh();
+                _activeControlManager.SetActiveControl(matchSelectInstance as IActiveControlManager);
+            }
+            else
+            {
+                _mainWindow.DisposeControl(matchSelectInstance);
+                _activeControlManager.SetActiveControl(this);
             }
         }
         private void HandleSelectedShipFromSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
@@ -333,42 +307,15 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             supplier selectedResult = e.SelectedResult as supplier;
 
             GetShipFromData(selectedResult);
-            searchPanel.Visible = false;
-            foreach (Control control in searchPanel.Controls)
-            {
-                control.Dispose();
-            }
-            searchPanel.SendToBack();
-            supplierInfoPanel.BringToFront();
-            supplierInfoPanel.Visible = true;
-            SetProgramLabels();
+            _activeControlManager.SetActiveControl(this);
 
         }
         private void HandleSelectedRemitToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
         {
             rem_sup selectedResult = e.SelectedResult as rem_sup;
 
-            searchPanel.Visible = false;
-            foreach (Control control in searchPanel.Controls)
-            {
-                control.Dispose();
-            }
-            searchPanel.SendToBack();
-            SetProgramLabels();
-
             DisplayRemitData(selectedResult);
-        }
-
-        private void supplierInfoPanel_VisibleChanged(object sender, EventArgs e)
-        {
-            if (supplierInfoPanel.Visible == true)
-            {
-                _mainWindow.AttachTextBoxKeyDownHandler(actionInput_KeyDown);
-            }
-            else
-            {
-                _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
-            }
+            _activeControlManager.SetActiveControl(this);
         }
     }
 }

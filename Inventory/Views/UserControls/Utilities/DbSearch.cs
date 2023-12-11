@@ -3,15 +3,17 @@ using Inventory.Views.UserControls;
 using Inventory.Services;
 using Microsoft.EntityFrameworkCore;
 using System.DirectoryServices;
+using Inventory.Interfaces;
 
 namespace Inventory.Views.UserControls
 {
-    public partial class DbSearch : UserControl
+    public partial class DbSearch : UserControl, IActiveControlManager
     {
 
         // -- Class Variables -- //
 
         private MainWindow _mainWindow;
+        private ActiveControlManager _activeControlManager;
         string selectedTable = string.Empty;
         string programLabel = string.Empty;
 
@@ -29,25 +31,14 @@ namespace Inventory.Views.UserControls
                 TableSelected = tableSelected;
             }
         }
-        public delegate void HideSearchPanelDelegate();
-        public event HideSearchPanelDelegate HideSearchPanel;
 
         // -- Constructor -- //
 
-        public DbSearch(MainWindow mainWindow)
+        public DbSearch(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-
-            this.Disposed += (s, a) =>
-            {
-                _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
-            };
-            //Attaches keydown event handler to user input field
-            _mainWindow.AttachTextBoxKeyDownHandler(actionInput_KeyDown);
-
-            _mainWindow.SetCommandsLabel("1. Continue    2. Edit    3. Cancel");
-            _mainWindow.SetTextBoxLabel("ACTION:");
+            _activeControlManager = activeControlManager;
         }
 
         // -- Methods -- //
@@ -69,20 +60,6 @@ namespace Inventory.Views.UserControls
             else
             {
                 selectedTable = tableName;
-
-                if (selectedTable == "supplier")
-                {
-                    programLabel = "Supplier";
-                }
-                else if (selectedTable == "remitTo")
-                {
-                    programLabel = "Remit To";
-                }
-                else
-                {
-                    programLabel = "ERROR";
-                }
-                _mainWindow.SetProgramLabel("Search for " + programLabel);
             }
         }
          
@@ -95,7 +72,9 @@ namespace Inventory.Views.UserControls
                 if (dialogResult == DialogResult.Yes)
                 {
                     //hide searchpanel
-                    OnHideSearchPanel();
+                    _mainWindow.DisposeControl(this);
+                    //search completed event
+                    SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null, selectedTable));
                 }
                 else if (dialogResult == DialogResult.No)
                 {
@@ -137,9 +116,7 @@ namespace Inventory.Views.UserControls
                     {
                         //Sends search results to the SearchResultsEventArgs handler's listener
                         SearchCompleted?.Invoke(this, new SearchResultsEventArgs(searchResults, selectedTable));
-
-                        //Removes keydown event handler from user input field
-                        _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
+                        _mainWindow.DisposeControl(this);
                     }
                 }
             }
@@ -152,46 +129,52 @@ namespace Inventory.Views.UserControls
             SearchDatabase(searchQuery);
         }
 
-        private void OnHideSearchPanel()
-        {
-            HideSearchPanel?.Invoke();
-        }
-
         // -- Event Listeners -- //
 
-        private void actionInput_KeyDown(object sender, KeyEventArgs e)
+        public void PerformAction(string userInput)
         {
-            //Waits to execute code until enter key is pressed in input area
-            if (e.KeyCode == Keys.Enter)
+            switch (userInput)
             {
-                //Collects user input and format for processing
-                string userInput = _mainWindow.GetTextBoxText().Trim();
+                //accepts the user's input and searches the db table selected from Program Switcher
+                case "1":
+                    SearchDatabase(searchQuereyTextBox.Text);
+                    break;
 
-                switch (userInput)
-                {
-                    //accepts the user's input and searches the db table selected from Program Switcher
-                    case "1":
-                        SearchDatabase(searchQuereyTextBox.Text);
-                        break;
+                case "2":
+                    searchQuereyTextBox.Clear();
+                    searchQuereyTextBox.Focus();
+                    break;
 
-                    case "2":
-                        searchQuereyTextBox.Clear();
-                        searchQuereyTextBox.Focus();
-                        break;
+                //returns user to main menu
+                case "3":
+                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
+                    break;
 
-                    //returns user to main menu
-                    case "3":
-                        _mainWindow.DisplayControl(new MenuList(_mainWindow));
-                        _mainWindow.DetachTextBoxKeyDownHandler(actionInput_KeyDown);
-                        break;
-
-                    default:
-                        MessageBox.Show("Invalid input. Please try again.");
-                        _mainWindow.ClearTextBox();
-                        break;
-                }
+                default:
+                    MessageBox.Show("Invalid input. Please try again.");
+                    _mainWindow.ClearTextBox();
+                    break;
             }
-            _mainWindow.ClearTextBox();
+        }
+
+        public void SetProgramLabels()
+        {
+            _mainWindow.SetCommandsLabel("1. Continue    2. Edit    3. Cancel");
+            _mainWindow.SetTextBoxLabel("ACTION:"); 
+
+            if (selectedTable == "supplier")
+            {
+                programLabel = "Supplier";
+            }
+            else if (selectedTable == "remitTo")
+            {
+                programLabel = "Remit To";
+            }
+            else
+            {
+                programLabel = "ERROR";
+            }
+            _mainWindow.SetProgramLabel("Search for " + programLabel);
         }
 
         private void searchQueryTextBox_KeyDown(object sender, KeyEventArgs e)

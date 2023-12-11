@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Inventory.Interfaces
 {
-    internal interface IActiveControlManager
+    public interface IActiveControlManager
     {
-        void AssignActionInput();
+        void PerformAction(string userInput);
         void SetProgramLabels();
     }
 }

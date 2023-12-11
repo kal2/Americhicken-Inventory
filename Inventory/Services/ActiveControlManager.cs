@@ -8,59 +8,37 @@ using System.Windows.Forms;
 
 namespace Inventory.Services
 {
-    internal class ActiveControlManager
+    public class ActiveControlManager
     {
         // -- Class Variables -- //
         private MainWindow _mainWindow;
         private IActiveControlManager _activeControl;
 
+        // -- Constructor -- //
         public ActiveControlManager(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
+            _mainWindow.AttachTextBoxKeyDownHandler(HandleUserInput);
         }
 
         // -- Methods -- //
-        public void AssignActionInput(IActiveControlManager activeControl)
+        public void SetActiveControl(IActiveControlManager activeControl)
         {
-            if (_activeControl != null)
-            {
-                UnsubscribeFromActionInput(_activeControl as Control);
-            }
-
             _activeControl = activeControl;
-
-            if (_activeControl != null)
-            {
-                SubscribeToActionInput(_activeControl as Control);
-            }
-
+            _mainWindow.DisplayControl(_activeControl as UserControl);
+            _activeControl.SetProgramLabels();
         }
 
-        public void SubscribeToActionInput(Control control)
-        {
-            control.KeyDown += Control_KeyDown;
-        }
-
-        public void UnsubscribeFromActionInput(Control control)
-        {
-            control.KeyDown -= Control_KeyDown;
-        }
-
-        private void Control_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                HandleUserInput();
-            }
-        }
-
-        private void HandleUserInput()
+        private void HandleUserInput(object sender, KeyEventArgs e)
         {
             if (_activeControl != null)
             {
-                _activeControl.AssignActionInput();
+                if (e.KeyCode == Keys.Enter)
+                {
+                    _activeControl.PerformAction(_mainWindow.GetTextBoxText());
 
-                _activeControl.SetProgramLabels();
+                    _mainWindow.ClearTextBox();
+                }
             }
         }
     }
