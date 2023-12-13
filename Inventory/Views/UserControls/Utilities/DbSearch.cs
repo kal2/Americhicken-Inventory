@@ -147,6 +147,7 @@ namespace Inventory.Views.UserControls
 
                 //returns user to main menu
                 case "3":
+                    _mainWindow.DisposeControl(this);
                     _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
                     break;
 

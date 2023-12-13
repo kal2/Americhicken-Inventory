@@ -156,6 +156,7 @@
             Controls.Add(splitContainer1);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ForeColor = SystemColors.ButtonFace;
+            KeyPreview = true;
             Name = "MainWindow";
             Text = "AmeriChicken Inventory";
             WindowState = FormWindowState.Maximized;

@@ -11,9 +11,8 @@ namespace Inventory
 {
     public partial class MainWindow : Form
     {
-
         // -- Class Variables -- //
-        private ActiveControlManager _activeControlManager;
+        private readonly ActiveControlManager _activeControlManager;
 
         public MainWindow()
         {

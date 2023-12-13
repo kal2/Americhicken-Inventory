@@ -11,11 +11,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
     {
         //--------Class Variables--------//
 
-        private MainWindow _mainWindow;
-        private ActiveControlManager _activeControlManager;
-        private supplier supplierData = null;
-        private rem_sup remitToObject;
-        private AmerichickenContext dbContext;
+        private readonly MainWindow _mainWindow;
+        private readonly ActiveControlManager _activeControlManager;
+        private supplier? supplierData = null;
+        private rem_sup? remitToObject;
+        private readonly AmerichickenContext dbContext;
 
         //--------Constructor--------//
 
@@ -37,43 +37,35 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _mainWindow.SetProgramLabel("View/Edit Ship From Supplier Info");
         }
 
-        public void GetShipFromData(object shipFromData)
+        public void GetShipFromData(supplier supplierObject)
         {
-            if (shipFromData is supplier supplierObject)
+            // If casting succeeded, and supplierObject is not null.
+            // Assign all the appropriate object data to the corresponding fields to display/edit.
+            supplierData = supplierObject;
+            supnameTextBox.Text = supplierObject.name?.ToString().Trim() ?? "";
+            string v = (supplierObject.area_code?.ToString() + supplierObject.phone?.ToString());
+            phoneMaskTextBox.Text = v.Trim() ?? "";
+            faxMaskTextBox.Text = supplierObject.fax?.ToString().Trim() ?? "";
+            contactNameTextBox.Text = supplierObject.cont_name?.ToString().Trim() ?? "";
+            contactPhoneMaskTextBox.Text = supplierObject.cont_phone?.ToString().Trim() ?? "";
+            contactFaxMaskTextBox.Text = supplierObject.cont_fax?.ToString().Trim() ?? "";
+            freightPhoneMaskTextBox.Text = supplierObject.freight_phone?.ToString().Trim() ?? "";
+            freightEmailTextBox.Text = supplierObject.fright_email?.ToString().Trim() ?? "";
+            shipFromStreetTextBox.Text = supplierObject.street?.ToString().Trim() ?? "";
+            shipFromCityTextBox.Text = supplierObject.city?.ToString().Trim() ?? "";
+            shipFromStateTextBox.Text = supplierObject.state?.ToString().Trim() ?? "";
+            shipFromZipTextBox.Text = supplierObject.zip?.ToString().Trim() ?? "";
+            noteTextBox.Text = supplierObject.note?.ToString().Trim() ?? "";
+
+            // If the supplier has a remit to code, get the remit to data and display it
+            if (supplierObject.rsupcode != null)
             {
+                remitToObject = dbContext.rem_sup.SingleOrDefault(s => s.rsupcode == supplierObject.rsupcode);
 
-                // If casting succeeded, and supplierObject is not null.
-                // Assign all the appropriate object data to the corresponding fields to display/edit.
-                supplierData = supplierObject;
-                supnameTextBox.Text = supplierObject.name?.ToString().Trim() ?? "";
-                phoneMaskTextBox.Text = (supplierObject.area_code?.ToString() + supplierObject.phone?.ToString()).Trim() ?? "";
-                faxMaskTextBox.Text = supplierObject.fax?.ToString().Trim() ?? "";
-                contactNameTextBox.Text = supplierObject.cont_name?.ToString().Trim() ?? "";
-                contactPhoneMaskTextBox.Text = supplierObject.cont_phone?.ToString().Trim() ?? "";
-                contactFaxMaskTextBox.Text = supplierObject.cont_fax?.ToString().Trim() ?? "";
-                freightPhoneMaskTextBox.Text = supplierObject.freight_phone?.ToString().Trim() ?? "";
-                freightEmailTextBox.Text = supplierObject.fright_email?.ToString().Trim() ?? "";
-                shipFromStreetTextBox.Text = supplierObject.street?.ToString().Trim() ?? "";
-                shipFromCityTextBox.Text = supplierObject.city?.ToString().Trim() ?? "";
-                shipFromStateTextBox.Text = supplierObject.state?.ToString().Trim() ?? "";
-                shipFromZipTextBox.Text = supplierObject.zip?.ToString().Trim() ?? "";
-                noteTextBox.Text = supplierObject.note?.ToString().Trim() ?? "";
-
-                // If the supplier has a remit to code, get the remit to data and display it
-                if (supplierObject.rsupcode != null)
+                if (remitToObject != null)
                 {
-                    remitToObject = dbContext.rem_sup.SingleOrDefault(s => s.rsupcode == supplierObject.rsupcode);
-
-                    if (remitToObject != null)
-                    {
-                        DisplayRemitData(remitToObject);
-                    }
+                    DisplayRemitData(remitToObject);
                 }
-            }
-            else
-            {
-                // Handle the case where the cast failed or shipFromData is not of the correct type.
-                // You can set a default value, log an error, or take other appropriate actions.
             }
         }
 
@@ -90,8 +82,8 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     {
                         // Update the properties with the modified values
                         existingSupplier.name = supnameTextBox.Text.Trim();
-                        existingSupplier.area_code = phoneMaskTextBox.Text.Trim().Substring(0, 3);
-                        existingSupplier.phone = phoneMaskTextBox.Text.Trim().Substring(3);
+                        existingSupplier.area_code = phoneMaskTextBox.Text.Trim()[..3];
+                        existingSupplier.phone = phoneMaskTextBox.Text.Trim()[3..];
                         existingSupplier.fax = faxMaskTextBox.Text.Trim();
                         existingSupplier.cont_name = contactNameTextBox.Text.Trim();
                         existingSupplier.cont_phone = contactPhoneMaskTextBox.Text.Trim();
@@ -119,11 +111,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 if (dialogResult == DialogResult.Yes)
                 {
                     //Grab user inputs and save to new supplier in db table
-                    supplier newSupplier = new supplier
+                    supplier newSupplier = new()
                     {
                         name = supnameTextBox.Text.Trim(),
-                        area_code = phoneMaskTextBox.Text.Trim().Substring(0, 3),
-                        phone = phoneMaskTextBox.Text.Trim().Substring(3),
+                        area_code = phoneMaskTextBox.Text.Trim()[..3],
+                        phone = phoneMaskTextBox.Text.Trim()[3..],
                         fax = faxMaskTextBox.Text.Trim(),
                         cont_name = contactNameTextBox.Text.Trim(),
                         cont_phone = contactPhoneMaskTextBox.Text.Trim(),
@@ -193,7 +185,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private bool IsDataModified(supplier supplierData)
         {
-
             // Compare the user interface values with the original data, return true if differences are detected
             return supplierData == null || supnameTextBox.Text != supplierData.name ||
                    phoneMaskTextBox.Text != supplierData.area_code + supplierData.phone ||
@@ -244,9 +235,10 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     }
                     break;
 
-
                 case "4":
                     //returns user to main menu
+                    _mainWindow.DisposeControl(this);
+                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
                     break;
 
                 default:
@@ -256,45 +248,37 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _mainWindow.ClearTextBox();
         }
 
-        private void remitToNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void RemitToNameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             //Waits to execute code until enter key is pressed in input area
             if (e.KeyCode == Keys.Enter)
             {
-                if (remitToNameTextBox.Text.Trim() == string.Empty)
+                if (remitToNameTextBox.Text.Length != 0)
+                {
+                    string userInput = remitToNameTextBox.Text.Trim();
+                    DbSearch dbSearchInstance = new(_mainWindow, _activeControlManager);
+                    dbSearchInstance.SearchCompleted += HandleSearchCompleted;
+                    dbSearchInstance.PerformSearch("remitTo", userInput);
+                    dbSearchInstance.Dispose();
+                }
+                else
                 {
                     MessageBox.Show("Please enter a remit to name.");
-                    return;
                 }
-                string userInput = remitToNameTextBox.Text.Trim();
-                DbSearch dbSearchInstance = new DbSearch(_mainWindow, _activeControlManager);
-                dbSearchInstance.SearchCompleted += HandleSearchCompleted;
-                dbSearchInstance.PerformSearch("remitTo", userInput);
-                dbSearchInstance.Dispose();
             }
         }
 
         //Store the search results along with the db table searched in order to load the appropriate program and pass the data to display/edit
         public void HandleSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
         {
-            MatchSelect matchSelectInstance = new MatchSelect(_mainWindow, _activeControlManager);
-
-            if (e.TableSelected == "supplier")
-            {
-                matchSelectInstance.SelectedSearchResult += HandleSelectedShipFromSearchResult;
-                matchSelectInstance.SetMatchSelectLabel("Supplier");
-            }
-            else if (e.TableSelected == "remitTo")
-            {
-                matchSelectInstance.SelectedSearchResult += HandleSelectedRemitToSearchResult;
-                matchSelectInstance.SetMatchSelectLabel("Remit To");
-            }
-
+            MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
+            matchSelectInstance.SelectedSearchResult += HandleSelectedRemitToSearchResult;
+            matchSelectInstance.SetMatchSelectLabel("Remit To");
             matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
 
             if (e.SearchResults.Count > 1)
             {
-                _activeControlManager.SetActiveControl(matchSelectInstance as IActiveControlManager);
+                _activeControlManager.SetActiveControl(matchSelectInstance);
             }
             else
             {
@@ -302,17 +286,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 _activeControlManager.SetActiveControl(this);
             }
         }
-        private void HandleSelectedShipFromSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
-        {
-            supplier selectedResult = e.SelectedResult as supplier;
-
-            GetShipFromData(selectedResult);
-            _activeControlManager.SetActiveControl(this);
-
-        }
         private void HandleSelectedRemitToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
         {
-            rem_sup selectedResult = e.SelectedResult as rem_sup;
+            rem_sup? selectedResult = e.SelectedResult as rem_sup;
 
             DisplayRemitData(selectedResult);
             _activeControlManager.SetActiveControl(this);

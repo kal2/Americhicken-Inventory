@@ -173,7 +173,6 @@ namespace Inventory.Views.UserControls
                     object selectedObject = resultSelectionListView.SelectedItems[0].Tag;
 
                     SelectedSearchResult?.Invoke(this, new SelectedSearchResultEventArgs(selectedObject));
-                    _mainWindow.DisposeControl(this);
                 }
             }
         }

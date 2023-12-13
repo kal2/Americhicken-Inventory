@@ -65,7 +65,6 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            searchPanel = new Panel();
             supplierInfoPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -111,7 +110,6 @@
             supplierInfoPanel.Name = "supplierInfoPanel";
             supplierInfoPanel.Size = new Size(1290, 536);
             supplierInfoPanel.TabIndex = 101;
-            supplierInfoPanel.Visible = false;
             // 
             // shipFromZipTextBox
             // 
@@ -211,7 +209,7 @@
             remitToNameTextBox.Name = "remitToNameTextBox";
             remitToNameTextBox.Size = new Size(493, 36);
             remitToNameTextBox.TabIndex = 12;
-            remitToNameTextBox.KeyDown += remitToNameTextBox_KeyDown;
+            remitToNameTextBox.KeyDown += RemitToNameTextBox_KeyDown;
             // 
             // label21
             // 
@@ -510,22 +508,12 @@
             label1.TabIndex = 100;
             label1.Text = "SUPPLIER NAME:";
             // 
-            // searchPanel
-            // 
-            searchPanel.Dock = DockStyle.Fill;
-            searchPanel.Location = new Point(0, 0);
-            searchPanel.Name = "searchPanel";
-            searchPanel.Size = new Size(1293, 539);
-            searchPanel.TabIndex = 138;
-            searchPanel.Visible = false;
-            // 
             // ShipFromUpdateInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Blue;
             Controls.Add(supplierInfoPanel);
-            Controls.Add(searchPanel);
             Name = "ShipFromUpdateInfo";
             Size = new Size(1293, 539);
             supplierInfoPanel.ResumeLayout(false);
@@ -572,6 +560,5 @@
         private TextBox shipFromStateTextBox;
         private TextBox shipFromCityTextBox;
         private TextBox shipFromStreetTextBox;
-        private Panel searchPanel;
     }
 }

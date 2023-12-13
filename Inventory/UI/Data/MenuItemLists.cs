@@ -1,6 +1,6 @@
 ﻿namespace Inventory.UI.Data
 {
-    public class MenuItemLists
+    public static class MenuItemLists
     {
         //Passes menu items to caller
         public static string[] MainMenu()

@@ -2,7 +2,7 @@
 
 namespace Inventory.UI.Menu
 {
-    public class MenuUserSelection
+    public static class MenuUserSelection
     {
         public static string[] UserMenuSelection(string currentMenu, string userSelection)
         {
@@ -12,7 +12,6 @@ namespace Inventory.UI.Menu
             //Check which menu is currently being displayed
             switch (currentMenu)
             {
-
                 //-----------Main Menu-----------//
                 case "main":
 
@@ -26,7 +25,7 @@ namespace Inventory.UI.Menu
                             break;
 
                         case "8":
-                            menuItems = MenuItemLists.MasterFileUpdateMenuItems();
+                            menuItems = MenuItemLists.FileMaintenenceMenuItems();
                             break;
                     }
                     break;
@@ -46,6 +45,21 @@ namespace Inventory.UI.Menu
                     break;
 
                 //-----------File Maintenance Menu----------//
+                case "filemaintenence":
+
+                    switch (userSelection)
+                    {
+                        case "1":
+
+                            //reindex selected main files
+                            break;
+
+                        case "4":
+
+                            menuItems = MenuItemLists.MasterFileUpdateMenuItems();
+                            break;
+                    }
+                    break;
                 case "masterfileupdate":
 
                     switch (userSelection)
