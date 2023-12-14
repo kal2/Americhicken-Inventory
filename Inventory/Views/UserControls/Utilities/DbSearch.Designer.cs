@@ -56,10 +56,12 @@
             // 
             // searchQuereyTextBox
             // 
-            searchQuereyTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            searchQuereyTextBox.BackColor = Color.Red;
+            searchQuereyTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            searchQuereyTextBox.ForeColor = Color.White;
             searchQuereyTextBox.Location = new Point(50, 127);
             searchQuereyTextBox.Name = "searchQuereyTextBox";
-            searchQuereyTextBox.Size = new Size(575, 36);
+            searchQuereyTextBox.Size = new Size(575, 34);
             searchQuereyTextBox.TabIndex = 0;
             searchQuereyTextBox.KeyDown += searchQueryTextBox_KeyDown;
             // 

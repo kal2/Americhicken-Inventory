@@ -95,7 +95,9 @@
             // 
             // selectedItemNumber
             // 
-            selectedItemNumber.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            selectedItemNumber.BackColor = Color.Red;
+            selectedItemNumber.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            selectedItemNumber.ForeColor = Color.White;
             selectedItemNumber.Location = new Point(282, 555);
             selectedItemNumber.Name = "selectedItemNumber";
             selectedItemNumber.Size = new Size(45, 39);

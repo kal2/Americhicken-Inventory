@@ -43,7 +43,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             // Assign all the appropriate object data to the corresponding fields to display/edit.
             supplierData = supplierObject;
             supnameTextBox.Text = supplierObject.name?.ToString().Trim() ?? "";
-            string v = (supplierObject.area_code?.ToString() + supplierObject.phone?.ToString());
+            string v = supplierObject.area_code?.ToString() + supplierObject.phone?.ToString();
             phoneMaskTextBox.Text = v.Trim() ?? "";
             faxMaskTextBox.Text = supplierObject.fax?.ToString().Trim() ?? "";
             contactNameTextBox.Text = supplierObject.cont_name?.ToString().Trim() ?? "";

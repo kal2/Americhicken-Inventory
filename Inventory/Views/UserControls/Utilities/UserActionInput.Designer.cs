@@ -45,12 +45,14 @@
             // 
             // actionInput
             // 
-            actionInput.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            actionInput.BackColor = Color.Red;
+            actionInput.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            actionInput.ForeColor = Color.White;
             actionInput.Location = new Point(114, 23);
             actionInput.Margin = new Padding(0);
             actionInput.MaxLength = 2;
             actionInput.Name = "actionInput";
-            actionInput.Size = new Size(40, 36);
+            actionInput.Size = new Size(40, 34);
             actionInput.TabIndex = 46;
             // 
             // textBoxLabel

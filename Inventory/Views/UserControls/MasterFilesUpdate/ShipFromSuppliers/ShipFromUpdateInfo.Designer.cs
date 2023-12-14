@@ -113,46 +113,50 @@
             // 
             // shipFromZipTextBox
             // 
-            shipFromZipTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            shipFromZipTextBox.ForeColor = Color.Black;
+            shipFromZipTextBox.BackColor = Color.Red;
+            shipFromZipTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            shipFromZipTextBox.ForeColor = Color.White;
             shipFromZipTextBox.Location = new Point(208, 424);
             shipFromZipTextBox.Margin = new Padding(0);
             shipFromZipTextBox.MaxLength = 40;
             shipFromZipTextBox.Name = "shipFromZipTextBox";
-            shipFromZipTextBox.Size = new Size(117, 36);
+            shipFromZipTextBox.Size = new Size(117, 34);
             shipFromZipTextBox.TabIndex = 11;
             // 
             // shipFromStateTextBox
             // 
-            shipFromStateTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            shipFromStateTextBox.ForeColor = Color.Black;
+            shipFromStateTextBox.BackColor = Color.Red;
+            shipFromStateTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            shipFromStateTextBox.ForeColor = Color.White;
             shipFromStateTextBox.Location = new Point(108, 424);
             shipFromStateTextBox.Margin = new Padding(0);
             shipFromStateTextBox.MaxLength = 40;
             shipFromStateTextBox.Name = "shipFromStateTextBox";
-            shipFromStateTextBox.Size = new Size(45, 36);
+            shipFromStateTextBox.Size = new Size(45, 34);
             shipFromStateTextBox.TabIndex = 10;
             // 
             // shipFromCityTextBox
             // 
-            shipFromCityTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            shipFromCityTextBox.ForeColor = Color.Black;
+            shipFromCityTextBox.BackColor = Color.Red;
+            shipFromCityTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            shipFromCityTextBox.ForeColor = Color.White;
             shipFromCityTextBox.Location = new Point(108, 379);
             shipFromCityTextBox.Margin = new Padding(0);
             shipFromCityTextBox.MaxLength = 40;
             shipFromCityTextBox.Name = "shipFromCityTextBox";
-            shipFromCityTextBox.Size = new Size(230, 36);
+            shipFromCityTextBox.Size = new Size(230, 34);
             shipFromCityTextBox.TabIndex = 9;
             // 
             // shipFromStreetTextBox
             // 
-            shipFromStreetTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            shipFromStreetTextBox.ForeColor = Color.Black;
+            shipFromStreetTextBox.BackColor = Color.Red;
+            shipFromStreetTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            shipFromStreetTextBox.ForeColor = Color.White;
             shipFromStreetTextBox.Location = new Point(108, 337);
             shipFromStreetTextBox.Margin = new Padding(0);
             shipFromStreetTextBox.MaxLength = 40;
             shipFromStreetTextBox.Name = "shipFromStreetTextBox";
-            shipFromStreetTextBox.Size = new Size(493, 36);
+            shipFromStreetTextBox.Size = new Size(493, 34);
             shipFromStreetTextBox.TabIndex = 8;
             // 
             // remitToCityStateZipLabel
@@ -179,13 +183,14 @@
             // 
             // noteTextBox
             // 
-            noteTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            noteTextBox.ForeColor = Color.Black;
+            noteTextBox.BackColor = Color.Red;
+            noteTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            noteTextBox.ForeColor = Color.White;
             noteTextBox.Location = new Point(343, 490);
             noteTextBox.Margin = new Padding(0);
             noteTextBox.MaxLength = 50;
             noteTextBox.Name = "noteTextBox";
-            noteTextBox.Size = new Size(670, 36);
+            noteTextBox.Size = new Size(670, 34);
             noteTextBox.TabIndex = 13;
             // 
             // label13
@@ -201,13 +206,14 @@
             // 
             // remitToNameTextBox
             // 
-            remitToNameTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            remitToNameTextBox.ForeColor = Color.Black;
+            remitToNameTextBox.BackColor = Color.Red;
+            remitToNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            remitToNameTextBox.ForeColor = Color.White;
             remitToNameTextBox.Location = new Point(734, 337);
             remitToNameTextBox.Margin = new Padding(0);
             remitToNameTextBox.MaxLength = 40;
             remitToNameTextBox.Name = "remitToNameTextBox";
-            remitToNameTextBox.Size = new Size(493, 36);
+            remitToNameTextBox.Size = new Size(493, 34);
             remitToNameTextBox.TabIndex = 12;
             remitToNameTextBox.KeyDown += RemitToNameTextBox_KeyDown;
             // 
@@ -246,90 +252,103 @@
             // 
             // freightEmailTextBox
             // 
-            freightEmailTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            freightEmailTextBox.ForeColor = Color.Black;
+            freightEmailTextBox.BackColor = Color.Red;
+            freightEmailTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            freightEmailTextBox.ForeColor = Color.White;
             freightEmailTextBox.Location = new Point(710, 231);
             freightEmailTextBox.Margin = new Padding(0);
             freightEmailTextBox.MaxLength = 50;
             freightEmailTextBox.Name = "freightEmailTextBox";
-            freightEmailTextBox.Size = new Size(559, 36);
+            freightEmailTextBox.Size = new Size(559, 34);
             freightEmailTextBox.TabIndex = 7;
             // 
             // freightPhoneMaskTextBox
             // 
+            freightPhoneMaskTextBox.BackColor = Color.Red;
             freightPhoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            freightPhoneMaskTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            freightPhoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            freightPhoneMaskTextBox.ForeColor = Color.White;
             freightPhoneMaskTextBox.Location = new Point(198, 231);
             freightPhoneMaskTextBox.Mask = "(999) 000-0000";
             freightPhoneMaskTextBox.Name = "freightPhoneMaskTextBox";
-            freightPhoneMaskTextBox.Size = new Size(147, 36);
+            freightPhoneMaskTextBox.Size = new Size(147, 34);
             freightPhoneMaskTextBox.TabIndex = 6;
             freightPhoneMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // contactFaxMaskTextBox
             // 
+            contactFaxMaskTextBox.BackColor = Color.Red;
             contactFaxMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            contactFaxMaskTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            contactFaxMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            contactFaxMaskTextBox.ForeColor = Color.White;
             contactFaxMaskTextBox.Location = new Point(850, 111);
             contactFaxMaskTextBox.Mask = "(999) 000-0000";
             contactFaxMaskTextBox.Name = "contactFaxMaskTextBox";
-            contactFaxMaskTextBox.Size = new Size(147, 36);
+            contactFaxMaskTextBox.Size = new Size(147, 34);
             contactFaxMaskTextBox.TabIndex = 5;
             contactFaxMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // contactPhoneMaskTextBox
             // 
+            contactPhoneMaskTextBox.BackColor = Color.Red;
             contactPhoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            contactPhoneMaskTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            contactPhoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            contactPhoneMaskTextBox.ForeColor = Color.White;
             contactPhoneMaskTextBox.Location = new Point(850, 57);
             contactPhoneMaskTextBox.Mask = "(999) 000-0000";
             contactPhoneMaskTextBox.Name = "contactPhoneMaskTextBox";
-            contactPhoneMaskTextBox.Size = new Size(147, 36);
+            contactPhoneMaskTextBox.Size = new Size(147, 34);
             contactPhoneMaskTextBox.TabIndex = 4;
             contactPhoneMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // contactNameTextBox
             // 
-            contactNameTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            contactNameTextBox.ForeColor = Color.Black;
+            contactNameTextBox.BackColor = Color.Red;
+            contactNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            contactNameTextBox.ForeColor = Color.White;
             contactNameTextBox.Location = new Point(834, 9);
             contactNameTextBox.Margin = new Padding(0);
             contactNameTextBox.MaxLength = 40;
             contactNameTextBox.Name = "contactNameTextBox";
-            contactNameTextBox.Size = new Size(450, 36);
+            contactNameTextBox.Size = new Size(450, 34);
             contactNameTextBox.TabIndex = 3;
             // 
             // faxMaskTextBox
             // 
+            faxMaskTextBox.BackColor = Color.Red;
             faxMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            faxMaskTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            faxMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            faxMaskTextBox.ForeColor = Color.White;
             faxMaskTextBox.Location = new Point(198, 111);
             faxMaskTextBox.Mask = "(999) 000-0000";
             faxMaskTextBox.Name = "faxMaskTextBox";
-            faxMaskTextBox.Size = new Size(147, 36);
+            faxMaskTextBox.Size = new Size(147, 34);
             faxMaskTextBox.TabIndex = 2;
             faxMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // phoneMaskTextBox
             // 
+            phoneMaskTextBox.BackColor = Color.Red;
             phoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            phoneMaskTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            phoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            phoneMaskTextBox.ForeColor = Color.White;
             phoneMaskTextBox.Location = new Point(198, 57);
             phoneMaskTextBox.Mask = "(999) 000-0000";
             phoneMaskTextBox.Name = "phoneMaskTextBox";
-            phoneMaskTextBox.Size = new Size(147, 36);
+            phoneMaskTextBox.Size = new Size(147, 34);
             phoneMaskTextBox.TabIndex = 1;
             phoneMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // supnameTextBox
             // 
-            supnameTextBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            supnameTextBox.ForeColor = Color.Black;
+            supnameTextBox.BackColor = Color.Red;
+            supnameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            supnameTextBox.ForeColor = Color.White;
             supnameTextBox.Location = new Point(182, 9);
             supnameTextBox.Margin = new Padding(0);
             supnameTextBox.MaxLength = 40;
             supnameTextBox.Name = "supnameTextBox";
-            supnameTextBox.Size = new Size(450, 36);
+            supnameTextBox.Size = new Size(450, 34);
             supnameTextBox.TabIndex = 0;
             // 
             // label20
