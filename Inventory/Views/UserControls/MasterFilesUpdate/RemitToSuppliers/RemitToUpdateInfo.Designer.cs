@@ -103,7 +103,7 @@
             RemitNameTextBox.MaxLength = 40;
             RemitNameTextBox.Name = "RemitNameTextBox";
             RemitNameTextBox.Size = new Size(707, 34);
-            RemitNameTextBox.TabIndex = 102;
+            RemitNameTextBox.TabIndex = 0;
             // 
             // faxMaskTextBox
             // 
@@ -114,8 +114,8 @@
             faxMaskTextBox.Location = new Point(641, 55);
             faxMaskTextBox.Mask = "(999) 000-0000";
             faxMaskTextBox.Name = "faxMaskTextBox";
-            faxMaskTextBox.Size = new Size(147, 34);
-            faxMaskTextBox.TabIndex = 116;
+            faxMaskTextBox.Size = new Size(174, 34);
+            faxMaskTextBox.TabIndex = 3;
             faxMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // phoneMaskTextBox
@@ -127,8 +127,8 @@
             phoneMaskTextBox.Location = new Point(399, 55);
             phoneMaskTextBox.Mask = "(999) 000-0000";
             phoneMaskTextBox.Name = "phoneMaskTextBox";
-            phoneMaskTextBox.Size = new Size(147, 34);
-            phoneMaskTextBox.TabIndex = 115;
+            phoneMaskTextBox.Size = new Size(174, 34);
+            phoneMaskTextBox.TabIndex = 2;
             phoneMaskTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label17
@@ -174,8 +174,7 @@
             remitZipTextBox.MaxLength = 40;
             remitZipTextBox.Name = "remitZipTextBox";
             remitZipTextBox.Size = new Size(66, 34);
-            remitZipTextBox.TabIndex = 132;
-            remitZipTextBox.Text = "63703";
+            remitZipTextBox.TabIndex = 7;
             // 
             // remitStateTextBox
             // 
@@ -187,7 +186,7 @@
             remitStateTextBox.MaxLength = 40;
             remitStateTextBox.Name = "remitStateTextBox";
             remitStateTextBox.Size = new Size(45, 34);
-            remitStateTextBox.TabIndex = 131;
+            remitStateTextBox.TabIndex = 6;
             // 
             // remitCityTextBox
             // 
@@ -199,7 +198,7 @@
             remitCityTextBox.MaxLength = 40;
             remitCityTextBox.Name = "remitCityTextBox";
             remitCityTextBox.Size = new Size(345, 34);
-            remitCityTextBox.TabIndex = 130;
+            remitCityTextBox.TabIndex = 5;
             // 
             // remitStreetTextBox
             // 
@@ -211,7 +210,7 @@
             remitStreetTextBox.MaxLength = 40;
             remitStreetTextBox.Name = "remitStreetTextBox";
             remitStreetTextBox.Size = new Size(707, 34);
-            remitStreetTextBox.TabIndex = 129;
+            remitStreetTextBox.TabIndex = 4;
             // 
             // label11
             // 
@@ -267,7 +266,7 @@
             payNetDaysTextBox.MaxLength = 40;
             payNetDaysTextBox.Name = "payNetDaysTextBox";
             payNetDaysTextBox.Size = new Size(48, 34);
-            payNetDaysTextBox.TabIndex = 137;
+            payNetDaysTextBox.TabIndex = 9;
             // 
             // label3
             // 
@@ -290,7 +289,7 @@
             indemnityContractTextBox.MaxLength = 40;
             indemnityContractTextBox.Name = "indemnityContractTextBox";
             indemnityContractTextBox.Size = new Size(48, 34);
-            indemnityContractTextBox.TabIndex = 139;
+            indemnityContractTextBox.TabIndex = 10;
             // 
             // label4
             // 
@@ -313,7 +312,7 @@
             activeTextBox.MaxLength = 40;
             activeTextBox.Name = "activeTextBox";
             activeTextBox.Size = new Size(48, 34);
-            activeTextBox.TabIndex = 141;
+            activeTextBox.TabIndex = 11;
             // 
             // label5
             // 
@@ -331,7 +330,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(810, 244);
+            label6.Location = new Point(786, 244);
             label6.Name = "label6";
             label6.Size = new Size(190, 30);
             label6.TabIndex = 144;
@@ -347,7 +346,7 @@
             creditLimitTextBox.MaxLength = 40;
             creditLimitTextBox.Name = "creditLimitTextBox";
             creditLimitTextBox.Size = new Size(154, 34);
-            creditLimitTextBox.TabIndex = 145;
+            creditLimitTextBox.TabIndex = 13;
             // 
             // label7
             // 
@@ -370,7 +369,7 @@
             letterOfCreditTextBox.MaxLength = 40;
             letterOfCreditTextBox.Name = "letterOfCreditTextBox";
             letterOfCreditTextBox.Size = new Size(154, 34);
-            letterOfCreditTextBox.TabIndex = 147;
+            letterOfCreditTextBox.TabIndex = 14;
             // 
             // label13
             // 
@@ -404,7 +403,7 @@
             guarantorTextBox.MaxLength = 40;
             guarantorTextBox.Name = "guarantorTextBox";
             guarantorTextBox.Size = new Size(204, 34);
-            guarantorTextBox.TabIndex = 153;
+            guarantorTextBox.TabIndex = 17;
             // 
             // label16
             // 
@@ -427,7 +426,7 @@
             noteTextBox.MaxLength = 50;
             noteTextBox.Name = "noteTextBox";
             noteTextBox.Size = new Size(707, 34);
-            noteTextBox.TabIndex = 155;
+            noteTextBox.TabIndex = 18;
             // 
             // label18
             // 
@@ -472,7 +471,7 @@
             aInsuranceTextBox.MaxLength = 40;
             aInsuranceTextBox.Name = "aInsuranceTextBox";
             aInsuranceTextBox.Size = new Size(705, 34);
-            aInsuranceTextBox.TabIndex = 159;
+            aInsuranceTextBox.TabIndex = 19;
             // 
             // label22
             // 
@@ -495,7 +494,7 @@
             bInsuranceTextBox.MaxLength = 40;
             bInsuranceTextBox.Name = "bInsuranceTextBox";
             bInsuranceTextBox.Size = new Size(705, 34);
-            bInsuranceTextBox.TabIndex = 161;
+            bInsuranceTextBox.TabIndex = 20;
             // 
             // label23
             // 
@@ -518,7 +517,7 @@
             dInsuranceTextBox.MaxLength = 40;
             dInsuranceTextBox.Name = "dInsuranceTextBox";
             dInsuranceTextBox.Size = new Size(705, 34);
-            dInsuranceTextBox.TabIndex = 165;
+            dInsuranceTextBox.TabIndex = 22;
             // 
             // label24
             // 
@@ -541,7 +540,7 @@
             cInsuranceTextBox.MaxLength = 40;
             cInsuranceTextBox.Name = "cInsuranceTextBox";
             cInsuranceTextBox.Size = new Size(705, 34);
-            cInsuranceTextBox.TabIndex = 163;
+            cInsuranceTextBox.TabIndex = 21;
             // 
             // label25
             // 
@@ -564,7 +563,7 @@
             eInsuranceTextBox.MaxLength = 40;
             eInsuranceTextBox.Name = "eInsuranceTextBox";
             eInsuranceTextBox.Size = new Size(705, 34);
-            eInsuranceTextBox.TabIndex = 167;
+            eInsuranceTextBox.TabIndex = 23;
             // 
             // label26
             // 
@@ -631,19 +630,18 @@
             remitZip4TextBox.MaxLength = 40;
             remitZip4TextBox.Name = "remitZip4TextBox";
             remitZip4TextBox.Size = new Size(55, 34);
-            remitZip4TextBox.TabIndex = 173;
-            remitZip4TextBox.Text = "4488";
+            remitZip4TextBox.TabIndex = 8;
             // 
             // contractDateMaskedBox
             // 
             contractDateMaskedBox.BackColor = Color.Red;
             contractDateMaskedBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
             contractDateMaskedBox.ForeColor = Color.White;
-            contractDateMaskedBox.Location = new Point(1006, 242);
+            contractDateMaskedBox.Location = new Point(982, 242);
             contractDateMaskedBox.Mask = "00/00/0000";
             contractDateMaskedBox.Name = "contractDateMaskedBox";
-            contractDateMaskedBox.Size = new Size(100, 34);
-            contractDateMaskedBox.TabIndex = 174;
+            contractDateMaskedBox.Size = new Size(124, 34);
+            contractDateMaskedBox.TabIndex = 12;
             contractDateMaskedBox.ValidatingType = typeof(DateTime);
             // 
             // beginDateMaskedBox
@@ -655,8 +653,7 @@
             beginDateMaskedBox.Mask = "00/00/0000";
             beginDateMaskedBox.Name = "beginDateMaskedBox";
             beginDateMaskedBox.Size = new Size(124, 34);
-            beginDateMaskedBox.TabIndex = 175;
-            beginDateMaskedBox.Text = "09992023";
+            beginDateMaskedBox.TabIndex = 15;
             beginDateMaskedBox.ValidatingType = typeof(DateTime);
             // 
             // label15
@@ -679,8 +676,7 @@
             expireDateMaskedBox.Mask = "00/00/0000";
             expireDateMaskedBox.Name = "expireDateMaskedBox";
             expireDateMaskedBox.Size = new Size(124, 34);
-            expireDateMaskedBox.TabIndex = 176;
-            expireDateMaskedBox.Text = "02456612";
+            expireDateMaskedBox.TabIndex = 16;
             expireDateMaskedBox.ValidatingType = typeof(DateTime);
             // 
             // RemitToUpdateInfo

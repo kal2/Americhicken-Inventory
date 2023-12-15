@@ -37,6 +37,7 @@ namespace Inventory.Services
                     break;
             }
         }
+    //Remit To Supplier
         public void LoadRemitToSupplier()
         {
             RemitToUpdateInfo remitToUpdateInfo = new (_mainWindow, _activeControlManager);
@@ -68,6 +69,7 @@ namespace Inventory.Services
                 _activeControlManager.SetActiveControl(remitToUpdateInfo);
             }
         }
+    //Ship From Supplier
         public void LoadShipFromSupplier()
         {
             ShipFromUpdateInfo shipFromUpdateInfo = new (_mainWindow, _activeControlManager);
