@@ -13,7 +13,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
-        private supplier? supplierData = null;
+        private supplier? supplierData;
         private rem_sup? remitToObject;
         private readonly AmerichickenContext dbContext;
 

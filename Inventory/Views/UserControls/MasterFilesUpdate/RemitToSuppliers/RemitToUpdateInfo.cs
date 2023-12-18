@@ -153,7 +153,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         public void DeleteRemitTo(rem_sup remitToData)
         {
             if (remitToData != null)
-            {                 
+            {
                 var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
                 if (existingRemData != null)
                 {
