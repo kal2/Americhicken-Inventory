@@ -29,7 +29,7 @@ namespace Inventory.Services
                     LoadRemitToSupplier();
                     break;
 
-                case "shipFromSupplier":
+                case "shipFromSupplierSearch":
                     LoadShipFromSupplier();
                     break;
                 default:

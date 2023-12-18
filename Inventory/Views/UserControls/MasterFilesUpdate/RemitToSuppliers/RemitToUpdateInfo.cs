@@ -195,6 +195,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 case "5":
                     //save/update insurance
                     UpdateRemitData(remitData);
+                    RemitInsurance remitInsuranceInstance = new (_mainWindow, _activeControlManager);
+                    remitInsuranceInstance.GetRemitInsuranceData(remitData);
+                    _mainWindow.DisposeControl(this);
+                    _activeControlManager.SetActiveControl(remitInsuranceInstance);
+
                     break;
                 default:
                     MessageBox.Show("ERROR: Invalid user input, please contact developer");

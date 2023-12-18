@@ -109,7 +109,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label12.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label12.ForeColor = Color.White;
             label12.Location = new Point(20, 1);
             label12.Name = "label12";
@@ -120,7 +120,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label1.ForeColor = Color.White;
             label1.Location = new Point(142, 2);
             label1.Name = "label1";
@@ -131,7 +131,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label2.ForeColor = Color.White;
             label2.Location = new Point(369, 2);
             label2.Name = "label2";
@@ -142,7 +142,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label3.ForeColor = Color.White;
             label3.Location = new Point(968, 1);
             label3.Name = "label3";
@@ -153,7 +153,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label4.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label4.ForeColor = Color.White;
             label4.Location = new Point(766, 2);
             label4.Name = "label4";
@@ -164,7 +164,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label5.ForeColor = Color.White;
             label5.Location = new Point(1131, 2);
             label5.Name = "label5";
@@ -175,9 +175,9 @@
             // label27
             // 
             label27.BorderStyle = BorderStyle.Fixed3D;
-            label27.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label27.Font = new Font("Segoe UI", 16F);
             label27.ForeColor = Color.White;
-            label27.Location = new Point(20, 181);
+            label27.Location = new Point(20, 193);
             label27.Name = "label27";
             label27.Size = new Size(1250, 1);
             label27.TabIndex = 171;
@@ -186,9 +186,9 @@
             // label6
             // 
             label6.BorderStyle = BorderStyle.Fixed3D;
-            label6.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 16F);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(20, 575);
+            label6.Location = new Point(20, 635);
             label6.Name = "label6";
             label6.Size = new Size(1250, 1);
             label6.TabIndex = 172;
@@ -197,9 +197,9 @@
             // label7
             // 
             label7.BorderStyle = BorderStyle.Fixed3D;
-            label7.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI", 16F);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(20, 288);
+            label7.Location = new Point(20, 312);
             label7.Name = "label7";
             label7.Size = new Size(1250, 1);
             label7.TabIndex = 173;
@@ -208,9 +208,9 @@
             // label8
             // 
             label8.BorderStyle = BorderStyle.Fixed3D;
-            label8.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Font = new Font("Segoe UI", 16F);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(20, 468);
+            label8.Location = new Point(20, 516);
             label8.Name = "label8";
             label8.Size = new Size(1250, 1);
             label8.TabIndex = 174;
@@ -219,9 +219,9 @@
             // label9
             // 
             label9.BorderStyle = BorderStyle.Fixed3D;
-            label9.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Font = new Font("Segoe UI", 16F);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(20, 361);
+            label9.Location = new Point(20, 397);
             label9.Name = "label9";
             label9.Size = new Size(1250, 1);
             label9.TabIndex = 175;
@@ -230,21 +230,21 @@
             // insTp1TextBox
             // 
             insTp1TextBox.BackColor = Color.Red;
-            insTp1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            insTp1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             insTp1TextBox.ForeColor = Color.White;
             insTp1TextBox.Location = new Point(20, 43);
             insTp1TextBox.Margin = new Padding(0);
             insTp1TextBox.MaxLength = 40;
             insTp1TextBox.Name = "insTp1TextBox";
             insTp1TextBox.Size = new Size(34, 34);
-            insTp1TextBox.TabIndex = 176;
+            insTp1TextBox.TabIndex = 1;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label10.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label10.ForeColor = Color.White;
-            label10.Location = new Point(142, 45);
+            label10.Location = new Point(142, 47);
             label10.Name = "label10";
             label10.Size = new Size(104, 30);
             label10.TabIndex = 177;
@@ -253,9 +253,9 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label11.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(142, 186);
+            label11.Location = new Point(142, 200);
             label11.Name = "label11";
             label11.Size = new Size(166, 30);
             label11.TabIndex = 178;
@@ -264,9 +264,9 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label13.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label13.ForeColor = Color.White;
-            label13.Location = new Point(142, 293);
+            label13.Location = new Point(142, 319);
             label13.Name = "label13";
             label13.Size = new Size(179, 30);
             label13.TabIndex = 179;
@@ -275,9 +275,9 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label14.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label14.ForeColor = Color.White;
-            label14.Location = new Point(142, 366);
+            label14.Location = new Point(142, 404);
             label14.Name = "label14";
             label14.Size = new Size(184, 30);
             label14.TabIndex = 180;
@@ -286,9 +286,9 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label15.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label15.ForeColor = Color.White;
-            label15.Location = new Point(142, 473);
+            label15.Location = new Point(142, 523);
             label15.Name = "label15";
             label15.Size = new Size(191, 30);
             label15.TabIndex = 181;
@@ -297,9 +297,9 @@
             // label16
             // 
             label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label16.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label16.ForeColor = Color.White;
-            label16.Location = new Point(369, 78);
+            label16.Location = new Point(369, 90);
             label16.Name = "label16";
             label16.Size = new Size(178, 30);
             label16.TabIndex = 182;
@@ -308,9 +308,9 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label17.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label17.ForeColor = Color.White;
-            label17.Location = new Point(405, 112);
+            label17.Location = new Point(405, 124);
             label17.Name = "label17";
             label17.Size = new Size(142, 30);
             label17.TabIndex = 183;
@@ -319,9 +319,9 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label18.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label18.ForeColor = Color.White;
-            label18.Location = new Point(372, 146);
+            label18.Location = new Point(372, 158);
             label18.Name = "label18";
             label18.Size = new Size(175, 30);
             label18.TabIndex = 184;
@@ -330,9 +330,9 @@
             // label19
             // 
             label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label19.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label19.ForeColor = Color.White;
-            label19.Location = new Point(352, 250);
+            label19.Location = new Point(352, 274);
             label19.Name = "label19";
             label19.RightToLeft = RightToLeft.No;
             label19.Size = new Size(195, 30);
@@ -342,9 +342,9 @@
             // label20
             // 
             label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label20.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label20.ForeColor = Color.White;
-            label20.Location = new Point(313, 216);
+            label20.Location = new Point(313, 240);
             label20.Name = "label20";
             label20.RightToLeft = RightToLeft.No;
             label20.Size = new Size(234, 30);
@@ -354,9 +354,9 @@
             // label21
             // 
             label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label21.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label21.ForeColor = Color.White;
-            label21.Location = new Point(396, 396);
+            label21.Location = new Point(396, 444);
             label21.Name = "label21";
             label21.Size = new Size(151, 30);
             label21.TabIndex = 188;
@@ -365,9 +365,9 @@
             // label22
             // 
             label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label22.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label22.ForeColor = Color.White;
-            label22.Location = new Point(369, 323);
+            label22.Location = new Point(369, 359);
             label22.Name = "label22";
             label22.Size = new Size(178, 30);
             label22.TabIndex = 187;
@@ -376,9 +376,9 @@
             // label23
             // 
             label23.AutoSize = true;
-            label23.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label23.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label23.ForeColor = Color.White;
-            label23.Location = new Point(387, 430);
+            label23.Location = new Point(387, 478);
             label23.Name = "label23";
             label23.Size = new Size(160, 30);
             label23.TabIndex = 189;
@@ -387,9 +387,9 @@
             // label24
             // 
             label24.AutoSize = true;
-            label24.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label24.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label24.ForeColor = Color.White;
-            label24.Location = new Point(369, 503);
+            label24.Location = new Point(369, 563);
             label24.Name = "label24";
             label24.Size = new Size(178, 30);
             label24.TabIndex = 190;
@@ -398,9 +398,9 @@
             // label25
             // 
             label25.AutoSize = true;
-            label25.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label25.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label25.ForeColor = Color.White;
-            label25.Location = new Point(231, 543);
+            label25.Location = new Point(231, 603);
             label25.Name = "label25";
             label25.Size = new Size(316, 30);
             label25.TabIndex = 191;
@@ -409,273 +409,273 @@
             // genBeginDateMaskBox
             // 
             genBeginDateMaskBox.BackColor = Color.Red;
-            genBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            genBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             genBeginDateMaskBox.ForeColor = Color.White;
-            genBeginDateMaskBox.Location = new Point(766, 41);
+            genBeginDateMaskBox.Location = new Point(766, 43);
             genBeginDateMaskBox.Mask = "00/00/0000";
             genBeginDateMaskBox.Name = "genBeginDateMaskBox";
             genBeginDateMaskBox.Size = new Size(124, 34);
-            genBeginDateMaskBox.TabIndex = 192;
+            genBeginDateMaskBox.TabIndex = 3;
             genBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // genEndDateMaskBox
             // 
             genEndDateMaskBox.BackColor = Color.Red;
-            genEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            genEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             genEndDateMaskBox.ForeColor = Color.White;
-            genEndDateMaskBox.Location = new Point(968, 41);
+            genEndDateMaskBox.Location = new Point(968, 43);
             genEndDateMaskBox.Mask = "00/00/0000";
             genEndDateMaskBox.Name = "genEndDateMaskBox";
             genEndDateMaskBox.Size = new Size(124, 34);
-            genEndDateMaskBox.TabIndex = 193;
+            genEndDateMaskBox.TabIndex = 4;
             genEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // genLetterSentDateMaskBox
             // 
             genLetterSentDateMaskBox.BackColor = Color.Red;
-            genLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            genLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             genLetterSentDateMaskBox.ForeColor = Color.White;
-            genLetterSentDateMaskBox.Location = new Point(1146, 41);
+            genLetterSentDateMaskBox.Location = new Point(1146, 43);
             genLetterSentDateMaskBox.Mask = "00/00/0000";
             genLetterSentDateMaskBox.Name = "genLetterSentDateMaskBox";
             genLetterSentDateMaskBox.Size = new Size(124, 34);
-            genLetterSentDateMaskBox.TabIndex = 194;
+            genLetterSentDateMaskBox.TabIndex = 5;
             genLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // autoLetterSentDateMaskBox
             // 
             autoLetterSentDateMaskBox.BackColor = Color.Red;
-            autoLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            autoLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             autoLetterSentDateMaskBox.ForeColor = Color.White;
-            autoLetterSentDateMaskBox.Location = new Point(1146, 184);
+            autoLetterSentDateMaskBox.Location = new Point(1146, 198);
             autoLetterSentDateMaskBox.Mask = "00/00/0000";
             autoLetterSentDateMaskBox.Name = "autoLetterSentDateMaskBox";
             autoLetterSentDateMaskBox.Size = new Size(124, 34);
-            autoLetterSentDateMaskBox.TabIndex = 197;
+            autoLetterSentDateMaskBox.TabIndex = 16;
             autoLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // autoEndDateMaskBox
             // 
             autoEndDateMaskBox.BackColor = Color.Red;
-            autoEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            autoEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             autoEndDateMaskBox.ForeColor = Color.White;
-            autoEndDateMaskBox.Location = new Point(968, 184);
+            autoEndDateMaskBox.Location = new Point(968, 198);
             autoEndDateMaskBox.Mask = "00/00/0000";
             autoEndDateMaskBox.Name = "autoEndDateMaskBox";
             autoEndDateMaskBox.Size = new Size(124, 34);
-            autoEndDateMaskBox.TabIndex = 196;
+            autoEndDateMaskBox.TabIndex = 15;
             autoEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // autoBeginDateMaskBox
             // 
             autoBeginDateMaskBox.BackColor = Color.Red;
-            autoBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            autoBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             autoBeginDateMaskBox.ForeColor = Color.White;
-            autoBeginDateMaskBox.Location = new Point(766, 184);
+            autoBeginDateMaskBox.Location = new Point(766, 198);
             autoBeginDateMaskBox.Mask = "00/00/0000";
             autoBeginDateMaskBox.Name = "autoBeginDateMaskBox";
             autoBeginDateMaskBox.Size = new Size(124, 34);
-            autoBeginDateMaskBox.TabIndex = 195;
+            autoBeginDateMaskBox.TabIndex = 14;
             autoBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // excessLetterSentDateMaskBox
             // 
             excessLetterSentDateMaskBox.BackColor = Color.Red;
-            excessLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            excessLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             excessLetterSentDateMaskBox.ForeColor = Color.White;
-            excessLetterSentDateMaskBox.Location = new Point(1146, 291);
+            excessLetterSentDateMaskBox.Location = new Point(1146, 317);
             excessLetterSentDateMaskBox.Mask = "00/00/0000";
             excessLetterSentDateMaskBox.Name = "excessLetterSentDateMaskBox";
             excessLetterSentDateMaskBox.Size = new Size(124, 34);
-            excessLetterSentDateMaskBox.TabIndex = 200;
+            excessLetterSentDateMaskBox.TabIndex = 25;
             excessLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // excessEndDateMaskBox
             // 
             excessEndDateMaskBox.BackColor = Color.Red;
-            excessEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            excessEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             excessEndDateMaskBox.ForeColor = Color.White;
-            excessEndDateMaskBox.Location = new Point(968, 291);
+            excessEndDateMaskBox.Location = new Point(968, 317);
             excessEndDateMaskBox.Mask = "00/00/0000";
             excessEndDateMaskBox.Name = "excessEndDateMaskBox";
             excessEndDateMaskBox.Size = new Size(124, 34);
-            excessEndDateMaskBox.TabIndex = 199;
+            excessEndDateMaskBox.TabIndex = 24;
             excessEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // excessBeginDateMaskBox
             // 
             excessBeginDateMaskBox.BackColor = Color.Red;
-            excessBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            excessBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             excessBeginDateMaskBox.ForeColor = Color.White;
-            excessBeginDateMaskBox.Location = new Point(766, 291);
+            excessBeginDateMaskBox.Location = new Point(766, 317);
             excessBeginDateMaskBox.Mask = "00/00/0000";
             excessBeginDateMaskBox.Name = "excessBeginDateMaskBox";
             excessBeginDateMaskBox.Size = new Size(124, 34);
-            excessBeginDateMaskBox.TabIndex = 198;
+            excessBeginDateMaskBox.TabIndex = 23;
             excessBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // workLetterSentDateMaskBox
             // 
             workLetterSentDateMaskBox.BackColor = Color.Red;
-            workLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            workLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             workLetterSentDateMaskBox.ForeColor = Color.White;
-            workLetterSentDateMaskBox.Location = new Point(1146, 364);
+            workLetterSentDateMaskBox.Location = new Point(1146, 402);
             workLetterSentDateMaskBox.Mask = "00/00/0000";
             workLetterSentDateMaskBox.Name = "workLetterSentDateMaskBox";
             workLetterSentDateMaskBox.Size = new Size(124, 34);
-            workLetterSentDateMaskBox.TabIndex = 203;
+            workLetterSentDateMaskBox.TabIndex = 32;
             workLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // workEndDateMaskBox
             // 
             workEndDateMaskBox.BackColor = Color.Red;
-            workEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            workEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             workEndDateMaskBox.ForeColor = Color.White;
-            workEndDateMaskBox.Location = new Point(968, 364);
+            workEndDateMaskBox.Location = new Point(968, 402);
             workEndDateMaskBox.Mask = "00/00/0000";
             workEndDateMaskBox.Name = "workEndDateMaskBox";
             workEndDateMaskBox.Size = new Size(124, 34);
-            workEndDateMaskBox.TabIndex = 202;
+            workEndDateMaskBox.TabIndex = 31;
             workEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // workBeginDateMaskBox
             // 
             workBeginDateMaskBox.BackColor = Color.Red;
-            workBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            workBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             workBeginDateMaskBox.ForeColor = Color.White;
-            workBeginDateMaskBox.Location = new Point(766, 364);
+            workBeginDateMaskBox.Location = new Point(766, 402);
             workBeginDateMaskBox.Mask = "00/00/0000";
             workBeginDateMaskBox.Name = "workBeginDateMaskBox";
             workBeginDateMaskBox.Size = new Size(124, 34);
-            workBeginDateMaskBox.TabIndex = 201;
+            workBeginDateMaskBox.TabIndex = 30;
             workBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // recallLetterSentDateMaskBox
             // 
             recallLetterSentDateMaskBox.BackColor = Color.Red;
-            recallLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            recallLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             recallLetterSentDateMaskBox.ForeColor = Color.White;
-            recallLetterSentDateMaskBox.Location = new Point(1146, 471);
+            recallLetterSentDateMaskBox.Location = new Point(1146, 521);
             recallLetterSentDateMaskBox.Mask = "00/00/0000";
             recallLetterSentDateMaskBox.Name = "recallLetterSentDateMaskBox";
             recallLetterSentDateMaskBox.Size = new Size(124, 34);
-            recallLetterSentDateMaskBox.TabIndex = 206;
+            recallLetterSentDateMaskBox.TabIndex = 40;
             recallLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // recallEndDateMaskBox
             // 
             recallEndDateMaskBox.BackColor = Color.Red;
-            recallEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            recallEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             recallEndDateMaskBox.ForeColor = Color.White;
-            recallEndDateMaskBox.Location = new Point(968, 471);
+            recallEndDateMaskBox.Location = new Point(968, 521);
             recallEndDateMaskBox.Mask = "00/00/0000";
             recallEndDateMaskBox.Name = "recallEndDateMaskBox";
             recallEndDateMaskBox.Size = new Size(124, 34);
-            recallEndDateMaskBox.TabIndex = 205;
+            recallEndDateMaskBox.TabIndex = 39;
             recallEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // recallBeginDateMaskBox
             // 
             recallBeginDateMaskBox.BackColor = Color.Red;
-            recallBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            recallBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             recallBeginDateMaskBox.ForeColor = Color.White;
-            recallBeginDateMaskBox.Location = new Point(766, 471);
+            recallBeginDateMaskBox.Location = new Point(766, 521);
             recallBeginDateMaskBox.Mask = "00/00/0000";
             recallBeginDateMaskBox.Name = "recallBeginDateMaskBox";
             recallBeginDateMaskBox.Size = new Size(124, 34);
-            recallBeginDateMaskBox.TabIndex = 204;
+            recallBeginDateMaskBox.TabIndex = 38;
             recallBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // policy1TextBox
             // 
             policy1TextBox.BackColor = Color.Red;
-            policy1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            policy1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             policy1TextBox.ForeColor = Color.White;
-            policy1TextBox.Location = new Point(369, 41);
+            policy1TextBox.Location = new Point(369, 43);
             policy1TextBox.Margin = new Padding(0);
             policy1TextBox.MaxLength = 40;
             policy1TextBox.Name = "policy1TextBox";
             policy1TextBox.Size = new Size(345, 34);
-            policy1TextBox.TabIndex = 207;
+            policy1TextBox.TabIndex = 2;
             // 
             // genCov4TextBox
             // 
             genCov4TextBox.BackColor = Color.Red;
-            genCov4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            genCov4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             genCov4TextBox.ForeColor = Color.White;
-            genCov4TextBox.Location = new Point(559, 76);
+            genCov4TextBox.Location = new Point(559, 88);
             genCov4TextBox.Margin = new Padding(0);
             genCov4TextBox.MaxLength = 40;
             genCov4TextBox.Name = "genCov4TextBox";
             genCov4TextBox.Size = new Size(124, 34);
-            genCov4TextBox.TabIndex = 208;
+            genCov4TextBox.TabIndex = 6;
             // 
             // genCov5TextBox
             // 
             genCov5TextBox.BackColor = Color.Red;
-            genCov5TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            genCov5TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             genCov5TextBox.ForeColor = Color.White;
-            genCov5TextBox.Location = new Point(559, 110);
+            genCov5TextBox.Location = new Point(559, 122);
             genCov5TextBox.Margin = new Padding(0);
             genCov5TextBox.MaxLength = 40;
             genCov5TextBox.Name = "genCov5TextBox";
             genCov5TextBox.Size = new Size(124, 34);
-            genCov5TextBox.TabIndex = 209;
+            genCov5TextBox.TabIndex = 7;
             // 
             // genCov6TextBox
             // 
             genCov6TextBox.BackColor = Color.Red;
-            genCov6TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            genCov6TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             genCov6TextBox.ForeColor = Color.White;
-            genCov6TextBox.Location = new Point(559, 144);
+            genCov6TextBox.Location = new Point(559, 156);
             genCov6TextBox.Margin = new Padding(0);
             genCov6TextBox.MaxLength = 40;
             genCov6TextBox.Name = "genCov6TextBox";
             genCov6TextBox.Size = new Size(124, 34);
-            genCov6TextBox.TabIndex = 210;
+            genCov6TextBox.TabIndex = 8;
             // 
             // genCov2TextBox
             // 
             genCov2TextBox.BackColor = Color.Red;
-            genCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            genCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             genCov2TextBox.ForeColor = Color.White;
-            genCov2TextBox.Location = new Point(1146, 144);
+            genCov2TextBox.Location = new Point(1146, 156);
             genCov2TextBox.Margin = new Padding(0);
             genCov2TextBox.MaxLength = 40;
             genCov2TextBox.Name = "genCov2TextBox";
             genCov2TextBox.Size = new Size(124, 34);
-            genCov2TextBox.TabIndex = 216;
+            genCov2TextBox.TabIndex = 11;
             // 
             // genCov1TextBox
             // 
             genCov1TextBox.BackColor = Color.Red;
-            genCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            genCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             genCov1TextBox.ForeColor = Color.White;
-            genCov1TextBox.Location = new Point(1146, 110);
+            genCov1TextBox.Location = new Point(1146, 122);
             genCov1TextBox.Margin = new Padding(0);
             genCov1TextBox.MaxLength = 40;
             genCov1TextBox.Name = "genCov1TextBox";
             genCov1TextBox.Size = new Size(124, 34);
-            genCov1TextBox.TabIndex = 215;
+            genCov1TextBox.TabIndex = 10;
             // 
             // genCov3TextBox
             // 
             genCov3TextBox.BackColor = Color.Red;
-            genCov3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            genCov3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             genCov3TextBox.ForeColor = Color.White;
-            genCov3TextBox.Location = new Point(1146, 76);
+            genCov3TextBox.Location = new Point(1146, 88);
             genCov3TextBox.Margin = new Padding(0);
             genCov3TextBox.MaxLength = 40;
             genCov3TextBox.Name = "genCov3TextBox";
             genCov3TextBox.Size = new Size(124, 34);
-            genCov3TextBox.TabIndex = 214;
+            genCov3TextBox.TabIndex = 9;
             // 
             // label26
             // 
             label26.AutoSize = true;
-            label26.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label26.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label26.ForeColor = Color.White;
-            label26.Location = new Point(970, 146);
+            label26.Location = new Point(970, 158);
             label26.Name = "label26";
             label26.Size = new Size(164, 30);
             label26.TabIndex = 213;
@@ -684,9 +684,9 @@
             // label28
             // 
             label28.AutoSize = true;
-            label28.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label28.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label28.ForeColor = Color.White;
-            label28.Location = new Point(968, 112);
+            label28.Location = new Point(968, 124);
             label28.Name = "label28";
             label28.Size = new Size(166, 30);
             label28.TabIndex = 212;
@@ -695,9 +695,9 @@
             // label29
             // 
             label29.AutoSize = true;
-            label29.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label29.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label29.ForeColor = Color.White;
-            label29.Location = new Point(970, 78);
+            label29.Location = new Point(970, 90);
             label29.Name = "label29";
             label29.Size = new Size(164, 30);
             label29.TabIndex = 211;
@@ -706,177 +706,177 @@
             // insTp2TextBox
             // 
             insTp2TextBox.BackColor = Color.Red;
-            insTp2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            insTp2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             insTp2TextBox.ForeColor = Color.White;
-            insTp2TextBox.Location = new Point(20, 184);
+            insTp2TextBox.Location = new Point(20, 198);
             insTp2TextBox.Margin = new Padding(0);
             insTp2TextBox.MaxLength = 40;
             insTp2TextBox.Name = "insTp2TextBox";
             insTp2TextBox.Size = new Size(34, 34);
-            insTp2TextBox.TabIndex = 217;
+            insTp2TextBox.TabIndex = 12;
             // 
             // insTp3TextBox
             // 
             insTp3TextBox.BackColor = Color.Red;
-            insTp3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            insTp3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             insTp3TextBox.ForeColor = Color.White;
-            insTp3TextBox.Location = new Point(20, 291);
+            insTp3TextBox.Location = new Point(20, 317);
             insTp3TextBox.Margin = new Padding(0);
             insTp3TextBox.MaxLength = 40;
             insTp3TextBox.Name = "insTp3TextBox";
             insTp3TextBox.Size = new Size(34, 34);
-            insTp3TextBox.TabIndex = 218;
+            insTp3TextBox.TabIndex = 21;
             // 
             // insTp4TextBox
             // 
             insTp4TextBox.BackColor = Color.Red;
-            insTp4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            insTp4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             insTp4TextBox.ForeColor = Color.White;
-            insTp4TextBox.Location = new Point(20, 364);
+            insTp4TextBox.Location = new Point(20, 402);
             insTp4TextBox.Margin = new Padding(0);
             insTp4TextBox.MaxLength = 40;
             insTp4TextBox.Name = "insTp4TextBox";
             insTp4TextBox.Size = new Size(34, 34);
-            insTp4TextBox.TabIndex = 219;
+            insTp4TextBox.TabIndex = 28;
             // 
             // insTp5TextBox
             // 
             insTp5TextBox.BackColor = Color.Red;
-            insTp5TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            insTp5TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             insTp5TextBox.ForeColor = Color.White;
-            insTp5TextBox.Location = new Point(20, 471);
+            insTp5TextBox.Location = new Point(20, 521);
             insTp5TextBox.Margin = new Padding(0);
             insTp5TextBox.MaxLength = 40;
             insTp5TextBox.Name = "insTp5TextBox";
             insTp5TextBox.Size = new Size(34, 34);
-            insTp5TextBox.TabIndex = 220;
+            insTp5TextBox.TabIndex = 36;
             // 
             // autoCov2TextBox
             // 
             autoCov2TextBox.BackColor = Color.Red;
-            autoCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            autoCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             autoCov2TextBox.ForeColor = Color.White;
-            autoCov2TextBox.Location = new Point(559, 253);
+            autoCov2TextBox.Location = new Point(559, 277);
             autoCov2TextBox.Margin = new Padding(0);
             autoCov2TextBox.MaxLength = 40;
             autoCov2TextBox.Name = "autoCov2TextBox";
             autoCov2TextBox.Size = new Size(124, 34);
-            autoCov2TextBox.TabIndex = 223;
+            autoCov2TextBox.TabIndex = 18;
             // 
             // autoCov1TextBox
             // 
             autoCov1TextBox.BackColor = Color.Red;
-            autoCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            autoCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             autoCov1TextBox.ForeColor = Color.White;
-            autoCov1TextBox.Location = new Point(559, 219);
+            autoCov1TextBox.Location = new Point(559, 243);
             autoCov1TextBox.Margin = new Padding(0);
             autoCov1TextBox.MaxLength = 40;
             autoCov1TextBox.Name = "autoCov1TextBox";
             autoCov1TextBox.Size = new Size(124, 34);
-            autoCov1TextBox.TabIndex = 222;
+            autoCov1TextBox.TabIndex = 17;
             // 
             // policy2TextBox
             // 
             policy2TextBox.BackColor = Color.Red;
-            policy2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            policy2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             policy2TextBox.ForeColor = Color.White;
-            policy2TextBox.Location = new Point(369, 184);
+            policy2TextBox.Location = new Point(369, 198);
             policy2TextBox.Margin = new Padding(0);
             policy2TextBox.MaxLength = 40;
             policy2TextBox.Name = "policy2TextBox";
             policy2TextBox.Size = new Size(345, 34);
-            policy2TextBox.TabIndex = 221;
+            policy2TextBox.TabIndex = 13;
             // 
             // workCov2TextBox
             // 
             workCov2TextBox.BackColor = Color.Red;
-            workCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            workCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             workCov2TextBox.ForeColor = Color.White;
-            workCov2TextBox.Location = new Point(559, 433);
+            workCov2TextBox.Location = new Point(559, 481);
             workCov2TextBox.Margin = new Padding(0);
             workCov2TextBox.MaxLength = 40;
             workCov2TextBox.Name = "workCov2TextBox";
             workCov2TextBox.Size = new Size(124, 34);
-            workCov2TextBox.TabIndex = 226;
+            workCov2TextBox.TabIndex = 34;
             // 
             // workCov1TextBox
             // 
             workCov1TextBox.BackColor = Color.Red;
-            workCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            workCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             workCov1TextBox.ForeColor = Color.White;
-            workCov1TextBox.Location = new Point(559, 399);
+            workCov1TextBox.Location = new Point(559, 447);
             workCov1TextBox.Margin = new Padding(0);
             workCov1TextBox.MaxLength = 40;
             workCov1TextBox.Name = "workCov1TextBox";
             workCov1TextBox.Size = new Size(124, 34);
-            workCov1TextBox.TabIndex = 225;
+            workCov1TextBox.TabIndex = 33;
             // 
             // policy4TextBox
             // 
             policy4TextBox.BackColor = Color.Red;
-            policy4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            policy4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             policy4TextBox.ForeColor = Color.White;
-            policy4TextBox.Location = new Point(369, 364);
+            policy4TextBox.Location = new Point(369, 402);
             policy4TextBox.Margin = new Padding(0);
             policy4TextBox.MaxLength = 40;
             policy4TextBox.Name = "policy4TextBox";
             policy4TextBox.Size = new Size(345, 34);
-            policy4TextBox.TabIndex = 224;
+            policy4TextBox.TabIndex = 29;
             // 
             // excessCov1TextBox
             // 
             excessCov1TextBox.BackColor = Color.Red;
-            excessCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            excessCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             excessCov1TextBox.ForeColor = Color.White;
-            excessCov1TextBox.Location = new Point(559, 326);
+            excessCov1TextBox.Location = new Point(559, 362);
             excessCov1TextBox.Margin = new Padding(0);
             excessCov1TextBox.MaxLength = 40;
             excessCov1TextBox.Name = "excessCov1TextBox";
             excessCov1TextBox.Size = new Size(124, 34);
-            excessCov1TextBox.TabIndex = 228;
+            excessCov1TextBox.TabIndex = 26;
             // 
             // policy3TextBox
             // 
             policy3TextBox.BackColor = Color.Red;
-            policy3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            policy3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             policy3TextBox.ForeColor = Color.White;
-            policy3TextBox.Location = new Point(369, 291);
+            policy3TextBox.Location = new Point(369, 317);
             policy3TextBox.Margin = new Padding(0);
             policy3TextBox.MaxLength = 40;
             policy3TextBox.Name = "policy3TextBox";
             policy3TextBox.Size = new Size(345, 34);
-            policy3TextBox.TabIndex = 227;
+            policy3TextBox.TabIndex = 22;
             // 
             // autoCov4TextBox
             // 
             autoCov4TextBox.BackColor = Color.Red;
-            autoCov4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            autoCov4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             autoCov4TextBox.ForeColor = Color.White;
-            autoCov4TextBox.Location = new Point(1146, 253);
+            autoCov4TextBox.Location = new Point(1146, 277);
             autoCov4TextBox.Margin = new Padding(0);
             autoCov4TextBox.MaxLength = 40;
             autoCov4TextBox.Name = "autoCov4TextBox";
             autoCov4TextBox.Size = new Size(124, 34);
-            autoCov4TextBox.TabIndex = 232;
+            autoCov4TextBox.TabIndex = 20;
             // 
             // autoCov3TextBox
             // 
             autoCov3TextBox.BackColor = Color.Red;
-            autoCov3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            autoCov3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             autoCov3TextBox.ForeColor = Color.White;
-            autoCov3TextBox.Location = new Point(1146, 219);
+            autoCov3TextBox.Location = new Point(1146, 243);
             autoCov3TextBox.Margin = new Padding(0);
             autoCov3TextBox.MaxLength = 40;
             autoCov3TextBox.Name = "autoCov3TextBox";
             autoCov3TextBox.Size = new Size(124, 34);
-            autoCov3TextBox.TabIndex = 231;
+            autoCov3TextBox.TabIndex = 19;
             // 
             // label30
             // 
             label30.AutoSize = true;
-            label30.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label30.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label30.ForeColor = Color.White;
-            label30.Location = new Point(946, 255);
+            label30.Location = new Point(946, 279);
             label30.Name = "label30";
             label30.Size = new Size(188, 30);
             label30.TabIndex = 230;
@@ -885,9 +885,9 @@
             // label31
             // 
             label31.AutoSize = true;
-            label31.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label31.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label31.ForeColor = Color.White;
-            label31.Location = new Point(922, 221);
+            label31.Location = new Point(922, 245);
             label31.Name = "label31";
             label31.Size = new Size(212, 30);
             label31.TabIndex = 229;
@@ -896,21 +896,21 @@
             // workCov3TextBox
             // 
             workCov3TextBox.BackColor = Color.Red;
-            workCov3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            workCov3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             workCov3TextBox.ForeColor = Color.White;
-            workCov3TextBox.Location = new Point(1146, 399);
+            workCov3TextBox.Location = new Point(1146, 447);
             workCov3TextBox.Margin = new Padding(0);
             workCov3TextBox.MaxLength = 40;
             workCov3TextBox.Name = "workCov3TextBox";
             workCov3TextBox.Size = new Size(124, 34);
-            workCov3TextBox.TabIndex = 235;
+            workCov3TextBox.TabIndex = 35;
             // 
             // label33
             // 
             label33.AutoSize = true;
-            label33.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label33.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label33.ForeColor = Color.White;
-            label33.Location = new Point(929, 401);
+            label33.Location = new Point(929, 449);
             label33.Name = "label33";
             label33.Size = new Size(205, 30);
             label33.TabIndex = 233;
@@ -919,21 +919,21 @@
             // excessCov2TextBox
             // 
             excessCov2TextBox.BackColor = Color.Red;
-            excessCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            excessCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             excessCov2TextBox.ForeColor = Color.White;
-            excessCov2TextBox.Location = new Point(1146, 326);
+            excessCov2TextBox.Location = new Point(1146, 362);
             excessCov2TextBox.Margin = new Padding(0);
             excessCov2TextBox.MaxLength = 40;
             excessCov2TextBox.Name = "excessCov2TextBox";
             excessCov2TextBox.Size = new Size(124, 34);
-            excessCov2TextBox.TabIndex = 237;
+            excessCov2TextBox.TabIndex = 27;
             // 
             // label32
             // 
             label32.AutoSize = true;
-            label32.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label32.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label32.ForeColor = Color.White;
-            label32.Location = new Point(1017, 328);
+            label32.Location = new Point(1017, 364);
             label32.Name = "label32";
             label32.Size = new Size(117, 30);
             label32.TabIndex = 236;
@@ -942,11 +942,11 @@
             // recallCov1TextBox
             // 
             recallCov1TextBox.BackColor = Color.Red;
-            recallCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            recallCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             recallCov1TextBox.ForeColor = Color.White;
-            recallCov1TextBox.Location = new Point(559, 506);
+            recallCov1TextBox.Location = new Point(559, 566);
             recallCov1TextBox.Margin = new Padding(0);
-            recallCov1TextBox.MaxLength = 40;
+            recallCov1TextBox.MaxLength = 41;
             recallCov1TextBox.Name = "recallCov1TextBox";
             recallCov1TextBox.Size = new Size(124, 34);
             recallCov1TextBox.TabIndex = 239;
@@ -954,31 +954,31 @@
             // policy5TextBox
             // 
             policy5TextBox.BackColor = Color.Red;
-            policy5TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            policy5TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             policy5TextBox.ForeColor = Color.White;
-            policy5TextBox.Location = new Point(369, 471);
+            policy5TextBox.Location = new Point(369, 521);
             policy5TextBox.Margin = new Padding(0);
             policy5TextBox.MaxLength = 40;
             policy5TextBox.Name = "policy5TextBox";
             policy5TextBox.Size = new Size(345, 34);
-            policy5TextBox.TabIndex = 238;
+            policy5TextBox.TabIndex = 37;
             // 
             // cancellationTextBox
             // 
             cancellationTextBox.BackColor = Color.Red;
-            cancellationTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            cancellationTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             cancellationTextBox.ForeColor = Color.White;
-            cancellationTextBox.Location = new Point(559, 541);
+            cancellationTextBox.Location = new Point(559, 601);
             cancellationTextBox.Margin = new Padding(0);
             cancellationTextBox.MaxLength = 40;
             cancellationTextBox.Name = "cancellationTextBox";
             cancellationTextBox.Size = new Size(124, 34);
-            cancellationTextBox.TabIndex = 240;
+            cancellationTextBox.TabIndex = 42;
             // 
             // label34
             // 
             label34.BorderStyle = BorderStyle.Fixed3D;
-            label34.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label34.Font = new Font("Segoe UI", 16F);
             label34.ForeColor = Color.White;
             label34.Location = new Point(20, 38);
             label34.Name = "label34";

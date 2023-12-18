@@ -178,4 +178,6 @@ public partial class rem_sup
     public string indem_flg { get; set; }
 
     public DateTime? indem_dt { get; set; }
+
+    public string policy3 { get; set; }
 }
