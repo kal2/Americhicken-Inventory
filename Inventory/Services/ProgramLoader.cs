@@ -10,16 +10,8 @@ using System.Threading.Tasks;
 
 namespace Inventory.Services
 {
-    public class ProgramLoader
+    public class ProgramLoader(MainWindow _mainWindow, ActiveControlManager _activeControlManager)
     {
-        private readonly MainWindow _mainWindow;
-        private readonly ActiveControlManager _activeControlManager;
-
-        public ProgramLoader(MainWindow mainWindow, ActiveControlManager activeControlManager)
-        {
-            _mainWindow = mainWindow;
-            _activeControlManager = activeControlManager;
-        }
 
         public void LoadProgram(string programName)
         {
@@ -43,7 +35,7 @@ namespace Inventory.Services
             RemitToUpdateInfo remitToUpdateInfo = new (_mainWindow, _activeControlManager);
             DbSearch dbSearch = new (_mainWindow, _activeControlManager);
             dbSearch.SetTable("remitTo");
-            dbSearch.SearchCompleted += HandleRemitToSearchCompleted;
+            dbSearch.SearchCompleted += (f3, f4) => HandleRemitToSearchCompleted(f3!, f4);
             _activeControlManager.SetActiveControl(dbSearch);
 
             void HandleRemitToSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
@@ -55,7 +47,7 @@ namespace Inventory.Services
                 else
                 {
                     MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
-                    matchSelectInstance.SelectedSearchResult += HandleSelectedRemitToSearchResult;
+                    matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedRemitToSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Remit To");
                     matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
                     _activeControlManager.SetActiveControl(matchSelectInstance);
@@ -64,8 +56,8 @@ namespace Inventory.Services
 
             void HandleSelectedRemitToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
-                remitToUpdateInfo.GetRemitToData(e.SelectedResult as rem_sup);
-                _mainWindow.DisposeControl(sender as UserControl);
+                remitToUpdateInfo.GetRemitToData((rem_sup)e!.SelectedResult);
+                _mainWindow.DisposeControl((UserControl)sender!);
                 _activeControlManager.SetActiveControl(remitToUpdateInfo);
             }
         }
@@ -75,7 +67,7 @@ namespace Inventory.Services
             ShipFromUpdateInfo shipFromUpdateInfo = new (_mainWindow, _activeControlManager);
             DbSearch dbSearch = new (_mainWindow, _activeControlManager);
             dbSearch.SetTable("supplier");
-            dbSearch.SearchCompleted += HandleSupplierSearchCompleted;
+            dbSearch.SearchCompleted += (f3, f4) => HandleSupplierSearchCompleted(f3!, f4);
             _activeControlManager.SetActiveControl(dbSearch);
 
             void HandleSupplierSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
@@ -87,7 +79,7 @@ namespace Inventory.Services
                 else
                 {
                     MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
-                    matchSelectInstance.SelectedSearchResult += HandleSelectedSupplierSearchResult;
+                    matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedSupplierSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Supplier");
                     matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
                     _activeControlManager.SetActiveControl(matchSelectInstance);
@@ -96,8 +88,8 @@ namespace Inventory.Services
 
             void HandleSelectedSupplierSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
-                shipFromUpdateInfo.GetShipFromData(e.SelectedResult as supplier);
-                _mainWindow.DisposeControl(sender as UserControl);
+                shipFromUpdateInfo.GetShipFromData((supplier)e!.SelectedResult);
+                _mainWindow.DisposeControl((UserControl)sender!);
                 _activeControlManager.SetActiveControl(shipFromUpdateInfo);
             }
         }

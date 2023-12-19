@@ -5,8 +5,7 @@
         //Passes menu items to caller
         public static string[] MainMenu()
         {
-            string[] items =
-            {
+            return [
                 "main",
                 "1 - PURCHASE ORDERS",
                 "2 - CUSTOMER INVOICES",
@@ -17,13 +16,11 @@
                 "7 - INVENTORY - REPORTS/VIEW ACTIVITY",
                 "8 - FILE MAINTENANCE",
                 "9 - EXIT"
-            };
-            return items;
+            ];
         }
         public static string[] POMenuItems()
         {
-            string[] items =
-            {
+            return [
                 "purchase",
                 "1 - ADD PURCHASE ORDER(S)",
                 "2 - CHANGE PURCHASE ORDER(S)",
@@ -47,13 +44,11 @@
                 "S - DAILY SAMPLE REQUEST REPORT",
                 "T - LIST PO PRICE CHANGES FOR LOT",
                 "W - WHITE BOARD REPORT"
-            };
-            return items;
+            ];
         }
         public static string[] FileMaintenenceMenuItems()
         {
-            string[] items =
-            {
+            return [
                 "filemaintenence",
                 "1 - REINDEX SELECTED MAIN FILES (Normally use this to Reindex)",
                 "2 - REINDEX ALL/SPECIFIC DATA FILES",
@@ -64,13 +59,11 @@
                 "7 - UPDATE NEXT INVOICE/CHECK/WIRE/DEBIT&CREDIT NBR TO USED",
                 "8 - CHANGE TO NEW POSTING MONTH",
                 "9 - RETURN TO MAIN MENU"
-            };
-            return items;
+            ];
         }
         public static string[] MasterFileUpdateMenuItems()
         {
-            string[] items =
-            {
+            return [
                 "masterfileupdate",
                 "1 - REMIT TO SUPPLIERS",
                 "2 - SHIPPED FROM SUPPLIERS",
@@ -87,8 +80,7 @@
                 "18 - NATIONAL PRICING MASTER",
                 "19 - SUPPLIER/CUSTOMER PRICING MASTER",
                 "99 - RETURN TO MAINTENANCE MENU"
-            };
-            return items;
+            ];
         }
     }
 }

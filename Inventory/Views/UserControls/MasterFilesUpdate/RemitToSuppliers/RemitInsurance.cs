@@ -21,7 +21,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         private readonly ActiveControlManager _activeControlHelper;
         private readonly MainWindow _mainWindow;
         private readonly AmerichickenContext dbContext;
-        private rem_sup? remitData;
+        private rem_sup remitData;
         public RemitInsurance(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
@@ -92,48 +92,51 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
                     if (existingRemData != null)
                     {
-                        remitData.ins_tp1 = insTp1TextBox.Text.Trim();
-                        remitData.ins_tp2 = insTp2TextBox.Text.Trim();
-                        remitData.ins_tp3 = insTp3TextBox.Text.Trim();
-                        remitData.ins_tp4 = insTp4TextBox.Text.Trim();
-                        remitData.ins_tp5 = insTp5TextBox.Text.Trim();
-                        remitData.policy1 = policy1TextBox.Text.Trim();
-                        remitData.gen_beg = DateTime.Parse(genBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.gen_end = DateTime.Parse(genEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.gen_let = DateTime.Parse(genLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.gen_cov1 = decimal.Parse(genCov1TextBox.Text.Trim());
-                        remitData.gen_cov2 = decimal.Parse(genCov2TextBox.Text.Trim());
-                        remitData.gen_cov3 = decimal.Parse(genCov3TextBox.Text.Trim());
-                        remitData.gen_cov4 = decimal.Parse(genCov4TextBox.Text.Trim());
-                        remitData.gen_cov5 = decimal.Parse(genCov5TextBox.Text.Trim());
-                        remitData.gen_cov6 = decimal.Parse(genCov6TextBox.Text.Trim());
-                        remitData.policy2 = policy2TextBox.Text.Trim();
-                        remitData.auto_beg = DateTime.Parse(autoBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.auto_end = DateTime.Parse(autoEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.auto_let = DateTime.Parse(autoLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.auto_cov1 = decimal.Parse(autoCov1TextBox.Text.Trim());
-                        remitData.auto_cov2 = decimal.Parse(autoCov2TextBox.Text.Trim());
-                        remitData.auto_cov3 = decimal.Parse(autoCov3TextBox.Text.Trim());
-                        remitData.auto_cov4 = decimal.Parse(autoCov4TextBox.Text.Trim());
-                        remitData.policy3 = policy3TextBox.Text.Trim();
-                        remitData.exces_beg = DateTime.Parse(excessBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.exces_end = DateTime.Parse(excessEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.exces_let = DateTime.Parse(excessLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.exce_cov1 = decimal.Parse(excessCov1TextBox.Text.Trim());
-                        remitData.exce_cov2 = decimal.Parse(excessCov2TextBox.Text.Trim());
-                        remitData.policy4 = policy4TextBox.Text.Trim();
-                        remitData.work_beg = DateTime.Parse(workBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.work_end = DateTime.Parse(workEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.work_let = DateTime.Parse(workLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.work_cov1 = decimal.Parse(workCov1TextBox.Text.Trim());
-                        remitData.work_cov2 = decimal.Parse(workCov2TextBox.Text.Trim());
-                        remitData.work_cov3 = decimal.Parse(workCov3TextBox.Text.Trim());
-                        remitData.policy5 = policy5TextBox.Text.Trim();
-                        remitData.recal_beg = DateTime.Parse(recallBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.recal_end = DateTime.Parse(recallEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.recal_let = DateTime.Parse(recallLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"));
-                        remitData.reca_cov1 = decimal.Parse(recallCov1TextBox.Text.Trim());
-                        remitData.cancel = decimal.Parse(cancellationTextBox.Text.Trim());
+                        // alter the assignments below to skip any empty textboxes
+
+                        existingRemData!.ins_tp1 = insTp1TextBox.Text.Trim();
+                        existingRemData.ins_tp2 = insTp2TextBox.Text.Trim();
+                        existingRemData.ins_tp3 = insTp3TextBox.Text.Trim();
+                        existingRemData.ins_tp4 = insTp4TextBox.Text.Trim();
+                        existingRemData.ins_tp5 = insTp5TextBox.Text.Trim();
+                        existingRemData.policy1 = policy1TextBox.Text.Trim();
+                        existingRemData.gen_beg = DateTime.TryParse(genBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var genBegin) ? genBegin : null;
+                        existingRemData.gen_end = DateTime.TryParse(genEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var genEnd) ? genEnd : null;
+                        existingRemData.gen_let = DateTime.TryParse(genLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var genLet) ? genLet : null;
+                        existingRemData.gen_cov1 = decimal.TryParse(genCov1TextBox.Text.Trim(), out var genCov1) ? genCov1 : null;
+                        existingRemData.gen_cov2 = decimal.TryParse(genCov2TextBox.Text.Trim(), out var genCov2) ? genCov2 : null;
+                        existingRemData.gen_cov3 = decimal.TryParse(genCov3TextBox.Text.Trim(), out var genCov3) ? genCov3 : null;
+                        existingRemData.gen_cov4 = decimal.TryParse(genCov4TextBox.Text.Trim(), out var genCov4) ? genCov4 : null;
+                        existingRemData.gen_cov5 = decimal.TryParse(genCov5TextBox.Text.Trim(), out var genCov5) ? genCov5 : null;
+                        existingRemData.gen_cov6 = decimal.TryParse(genCov6TextBox.Text.Trim(), out var genCov6) ? genCov6 : null;
+                        existingRemData.policy2 = policy2TextBox.Text.Trim();
+                        existingRemData.auto_beg = DateTime.TryParse(autoBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var autoBeg) ? autoBeg : null;
+                        existingRemData.auto_end = DateTime.TryParse(autoEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var autoEnd) ? autoEnd : null;
+                        existingRemData.auto_let = DateTime.TryParse(autoLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var autoLet) ? autoLet : null;
+                        existingRemData.auto_cov1 = decimal.TryParse(autoCov1TextBox.Text.Trim(), out var autoCov1) ? autoCov1 : null;
+                        existingRemData.auto_cov2 = decimal.TryParse(autoCov2TextBox.Text.Trim(), out var autoCov2) ? autoCov2 : null;
+                        existingRemData.auto_cov3 = decimal.TryParse(autoCov3TextBox.Text.Trim(), out var autoCov3) ? autoCov3 : null;
+                        existingRemData.auto_cov4 = decimal.TryParse(autoCov4TextBox.Text.Trim(), out var autoCov4) ? autoCov4 : null;
+                        existingRemData.policy3 = policy3TextBox.Text.Trim();
+                        existingRemData.exces_beg = DateTime.TryParse(excessBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var excesBeg) ? excesBeg : null;
+                        existingRemData.exces_end = DateTime.TryParse(excessEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var excesEnd) ? excesEnd : null;
+                        existingRemData.exces_let = DateTime.TryParse(excessLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var excesLet) ? excesLet : null;
+                        existingRemData.exce_cov1 = decimal.TryParse(excessCov1TextBox.Text.Trim(), out var exceCov1) ? exceCov1 : null;
+                        existingRemData.exce_cov2 = decimal.TryParse(excessCov2TextBox.Text.Trim(), out var exceCov2) ? exceCov2 : null;
+                        existingRemData.policy4 = policy4TextBox.Text.Trim();
+                        existingRemData.work_beg = DateTime.TryParse(workBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var workBeg) ? workBeg : null;
+                        existingRemData.work_end = DateTime.TryParse(workEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var workEnd) ? workEnd : null;
+                        existingRemData.work_let = DateTime.TryParse(workLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var workLet) ? workLet : null;
+                        existingRemData.work_cov1 = decimal.TryParse(workCov1TextBox.Text.Trim(), out var workCov1) ? workCov1 : null;
+                        existingRemData.work_cov2 = decimal.TryParse(workCov2TextBox.Text.Trim(), out var workCov2) ? workCov2 : null;
+                        existingRemData.work_cov3 = decimal.TryParse(workCov3TextBox.Text.Trim(), out var workCov3) ? workCov3 : null;
+                        existingRemData.policy5 = policy5TextBox.Text.Trim();
+                        existingRemData.recal_beg = DateTime.TryParse(recallBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var recalBeg) ? recalBeg : null;
+                        existingRemData.recal_end = DateTime.TryParse(recallEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var recalEnd) ? recalEnd : null;
+                        existingRemData.recal_let = DateTime.TryParse(recallLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var recalLet) ? recalLet : null;
+                        existingRemData.reca_cov1 = decimal.TryParse(recallCov1TextBox.Text.Trim(), out var recaCov1) ? recaCov1 : null;
+                        existingRemData.cancel = decimal.TryParse(cancellationTextBox.Text.Trim(), out var cancel) ? cancel : null;
+                        dbContext.SaveChanges();
                     }
                     else
                     {
@@ -145,7 +148,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             {
                 MessageBox.Show("ERROR: Remit Data is null trying to update insurance info. Please try again or contact developer.");
             }
-
         }
         public bool IsDataModified(rem_sup remitToData)
         {
@@ -173,7 +175,24 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                    remitToData.auto_cov3 != decimal.Parse(autoCov3TextBox.Text.Trim()) ||
                    remitToData.auto_cov4 != decimal.Parse(autoCov4TextBox.Text.Trim()) ||
                    remitToData.policy3 != policy3TextBox.Text.Trim() ||
-                   remitToData.exces_beg != DateTime.Parse(excessBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US")) || remitToData.exces_end != DateTime.Parse(excessEndDateMaskBox.Text.Trim(), new CultureInfo("en-US")) || remitToData.exces_let != DateTime.Parse(excessLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US")) || remitToData.exce_cov1 != decimal.Parse(excessCov1TextBox.Text.Trim()) || remitToData.exce_cov2 != decimal.Parse(excessCov2TextBox.Text.Trim()) || remitToData.policy4 != policy4TextBox.Text.Trim() || remitToData.work_beg != DateTime.Parse(workBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US")) || remitToData.work_end != DateTime.Parse(workEndDateMaskBox.Text.Trim(), new CultureInfo("en-US")) || remitToData.work_let != DateTime.Parse(workLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US")) || remitToData.work_cov1 != decimal.Parse(workCov1TextBox.Text.Trim()) || remitToData.work_cov2 != decimal.Parse(workCov2TextBox.Text.Trim()) || remitToData.work_cov3 != decimal.Parse(workCov3TextBox.Text.Trim()) || remitToData.policy5 != policy5TextBox.Text.Trim() || remitToData.recal_beg != DateTime.Parse(recallBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US")) || remitToData.recal_end != DateTime.Parse(recallEndDateMaskBox.Text.Trim(), new CultureInfo("en-US")) || remitToData.recal_let != DateTime.Parse(recallLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US")) || remitToData.reca_cov1 != decimal.Parse(recallCov1TextBox.Text.Trim()) || remitToData.cancel != decimal.Parse(cancellationTextBox.Text.Trim());
+                   remitToData.exces_beg != DateTime.Parse(excessBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US")) ||
+                   remitToData.exces_end != DateTime.Parse(excessEndDateMaskBox.Text.Trim(), new CultureInfo("en-US")) ||
+                   remitToData.exces_let != DateTime.Parse(excessLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US")) ||
+                   remitToData.exce_cov1 != decimal.Parse(excessCov1TextBox.Text.Trim()) ||
+                   remitToData.exce_cov2 != decimal.Parse(excessCov2TextBox.Text.Trim()) ||
+                   remitToData.policy4 != policy4TextBox.Text.Trim() ||
+                   remitToData.work_beg != DateTime.Parse(workBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US")) ||
+                   remitToData.work_end != DateTime.Parse(workEndDateMaskBox.Text.Trim(), new CultureInfo("en-US")) ||
+                   remitToData.work_let != DateTime.Parse(workLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US")) ||
+                   remitToData.work_cov1 != decimal.Parse(workCov1TextBox.Text.Trim()) ||
+                   remitToData.work_cov2 != decimal.Parse(workCov2TextBox.Text.Trim()) ||
+                   remitToData.work_cov3 != decimal.Parse(workCov3TextBox.Text.Trim()) ||
+                   remitToData.policy5 != policy5TextBox.Text.Trim() ||
+                   remitToData.recal_beg != DateTime.Parse(recallBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US")) ||
+                   remitToData.recal_end != DateTime.Parse(recallEndDateMaskBox.Text.Trim(), new CultureInfo("en-US")) ||
+                   remitToData.recal_let != DateTime.Parse(recallLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US")) ||
+                   remitToData.reca_cov1 != decimal.Parse(recallCov1TextBox.Text.Trim()) ||
+                   remitToData.cancel != decimal.Parse(cancellationTextBox.Text.Trim());
         }
         public void PerformAction(string userInput)
         {
@@ -202,7 +221,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     break;
                 default:
                     MessageBox.Show("Invalid input, please try again or contact developer");
-                    break;  
+                    break;
             }
         }
     }

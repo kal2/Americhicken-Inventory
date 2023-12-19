@@ -43,8 +43,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             // Assign all the appropriate object data to the corresponding fields to display/edit.
             supplierData = supplierObject;
             supnameTextBox.Text = supplierObject.name?.ToString().Trim() ?? "";
-            string v = supplierObject.area_code?.ToString() + supplierObject.phone?.ToString();
-            phoneMaskTextBox.Text = v.Trim() ?? "";
+            phoneMaskTextBox.Text = $"{supplierObject.area_code?.ToString().Trim() + supplierObject.phone?.ToString().Trim()}";
             faxMaskTextBox.Text = supplierObject.fax?.ToString().Trim() ?? "";
             contactNameTextBox.Text = supplierObject.cont_name?.ToString().Trim() ?? "";
             contactPhoneMaskTextBox.Text = supplierObject.cont_phone?.ToString().Trim() ?? "";
@@ -95,7 +94,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         existingSupplier.state = shipFromStateTextBox.Text.ToUpper().Trim();
                         existingSupplier.zip = shipFromZipTextBox.Text.Trim();
                         existingSupplier.note = noteTextBox.Text.Trim();
-                        existingSupplier.rsupcode = remitToObject.rsupcode;
+                        existingSupplier.rsupcode = remitToObject!.rsupcode;
 
                         dbContext.SaveChanges(); // Save changes to the database
                     }
@@ -127,11 +126,10 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         state = shipFromStateTextBox.Text.ToUpper().Trim(),
                         zip = shipFromZipTextBox.Text.Trim(),
                         note = noteTextBox.Text.Trim(),
-                        rsupcode = remitToObject.rsupcode
+                        rsupcode = remitToObject!.rsupcode
                     };
                     dbContext.supplier.Add(newSupplier);
                     dbContext.SaveChanges();
-                    supplierData = newSupplier;
                 }
                 else if (dialogResult == DialogResult.No)
                 {
@@ -198,7 +196,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                    shipFromCityTextBox.Text != supplierData.city ||
                    shipFromStateTextBox.Text != supplierData.state ||
                    shipFromZipTextBox.Text != supplierData.zip ||
-                   remitToObject.rsupcode != supplierData.rsupcode;
+                   remitToObject!.rsupcode != supplierData.rsupcode;
         }
 
         //--------Event Listeners--------//
@@ -209,7 +207,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             {
                 case "1":
                     //add or update supplier
-                    UpdateSupplier(supplierData);
+                    UpdateSupplier(supplierData!);
                     break;
 
                 case "2":
@@ -223,7 +221,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        DeleteSupplier(supplierData);
+                        DeleteSupplier(supplierData!);
                     }
                     else if (dialogResult == DialogResult.No)
                     {
@@ -257,7 +255,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 {
                     string userInput = remitToNameTextBox.Text.Trim();
                     DbSearch dbSearchInstance = new(_mainWindow, _activeControlManager);
-                    dbSearchInstance.SearchCompleted += HandleSearchCompleted;
+                    dbSearchInstance.SearchCompleted += (f, f2) => HandleSearchCompleted(f!, f2);
                     dbSearchInstance.PerformSearch("remitTo", userInput);
                     dbSearchInstance.Dispose();
                 }
@@ -272,7 +270,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         public void HandleSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
         {
             MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
-            matchSelectInstance.SelectedSearchResult += HandleSelectedRemitToSearchResult;
+            matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedRemitToSearchResult(f!, f2);
             matchSelectInstance.SetMatchSelectLabel("Remit To");
             matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
 
@@ -290,7 +288,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         {
             rem_sup? selectedResult = e.SelectedResult as rem_sup;
 
-            DisplayRemitData(selectedResult);
+            DisplayRemitData(selectedResult!);
             _activeControlManager.SetActiveControl(this);
         }
     }

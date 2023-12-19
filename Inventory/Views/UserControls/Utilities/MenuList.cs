@@ -9,8 +9,8 @@ namespace Inventory
     public partial class MenuList : UserControl, IActiveControlManager
     {
         //Stores reference to MainWindow
-        private MainWindow _mainWindow;
-        private ActiveControlManager _activeControlManager;
+        private readonly MainWindow _mainWindow;
+        private readonly ActiveControlManager _activeControlManager;
         //Contains the current menu that is displayed in main window
         string currentMenu = "main";
         public MenuList(MainWindow mainWindow, ActiveControlManager activeControlManager)
@@ -21,8 +21,6 @@ namespace Inventory
             _mainWindow = mainWindow;
             _activeControlManager = activeControlManager;
         }
-
-
 
         //-----------User Input-------------//
 
@@ -59,7 +57,7 @@ namespace Inventory
                 //Assigns programName to second array element that houses appropriate program info
                 programName = menuItems[1];
 
-                ProgramLoader programLoader = new ProgramLoader(_mainWindow, _activeControlManager);
+                ProgramLoader programLoader = new(_mainWindow, _activeControlManager);
 
                 programLoader.LoadProgram(programName);
             }

@@ -31,10 +31,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             dbContext = new AmerichickenContext();
 
             //wait for control to load then focus remitnametextbox
-            this.Load += (s, e) =>
-            {
-                RemitNameTextBox.Focus();
-            };
+            this.Load += (s, e) => RemitNameTextBox.Focus();
         }
 
         // -- methods -- //
@@ -59,7 +56,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             indemnityContractTextBox.Text = remitData.indem_flg?.Trim() ?? "";
             activeTextBox.Text = remitData.active?.Trim() ?? "";
             contractDateMaskedBox.Text = remitData.indem_dt?.ToString("MM/dd/yyyy").Trim() ?? "";
-            creditLimitTextBox.Text = remitData.cred_lim?.ToString() ?? "";
+            creditLimitTextBox.Text = remitData.cred_lim?.ToString().Trim() ?? "";
             beginDateMaskedBox.Text = remitData.beg_date?.ToString("MM/dd/yyyy").Trim() ?? "";
             expireDateMaskedBox.Text = remitData.end_date?.ToString("MM/dd/yyyy").Trim() ?? "";
             guarantorTextBox.Text = remitData.guaran?.Trim() ?? "";
@@ -72,29 +69,30 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         }
         public void UpdateRemitData(rem_sup remitToData)
         {
-            if (remitToData != null)
+            remitData = remitToData;
+            if (remitData != null)
             {
-                if (IsDataModified(remitToData))
+                if (IsDataModified(remitData))
                 {
-                    var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
+                    var existingRemData = dbContext.rem_sup.Find(remitData.PK_rem_sup);
                     if (existingRemData != null)
                     {
                         existingRemData.name = RemitNameTextBox.Text.Trim();
-                        existingRemData.area_code = phoneMaskTextBox.Text.Trim()[..3];
-                        existingRemData.phone = phoneMaskTextBox.Text.Trim()[3..];
+                        existingRemData.area_code = phoneMaskTextBox.Text.Trim().Length >= 3 ? phoneMaskTextBox.Text.Trim()[..3] : null;
+                        existingRemData.phone = phoneMaskTextBox.Text.Trim().Length >= 10 ? phoneMaskTextBox.Text.Trim()[3..] : null;
                         existingRemData.fax = faxMaskTextBox.Text.Trim();
                         existingRemData.street = remitStreetTextBox.Text.Trim();
                         existingRemData.city = remitCityTextBox.Text.Trim();
                         existingRemData.state = remitStateTextBox.Text.Trim();
                         existingRemData.zip = remitZipTextBox.Text.Trim();
                         existingRemData.zip4 = remitZip4TextBox.Text.Trim();
-                        existingRemData.net_days = int.Parse(payNetDaysTextBox.Text.Trim());
+                        existingRemData.net_days = int.TryParse(payNetDaysTextBox.Text.Trim(), out var netDays) ? netDays : 0;
                         existingRemData.indem_flg = indemnityContractTextBox.Text.ToUpper().Trim();
                         existingRemData.active = activeTextBox.Text.ToUpper().Trim();
-                        existingRemData.indem_dt = DateTime.Parse(contractDateMaskedBox.Text.Trim(), new CultureInfo("en-US"));
-                        existingRemData.cred_lim = decimal.Parse(creditLimitTextBox.Text.Trim());
-                        existingRemData.beg_date = DateTime.Parse(beginDateMaskedBox.Text.Trim(), new CultureInfo("en-US"));
-                        existingRemData.end_date = DateTime.Parse(expireDateMaskedBox.Text.Trim(), new CultureInfo("en-US"));
+                        existingRemData.indem_dt = DateTime.TryParse(contractDateMaskedBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var indemDt) ? indemDt : DateTime.MinValue;
+                        existingRemData.cred_lim = decimal.TryParse(creditLimitTextBox.Text.Trim(), out var credLim) ? credLim : 0;
+                        existingRemData.beg_date = DateTime.TryParse(beginDateMaskedBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var begDate) ? begDate : DateTime.MinValue;
+                        existingRemData.end_date = DateTime.TryParse(expireDateMaskedBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var endDate) ? endDate : DateTime.MinValue;
                         existingRemData.guaran = guarantorTextBox.Text.Trim();
                         existingRemData.note = noteTextBox.Text.Trim();
                         existingRemData.ins_co1 = aInsuranceTextBox.Text.Trim();
@@ -118,7 +116,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     rem_sup newRemitEntry = new ()
                     {
                         name = RemitNameTextBox.Text,
-                        area_code = phoneMaskTextBox.Text.Substring(0, 3),
+                        area_code = phoneMaskTextBox.Text[..3],
                         phone = phoneMaskTextBox.Text.Substring(3, 7),
                         fax = faxMaskTextBox.Text,
                         street = remitStreetTextBox.Text,
@@ -129,10 +127,10 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         net_days = int.Parse(payNetDaysTextBox.Text),
                         indem_flg = indemnityContractTextBox.Text,
                         active = activeTextBox.Text,
-                        indem_dt = DateTime.Parse(contractDateMaskedBox.Text),
+                        indem_dt = DateTime.Parse(contractDateMaskedBox.Text, new CultureInfo("en-US")),
                         cred_lim = int.Parse(creditLimitTextBox.Text),
-                        beg_date = DateTime.Parse(beginDateMaskedBox.Text),
-                        end_date = DateTime.Parse(expireDateMaskedBox.Text),
+                        beg_date = DateTime.Parse(beginDateMaskedBox.Text, new CultureInfo("en-US")),
+                        end_date = DateTime.Parse(expireDateMaskedBox.Text, new CultureInfo("en-US")),
                         guaran = guarantorTextBox.Text,
                         note = noteTextBox.Text,
                         ins_co1 = aInsuranceTextBox.Text,
@@ -143,12 +141,13 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     };
                     dbContext.rem_sup.Add(newRemitEntry);
                     dbContext.SaveChanges();
+                    remitData = newRemitEntry;
                 }
             }
         }
         public bool IsDataModified(rem_sup remitToData)
         {
-            return remitToData == null || remitToData.name != RemitNameTextBox.Text || remitToData.area_code + remitToData.phone != phoneMaskTextBox.Text || remitToData.fax != faxMaskTextBox.Text || remitToData.street != remitStreetTextBox.Text || remitToData.city != remitCityTextBox.Text || remitToData.state != remitStateTextBox.Text || remitToData.zip != remitZipTextBox.Text || remitToData.zip4 != remitZip4TextBox.Text || remitToData.net_days != int.Parse(payNetDaysTextBox.Text) || remitToData.indem_flg != indemnityContractTextBox.Text || remitToData.active != activeTextBox.Text || remitToData.indem_dt != DateTime.Parse(contractDateMaskedBox.Text) || remitToData.cred_lim != int.Parse(creditLimitTextBox.Text) || remitToData.beg_date != DateTime.Parse(beginDateMaskedBox.Text) || remitToData.end_date != DateTime.Parse(expireDateMaskedBox.Text) || remitToData.guaran != guarantorTextBox.Text || remitToData.note != noteTextBox.Text || remitToData.ins_co1 != aInsuranceTextBox.Text || remitToData.ins_co2 != bInsuranceTextBox.Text || remitToData.ins_co3 != cInsuranceTextBox.Text || remitToData.ins_co4 != dInsuranceTextBox.Text || remitToData.ins_co5 != eInsuranceTextBox.Text;
+            return remitToData == null || remitToData.name != RemitNameTextBox.Text || remitToData.area_code + remitToData.phone != phoneMaskTextBox.Text || remitToData.fax != faxMaskTextBox.Text || remitToData.street != remitStreetTextBox.Text || remitToData.city != remitCityTextBox.Text || remitToData.state != remitStateTextBox.Text || remitToData.zip != remitZipTextBox.Text || remitToData.zip4 != remitZip4TextBox.Text || remitToData.net_days != int.Parse(payNetDaysTextBox.Text) || remitToData.indem_flg != indemnityContractTextBox.Text || remitToData.active != activeTextBox.Text || remitToData.indem_dt != DateTime.Parse(contractDateMaskedBox.Text, new CultureInfo("en-US")) || remitToData.cred_lim != int.Parse(creditLimitTextBox.Text) || remitToData.beg_date != DateTime.Parse(beginDateMaskedBox.Text, new CultureInfo("en-US")) || remitToData.end_date != DateTime.Parse(expireDateMaskedBox.Text, new CultureInfo("en-US")) || remitToData.guaran != guarantorTextBox.Text || remitToData.note != noteTextBox.Text || remitToData.ins_co1 != aInsuranceTextBox.Text || remitToData.ins_co2 != bInsuranceTextBox.Text || remitToData.ins_co3 != cInsuranceTextBox.Text || remitToData.ins_co4 != dInsuranceTextBox.Text || remitToData.ins_co5 != eInsuranceTextBox.Text;
         }
         public void DeleteRemitTo(rem_sup remitToData)
         {
@@ -195,9 +194,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 case "5":
                     //save/update insurance
                     UpdateRemitData(remitData);
+                    _mainWindow.DisposeControl(this);
                     RemitInsurance remitInsuranceInstance = new (_mainWindow, _activeControlManager);
                     remitInsuranceInstance.GetRemitInsuranceData(remitData);
-                    _mainWindow.DisposeControl(this);
                     _activeControlManager.SetActiveControl(remitInsuranceInstance);
 
                     break;

@@ -9,27 +9,20 @@ namespace Inventory.Views.UserControls
 {
     public partial class DbSearch : UserControl, IActiveControlManager
     {
-
         // -- Class Variables -- //
 
-        private MainWindow _mainWindow;
-        private ActiveControlManager _activeControlManager;
+        private readonly MainWindow _mainWindow;
+        private readonly ActiveControlManager _activeControlManager;
         string selectedTable = string.Empty;
         string programLabel = string.Empty;
 
         // -- Event Handlers -- //
 
         public event EventHandler<SearchResultsEventArgs> SearchCompleted;
-        public class SearchResultsEventArgs : EventArgs
+        public class SearchResultsEventArgs(List<object> searchResults, string tableSelected) : EventArgs
         {
-            public List<object> SearchResults { get; }
-            public string TableSelected { get; }
-
-            public SearchResultsEventArgs(List<object> searchResults, string tableSelected)
-            {
-                SearchResults = searchResults;
-                TableSelected = tableSelected;
-            }
+            public List<object> SearchResults { get; } = searchResults;
+            public string TableSelected { get; } = tableSelected;
         }
 
         // -- Constructor -- //
@@ -45,24 +38,19 @@ namespace Inventory.Views.UserControls
 
         public void SetTable(string tableName)
         {
-            if (tableName == string.Empty)
+            if (tableName?.Length == 0)
             {
                 MessageBox.Show("ERROR: No db table selected to search, please contact developer");
-                return;
             }
-
             else if (tableName != "supplier" && tableName != "remitTo")
             {
                 MessageBox.Show("ERROR: Invalid db table name, please contact developer");
-                return;
             }
-
             else
             {
                 selectedTable = tableName;
             }
         }
-         
         public void SearchDatabase(string searchInput)
         {
             if (ValidationHelper.IsEmpty(searchInput))
@@ -74,7 +62,7 @@ namespace Inventory.Views.UserControls
                     //hide searchpanel
                     _mainWindow.DisposeControl(this);
                     //search completed event
-                    SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null, selectedTable));
+                    SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null!, selectedTable));
                 }
                 else if (dialogResult == DialogResult.No)
                 {
@@ -86,38 +74,35 @@ namespace Inventory.Views.UserControls
                     return;
                 }
             }
-
             else
             {
                 searchInput = searchInput.Trim();
 
-                using (var context = new AmerichickenContext())
+                using var context = new AmerichickenContext();
+                var searchResults = new List<object>();
+                switch (selectedTable)
                 {
-                    var searchResults = new List<object>();
-                    switch (selectedTable)
-                    {
-                        case "supplier":
-                            searchResults = context.supplier.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
-                            break;
+                    case "supplier":
+                        searchResults = context.supplier.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
+                        break;
 
-                        case "remitTo":
-                            searchResults = context.rem_sup.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
-                            break;
+                    case "remitTo":
+                        searchResults = context.rem_sup.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
+                        break;
 
-                        default:
-                            break;
-                    }
-                    if (searchResults.Count == 0)
-                    {
-                        MessageBox.Show("No results found");
-                        return;
-                    }
-                    else
-                    {
-                        //Sends search results to the SearchResultsEventArgs handler's listener
-                        SearchCompleted?.Invoke(this, new SearchResultsEventArgs(searchResults, selectedTable));
-                        _mainWindow.DisposeControl(this);
-                    }
+                    default:
+                        break;
+                }
+                if (searchResults.Count == 0)
+                {
+                    MessageBox.Show("No results found");
+                    return;
+                }
+                else
+                {
+                    //Sends search results to the SearchResultsEventArgs handler's listener
+                    SearchCompleted?.Invoke(this, new SearchResultsEventArgs(searchResults, selectedTable));
+                    _mainWindow.DisposeControl(this);
                 }
             }
         }
@@ -161,7 +146,7 @@ namespace Inventory.Views.UserControls
         public void SetProgramLabels()
         {
             _mainWindow.SetCommandsLabel("1. Continue    2. Edit    3. Cancel");
-            _mainWindow.SetTextBoxLabel("ACTION:"); 
+            _mainWindow.SetTextBoxLabel("ACTION:");
 
             if (selectedTable == "supplier")
             {
