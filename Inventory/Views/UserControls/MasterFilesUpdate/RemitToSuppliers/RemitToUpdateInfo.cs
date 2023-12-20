@@ -69,12 +69,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         }
         public void UpdateRemitData(rem_sup remitToData)
         {
-            remitData = remitToData;
-            if (remitData != null)
+            if (remitToData != null)
             {
-                if (IsDataModified(remitData))
+                if (IsDataModified(remitToData))
                 {
-                    var existingRemData = dbContext.rem_sup.Find(remitData.PK_rem_sup);
+                    var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
                     if (existingRemData != null)
                     {
                         existingRemData.name = RemitNameTextBox.Text.Trim();
@@ -101,6 +100,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         existingRemData.ins_co4 = dInsuranceTextBox.Text.Trim();
                         existingRemData.ins_co5 = eInsuranceTextBox.Text.Trim();
                         dbContext.SaveChanges();
+                        remitData = existingRemData;
                     }
                     else
                     {

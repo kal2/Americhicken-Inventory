@@ -65,13 +65,15 @@ namespace Inventory.UI.Menu
                     switch (userSelection)
                     {
                         case "1":
-
                             menuItems = ProgramLists.RemitToSupplier();
                             break;
 
                         case "2":
-
                             menuItems = ProgramLists.ShipFromSupplier();
+                            break;
+
+                        case "5":
+                            menuItems = ProgramLists.FreightCarrier();
                             break;
                     }
                     break;

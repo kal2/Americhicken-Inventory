@@ -42,7 +42,7 @@ namespace Inventory.Views.UserControls
             {
                 MessageBox.Show("ERROR: No db table selected to search, please contact developer");
             }
-            else if (tableName != "supplier" && tableName != "remitTo")
+            else if (tableName != "supplier" && tableName != "remitTo" && tableName != "freight")
             {
                 MessageBox.Show("ERROR: Invalid db table name, please contact developer");
             }
@@ -71,7 +71,6 @@ namespace Inventory.Views.UserControls
                 else
                 {
                     MessageBox.Show("ERROR: Something went wrong checking searchbox text, please contact developer");
-                    return;
                 }
             }
             else
@@ -90,13 +89,16 @@ namespace Inventory.Views.UserControls
                         searchResults = context.rem_sup.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
                         break;
 
+                    case "freight":
+                        searchResults = context.freight.Where(s => EF.Functions.Like(s.NAME, searchInput + "%")).ToList().Cast<object>().ToList();
+                        break;
+
                     default:
                         break;
                 }
                 if (searchResults.Count == 0)
                 {
                     MessageBox.Show("No results found");
-                    return;
                 }
                 else
                 {

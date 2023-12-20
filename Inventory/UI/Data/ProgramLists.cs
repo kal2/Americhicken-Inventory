@@ -23,7 +23,14 @@
         {
             return [
                 "program",
-                "shipFromSupplierSearch"
+                "shipFromSupplier"
+            ];
+        }
+        public static string[] FreightCarrier()
+        {
+            return [
+                "program",
+                "freightCarrier"
             ];
         }
     }
