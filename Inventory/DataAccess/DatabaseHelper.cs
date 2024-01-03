@@ -4,7 +4,7 @@ namespace Inventory.DataAccess
 {
     public static class DatabaseHelper
     {
-        private static readonly string ConnectionString = @"Data Source=MIRACLE\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True";
+        private static readonly string ConnectionString = @"Data Source=MIRACLE\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;TrustServerCertificate=true";
 
         public static SqlConnection GetConnection()
         {

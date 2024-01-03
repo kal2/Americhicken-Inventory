@@ -113,8 +113,8 @@
             // 
             // shipFromZipTextBox
             // 
-            shipFromZipTextBox.BackColor = Color.Red;
-            shipFromZipTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            shipFromZipTextBox.BackColor = Color.Maroon;
+            shipFromZipTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             shipFromZipTextBox.ForeColor = Color.White;
             shipFromZipTextBox.Location = new Point(208, 424);
             shipFromZipTextBox.Margin = new Padding(0);
@@ -125,8 +125,8 @@
             // 
             // shipFromStateTextBox
             // 
-            shipFromStateTextBox.BackColor = Color.Red;
-            shipFromStateTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            shipFromStateTextBox.BackColor = Color.Maroon;
+            shipFromStateTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             shipFromStateTextBox.ForeColor = Color.White;
             shipFromStateTextBox.Location = new Point(108, 424);
             shipFromStateTextBox.Margin = new Padding(0);
@@ -137,8 +137,8 @@
             // 
             // shipFromCityTextBox
             // 
-            shipFromCityTextBox.BackColor = Color.Red;
-            shipFromCityTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            shipFromCityTextBox.BackColor = Color.Maroon;
+            shipFromCityTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             shipFromCityTextBox.ForeColor = Color.White;
             shipFromCityTextBox.Location = new Point(108, 379);
             shipFromCityTextBox.Margin = new Padding(0);
@@ -149,8 +149,8 @@
             // 
             // shipFromStreetTextBox
             // 
-            shipFromStreetTextBox.BackColor = Color.Red;
-            shipFromStreetTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            shipFromStreetTextBox.BackColor = Color.Maroon;
+            shipFromStreetTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             shipFromStreetTextBox.ForeColor = Color.White;
             shipFromStreetTextBox.Location = new Point(108, 337);
             shipFromStreetTextBox.Margin = new Padding(0);
@@ -162,7 +162,7 @@
             // remitToCityStateZipLabel
             // 
             remitToCityStateZipLabel.AutoSize = true;
-            remitToCityStateZipLabel.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            remitToCityStateZipLabel.Font = new Font("Segoe UI", 16F);
             remitToCityStateZipLabel.ForeColor = Color.White;
             remitToCityStateZipLabel.Location = new Point(734, 409);
             remitToCityStateZipLabel.Name = "remitToCityStateZipLabel";
@@ -173,7 +173,7 @@
             // remitToStreetLabel
             // 
             remitToStreetLabel.AutoSize = true;
-            remitToStreetLabel.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            remitToStreetLabel.Font = new Font("Segoe UI", 16F);
             remitToStreetLabel.ForeColor = Color.White;
             remitToStreetLabel.Location = new Point(734, 379);
             remitToStreetLabel.Name = "remitToStreetLabel";
@@ -183,8 +183,8 @@
             // 
             // noteTextBox
             // 
-            noteTextBox.BackColor = Color.Red;
-            noteTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            noteTextBox.BackColor = Color.Maroon;
+            noteTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             noteTextBox.ForeColor = Color.White;
             noteTextBox.Location = new Point(343, 490);
             noteTextBox.Margin = new Padding(0);
@@ -196,18 +196,18 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label13.Font = new Font("Segoe UI", 16F);
             label13.ForeColor = Color.White;
             label13.Location = new Point(652, 340);
             label13.Name = "label13";
-            label13.Size = new Size(78, 30);
+            label13.Size = new Size(79, 30);
             label13.TabIndex = 130;
             label13.Text = "NAME:";
             // 
             // remitToNameTextBox
             // 
-            remitToNameTextBox.BackColor = Color.Red;
-            remitToNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            remitToNameTextBox.BackColor = Color.Maroon;
+            remitToNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             remitToNameTextBox.ForeColor = Color.White;
             remitToNameTextBox.Location = new Point(734, 337);
             remitToNameTextBox.Margin = new Padding(0);
@@ -220,7 +220,7 @@
             // label21
             // 
             label21.BorderStyle = BorderStyle.Fixed3D;
-            label21.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label21.Font = new Font("Segoe UI", 16F);
             label21.ForeColor = Color.White;
             label21.Location = new Point(652, 325);
             label21.Name = "label21";
@@ -231,29 +231,29 @@
             // label22
             // 
             label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point);
+            label22.Font = new Font("Segoe UI", 12F);
             label22.ForeColor = Color.White;
             label22.Location = new Point(652, 304);
             label22.Name = "label22";
-            label22.Size = new Size(76, 21);
+            label22.Size = new Size(77, 21);
             label22.TabIndex = 127;
             label22.Text = "REMIT TO";
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label12.Font = new Font("Segoe UI", 16F);
             label12.ForeColor = Color.White;
             label12.Location = new Point(520, 167);
             label12.Name = "label12";
-            label12.Size = new Size(251, 30);
+            label12.Size = new Size(249, 30);
             label12.TabIndex = 126;
             label12.Text = "FREIGHT INFORMATION";
             // 
             // freightEmailTextBox
             // 
-            freightEmailTextBox.BackColor = Color.Red;
-            freightEmailTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            freightEmailTextBox.BackColor = Color.Maroon;
+            freightEmailTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             freightEmailTextBox.ForeColor = Color.White;
             freightEmailTextBox.Location = new Point(710, 231);
             freightEmailTextBox.Margin = new Padding(0);
@@ -264,9 +264,9 @@
             // 
             // freightPhoneMaskTextBox
             // 
-            freightPhoneMaskTextBox.BackColor = Color.Red;
+            freightPhoneMaskTextBox.BackColor = Color.Maroon;
             freightPhoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            freightPhoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            freightPhoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             freightPhoneMaskTextBox.ForeColor = Color.White;
             freightPhoneMaskTextBox.Location = new Point(198, 231);
             freightPhoneMaskTextBox.Mask = "(999) 000-0000";
@@ -277,9 +277,9 @@
             // 
             // contactFaxMaskTextBox
             // 
-            contactFaxMaskTextBox.BackColor = Color.Red;
+            contactFaxMaskTextBox.BackColor = Color.Maroon;
             contactFaxMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            contactFaxMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            contactFaxMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             contactFaxMaskTextBox.ForeColor = Color.White;
             contactFaxMaskTextBox.Location = new Point(850, 111);
             contactFaxMaskTextBox.Mask = "(999) 000-0000";
@@ -290,9 +290,9 @@
             // 
             // contactPhoneMaskTextBox
             // 
-            contactPhoneMaskTextBox.BackColor = Color.Red;
+            contactPhoneMaskTextBox.BackColor = Color.Maroon;
             contactPhoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            contactPhoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            contactPhoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             contactPhoneMaskTextBox.ForeColor = Color.White;
             contactPhoneMaskTextBox.Location = new Point(850, 57);
             contactPhoneMaskTextBox.Mask = "(999) 000-0000";
@@ -303,8 +303,8 @@
             // 
             // contactNameTextBox
             // 
-            contactNameTextBox.BackColor = Color.Red;
-            contactNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            contactNameTextBox.BackColor = Color.Maroon;
+            contactNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             contactNameTextBox.ForeColor = Color.White;
             contactNameTextBox.Location = new Point(834, 9);
             contactNameTextBox.Margin = new Padding(0);
@@ -315,9 +315,9 @@
             // 
             // faxMaskTextBox
             // 
-            faxMaskTextBox.BackColor = Color.Red;
+            faxMaskTextBox.BackColor = Color.Maroon;
             faxMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            faxMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            faxMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             faxMaskTextBox.ForeColor = Color.White;
             faxMaskTextBox.Location = new Point(198, 111);
             faxMaskTextBox.Mask = "(999) 000-0000";
@@ -328,9 +328,9 @@
             // 
             // phoneMaskTextBox
             // 
-            phoneMaskTextBox.BackColor = Color.Red;
+            phoneMaskTextBox.BackColor = Color.Maroon;
             phoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            phoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            phoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             phoneMaskTextBox.ForeColor = Color.White;
             phoneMaskTextBox.Location = new Point(198, 57);
             phoneMaskTextBox.Mask = "(999) 000-0000";
@@ -341,8 +341,8 @@
             // 
             // supnameTextBox
             // 
-            supnameTextBox.BackColor = Color.Red;
-            supnameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            supnameTextBox.BackColor = Color.Maroon;
+            supnameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             supnameTextBox.ForeColor = Color.White;
             supnameTextBox.Location = new Point(182, 9);
             supnameTextBox.Margin = new Padding(0);
@@ -354,18 +354,18 @@
             // label20
             // 
             label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label20.Font = new Font("Segoe UI", 16F);
             label20.ForeColor = Color.White;
             label20.Location = new Point(520, 234);
             label20.Name = "label20";
-            label20.Size = new Size(183, 30);
+            label20.Size = new Size(181, 30);
             label20.TabIndex = 117;
             label20.Text = "CONTACT EMAIL:";
             // 
             // label19
             // 
             label19.BorderStyle = BorderStyle.Fixed3D;
-            label19.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label19.Font = new Font("Segoe UI", 16F);
             label19.ForeColor = Color.White;
             label19.Location = new Point(16, 210);
             label19.Name = "label19";
@@ -376,18 +376,18 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label18.Font = new Font("Segoe UI", 16F);
             label18.ForeColor = Color.White;
             label18.Location = new Point(687, 114);
             label18.Name = "label18";
-            label18.Size = new Size(162, 30);
+            label18.Size = new Size(157, 30);
             label18.TabIndex = 115;
             label18.Text = "CONTACT FAX:";
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label17.Font = new Font("Segoe UI", 16F);
             label17.ForeColor = Color.White;
             label17.Location = new Point(43, 114);
             label17.Name = "label17";
@@ -398,40 +398,40 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label14.Font = new Font("Segoe UI", 16F);
             label14.ForeColor = Color.White;
             label14.Location = new Point(267, 493);
             label14.Name = "label14";
-            label14.Size = new Size(75, 30);
+            label14.Size = new Size(73, 30);
             label14.TabIndex = 113;
             label14.Text = "NOTE:";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label11.Font = new Font("Segoe UI", 16F);
             label11.ForeColor = Color.White;
             label11.Location = new Point(156, 424);
             label11.Name = "label11";
-            label11.Size = new Size(50, 30);
+            label11.Size = new Size(49, 30);
             label11.TabIndex = 110;
             label11.Text = "ZIP:";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label10.Font = new Font("Segoe UI", 16F);
             label10.ForeColor = Color.White;
             label10.Location = new Point(30, 424);
             label10.Name = "label10";
-            label10.Size = new Size(78, 30);
+            label10.Size = new Size(75, 30);
             label10.TabIndex = 109;
             label10.Text = "STATE:";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label9.Font = new Font("Segoe UI", 16F);
             label9.ForeColor = Color.White;
             label9.Location = new Point(43, 379);
             label9.Name = "label9";
@@ -442,18 +442,18 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label8.Font = new Font("Segoe UI", 16F);
             label8.ForeColor = Color.White;
             label8.Location = new Point(16, 340);
             label8.Name = "label8";
-            label8.Size = new Size(88, 30);
+            label8.Size = new Size(89, 30);
             label8.TabIndex = 107;
             label8.Text = "STREET:";
             // 
             // label7
             // 
             label7.BorderStyle = BorderStyle.Fixed3D;
-            label7.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI", 16F);
             label7.ForeColor = Color.White;
             label7.Location = new Point(16, 325);
             label7.Name = "label7";
@@ -464,62 +464,62 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 12F);
             label6.ForeColor = Color.White;
             label6.Location = new Point(16, 304);
             label6.Name = "label6";
-            label6.Size = new Size(157, 21);
+            label6.Size = new Size(163, 21);
             label6.TabIndex = 105;
             label6.Text = "SHIP FROM ADDRESS";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 16F);
             label5.ForeColor = Color.White;
             label5.Location = new Point(17, 234);
             label5.Name = "label5";
-            label5.Size = new Size(182, 30);
+            label5.Size = new Size(180, 30);
             label5.TabIndex = 104;
             label5.Text = "FREIGHT PHONE:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label4.Font = new Font("Segoe UI", 16F);
             label4.ForeColor = Color.White;
             label4.Location = new Point(652, 60);
             label4.Name = "label4";
-            label4.Size = new Size(198, 30);
+            label4.Size = new Size(192, 30);
             label4.TabIndex = 103;
             label4.Text = "CONTACT PHONE:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 16F);
             label3.ForeColor = Color.White;
             label3.Location = new Point(650, 12);
             label3.Name = "label3";
-            label3.Size = new Size(184, 30);
+            label3.Size = new Size(181, 30);
             label3.TabIndex = 102;
             label3.Text = "CONTACT NAME:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 16F);
             label2.ForeColor = Color.White;
             label2.Location = new Point(8, 60);
             label2.Name = "label2";
-            label2.Size = new Size(185, 30);
+            label2.Size = new Size(184, 30);
             label2.TabIndex = 101;
             label2.Text = "PHONE NUMBER:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 16F, FontStyle.Italic, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 16F);
             label1.ForeColor = Color.White;
             label1.Location = new Point(3, 12);
             label1.Name = "label1";
@@ -531,7 +531,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Blue;
+            BackColor = Color.FromArgb(1, 0, 128);
             Controls.Add(supplierInfoPanel);
             Name = "ShipFromUpdateInfo";
             Size = new Size(1293, 539);

@@ -42,19 +42,19 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             // If casting succeeded, and supplierObject is not null.
             // Assign all the appropriate object data to the corresponding fields to display/edit.
             supplierData = supplierObject;
-            supnameTextBox.Text = supplierObject.name?.ToString().Trim() ?? "";
+            supnameTextBox.Text = supplierObject.name?.ToString().Trim();
             phoneMaskTextBox.Text = $"{supplierObject.area_code?.ToString().Trim() + supplierObject.phone?.ToString().Trim()}";
-            faxMaskTextBox.Text = supplierObject.fax?.ToString().Trim() ?? "";
-            contactNameTextBox.Text = supplierObject.cont_name?.ToString().Trim() ?? "";
-            contactPhoneMaskTextBox.Text = supplierObject.cont_phone?.ToString().Trim() ?? "";
-            contactFaxMaskTextBox.Text = supplierObject.cont_fax?.ToString().Trim() ?? "";
-            freightPhoneMaskTextBox.Text = supplierObject.freight_phone?.ToString().Trim() ?? "";
-            freightEmailTextBox.Text = supplierObject.fright_email?.ToString().Trim() ?? "";
-            shipFromStreetTextBox.Text = supplierObject.street?.ToString().Trim() ?? "";
-            shipFromCityTextBox.Text = supplierObject.city?.ToString().Trim() ?? "";
-            shipFromStateTextBox.Text = supplierObject.state?.ToString().Trim() ?? "";
-            shipFromZipTextBox.Text = supplierObject.zip?.ToString().Trim() ?? "";
-            noteTextBox.Text = supplierObject.note?.ToString().Trim() ?? "";
+            faxMaskTextBox.Text = supplierObject.fax?.ToString().Trim();
+            contactNameTextBox.Text = supplierObject.cont_name?.ToString().Trim();
+            contactPhoneMaskTextBox.Text = supplierObject.cont_phone?.ToString().Trim();
+            contactFaxMaskTextBox.Text = supplierObject.cont_fax?.ToString().Trim();
+            freightPhoneMaskTextBox.Text = supplierObject.freight_phone?.ToString().Trim();
+            freightEmailTextBox.Text = supplierObject.freight_email?.ToString().Trim();
+            shipFromStreetTextBox.Text = supplierObject.street?.ToString().Trim();
+            shipFromCityTextBox.Text = supplierObject.city?.ToString().Trim();
+            shipFromStateTextBox.Text = supplierObject.state?.ToString().Trim();
+            shipFromZipTextBox.Text = supplierObject.zip?.ToString().Trim();
+            noteTextBox.Text = supplierObject.note?.ToString().Trim();
 
             // If the supplier has a remit to code, get the remit to data and display it
             if (supplierObject.rsupcode != null)
@@ -88,7 +88,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         existingSupplier.cont_phone = contactPhoneMaskTextBox.Text.Trim();
                         existingSupplier.cont_fax = contactFaxMaskTextBox.Text.Trim();
                         existingSupplier.freight_phone = freightPhoneMaskTextBox.Text.Trim();
-                        existingSupplier.fright_email = freightEmailTextBox.Text.Trim();
+                        existingSupplier.freight_email = freightEmailTextBox.Text.Trim();
                         existingSupplier.street = shipFromStreetTextBox.Text.Trim();
                         existingSupplier.city = shipFromCityTextBox.Text.Trim();
                         existingSupplier.state = shipFromStateTextBox.Text.ToUpper().Trim();
@@ -120,7 +120,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         cont_phone = contactPhoneMaskTextBox.Text.Trim(),
                         cont_fax = contactFaxMaskTextBox.Text.Trim(),
                         freight_phone = freightPhoneMaskTextBox.Text.Trim(),
-                        fright_email = freightEmailTextBox.Text.Trim(),
+                        freight_email = freightEmailTextBox.Text.Trim(),
                         street = shipFromStreetTextBox.Text.Trim(),
                         city = shipFromCityTextBox.Text.Trim(),
                         state = shipFromStateTextBox.Text.ToUpper().Trim(),
@@ -191,7 +191,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                    contactPhoneMaskTextBox.Text != supplierData.cont_phone ||
                    contactFaxMaskTextBox.Text != supplierData.cont_fax ||
                    freightPhoneMaskTextBox.Text != supplierData.freight_phone ||
-                   freightEmailTextBox.Text != supplierData.fright_email ||
+                   freightEmailTextBox.Text != supplierData.freight_email ||
                    shipFromStreetTextBox.Text != supplierData.street ||
                    shipFromCityTextBox.Text != supplierData.city ||
                    shipFromStateTextBox.Text != supplierData.state ||

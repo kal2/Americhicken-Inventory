@@ -36,7 +36,7 @@
             // userActionCommandsLabel
             // 
             userActionCommandsLabel.AutoSize = true;
-            userActionCommandsLabel.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            userActionCommandsLabel.Font = new Font("Segoe UI", 16F);
             userActionCommandsLabel.Location = new Point(197, 26);
             userActionCommandsLabel.Margin = new Padding(1, 0, 1, 0);
             userActionCommandsLabel.Name = "userActionCommandsLabel";
@@ -45,8 +45,8 @@
             // 
             // actionInput
             // 
-            actionInput.BackColor = Color.Red;
-            actionInput.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            actionInput.BackColor = Color.Maroon;
+            actionInput.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             actionInput.ForeColor = Color.White;
             actionInput.Location = new Point(114, 23);
             actionInput.Margin = new Padding(0);
@@ -58,7 +58,7 @@
             // textBoxLabel
             // 
             textBoxLabel.AutoSize = true;
-            textBoxLabel.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxLabel.Font = new Font("Segoe UI", 16F);
             textBoxLabel.Location = new Point(16, 26);
             textBoxLabel.Margin = new Padding(1, 0, 1, 0);
             textBoxLabel.Name = "textBoxLabel";
@@ -70,7 +70,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Blue;
+            BackColor = Color.Transparent;
             Controls.Add(userActionCommandsLabel);
             Controls.Add(actionInput);
             Controls.Add(textBoxLabel);

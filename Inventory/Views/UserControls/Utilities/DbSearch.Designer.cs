@@ -37,7 +37,8 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.BackColor = Color.FromArgb(1, 0, 128);
+            label1.Font = new Font("Segoe UI", 16F);
             label1.Location = new Point(50, 46);
             label1.Name = "label1";
             label1.Size = new Size(191, 30);
@@ -47,7 +48,8 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.BackColor = Color.FromArgb(1, 0, 128);
+            label2.Font = new Font("Segoe UI", 14F);
             label2.Location = new Point(50, 99);
             label2.Name = "label2";
             label2.Size = new Size(62, 25);
@@ -56,8 +58,8 @@
             // 
             // searchQuereyTextBox
             // 
-            searchQuereyTextBox.BackColor = Color.Red;
-            searchQuereyTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            searchQuereyTextBox.BackColor = Color.Maroon;
+            searchQuereyTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             searchQuereyTextBox.ForeColor = Color.White;
             searchQuereyTextBox.Location = new Point(50, 127);
             searchQuereyTextBox.Name = "searchQuereyTextBox";
@@ -67,6 +69,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(1, 0, 128);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";

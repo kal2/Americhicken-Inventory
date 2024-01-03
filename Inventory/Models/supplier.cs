@@ -41,7 +41,7 @@ public partial class supplier
 
     public string freight_phone { get; set; }
 
-    public string fright_email { get; set; }
+    public string freight_email { get; set; }
 
     public string used { get; set; }
 

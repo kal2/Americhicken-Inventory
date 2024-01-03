@@ -33,10 +33,10 @@
             // 
             // menuListBox
             // 
-            menuListBox.BackColor = Color.Blue;
+            menuListBox.BackColor = Color.FromArgb(1, 0, 128);
             menuListBox.BorderStyle = BorderStyle.None;
             menuListBox.Dock = DockStyle.Fill;
-            menuListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            menuListBox.Font = new Font("Segoe UI", 18F);
             menuListBox.ForeColor = Color.White;
             menuListBox.FormattingEnabled = true;
             menuListBox.ImeMode = ImeMode.On;
@@ -52,7 +52,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            BackColor = Color.Blue;
+            BackColor = Color.FromArgb(1, 0, 128);
             Controls.Add(menuListBox);
             ForeColor = Color.White;
             Name = "MenuList";

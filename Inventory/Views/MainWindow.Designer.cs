@@ -49,7 +49,7 @@
             // 
             dateLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             dateLabel.AutoSize = true;
-            dateLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            dateLabel.Font = new Font("Segoe UI", 12F);
             dateLabel.Location = new Point(1281, 35);
             dateLabel.Name = "dateLabel";
             dateLabel.RightToLeft = RightToLeft.No;
@@ -62,7 +62,7 @@
             // 
             programLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             programLabel.AutoSize = true;
-            programLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            programLabel.Font = new Font("Segoe UI", 12F);
             programLabel.Location = new Point(3, 35);
             programLabel.Name = "programLabel";
             programLabel.Size = new Size(89, 21);
@@ -73,7 +73,7 @@
             // 
             companyLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             companyLabel.AutoSize = true;
-            companyLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            companyLabel.Font = new Font("Segoe UI", 12F);
             companyLabel.Location = new Point(3, 7);
             companyLabel.Name = "companyLabel";
             companyLabel.Size = new Size(134, 21);
@@ -103,6 +103,7 @@
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.BackColor = Color.Transparent;
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
@@ -127,6 +128,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            splitContainer2.Panel1.BackColor = Color.Transparent;
             splitContainer2.Panel1.Padding = new Padding(10);
             // 
             // splitContainer2.Panel2
@@ -139,7 +141,7 @@
             // 
             // userActionInputMain
             // 
-            userActionInputMain.BackColor = Color.Blue;
+            userActionInputMain.BackColor = Color.Transparent;
             userActionInputMain.Dock = DockStyle.Fill;
             userActionInputMain.ForeColor = Color.White;
             userActionInputMain.Location = new Point(0, 0);
@@ -151,10 +153,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Blue;
+            BackColor = Color.FromArgb(1, 0, 128);
             ClientSize = new Size(1324, 861);
             Controls.Add(splitContainer1);
-            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 9F);
             ForeColor = SystemColors.ButtonFace;
             KeyPreview = true;
             Name = "MainWindow";

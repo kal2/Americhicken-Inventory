@@ -33,7 +33,7 @@ public partial class AmerichickenContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True;TrustServerCertificate=true");
+        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True;TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,48 +42,21 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_bil_buy);
 
             entity.Property(e => e.PK_bil_buy).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.active)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.area_code)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.active).HasMaxLength(1);
+            entity.Property(e => e.area_code).HasMaxLength(3);
             entity.Property(e => e.bal_calc).HasColumnType("numeric(9, 2)");
-            entity.Property(e => e.bbuycode)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.bbuycode).HasMaxLength(4);
             entity.Property(e => e.beg_date).HasColumnType("date");
-            entity.Property(e => e.city)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.country)
-                .HasMaxLength(28)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.cre_rqst)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.cred_bal)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.city).HasMaxLength(20);
+            entity.Property(e => e.country).HasMaxLength(28);
+            entity.Property(e => e.cre_rqst).HasMaxLength(32);
+            entity.Property(e => e.cred_bal).HasMaxLength(1);
             entity.Property(e => e.cred_lim).HasColumnType("numeric(7, 0)");
             entity.Property(e => e.credap_dt).HasColumnType("date");
-            entity.Property(e => e.credit_ap)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.credit_ap).HasMaxLength(10);
             entity.Property(e => e.cus_bal).HasColumnType("numeric(9, 2)");
             entity.Property(e => e.cus_bal15).HasColumnType("numeric(11, 2)");
-            entity.Property(e => e.cust_sw)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.cust_sw).HasMaxLength(1);
             entity.Property(e => e.date_fin).HasColumnType("date");
             entity.Property(e => e.date_rqst).HasColumnType("date");
             entity.Property(e => e.date_rvwd).HasColumnType("date");
@@ -91,164 +64,59 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.days_25).HasColumnType("numeric(11, 0)");
             entity.Property(e => e.days_ex).HasColumnType("numeric(11, 0)");
             entity.Property(e => e.db_dt).HasColumnType("date");
-            entity.Property(e => e.db_rpt)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.db_rpt).HasMaxLength(1);
             entity.Property(e => e.end_date).HasColumnType("date");
-            entity.Property(e => e.fax)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.fed_cust)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.fin_prov)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.fax).HasMaxLength(10);
+            entity.Property(e => e.fed_cust).HasMaxLength(1);
+            entity.Property(e => e.fin_prov).HasMaxLength(1);
             entity.Property(e => e.fst_sale).HasColumnType("date");
-            entity.Property(e => e.guaran)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.guaran).HasMaxLength(20);
             entity.Property(e => e.high_bal).HasColumnType("numeric(10, 2)");
-            entity.Property(e => e.icity)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.iline1)
-                .HasMaxLength(35)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.iline2)
-                .HasMaxLength(35)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.iline3)
-                .HasMaxLength(35)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.incen_cd)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.int_zip)
-                .HasMaxLength(8)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.internat)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.istreet)
-                .HasMaxLength(28)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.istreet2)
-                .HasMaxLength(28)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.led_code)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.icity).HasMaxLength(20);
+            entity.Property(e => e.iline1).HasMaxLength(35);
+            entity.Property(e => e.iline2).HasMaxLength(35);
+            entity.Property(e => e.iline3).HasMaxLength(35);
+            entity.Property(e => e.incen_cd).HasMaxLength(2);
+            entity.Property(e => e.int_zip).HasMaxLength(8);
+            entity.Property(e => e.internat).HasMaxLength(1);
+            entity.Property(e => e.istreet).HasMaxLength(28);
+            entity.Property(e => e.istreet2).HasMaxLength(28);
+            entity.Property(e => e.led_code).HasMaxLength(4);
             entity.Property(e => e.let_crd).HasColumnType("numeric(7, 0)");
-            entity.Property(e => e.letter_c)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.name)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.letter_c).HasMaxLength(1);
+            entity.Property(e => e.name).HasMaxLength(40);
             entity.Property(e => e.nbr_days).HasColumnType("numeric(11, 0)");
-            entity.Property(e => e.no_incen)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.no_shrtrpt)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.note)
-                .HasMaxLength(60)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.note2)
-                .HasMaxLength(60)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.phone)
-                .HasMaxLength(7)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.po_attn)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.po_warn)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.reg_name)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.region)
-                .HasMaxLength(30)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.no_incen).HasMaxLength(1);
+            entity.Property(e => e.no_shrtrpt).HasMaxLength(1);
+            entity.Property(e => e.note).HasMaxLength(60);
+            entity.Property(e => e.note2).HasMaxLength(60);
+            entity.Property(e => e.phone).HasMaxLength(7);
+            entity.Property(e => e.po_attn).HasMaxLength(20);
+            entity.Property(e => e.po_warn).HasMaxLength(20);
+            entity.Property(e => e.reg_name).HasMaxLength(40);
+            entity.Property(e => e.region).HasMaxLength(30);
             entity.Property(e => e.s1_bal).HasColumnType("numeric(8, 0)");
-            entity.Property(e => e.s1_code)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.s1_code).HasMaxLength(2);
             entity.Property(e => e.s1_lim).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.s2_bal).HasColumnType("numeric(8, 0)");
-            entity.Property(e => e.s2_code)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.s2_code).HasMaxLength(2);
             entity.Property(e => e.s2_lim).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.s3_bal).HasColumnType("numeric(8, 0)");
-            entity.Property(e => e.s3_code)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.s3_code).HasMaxLength(2);
             entity.Property(e => e.s3_lim).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.ships).HasColumnType("numeric(11, 0)");
             entity.Property(e => e.ships_180).HasColumnType("numeric(11, 0)");
             entity.Property(e => e.ships_25).HasColumnType("numeric(11, 0)");
             entity.Property(e => e.ships_ex).HasColumnType("numeric(11, 0)");
-            entity.Property(e => e.state)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.street)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.street2)
-                .HasMaxLength(28)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.state).HasMaxLength(2);
+            entity.Property(e => e.street).HasMaxLength(40);
+            entity.Property(e => e.street2).HasMaxLength(28);
             entity.Property(e => e.term_days).HasColumnType("numeric(2, 0)");
-            entity.Property(e => e.used)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.used).HasMaxLength(1);
             entity.Property(e => e.workdays).HasColumnType("numeric(15, 0)");
             entity.Property(e => e.workships).HasColumnType("numeric(11, 0)");
-            entity.Property(e => e.zip)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.zip4)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.zip).HasMaxLength(5);
+            entity.Property(e => e.zip4).HasMaxLength(4);
         });
 
         modelBuilder.Entity<buyer>(entity =>
@@ -256,81 +124,30 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_buyer);
 
             entity.Property(e => e.PK_buyer).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.area_code)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.bbuycode)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.buy_code)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.city)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.country)
-                .HasMaxLength(28)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.area_code).HasMaxLength(3);
+            entity.Property(e => e.bbuycode).HasMaxLength(4);
+            entity.Property(e => e.buy_code).HasMaxLength(4);
+            entity.Property(e => e.city).HasMaxLength(20);
+            entity.Property(e => e.country).HasMaxLength(28);
             entity.Property(e => e.cus_bal).HasColumnType("numeric(11, 2)");
             entity.Property(e => e.days_180).HasColumnType("numeric(10, 0)");
             entity.Property(e => e.days_60).HasColumnType("numeric(10, 0)");
             entity.Property(e => e.days_ex).HasColumnType("numeric(10, 0)");
-            entity.Property(e => e.fax)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.int_zip)
-                .HasMaxLength(8)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.internat)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.name)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.note)
-                .HasMaxLength(60)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.phone)
-                .HasMaxLength(7)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.fax).HasMaxLength(10);
+            entity.Property(e => e.int_zip).HasMaxLength(8);
+            entity.Property(e => e.internat).HasMaxLength(1);
+            entity.Property(e => e.name).HasMaxLength(40);
+            entity.Property(e => e.note).HasMaxLength(60);
+            entity.Property(e => e.phone).HasMaxLength(7);
             entity.Property(e => e.ships_180).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.ships_60).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.ships_ex).HasColumnType("numeric(8, 0)");
-            entity.Property(e => e.state)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.street)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.street2)
-                .HasMaxLength(28)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.used)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.zip)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.zip4)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.state).HasMaxLength(2);
+            entity.Property(e => e.street).HasMaxLength(40);
+            entity.Property(e => e.street2).HasMaxLength(28);
+            entity.Property(e => e.used).HasMaxLength(1);
+            entity.Property(e => e.zip).HasMaxLength(5);
+            entity.Property(e => e.zip4).HasMaxLength(4);
         });
 
         modelBuilder.Entity<freight>(entity =>
@@ -338,14 +155,8 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_freight);
 
             entity.Property(e => e.PK_freight).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.ACTIVE)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.AREA_CODE)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.ACTIVE).HasMaxLength(1);
+            entity.Property(e => e.AREA_CODE).HasMaxLength(3);
             entity.Property(e => e.AUTO_BEG).HasColumnType("date");
             entity.Property(e => e.AUTO_COV).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.AUTO_COV1).HasColumnType("numeric(8, 0)");
@@ -363,26 +174,11 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.CARG_COV2).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.CARG_COV3).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.CARG_COV4).HasColumnType("numeric(8, 0)");
-            entity.Property(e => e.CITY)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.FAX_AREA)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.FAX_PHONE)
-                .HasMaxLength(7)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.FRT_CODE)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.FRT_CONT)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.CITY).HasMaxLength(20);
+            entity.Property(e => e.FAX_AREA).HasMaxLength(3);
+            entity.Property(e => e.FAX_PHONE).HasMaxLength(7);
+            entity.Property(e => e.FRT_CODE).HasMaxLength(4);
+            entity.Property(e => e.FRT_CONT).HasMaxLength(32);
             entity.Property(e => e.GEN_BEG).HasColumnType("date");
             entity.Property(e => e.GEN_COV1).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.GEN_COV2).HasColumnType("numeric(8, 0)");
@@ -392,166 +188,52 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.GEN_COV6).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.GEN_END).HasColumnType("date");
             entity.Property(e => e.GEN_LET).HasColumnType("date");
-            entity.Property(e => e.INS1_TP1)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS1_TP2)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS1_TP3)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS1_TP4)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS2_TP1)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS2_TP2)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS2_TP3)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS2_TP4)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS_CO1)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS_CO2)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS_CO3)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS_CO4)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS_TP1)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS_TP2)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS_TP3)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS_TP4)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.INS_TP5)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.NAME)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.NOTE)
-                .HasMaxLength(65)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PAY_AREA)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PAY_CITY)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PAY_FAREA)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PAY_FPHONE)
-                .HasMaxLength(7)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PAY_NAME)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PAY_PHONE)
-                .HasMaxLength(7)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PAY_STREET)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PAY_ZIP)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PAY_ZIP4)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.PHONE)
-                .HasMaxLength(7)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.INS1_TP1).HasMaxLength(1);
+            entity.Property(e => e.INS1_TP2).HasMaxLength(1);
+            entity.Property(e => e.INS1_TP3).HasMaxLength(1);
+            entity.Property(e => e.INS1_TP4).HasMaxLength(1);
+            entity.Property(e => e.INS2_TP1).HasMaxLength(1);
+            entity.Property(e => e.INS2_TP2).HasMaxLength(1);
+            entity.Property(e => e.INS2_TP3).HasMaxLength(1);
+            entity.Property(e => e.INS2_TP4).HasMaxLength(1);
+            entity.Property(e => e.INS_CO1).HasMaxLength(32);
+            entity.Property(e => e.INS_CO2).HasMaxLength(32);
+            entity.Property(e => e.INS_CO3).HasMaxLength(32);
+            entity.Property(e => e.INS_CO4).HasMaxLength(32);
+            entity.Property(e => e.INS_TP1).HasMaxLength(1);
+            entity.Property(e => e.INS_TP2).HasMaxLength(1);
+            entity.Property(e => e.INS_TP3).HasMaxLength(1);
+            entity.Property(e => e.INS_TP4).HasMaxLength(1);
+            entity.Property(e => e.INS_TP5).HasMaxLength(1);
+            entity.Property(e => e.NAME).HasMaxLength(40);
+            entity.Property(e => e.NOTE).HasMaxLength(65);
+            entity.Property(e => e.PAY_AREA).HasMaxLength(3);
+            entity.Property(e => e.PAY_CITY).HasMaxLength(20);
+            entity.Property(e => e.PAY_FAREA).HasMaxLength(3);
+            entity.Property(e => e.PAY_FPHONE).HasMaxLength(7);
+            entity.Property(e => e.PAY_NAME).HasMaxLength(40);
+            entity.Property(e => e.PAY_PHONE).HasMaxLength(7);
+            entity.Property(e => e.PAY_STREET).HasMaxLength(40);
+            entity.Property(e => e.PAY_ZIP).HasMaxLength(5);
+            entity.Property(e => e.PAY_ZIP4).HasMaxLength(4);
+            entity.Property(e => e.PHONE).HasMaxLength(7);
             entity.Property(e => e.PHY_BEG).HasColumnType("date");
             entity.Property(e => e.PHY_COV1).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.PHY_COV2).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.PHY_END).HasColumnType("date");
-            entity.Property(e => e.POLICY1)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.POLICY2)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.POLICY3)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.POLICY4)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.POLICY5)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.POLICY1).HasMaxLength(20);
+            entity.Property(e => e.POLICY2).HasMaxLength(20);
+            entity.Property(e => e.POLICY3).HasMaxLength(20);
+            entity.Property(e => e.POLICY4).HasMaxLength(20);
+            entity.Property(e => e.POLICY5).HasMaxLength(20);
             entity.Property(e => e.REFER_BEG).HasColumnType("date");
             entity.Property(e => e.REFER_COV).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.REFER_END).HasColumnType("date");
             entity.Property(e => e.REFER_LET).HasColumnType("date");
-            entity.Property(e => e.REPORT)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.STATE)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.STREET)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.USED)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.REPORT).HasMaxLength(1);
+            entity.Property(e => e.STATE).HasMaxLength(2);
+            entity.Property(e => e.STREET).HasMaxLength(40);
+            entity.Property(e => e.USED).HasMaxLength(1);
             entity.Property(e => e.WORK_BEG).HasColumnType("date");
             entity.Property(e => e.WORK_COV).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.WORK_COV1).HasColumnType("numeric(8, 0)");
@@ -559,14 +241,8 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.WORK_COV3).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.WORK_END).HasColumnType("date");
             entity.Property(e => e.WORK_LET).HasColumnType("date");
-            entity.Property(e => e.ZIP)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ZIP4)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.ZIP).HasMaxLength(5);
+            entity.Property(e => e.ZIP4).HasMaxLength(4);
         });
 
         modelBuilder.Entity<po_head>(entity =>
@@ -574,57 +250,21 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_po_head);
 
             entity.Property(e => e.PK_po_head).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.bbuycode)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.bbuycode).HasMaxLength(4);
             entity.Property(e => e.bill_adj).HasColumnType("numeric(9, 2)");
             entity.Property(e => e.brk_prom).HasColumnType("numeric(8, 2)");
-            entity.Property(e => e.brok_name)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.brokerage)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.buy_code)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.buyer_pd)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.buyer_po)
-                .HasMaxLength(15)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.brok_name).HasMaxLength(5);
+            entity.Property(e => e.brokerage).HasMaxLength(1);
+            entity.Property(e => e.buy_code).HasMaxLength(4);
+            entity.Property(e => e.buyer_pd).HasMaxLength(1);
+            entity.Property(e => e.buyer_po).HasMaxLength(15);
             entity.Property(e => e.case_8910).HasColumnType("numeric(5, 0)");
-            entity.Property(e => e.check1)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.check2)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.com_code)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.com_code2)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.com_code3)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.com_pd)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.check1).HasMaxLength(1);
+            entity.Property(e => e.check2).HasMaxLength(1);
+            entity.Property(e => e.com_code).HasMaxLength(2);
+            entity.Property(e => e.com_code2).HasMaxLength(2);
+            entity.Property(e => e.com_code3).HasMaxLength(2);
+            entity.Property(e => e.com_pd).HasMaxLength(1);
             entity.Property(e => e.comm_adj).HasColumnType("numeric(7, 2)");
             entity.Property(e => e.comm_amt).HasColumnType("numeric(9, 2)");
             entity.Property(e => e.comm_amt2).HasColumnType("numeric(9, 2)");
@@ -639,139 +279,46 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.cus_amt2).HasColumnType("numeric(10, 2)");
             entity.Property(e => e.cus_pall).HasColumnType("numeric(8, 2)");
             entity.Property(e => e.cus_prom).HasColumnType("numeric(8, 2)");
-            entity.Property(e => e.cus_prt1)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.cus_prt2)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.cus_reas1)
-                .HasMaxLength(15)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.cus_reas2)
-                .HasMaxLength(15)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.cus_prt1).HasMaxLength(1);
+            entity.Property(e => e.cus_prt2).HasMaxLength(2);
+            entity.Property(e => e.cus_reas1).HasMaxLength(15);
+            entity.Property(e => e.cus_reas2).HasMaxLength(15);
             entity.Property(e => e.del_reqd).HasColumnType("date");
             entity.Property(e => e.frt1_adj1).HasColumnType("numeric(8, 2)");
-            entity.Property(e => e.frt1_rs1)
-                .HasMaxLength(15)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.frt1_rs2)
-                .HasMaxLength(15)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.frt2_flg)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.frt3_flg)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.frt1_rs1).HasMaxLength(15);
+            entity.Property(e => e.frt1_rs2).HasMaxLength(15);
+            entity.Property(e => e.frt2_flg).HasMaxLength(1);
+            entity.Property(e => e.frt3_flg).HasMaxLength(1);
             entity.Property(e => e.frt_amt1).HasColumnType("numeric(9, 2)");
-            entity.Property(e => e.frt_code1)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.frt_code1).HasMaxLength(4);
             entity.Property(e => e.frt_pall).HasColumnType("numeric(8, 2)");
-            entity.Property(e => e.frt_pd)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.frt_rec)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.frt_pd).HasMaxLength(1);
+            entity.Property(e => e.frt_rec).HasMaxLength(1);
             entity.Property(e => e.gross).HasColumnType("numeric(9, 2)");
             entity.Property(e => e.inv_date).HasColumnType("date");
-            entity.Property(e => e.inv_flg)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.inv_nbr)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.main_ship)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.mid_pd)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.misc_flg)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.notes_flg)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.inv_flg).HasMaxLength(1);
+            entity.Property(e => e.inv_nbr).HasMaxLength(5);
+            entity.Property(e => e.main_ship).HasMaxLength(1);
+            entity.Property(e => e.mid_pd).HasMaxLength(1);
+            entity.Property(e => e.misc_flg).HasMaxLength(1);
+            entity.Property(e => e.notes_flg).HasMaxLength(1);
             entity.Property(e => e.ord_date).HasColumnType("date");
             entity.Property(e => e.over_pd).HasColumnType("numeric(8, 2)");
-            entity.Property(e => e.paid_flg)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.paid_flg).HasMaxLength(1);
             entity.Property(e => e.po_dtadd).HasColumnType("date");
-            entity.Property(e => e.po_nbr)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.po_suffix)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.posted)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.pu_lock)
-                .HasMaxLength(25)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ref_po1)
-                .HasMaxLength(9)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ref_po2)
-                .HasMaxLength(9)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ref_po3)
-                .HasMaxLength(9)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ref_po4)
-                .HasMaxLength(9)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ref_po5)
-                .HasMaxLength(9)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ref_po6)
-                .HasMaxLength(9)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.rsupcode)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.sal_code2)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.sal_code3)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.po_nbr).HasMaxLength(5);
+            entity.Property(e => e.po_suffix).HasMaxLength(1);
+            entity.Property(e => e.posted).HasMaxLength(1);
+            entity.Property(e => e.pu_lock).HasMaxLength(25);
+            entity.Property(e => e.ref_po1).HasMaxLength(9);
+            entity.Property(e => e.ref_po2).HasMaxLength(9);
+            entity.Property(e => e.ref_po3).HasMaxLength(9);
+            entity.Property(e => e.ref_po4).HasMaxLength(9);
+            entity.Property(e => e.ref_po5).HasMaxLength(9);
+            entity.Property(e => e.ref_po6).HasMaxLength(9);
+            entity.Property(e => e.rsupcode).HasMaxLength(4);
+            entity.Property(e => e.sal_code2).HasMaxLength(2);
+            entity.Property(e => e.sal_code3).HasMaxLength(2);
             entity.Property(e => e.sale2_amt).HasColumnType("numeric(8, 2)");
             entity.Property(e => e.sale2_cen).HasColumnType("numeric(7, 2)");
             entity.Property(e => e.sale2_ent).HasColumnType("numeric(8, 2)");
@@ -783,50 +330,20 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.sale_cent).HasColumnType("numeric(7, 4)");
             entity.Property(e => e.sale_comm).HasColumnType("numeric(8, 2)");
             entity.Property(e => e.sale_ent).HasColumnType("numeric(7, 2)");
-            entity.Property(e => e.salesman)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.salesman).HasMaxLength(2);
             entity.Property(e => e.ship_date).HasColumnType("date");
-            entity.Property(e => e.ship_nbr)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ship_suff)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.short_flg)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.shortflg2)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.ship_nbr).HasMaxLength(4);
+            entity.Property(e => e.ship_suff).HasMaxLength(1);
+            entity.Property(e => e.short_flg).HasMaxLength(1);
+            entity.Property(e => e.shortflg2).HasMaxLength(1);
             entity.Property(e => e.sup_amt1).HasColumnType("numeric(10, 2)");
             entity.Property(e => e.sup_amt2).HasColumnType("numeric(10, 2)");
-            entity.Property(e => e.sup_code)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.sup_code).HasMaxLength(4);
             entity.Property(e => e.sup_pall).HasColumnType("numeric(8, 2)");
-            entity.Property(e => e.sup_pd)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.sup_reas1)
-                .HasMaxLength(15)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.sup_reas2)
-                .HasMaxLength(15)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.sup_rec)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.sup_pd).HasMaxLength(1);
+            entity.Property(e => e.sup_reas1).HasMaxLength(15);
+            entity.Property(e => e.sup_reas2).HasMaxLength(15);
+            entity.Property(e => e.sup_rec).HasMaxLength(1);
             entity.Property(e => e.sw_lbs).HasColumnType("numeric(8, 2)");
             entity.Property(e => e.sw_purch).HasColumnType("numeric(8, 2)");
             entity.Property(e => e.sw_sell).HasColumnType("numeric(8, 2)");
@@ -837,10 +354,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.tot_short).HasColumnType("numeric(8, 1)");
             entity.Property(e => e.usr_prom).HasColumnType("numeric(8, 2)");
             entity.Property(e => e.writeoff).HasColumnType("numeric(8, 2)");
-            entity.Property(e => e.zero_comm)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.zero_comm).HasMaxLength(1);
         });
 
         modelBuilder.Entity<rem_sup>(entity =>
@@ -848,14 +362,8 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_rem_sup);
 
             entity.Property(e => e.PK_rem_sup).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.active)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.area_code)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.active).HasMaxLength(1);
+            entity.Property(e => e.area_code).HasMaxLength(3);
             entity.Property(e => e.auto_beg).HasColumnType("date");
             entity.Property(e => e.auto_cov).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.auto_cov1).HasColumnType("numeric(8, 0)");
@@ -866,10 +374,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.auto_let).HasColumnType("date");
             entity.Property(e => e.beg_date).HasColumnType("date");
             entity.Property(e => e.cancel).HasColumnType("numeric(2, 0)");
-            entity.Property(e => e.city)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.city).HasMaxLength(20);
             entity.Property(e => e.cred_lim).HasColumnType("numeric(7, 0)");
             entity.Property(e => e.end_date).HasColumnType("date");
             entity.Property(e => e.exce_cov1).HasColumnType("numeric(8, 0)");
@@ -878,10 +383,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.exces_cov).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.exces_end).HasColumnType("date");
             entity.Property(e => e.exces_let).HasColumnType("date");
-            entity.Property(e => e.fax)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.fax).HasMaxLength(10);
             entity.Property(e => e.gen_beg).HasColumnType("date");
             entity.Property(e => e.gen_cov1).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.gen_cov2).HasColumnType("numeric(8, 0)");
@@ -891,129 +393,39 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.gen_cov6).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.gen_end).HasColumnType("date");
             entity.Property(e => e.gen_let).HasColumnType("date");
-            entity.Property(e => e.guaran)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.guaran).HasMaxLength(20);
             entity.Property(e => e.indem_dt).HasColumnType("date");
-            entity.Property(e => e.indem_flg)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins1_tp1)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins1_tp2)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins1_tp3)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins1_tp4)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins2_tp1)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins2_tp2)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins2_tp3)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins2_tp4)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_co1)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_co2)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_co3)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_co4)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_co5)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_tp1)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_tp2)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_tp3)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_tp4)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.ins_tp5)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.led_code)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.indem_flg).HasMaxLength(1);
+            entity.Property(e => e.ins1_tp1).HasMaxLength(1);
+            entity.Property(e => e.ins1_tp2).HasMaxLength(1);
+            entity.Property(e => e.ins1_tp3).HasMaxLength(1);
+            entity.Property(e => e.ins1_tp4).HasMaxLength(1);
+            entity.Property(e => e.ins2_tp1).HasMaxLength(1);
+            entity.Property(e => e.ins2_tp2).HasMaxLength(1);
+            entity.Property(e => e.ins2_tp3).HasMaxLength(1);
+            entity.Property(e => e.ins2_tp4).HasMaxLength(1);
+            entity.Property(e => e.ins_co1).HasMaxLength(32);
+            entity.Property(e => e.ins_co2).HasMaxLength(32);
+            entity.Property(e => e.ins_co3).HasMaxLength(32);
+            entity.Property(e => e.ins_co4).HasMaxLength(32);
+            entity.Property(e => e.ins_co5).HasMaxLength(32);
+            entity.Property(e => e.ins_tp1).HasMaxLength(1);
+            entity.Property(e => e.ins_tp2).HasMaxLength(1);
+            entity.Property(e => e.ins_tp3).HasMaxLength(1);
+            entity.Property(e => e.ins_tp4).HasMaxLength(1);
+            entity.Property(e => e.ins_tp5).HasMaxLength(1);
+            entity.Property(e => e.led_code).HasMaxLength(4);
             entity.Property(e => e.let_crd).HasColumnType("numeric(7, 0)");
-            entity.Property(e => e.name)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.name).HasMaxLength(40);
             entity.Property(e => e.net_days).HasColumnType("numeric(3, 0)");
-            entity.Property(e => e.note)
-                .HasMaxLength(60)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.pay_zip4)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.phone)
-                .HasMaxLength(7)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.policy1)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.policy2)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.policy3)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.policy4)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.policy5)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.note).HasMaxLength(60);
+            entity.Property(e => e.pay_zip4).HasMaxLength(4);
+            entity.Property(e => e.phone).HasMaxLength(7);
+            entity.Property(e => e.policy1).HasMaxLength(20);
+            entity.Property(e => e.policy2).HasMaxLength(20);
+            entity.Property(e => e.policy3).HasMaxLength(20);
+            entity.Property(e => e.policy4).HasMaxLength(20);
+            entity.Property(e => e.policy5).HasMaxLength(20);
             entity.Property(e => e.reca_cov1).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.recal_beg).HasColumnType("date");
             entity.Property(e => e.recal_end).HasColumnType("date");
@@ -1022,26 +434,11 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.refer_cov).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.refer_end).HasColumnType("date");
             entity.Property(e => e.refer_let).HasColumnType("date");
-            entity.Property(e => e.rsupcode)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.state)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.street)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.temp)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.used)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.rsupcode).HasMaxLength(4);
+            entity.Property(e => e.state).HasMaxLength(2);
+            entity.Property(e => e.street).HasMaxLength(40);
+            entity.Property(e => e.temp).HasMaxLength(1);
+            entity.Property(e => e.used).HasMaxLength(1);
             entity.Property(e => e.work_beg).HasColumnType("date");
             entity.Property(e => e.work_cov).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.work_cov1).HasColumnType("numeric(8, 0)");
@@ -1049,14 +446,8 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.work_cov3).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.work_end).HasColumnType("date");
             entity.Property(e => e.work_let).HasColumnType("date");
-            entity.Property(e => e.zip)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.zip4)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.zip).HasMaxLength(5);
+            entity.Property(e => e.zip4).HasMaxLength(4);
         });
 
         modelBuilder.Entity<salesman>(entity =>
@@ -1064,75 +455,30 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_salesman);
 
             entity.Property(e => e.PK_salesman).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.active)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.aprv_com)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.city)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.active).HasMaxLength(1);
+            entity.Property(e => e.aprv_com).HasMaxLength(1);
+            entity.Property(e => e.city).HasMaxLength(20);
             entity.Property(e => e.eff_dt1).HasColumnType("date");
             entity.Property(e => e.eff_dt2).HasColumnType("date");
             entity.Property(e => e.eff_dt3).HasColumnType("date");
-            entity.Property(e => e.fed_taxid)
-                .HasMaxLength(9)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.fed_taxid).HasMaxLength(9);
             entity.Property(e => e.interest).HasColumnType("numeric(9, 2)");
-            entity.Property(e => e.name)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.office_cd)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.res_ded)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.res_paid)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.name).HasMaxLength(40);
+            entity.Property(e => e.office_cd).HasMaxLength(2);
+            entity.Property(e => e.res_ded).HasMaxLength(4);
+            entity.Property(e => e.res_paid).HasMaxLength(4);
             entity.Property(e => e.reserve).HasColumnType("numeric(9, 2)");
-            entity.Property(e => e.rpt_prt)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.sale_code)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.rpt_prt).HasMaxLength(1);
+            entity.Property(e => e.sale_code).HasMaxLength(2);
             entity.Property(e => e.sale_per2).HasColumnType("numeric(3, 0)");
             entity.Property(e => e.sale_per3).HasColumnType("numeric(3, 0)");
             entity.Property(e => e.sale_perc).HasColumnType("numeric(3, 0)");
-            entity.Property(e => e.sale_ssn)
-                .HasMaxLength(9)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.state)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.street)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.sale_ssn).HasMaxLength(9);
+            entity.Property(e => e.state).HasMaxLength(2);
+            entity.Property(e => e.street).HasMaxLength(40);
             entity.Property(e => e.withdraw).HasColumnType("numeric(9, 2)");
-            entity.Property(e => e.zip)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.zip4)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.zip).HasMaxLength(5);
+            entity.Property(e => e.zip4).HasMaxLength(4);
         });
 
         modelBuilder.Entity<supplier>(entity =>
@@ -1140,82 +486,25 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_supplier);
 
             entity.Property(e => e.PK_supplier).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.area_code)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.city)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.cont_fax)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.cont_name)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.cont_phone)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.fax)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.freight_phone)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.fright_email)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.name)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.note)
-                .HasMaxLength(60)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.phone)
-                .HasMaxLength(7)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.pu_code)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.rsupcode)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.state)
-                .HasMaxLength(2)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.street)
-                .HasMaxLength(40)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.sup_code)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.used)
-                .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.zip)
-                .HasMaxLength(5)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.zip4)
-                .HasMaxLength(4)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.area_code).HasMaxLength(3);
+            entity.Property(e => e.city).HasMaxLength(20);
+            entity.Property(e => e.cont_fax).HasMaxLength(10);
+            entity.Property(e => e.cont_name).HasMaxLength(40);
+            entity.Property(e => e.cont_phone).HasMaxLength(10);
+            entity.Property(e => e.fax).HasMaxLength(10);
+            entity.Property(e => e.freight_email).HasMaxLength(50);
+            entity.Property(e => e.freight_phone).HasMaxLength(10);
+            entity.Property(e => e.name).HasMaxLength(50);
+            entity.Property(e => e.note).HasMaxLength(60);
+            entity.Property(e => e.phone).HasMaxLength(7);
+            entity.Property(e => e.pu_code).HasMaxLength(4);
+            entity.Property(e => e.rsupcode).HasMaxLength(4);
+            entity.Property(e => e.state).HasMaxLength(50);
+            entity.Property(e => e.street).HasMaxLength(40);
+            entity.Property(e => e.sup_code).HasMaxLength(4);
+            entity.Property(e => e.used).HasMaxLength(1);
+            entity.Property(e => e.zip).HasMaxLength(5);
+            entity.Property(e => e.zip4).HasMaxLength(4);
         });
 
         OnModelCreatingGeneratedProcedures(modelBuilder);
