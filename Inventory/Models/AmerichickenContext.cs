@@ -213,6 +213,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.PAY_FPHONE).HasMaxLength(7);
             entity.Property(e => e.PAY_NAME).HasMaxLength(40);
             entity.Property(e => e.PAY_PHONE).HasMaxLength(7);
+            entity.Property(e => e.PAY_STATE).HasMaxLength(2);
             entity.Property(e => e.PAY_STREET).HasMaxLength(40);
             entity.Property(e => e.PAY_ZIP).HasMaxLength(5);
             entity.Property(e => e.PAY_ZIP4).HasMaxLength(4);

@@ -108,6 +108,18 @@ namespace Inventory.Views.UserControls
                                 resultSelectionListView.Items.Add(remitSelectionChoice);
                                 break;
 
+                            case "freight":
+                                var freightResult = item as freight;
+
+                                ListViewItem freightSelectionChoice = new ListViewItem((i + 1).ToString());
+                                freightSelectionChoice.SubItems.Add(freightResult.NAME);
+                                freightSelectionChoice.SubItems.Add(freightResult.CITY);
+                                freightSelectionChoice.SubItems.Add(freightResult.STATE);
+
+                                freightSelectionChoice.Tag = freightResult;
+                                resultSelectionListView.Items.Add(freightSelectionChoice);
+                                break;
+
                             default:
                                 MessageBox.Show("oops");
                                 break;

@@ -158,6 +158,10 @@ namespace Inventory.Views.UserControls
             {
                 programLabel = "Remit To";
             }
+            else if (selectedTable == "freight")
+            {
+                programLabel = "Freight Carrier";
+            }
             else
             {
                 programLabel = "ERROR";

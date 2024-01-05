@@ -13,7 +13,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
-        private supplier? supplierData;
+        private supplier? _supplierData;
         private rem_sup? remitToObject;
         private readonly AmerichickenContext dbContext;
 
@@ -41,7 +41,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         {
             // If casting succeeded, and supplierObject is not null.
             // Assign all the appropriate object data to the corresponding fields to display/edit.
-            supplierData = supplierObject;
+            _supplierData = supplierObject;
             supnameTextBox.Text = supplierObject.name?.ToString().Trim();
             phoneMaskTextBox.Text = $"{supplierObject.area_code?.ToString().Trim() + supplierObject.phone?.ToString().Trim()}";
             faxMaskTextBox.Text = supplierObject.fax?.ToString().Trim();
@@ -207,7 +207,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             {
                 case "1":
                     //add or update supplier
-                    UpdateSupplier(supplierData!);
+                    UpdateSupplier(_supplierData!);
                     break;
 
                 case "2":
@@ -221,7 +221,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        DeleteSupplier(supplierData!);
+                        DeleteSupplier(_supplierData!);
                     }
                     else if (dialogResult == DialogResult.No)
                     {

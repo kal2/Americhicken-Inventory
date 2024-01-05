@@ -46,7 +46,7 @@
             autoCov3TextBox = new TextBox();
             label30 = new Label();
             label31 = new Label();
-            excessCov2TextBox = new TextBox();
+            compCov2TextBox = new TextBox();
             policy3TextBox = new TextBox();
             cargoCov2TextBox = new TextBox();
             cargoCov1TextBox = new TextBox();
@@ -118,10 +118,10 @@
             compCov3TextBox.ForeColor = Color.White;
             compCov3TextBox.Location = new Point(1146, 359);
             compCov3TextBox.Margin = new Padding(0);
-            compCov3TextBox.MaxLength = 40;
+            compCov3TextBox.MaxLength = 8;
             compCov3TextBox.Name = "compCov3TextBox";
             compCov3TextBox.Size = new Size(124, 34);
-            compCov3TextBox.TabIndex = 404;
+            compCov3TextBox.TabIndex = 353;
             // 
             // label37
             // 
@@ -141,10 +141,10 @@
             compCov1TextBox.ForeColor = Color.White;
             compCov1TextBox.Location = new Point(559, 359);
             compCov1TextBox.Margin = new Padding(0);
-            compCov1TextBox.MaxLength = 40;
+            compCov1TextBox.MaxLength = 8;
             compCov1TextBox.Name = "compCov1TextBox";
             compCov1TextBox.Size = new Size(124, 34);
-            compCov1TextBox.TabIndex = 403;
+            compCov1TextBox.TabIndex = 351;
             // 
             // label38
             // 
@@ -164,10 +164,10 @@
             cargoCov4TextBox.ForeColor = Color.White;
             cargoCov4TextBox.Location = new Point(1146, 514);
             cargoCov4TextBox.Margin = new Padding(0);
-            cargoCov4TextBox.MaxLength = 40;
+            cargoCov4TextBox.MaxLength = 8;
             cargoCov4TextBox.Name = "cargoCov4TextBox";
             cargoCov4TextBox.Size = new Size(124, 34);
-            cargoCov4TextBox.TabIndex = 401;
+            cargoCov4TextBox.TabIndex = 362;
             // 
             // label36
             // 
@@ -187,10 +187,10 @@
             damageCov2TextBox.ForeColor = Color.White;
             damageCov2TextBox.Location = new Point(1146, 597);
             damageCov2TextBox.Margin = new Padding(0);
-            damageCov2TextBox.MaxLength = 41;
+            damageCov2TextBox.MaxLength = 8;
             damageCov2TextBox.Name = "damageCov2TextBox";
             damageCov2TextBox.Size = new Size(124, 34);
-            damageCov2TextBox.TabIndex = 400;
+            damageCov2TextBox.TabIndex = 368;
             // 
             // label35
             // 
@@ -221,10 +221,10 @@
             cancellationTextBox.ForeColor = Color.White;
             cancellationTextBox.Location = new Point(279, 597);
             cancellationTextBox.Margin = new Padding(0);
-            cancellationTextBox.MaxLength = 40;
+            cancellationTextBox.MaxLength = 2;
             cancellationTextBox.Name = "cancellationTextBox";
             cancellationTextBox.Size = new Size(36, 34);
-            cancellationTextBox.TabIndex = 364;
+            cancellationTextBox.TabIndex = 369;
             // 
             // damageCov1TextBox
             // 
@@ -233,10 +233,10 @@
             damageCov1TextBox.ForeColor = Color.White;
             damageCov1TextBox.Location = new Point(559, 597);
             damageCov1TextBox.Margin = new Padding(0);
-            damageCov1TextBox.MaxLength = 41;
+            damageCov1TextBox.MaxLength = 8;
             damageCov1TextBox.Name = "damageCov1TextBox";
             damageCov1TextBox.Size = new Size(124, 34);
-            damageCov1TextBox.TabIndex = 397;
+            damageCov1TextBox.TabIndex = 367;
             // 
             // policy5TextBox
             // 
@@ -245,10 +245,10 @@
             policy5TextBox.ForeColor = Color.White;
             policy5TextBox.Location = new Point(369, 552);
             policy5TextBox.Margin = new Padding(0);
-            policy5TextBox.MaxLength = 40;
+            policy5TextBox.MaxLength = 20;
             policy5TextBox.Name = "policy5TextBox";
             policy5TextBox.Size = new Size(345, 34);
-            policy5TextBox.TabIndex = 361;
+            policy5TextBox.TabIndex = 364;
             // 
             // cargoCov3TextBox
             // 
@@ -257,10 +257,10 @@
             cargoCov3TextBox.ForeColor = Color.White;
             cargoCov3TextBox.Location = new Point(1146, 478);
             cargoCov3TextBox.Margin = new Padding(0);
-            cargoCov3TextBox.MaxLength = 40;
+            cargoCov3TextBox.MaxLength = 8;
             cargoCov3TextBox.Name = "cargoCov3TextBox";
             cargoCov3TextBox.Size = new Size(124, 34);
-            cargoCov3TextBox.TabIndex = 359;
+            cargoCov3TextBox.TabIndex = 361;
             // 
             // label33
             // 
@@ -280,7 +280,7 @@
             autoCov4TextBox.ForeColor = Color.White;
             autoCov4TextBox.Location = new Point(1146, 277);
             autoCov4TextBox.Margin = new Padding(0);
-            autoCov4TextBox.MaxLength = 40;
+            autoCov4TextBox.MaxLength = 8;
             autoCov4TextBox.Name = "autoCov4TextBox";
             autoCov4TextBox.Size = new Size(124, 34);
             autoCov4TextBox.TabIndex = 345;
@@ -292,7 +292,7 @@
             autoCov3TextBox.ForeColor = Color.White;
             autoCov3TextBox.Location = new Point(1146, 243);
             autoCov3TextBox.Margin = new Padding(0);
-            autoCov3TextBox.MaxLength = 40;
+            autoCov3TextBox.MaxLength = 8;
             autoCov3TextBox.Name = "autoCov3TextBox";
             autoCov3TextBox.Size = new Size(124, 34);
             autoCov3TextBox.TabIndex = 344;
@@ -319,17 +319,17 @@
             label31.TabIndex = 394;
             label31.Text = "Injury (Per Accident):";
             // 
-            // excessCov2TextBox
+            // compCov2TextBox
             // 
-            excessCov2TextBox.BackColor = Color.Maroon;
-            excessCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            excessCov2TextBox.ForeColor = Color.White;
-            excessCov2TextBox.Location = new Point(559, 393);
-            excessCov2TextBox.Margin = new Padding(0);
-            excessCov2TextBox.MaxLength = 40;
-            excessCov2TextBox.Name = "excessCov2TextBox";
-            excessCov2TextBox.Size = new Size(124, 34);
-            excessCov2TextBox.TabIndex = 351;
+            compCov2TextBox.BackColor = Color.Maroon;
+            compCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            compCov2TextBox.ForeColor = Color.White;
+            compCov2TextBox.Location = new Point(559, 393);
+            compCov2TextBox.Margin = new Padding(0);
+            compCov2TextBox.MaxLength = 8;
+            compCov2TextBox.Name = "compCov2TextBox";
+            compCov2TextBox.Size = new Size(124, 34);
+            compCov2TextBox.TabIndex = 352;
             // 
             // policy3TextBox
             // 
@@ -338,7 +338,7 @@
             policy3TextBox.ForeColor = Color.White;
             policy3TextBox.Location = new Point(369, 317);
             policy3TextBox.Margin = new Padding(0);
-            policy3TextBox.MaxLength = 40;
+            policy3TextBox.MaxLength = 20;
             policy3TextBox.Name = "policy3TextBox";
             policy3TextBox.Size = new Size(345, 34);
             policy3TextBox.TabIndex = 347;
@@ -350,10 +350,10 @@
             cargoCov2TextBox.ForeColor = Color.White;
             cargoCov2TextBox.Location = new Point(559, 512);
             cargoCov2TextBox.Margin = new Padding(0);
-            cargoCov2TextBox.MaxLength = 40;
+            cargoCov2TextBox.MaxLength = 8;
             cargoCov2TextBox.Name = "cargoCov2TextBox";
             cargoCov2TextBox.Size = new Size(124, 34);
-            cargoCov2TextBox.TabIndex = 358;
+            cargoCov2TextBox.TabIndex = 360;
             // 
             // cargoCov1TextBox
             // 
@@ -362,10 +362,10 @@
             cargoCov1TextBox.ForeColor = Color.White;
             cargoCov1TextBox.Location = new Point(559, 478);
             cargoCov1TextBox.Margin = new Padding(0);
-            cargoCov1TextBox.MaxLength = 40;
+            cargoCov1TextBox.MaxLength = 8;
             cargoCov1TextBox.Name = "cargoCov1TextBox";
             cargoCov1TextBox.Size = new Size(124, 34);
-            cargoCov1TextBox.TabIndex = 357;
+            cargoCov1TextBox.TabIndex = 359;
             // 
             // policy4TextBox
             // 
@@ -374,10 +374,10 @@
             policy4TextBox.ForeColor = Color.White;
             policy4TextBox.Location = new Point(369, 433);
             policy4TextBox.Margin = new Padding(0);
-            policy4TextBox.MaxLength = 40;
+            policy4TextBox.MaxLength = 20;
             policy4TextBox.Name = "policy4TextBox";
             policy4TextBox.Size = new Size(345, 34);
-            policy4TextBox.TabIndex = 353;
+            policy4TextBox.TabIndex = 355;
             // 
             // autoCov2TextBox
             // 
@@ -386,7 +386,7 @@
             autoCov2TextBox.ForeColor = Color.White;
             autoCov2TextBox.Location = new Point(559, 277);
             autoCov2TextBox.Margin = new Padding(0);
-            autoCov2TextBox.MaxLength = 40;
+            autoCov2TextBox.MaxLength = 8;
             autoCov2TextBox.Name = "autoCov2TextBox";
             autoCov2TextBox.Size = new Size(124, 34);
             autoCov2TextBox.TabIndex = 343;
@@ -398,7 +398,7 @@
             autoCov1TextBox.ForeColor = Color.White;
             autoCov1TextBox.Location = new Point(559, 243);
             autoCov1TextBox.Margin = new Padding(0);
-            autoCov1TextBox.MaxLength = 40;
+            autoCov1TextBox.MaxLength = 8;
             autoCov1TextBox.Name = "autoCov1TextBox";
             autoCov1TextBox.Size = new Size(124, 34);
             autoCov1TextBox.TabIndex = 342;
@@ -410,7 +410,7 @@
             policy2TextBox.ForeColor = Color.White;
             policy2TextBox.Location = new Point(369, 198);
             policy2TextBox.Margin = new Padding(0);
-            policy2TextBox.MaxLength = 40;
+            policy2TextBox.MaxLength = 20;
             policy2TextBox.Name = "policy2TextBox";
             policy2TextBox.Size = new Size(345, 34);
             policy2TextBox.TabIndex = 338;
@@ -422,10 +422,10 @@
             insTp5TextBox.ForeColor = Color.White;
             insTp5TextBox.Location = new Point(20, 552);
             insTp5TextBox.Margin = new Padding(0);
-            insTp5TextBox.MaxLength = 40;
+            insTp5TextBox.MaxLength = 1;
             insTp5TextBox.Name = "insTp5TextBox";
             insTp5TextBox.Size = new Size(34, 34);
-            insTp5TextBox.TabIndex = 360;
+            insTp5TextBox.TabIndex = 363;
             // 
             // insTp4TextBox
             // 
@@ -434,10 +434,10 @@
             insTp4TextBox.ForeColor = Color.White;
             insTp4TextBox.Location = new Point(20, 433);
             insTp4TextBox.Margin = new Padding(0);
-            insTp4TextBox.MaxLength = 40;
+            insTp4TextBox.MaxLength = 1;
             insTp4TextBox.Name = "insTp4TextBox";
             insTp4TextBox.Size = new Size(34, 34);
-            insTp4TextBox.TabIndex = 352;
+            insTp4TextBox.TabIndex = 354;
             // 
             // insTp3TextBox
             // 
@@ -446,7 +446,7 @@
             insTp3TextBox.ForeColor = Color.White;
             insTp3TextBox.Location = new Point(20, 317);
             insTp3TextBox.Margin = new Padding(0);
-            insTp3TextBox.MaxLength = 40;
+            insTp3TextBox.MaxLength = 1;
             insTp3TextBox.Name = "insTp3TextBox";
             insTp3TextBox.Size = new Size(34, 34);
             insTp3TextBox.TabIndex = 346;
@@ -458,7 +458,7 @@
             insTp2TextBox.ForeColor = Color.White;
             insTp2TextBox.Location = new Point(20, 198);
             insTp2TextBox.Margin = new Padding(0);
-            insTp2TextBox.MaxLength = 40;
+            insTp2TextBox.MaxLength = 1;
             insTp2TextBox.Name = "insTp2TextBox";
             insTp2TextBox.Size = new Size(34, 34);
             insTp2TextBox.TabIndex = 337;
@@ -482,7 +482,7 @@
             genCov2TextBox.ForeColor = Color.White;
             genCov2TextBox.Location = new Point(1146, 156);
             genCov2TextBox.Margin = new Padding(0);
-            genCov2TextBox.MaxLength = 40;
+            genCov2TextBox.MaxLength = 8;
             genCov2TextBox.Name = "genCov2TextBox";
             genCov2TextBox.Size = new Size(124, 34);
             genCov2TextBox.TabIndex = 336;
@@ -494,7 +494,7 @@
             genCov1TextBox.ForeColor = Color.White;
             genCov1TextBox.Location = new Point(1146, 122);
             genCov1TextBox.Margin = new Padding(0);
-            genCov1TextBox.MaxLength = 40;
+            genCov1TextBox.MaxLength = 8;
             genCov1TextBox.Name = "genCov1TextBox";
             genCov1TextBox.Size = new Size(124, 34);
             genCov1TextBox.TabIndex = 335;
@@ -506,7 +506,7 @@
             genCov3TextBox.ForeColor = Color.White;
             genCov3TextBox.Location = new Point(1146, 88);
             genCov3TextBox.Margin = new Padding(0);
-            genCov3TextBox.MaxLength = 40;
+            genCov3TextBox.MaxLength = 8;
             genCov3TextBox.Name = "genCov3TextBox";
             genCov3TextBox.Size = new Size(124, 34);
             genCov3TextBox.TabIndex = 334;
@@ -551,7 +551,7 @@
             genCov6TextBox.ForeColor = Color.White;
             genCov6TextBox.Location = new Point(559, 156);
             genCov6TextBox.Margin = new Padding(0);
-            genCov6TextBox.MaxLength = 40;
+            genCov6TextBox.MaxLength = 8;
             genCov6TextBox.Name = "genCov6TextBox";
             genCov6TextBox.Size = new Size(124, 34);
             genCov6TextBox.TabIndex = 333;
@@ -563,7 +563,7 @@
             genCov5TextBox.ForeColor = Color.White;
             genCov5TextBox.Location = new Point(559, 122);
             genCov5TextBox.Margin = new Padding(0);
-            genCov5TextBox.MaxLength = 40;
+            genCov5TextBox.MaxLength = 8;
             genCov5TextBox.Name = "genCov5TextBox";
             genCov5TextBox.Size = new Size(124, 34);
             genCov5TextBox.TabIndex = 332;
@@ -575,7 +575,7 @@
             genCov4TextBox.ForeColor = Color.White;
             genCov4TextBox.Location = new Point(559, 88);
             genCov4TextBox.Margin = new Padding(0);
-            genCov4TextBox.MaxLength = 40;
+            genCov4TextBox.MaxLength = 8;
             genCov4TextBox.Name = "genCov4TextBox";
             genCov4TextBox.Size = new Size(124, 34);
             genCov4TextBox.TabIndex = 331;
@@ -587,7 +587,7 @@
             policy1TextBox.ForeColor = Color.White;
             policy1TextBox.Location = new Point(369, 43);
             policy1TextBox.Margin = new Padding(0);
-            policy1TextBox.MaxLength = 40;
+            policy1TextBox.MaxLength = 20;
             policy1TextBox.Name = "policy1TextBox";
             policy1TextBox.Size = new Size(345, 34);
             policy1TextBox.TabIndex = 327;
@@ -601,7 +601,7 @@
             damageEndDateMaskBox.Mask = "00/00/0000";
             damageEndDateMaskBox.Name = "damageEndDateMaskBox";
             damageEndDateMaskBox.Size = new Size(124, 34);
-            damageEndDateMaskBox.TabIndex = 363;
+            damageEndDateMaskBox.TabIndex = 366;
             damageEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // damageBeginDateMaskBox
@@ -613,7 +613,7 @@
             damageBeginDateMaskBox.Mask = "00/00/0000";
             damageBeginDateMaskBox.Name = "damageBeginDateMaskBox";
             damageBeginDateMaskBox.Size = new Size(124, 34);
-            damageBeginDateMaskBox.TabIndex = 362;
+            damageBeginDateMaskBox.TabIndex = 365;
             damageBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // cargoLetterSentDateMaskBox
@@ -625,7 +625,7 @@
             cargoLetterSentDateMaskBox.Mask = "00/00/0000";
             cargoLetterSentDateMaskBox.Name = "cargoLetterSentDateMaskBox";
             cargoLetterSentDateMaskBox.Size = new Size(124, 34);
-            cargoLetterSentDateMaskBox.TabIndex = 356;
+            cargoLetterSentDateMaskBox.TabIndex = 358;
             cargoLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // cargoEndDateMaskBox
@@ -637,7 +637,7 @@
             cargoEndDateMaskBox.Mask = "00/00/0000";
             cargoEndDateMaskBox.Name = "cargoEndDateMaskBox";
             cargoEndDateMaskBox.Size = new Size(124, 34);
-            cargoEndDateMaskBox.TabIndex = 355;
+            cargoEndDateMaskBox.TabIndex = 357;
             cargoEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // cargoBeginDateMaskBox
@@ -649,7 +649,7 @@
             cargoBeginDateMaskBox.Mask = "00/00/0000";
             cargoBeginDateMaskBox.Name = "cargoBeginDateMaskBox";
             cargoBeginDateMaskBox.Size = new Size(124, 34);
-            cargoBeginDateMaskBox.TabIndex = 354;
+            cargoBeginDateMaskBox.TabIndex = 356;
             cargoBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // compLetterSentDateMaskBox
@@ -922,7 +922,7 @@
             insTp1TextBox.ForeColor = Color.White;
             insTp1TextBox.Location = new Point(20, 43);
             insTp1TextBox.Margin = new Padding(0);
-            insTp1TextBox.MaxLength = 40;
+            insTp1TextBox.MaxLength = 1;
             insTp1TextBox.Name = "insTp1TextBox";
             insTp1TextBox.Size = new Size(34, 34);
             insTp1TextBox.TabIndex = 326;
@@ -1071,7 +1071,7 @@
             Controls.Add(autoCov3TextBox);
             Controls.Add(label30);
             Controls.Add(label31);
-            Controls.Add(excessCov2TextBox);
+            Controls.Add(compCov2TextBox);
             Controls.Add(policy3TextBox);
             Controls.Add(cargoCov2TextBox);
             Controls.Add(cargoCov1TextBox);
@@ -1161,7 +1161,7 @@
         private TextBox autoCov3TextBox;
         private Label label30;
         private Label label31;
-        private TextBox excessCov2TextBox;
+        private TextBox compCov2TextBox;
         private TextBox policy3TextBox;
         private TextBox cargoCov2TextBox;
         private TextBox cargoCov1TextBox;

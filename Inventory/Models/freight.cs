@@ -184,4 +184,6 @@ public partial class freight
     public string USED { get; set; }
 
     public string REPORT { get; set; }
+
+    public string PAY_STATE { get; set; }
 }
