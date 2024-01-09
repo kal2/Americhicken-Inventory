@@ -12,6 +12,7 @@ namespace Inventory.Views.UserControls
         private MainWindow _mainWindow;
         private ActiveControlManager _activeControlManager;
         private string matchSelectLabel = string.Empty;
+        private int i = 0;
 
         // -- Event Handlers -- //
 
@@ -54,7 +55,12 @@ namespace Inventory.Views.UserControls
         {
             if (results == null)
             {
-                MessageBox.Show("ERROR: Search results are null, please contact developer");
+                MessageBox.Show("ERROR: 'results' is null, please contact developer");
+                return;
+            }
+            else if (selectedTable == null)
+            {
+                MessageBox.Show("ERROR: 'selectedTable' able is null, please contact developer");
                 return;
             }
             else if (results.Count == 0)
@@ -70,68 +76,77 @@ namespace Inventory.Views.UserControls
             }
             else
             {
-                results = results.ToList();
-                selectedTable = selectedTable.Trim();
-                DisplayResults(results, selectedTable); 
+                DisplayResults(results, selectedTable);
             }
         }
+
         private void DisplayResults(List<object> results, string selectedTable)
         {
             resultSelectionListView.Items.Clear();
 
-            for (int i = 0; i < results.Count; i++)
+            Dictionary<string, Func<object, ListViewItem>> displayHandlers = new Dictionary<string, Func<object, ListViewItem>>()
             {
-                var item = results[i];
+                { "supplier", item => CreateListViewItem(item as supplier) },
+                { "remitTo", item => CreateListViewItem(item as rem_sup) },
+                { "freight", item => CreateListViewItem(item as freight) }
+            };
+
+            if (!displayHandlers.ContainsKey(selectedTable.Trim()))
+            {
+                MessageBox.Show("Invalid table selection: " + selectedTable);
+                return;
+            }
+
+            foreach (var item in results)
+            {
                 if (item != null)
                 {
-                    switch (selectedTable)
-                    {
-                        case "supplier":
-                            var supResult = item as supplier;
-
-                            ListViewItem supSelectionChoice = new ListViewItem((i + 1).ToString());
-                            supSelectionChoice.SubItems.Add(supResult?.name);
-                            supSelectionChoice.SubItems.Add(supResult?.city);
-                            supSelectionChoice.SubItems.Add(supResult?.state);
-
-                            supSelectionChoice.Tag = supResult;
-
-                            resultSelectionListView.Items.Add(supSelectionChoice);
-                            break;
-
-                        case "remitTo":
-                            var remitResult = item as rem_sup;
-
-                            ListViewItem remitSelectionChoice = new ListViewItem((i + 1).ToString());
-                            remitSelectionChoice.SubItems.Add(remitResult?.name);
-                            remitSelectionChoice.SubItems.Add(remitResult?.city);
-                            remitSelectionChoice.SubItems.Add(remitResult?.state);
-                            remitSelectionChoice.SubItems.Add(remitResult?.street);
-
-                            remitSelectionChoice.Tag = remitResult;
-                            resultSelectionListView.Items.Add(remitSelectionChoice);
-                            break;
-
-                        case "freight":
-                            var freightResult = item as freight;
-
-                            ListViewItem freightSelectionChoice = new ListViewItem((i + 1).ToString());
-                            freightSelectionChoice.SubItems.Add(freightResult?.NAME);
-                            freightSelectionChoice.SubItems.Add(freightResult?.CITY);
-                            freightSelectionChoice.SubItems.Add(freightResult?.STATE);
-
-                            freightSelectionChoice.Tag = freightResult;
-                            resultSelectionListView.Items.Add(freightSelectionChoice);
-                            break;
-
-                        default:
-                            MessageBox.Show("oops");
-                            break;
-                    }
+                    i++;  // Increment counter before creating item
+                    ListViewItem listViewItem = displayHandlers[selectedTable.Trim()](item);
+                    listViewItem.Text = i.ToString();  // Set row number as first column
+                    resultSelectionListView.Items.Add(listViewItem);
                 }
             }
         }
-        
+
+        private ListViewItem CreateListViewItem(supplier supResult)
+        {
+            ListViewItem supSelectionChoice = new ListViewItem((i + 1).ToString());
+            supSelectionChoice.SubItems.Add(supResult?.name);
+            supSelectionChoice.SubItems.Add(supResult?.city);
+            supSelectionChoice.SubItems.Add(supResult?.state);
+
+            supSelectionChoice.Tag = supResult;
+
+            return supSelectionChoice;
+        }
+
+        private ListViewItem CreateListViewItem(rem_sup remitResult)
+        {
+            ListViewItem remitSelectionChoice = new ListViewItem((i + 1).ToString());
+            remitSelectionChoice.SubItems.Add(remitResult?.name);
+            remitSelectionChoice.SubItems.Add(remitResult?.city);
+            remitSelectionChoice.SubItems.Add(remitResult?.state);
+            remitSelectionChoice.SubItems.Add(remitResult?.street);
+
+            remitSelectionChoice.Tag = remitResult;
+
+            return remitSelectionChoice;
+        }
+
+        private ListViewItem CreateListViewItem(freight freightResult)
+        {
+            ListViewItem freightSelectionChoice = new ListViewItem((i + 1).ToString());
+            freightSelectionChoice.SubItems.Add(freightResult?.NAME);
+            freightSelectionChoice.SubItems.Add(freightResult?.CITY);
+            freightSelectionChoice.SubItems.Add(freightResult?.STATE);
+
+            freightSelectionChoice.Tag = freightResult;
+
+            return freightSelectionChoice;
+        }
+
+
 
         // -- Event Listeners -- //
 

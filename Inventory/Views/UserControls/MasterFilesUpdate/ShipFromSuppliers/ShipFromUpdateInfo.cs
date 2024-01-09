@@ -272,7 +272,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
             matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedRemitToSearchResult(f!, f2);
             matchSelectInstance.SetMatchSelectLabel("Remit To");
-            matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
+            matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
 
             if (e.SearchResults.Count > 1)
             {
