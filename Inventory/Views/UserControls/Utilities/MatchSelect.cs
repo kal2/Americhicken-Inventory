@@ -50,7 +50,7 @@ namespace Inventory.Views.UserControls
             matchSelectLabel = label;
         }
 
-        public void DisplayResults(List<object> results, string selectedTable)
+        public void GetResults(List<object> results, string selectedTable)
         {
             if (results == null)
             {
@@ -72,62 +72,66 @@ namespace Inventory.Views.UserControls
             {
                 results = results.ToList();
                 selectedTable = selectedTable.Trim();
+                DisplayResults(results, selectedTable); 
+            }
+        }
+        private void DisplayResults(List<object> results, string selectedTable)
+        {
+            resultSelectionListView.Items.Clear();
 
-                resultSelectionListView.Items.Clear();
-
-                for (int i = 0; i < results.Count; i++)
+            for (int i = 0; i < results.Count; i++)
+            {
+                var item = results[i];
+                if (item != null)
                 {
-                    var item = results[i];
-                    if (item != null)
+                    switch (selectedTable)
                     {
-                        switch (selectedTable)
-                        {
-                            case "supplier":
-                                var supResult = item as supplier;
+                        case "supplier":
+                            var supResult = item as supplier;
 
-                                ListViewItem supSelectionChoice = new ListViewItem((i + 1).ToString());
-                                supSelectionChoice.SubItems.Add(supResult.name);
-                                supSelectionChoice.SubItems.Add(supResult.city);
-                                supSelectionChoice.SubItems.Add(supResult.state);
+                            ListViewItem supSelectionChoice = new ListViewItem((i + 1).ToString());
+                            supSelectionChoice.SubItems.Add(supResult?.name);
+                            supSelectionChoice.SubItems.Add(supResult?.city);
+                            supSelectionChoice.SubItems.Add(supResult?.state);
 
-                                supSelectionChoice.Tag = supResult;
+                            supSelectionChoice.Tag = supResult;
 
-                                resultSelectionListView.Items.Add(supSelectionChoice);
-                                break;
+                            resultSelectionListView.Items.Add(supSelectionChoice);
+                            break;
 
-                            case "remitTo":
-                                var remitResult = item as rem_sup;
+                        case "remitTo":
+                            var remitResult = item as rem_sup;
 
-                                ListViewItem remitSelectionChoice = new ListViewItem((i + 1).ToString());
-                                remitSelectionChoice.SubItems.Add(remitResult.name);
-                                remitSelectionChoice.SubItems.Add(remitResult.city);
-                                remitSelectionChoice.SubItems.Add(remitResult.state);
-                                remitSelectionChoice.SubItems.Add(remitResult.street);
+                            ListViewItem remitSelectionChoice = new ListViewItem((i + 1).ToString());
+                            remitSelectionChoice.SubItems.Add(remitResult?.name);
+                            remitSelectionChoice.SubItems.Add(remitResult?.city);
+                            remitSelectionChoice.SubItems.Add(remitResult?.state);
+                            remitSelectionChoice.SubItems.Add(remitResult?.street);
 
-                                remitSelectionChoice.Tag = remitResult;
-                                resultSelectionListView.Items.Add(remitSelectionChoice);
-                                break;
+                            remitSelectionChoice.Tag = remitResult;
+                            resultSelectionListView.Items.Add(remitSelectionChoice);
+                            break;
 
-                            case "freight":
-                                var freightResult = item as freight;
+                        case "freight":
+                            var freightResult = item as freight;
 
-                                ListViewItem freightSelectionChoice = new ListViewItem((i + 1).ToString());
-                                freightSelectionChoice.SubItems.Add(freightResult.NAME);
-                                freightSelectionChoice.SubItems.Add(freightResult.CITY);
-                                freightSelectionChoice.SubItems.Add(freightResult.STATE);
+                            ListViewItem freightSelectionChoice = new ListViewItem((i + 1).ToString());
+                            freightSelectionChoice.SubItems.Add(freightResult?.NAME);
+                            freightSelectionChoice.SubItems.Add(freightResult?.CITY);
+                            freightSelectionChoice.SubItems.Add(freightResult?.STATE);
 
-                                freightSelectionChoice.Tag = freightResult;
-                                resultSelectionListView.Items.Add(freightSelectionChoice);
-                                break;
+                            freightSelectionChoice.Tag = freightResult;
+                            resultSelectionListView.Items.Add(freightSelectionChoice);
+                            break;
 
-                            default:
-                                MessageBox.Show("oops");
-                                break;
-                        }
+                        default:
+                            MessageBox.Show("oops");
+                            break;
                     }
                 }
             }
         }
+        
 
         // -- Event Listeners -- //
 
@@ -152,7 +156,9 @@ namespace Inventory.Views.UserControls
                     break;
 
                 case "5":
-                    //cancel
+                    //Main Menu
+                    _mainWindow.DisposeControl(this);
+                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
                     break;
             }
             _mainWindow.ClearTextBox();
@@ -160,7 +166,7 @@ namespace Inventory.Views.UserControls
 
         public void SetProgramLabels()
         {
-            _mainWindow.SetCommandsLabel("1. Next Pg    2. Previous Pg    3. First Pg    4. Add " + matchSelectLabel + "    5. Cancel");
+            _mainWindow.SetCommandsLabel("1. Next Pg    2. Previous Pg    3. First Pg    4. Add " + matchSelectLabel + "    5. Main Menu");
             _mainWindow.SetTextBoxLabel("ACTION:");
             _mainWindow.SetProgramLabel(matchSelectLabel + " Match Select");
         }

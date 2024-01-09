@@ -54,7 +54,7 @@ namespace Inventory.Services
                     MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
                     matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedRemitToSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Remit To");
-                    matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
+                    matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
                     _activeControlManager.SetActiveControl(matchSelectInstance);
                 }
             }
@@ -86,7 +86,7 @@ namespace Inventory.Services
                     MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
                     matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedSupplierSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Supplier");
-                    matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
+                    matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
                     _activeControlManager.SetActiveControl(matchSelectInstance);
                 }
             }
@@ -118,7 +118,7 @@ namespace Inventory.Services
                     MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
                     matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedFreightCarrierSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Freight Carrier");
-                    matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
+                    matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
                     if (e.SearchResults.Count > 1)
                     {
                         _activeControlManager.SetActiveControl(matchSelectInstance);
