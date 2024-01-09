@@ -119,14 +119,16 @@ namespace Inventory.Services
                     matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedFreightCarrierSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Freight Carrier");
                     matchSelectInstance.DisplayResults(e.SearchResults, e.TableSelected);
-                    _activeControlManager.SetActiveControl(matchSelectInstance);
+                    if (e.SearchResults.Count > 1)
+                    {
+                        _activeControlManager.SetActiveControl(matchSelectInstance);
+                    }
                 }
             }
 
             void HandleSelectedFreightCarrierSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
                 freightCarrierInstance.GetFreightCarrierData((freight)e!.SelectedResult);
-                _mainWindow.DisposeControl((UserControl)sender!);
                 _activeControlManager.SetActiveControl(freightCarrierInstance);
             }
         }

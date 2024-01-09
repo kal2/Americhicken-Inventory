@@ -96,7 +96,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             freightStateTextBox.Text = _freightData.STATE?.Trim();
             freightZipTextBox.Text = _freightData.ZIP?.Trim();
             freightZip4TextBox.Text = _freightData.ZIP4?.Trim();
-            freightPhoneMaskedTextBox.Text = _freightData.AREA_CODE.Trim() + _freightData.PHONE?.Trim();
+            freightPhoneMaskedTextBox.Text = _freightData.AREA_CODE?.Trim() + _freightData.PHONE?.Trim();
             freightFaxMaskedTextBox.Text = _freightData.FAX_AREA?.Trim() + _freightData.FAX_PHONE?.Trim();
             contactTextBox.Text = _freightData.FRT_CONT?.Trim();
             payNameTextBox.Text = _freightData.PAY_NAME?.Trim();
@@ -125,33 +125,34 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                     var existingFreight = dbContext.freight.Find(freightData.PK_freight);
                     if (existingFreight != null)
                     {
-                        existingFreight.NAME = freightNameTextBox.Text.Trim();
-                        existingFreight.STREET = freightStreetTextBox.Text.Trim();
-                        existingFreight.CITY = freightCityTextBox.Text.Trim();
-                        existingFreight.STATE = freightStateTextBox.Text.Trim();
-                        existingFreight.ZIP = freightZipTextBox.Text.Trim();
-                        existingFreight.ZIP4 = freightZip4TextBox.Text.Trim();
+                        existingFreight.NAME = string.IsNullOrEmpty(freightNameTextBox.Text) ? null : freightNameTextBox.Text.Trim();
+                        existingFreight.NAME = string.IsNullOrEmpty(freightNameTextBox.Text) ? null : freightNameTextBox.Text.Trim();
+                        existingFreight.STREET = string.IsNullOrEmpty(freightStreetTextBox.Text) ? null : freightStreetTextBox.Text.Trim();
+                        existingFreight.CITY = string.IsNullOrEmpty(freightCityTextBox.Text) ? null : freightCityTextBox.Text.Trim();
+                        existingFreight.STATE = string.IsNullOrEmpty(freightStateTextBox.Text) ? null : freightStateTextBox.Text.Trim();
+                        existingFreight.ZIP = string.IsNullOrEmpty(freightZipTextBox.Text) ? null : freightZipTextBox.Text.Trim();
+                        existingFreight.ZIP4 = string.IsNullOrEmpty(freightZip4TextBox.Text) ? null : freightZip4TextBox.Text.Trim();
                         existingFreight.AREA_CODE = freightPhoneMaskedTextBox.Text.Length == 10 ? freightPhoneMaskedTextBox.Text.Substring(0, 3) : null;
                         existingFreight.PHONE = freightPhoneMaskedTextBox.Text.Length == 10 ? freightPhoneMaskedTextBox.Text.Substring(3, 7) : null;
                         existingFreight.FAX_AREA = freightFaxMaskedTextBox.Text.Length == 10 ? freightFaxMaskedTextBox.Text.Substring(0, 3) : null;
                         existingFreight.FAX_PHONE = freightFaxMaskedTextBox.Text.Length == 10 ? freightFaxMaskedTextBox.Text.Substring(3, 7) : null;
-                        existingFreight.FRT_CONT = contactTextBox.Text.Trim();
-                        existingFreight.PAY_NAME = payNameTextBox.Text.Trim();
-                        existingFreight.PAY_STREET = payAddressTextBox.Text.Trim();
-                        existingFreight.PAY_CITY = payCityTextBox.Text.Trim();
-                        existingFreight.PAY_STATE = payStateTextBox.Text.Trim();
-                        existingFreight.PAY_ZIP = payZipTextBox.Text.Trim();
-                        existingFreight.PAY_ZIP4 = payZip4TextBox.Text.Trim();
+                        existingFreight.FRT_CONT = string.IsNullOrEmpty(contactTextBox.Text) ? null : contactTextBox.Text.Trim();
+                        existingFreight.PAY_NAME = string.IsNullOrEmpty(payNameTextBox.Text) ? null : payNameTextBox.Text.Trim();
+                        existingFreight.PAY_STREET = string.IsNullOrEmpty(payAddressTextBox.Text) ? null : payAddressTextBox.Text.Trim();
+                        existingFreight.PAY_CITY = string.IsNullOrEmpty(payCityTextBox.Text) ? null : payCityTextBox.Text.Trim();
+                        existingFreight.PAY_STATE = string.IsNullOrEmpty(payStateTextBox.Text) ? null : payStateTextBox.Text.Trim();
+                        existingFreight.PAY_ZIP = string.IsNullOrEmpty(payZipTextBox.Text) ? null : payZipTextBox.Text.Trim();
+                        existingFreight.PAY_ZIP4 = string.IsNullOrEmpty(payZip4TextBox.Text) ? null : payZip4TextBox.Text.Trim();
                         existingFreight.PAY_AREA = payPhoneMaskedTextBox.Text.Length == 10 ? payPhoneMaskedTextBox.Text.Substring(0, 3) : null;
                         existingFreight.PAY_PHONE = payPhoneMaskedTextBox.Text.Length == 10 ? payPhoneMaskedTextBox.Text.Substring(3, 7) : null;
                         existingFreight.PAY_FAREA = payFaxMaskedTextBox.Text.Length == 10 ? payFaxMaskedTextBox.Text.Substring(0, 3) : null;
                         existingFreight.PAY_FPHONE = payFaxMaskedTextBox.Text.Length == 10 ? payFaxMaskedTextBox.Text.Substring(3, 7) : null;
                         existingFreight.ACTIVE = activeHoldTextBox.Text.Trim().ToUpper();
-                        existingFreight.NOTE = noteTextBox.Text.Trim();
-                        existingFreight.INS_CO1 = aInsuranceTextBox.Text.Trim();
-                        existingFreight.INS_CO2 = bInsuranceTextBox.Text.Trim();
-                        existingFreight.INS_CO3 = cInsuranceTextBox.Text.Trim();
-                        existingFreight.INS_CO4 = dInsuranceTextBox.Text.Trim();
+                        existingFreight.NOTE = string.IsNullOrEmpty(noteTextBox.Text) ? null : noteTextBox.Text.Trim();
+                        existingFreight.INS_CO1 = string.IsNullOrEmpty(aInsuranceTextBox.Text) ? null : aInsuranceTextBox.Text.Trim();
+                        existingFreight.INS_CO2 = string.IsNullOrEmpty(bInsuranceTextBox.Text) ? null : bInsuranceTextBox.Text.Trim();
+                        existingFreight.INS_CO3 = string.IsNullOrEmpty(cInsuranceTextBox.Text) ? null : cInsuranceTextBox.Text.Trim();
+                        existingFreight.INS_CO4 = string.IsNullOrEmpty(dInsuranceTextBox.Text) ? null : dInsuranceTextBox.Text.Trim();
 
                         dbContext.SaveChanges();
                     }
@@ -168,33 +169,33 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                 {
                     freight newFreight = new()
                     {
-                        NAME = freightNameTextBox.Text.Trim(),
-                        STREET = freightStreetTextBox.Text.Trim(),
-                        CITY = freightCityTextBox.Text.Trim(),
-                        STATE = freightStateTextBox.Text.Trim(),
-                        ZIP = freightZipTextBox.Text.Trim(),
-                        ZIP4 = freightZip4TextBox.Text.Trim(),
+                        NAME = string.IsNullOrEmpty(freightNameTextBox.Text) ? null : freightNameTextBox.Text.Trim(),
+                        STREET = string.IsNullOrEmpty(freightStreetTextBox.Text) ? null : freightStreetTextBox.Text.Trim(),
+                        CITY = string.IsNullOrEmpty(freightCityTextBox.Text) ? null : freightCityTextBox.Text.Trim(),
+                        STATE = string.IsNullOrEmpty(freightStateTextBox.Text) ? null : freightStateTextBox.Text.Trim(),
+                        ZIP = string.IsNullOrEmpty(freightZipTextBox.Text) ? null : freightZipTextBox.Text.Trim(),
+                        ZIP4 = string.IsNullOrEmpty(freightZip4TextBox.Text) ? null : freightZip4TextBox.Text.Trim(),
                         AREA_CODE = freightPhoneMaskedTextBox.Text.Length == 10 ? freightPhoneMaskedTextBox.Text.Substring(0, 3) : null,
                         PHONE = freightPhoneMaskedTextBox.Text.Length == 10 ? freightPhoneMaskedTextBox.Text.Substring(3, 7) : null,
                         FAX_AREA = freightFaxMaskedTextBox.Text.Length == 10 ? freightFaxMaskedTextBox.Text.Substring(0, 3) : null,
                         FAX_PHONE = freightFaxMaskedTextBox.Text.Length == 10 ? freightFaxMaskedTextBox.Text.Substring(3, 7) : null,
-                        FRT_CONT = contactTextBox.Text.Trim(),
-                        PAY_NAME = payNameTextBox.Text.Trim(),
-                        PAY_STREET = payAddressTextBox.Text.Trim(),
-                        PAY_CITY = payCityTextBox.Text.Trim(),
-                        PAY_STATE = payStateTextBox.Text.Trim(),
-                        PAY_ZIP = payZipTextBox.Text.Trim(),
-                        PAY_ZIP4 = payZip4TextBox.Text.Trim(),
+                        FRT_CONT = string.IsNullOrEmpty(contactTextBox.Text) ? null : contactTextBox.Text.Trim(),
+                        PAY_NAME = string.IsNullOrEmpty(payNameTextBox.Text) ? null : payNameTextBox.Text.Trim(),
+                        PAY_STREET = string.IsNullOrEmpty(payAddressTextBox.Text) ? null : payAddressTextBox.Text.Trim(),
+                        PAY_CITY = string.IsNullOrEmpty(payCityTextBox.Text) ? null : payCityTextBox.Text.Trim(),
+                        PAY_STATE = string.IsNullOrEmpty(payStateTextBox.Text) ? null : payStateTextBox.Text.Trim(),
+                        PAY_ZIP = string.IsNullOrEmpty(payZipTextBox.Text) ? null : payZipTextBox.Text.Trim(),
+                        PAY_ZIP4 = string.IsNullOrEmpty(payZip4TextBox.Text) ? null : payZip4TextBox.Text.Trim(),
                         PAY_AREA = payPhoneMaskedTextBox.Text.Length == 10 ? payPhoneMaskedTextBox.Text.Substring(0, 3) : null,
                         PAY_PHONE = payPhoneMaskedTextBox.Text.Length == 10 ? payPhoneMaskedTextBox.Text.Substring(3, 7) : null,
                         PAY_FAREA = payFaxMaskedTextBox.Text.Length == 10 ? payFaxMaskedTextBox.Text.Substring(0, 3) : null,
                         PAY_FPHONE = payFaxMaskedTextBox.Text.Length == 10 ? payFaxMaskedTextBox.Text.Substring(3, 7) :null,
-                        ACTIVE = activeHoldTextBox.Text.Trim(),
-                        NOTE = noteTextBox.Text.Trim(),
-                        INS_CO1 = aInsuranceTextBox.Text.Trim(),
-                        INS_CO2 = bInsuranceTextBox.Text.Trim(),
-                        INS_CO3 = cInsuranceTextBox.Text.Trim(),
-                        INS_CO4 = dInsuranceTextBox.Text.Trim(),
+                        ACTIVE = string.IsNullOrEmpty(activeHoldTextBox.Text) ? null : activeHoldTextBox.Text.Trim(),
+                        NOTE = string.IsNullOrEmpty(noteTextBox.Text) ? null : noteTextBox.Text.Trim(),
+                        INS_CO1 = string.IsNullOrEmpty(aInsuranceTextBox.Text) ? null : aInsuranceTextBox.Text.Trim(),
+                        INS_CO2 = string.IsNullOrEmpty(bInsuranceTextBox.Text) ? null : bInsuranceTextBox.Text.Trim(),
+                        INS_CO3 = string.IsNullOrEmpty(cInsuranceTextBox.Text) ? null : cInsuranceTextBox.Text.Trim(),
+                        INS_CO4 = string.IsNullOrEmpty(dInsuranceTextBox.Text) ? null : dInsuranceTextBox.Text.Trim(),
                     };
                     _freightData = newFreight;
                     dbContext.freight.Add(newFreight);
