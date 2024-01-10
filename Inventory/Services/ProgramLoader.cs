@@ -128,8 +128,15 @@ namespace Inventory.Services
 
             void HandleSelectedFreightCarrierSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
-                freightCarrierInstance.GetFreightCarrierData((freight)e!.SelectedResult);
-                _activeControlManager.SetActiveControl(freightCarrierInstance);
+                if (e.SelectedResult == null)
+                {
+                    _activeControlManager.SetActiveControl(freightCarrierInstance);
+                }
+                else
+                {
+                    freightCarrierInstance.GetFreightCarrierData((freight)e!.SelectedResult);
+                    _activeControlManager.SetActiveControl(freightCarrierInstance);
+                }
             }
         }
     }

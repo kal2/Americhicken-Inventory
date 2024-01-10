@@ -9,10 +9,14 @@ namespace Inventory.Views.UserControls
     {
         // -- Class Variables -- //
 
-        private MainWindow _mainWindow;
-        private ActiveControlManager _activeControlManager;
+        private readonly MainWindow _mainWindow;
+        private readonly ActiveControlManager _activeControlManager;
         private string matchSelectLabel = string.Empty;
+        private List<object> _results = [];
+        private string _selectedTable = string.Empty;
         private int i = 0;
+        private readonly int _pageSize = 11;
+        private int _currentPage = 1;
 
         // -- Event Handlers -- //
 
@@ -76,6 +80,8 @@ namespace Inventory.Views.UserControls
             }
             else
             {
+                _results = results;
+                _selectedTable = selectedTable;
                 DisplayResults(results, selectedTable);
             }
         }
@@ -97,13 +103,16 @@ namespace Inventory.Views.UserControls
                 return;
             }
 
-            foreach (var item in results)
+            int startIndex = (_currentPage - 1) * _pageSize;
+            int endIndex = Math.Min(startIndex + _pageSize, results.Count);
+
+            for (int i = startIndex; i < endIndex; i++)
             {
+                var item = results[i];
                 if (item != null)
                 {
-                    i++;  // Increment counter before creating item
                     ListViewItem listViewItem = displayHandlers[selectedTable.Trim()](item);
-                    listViewItem.Text = i.ToString();  // Set row number as first column
+                    listViewItem.Text = (i+1).ToString();
                     resultSelectionListView.Items.Add(listViewItem);
                 }
             }
@@ -111,7 +120,7 @@ namespace Inventory.Views.UserControls
 
         private ListViewItem CreateListViewItem(supplier supResult)
         {
-            ListViewItem supSelectionChoice = new ListViewItem((i + 1).ToString());
+            ListViewItem supSelectionChoice = new ListViewItem();
             supSelectionChoice.SubItems.Add(supResult?.name);
             supSelectionChoice.SubItems.Add(supResult?.city);
             supSelectionChoice.SubItems.Add(supResult?.state);
@@ -123,7 +132,7 @@ namespace Inventory.Views.UserControls
 
         private ListViewItem CreateListViewItem(rem_sup remitResult)
         {
-            ListViewItem remitSelectionChoice = new ListViewItem((i + 1).ToString());
+            ListViewItem remitSelectionChoice = new ListViewItem();
             remitSelectionChoice.SubItems.Add(remitResult?.name);
             remitSelectionChoice.SubItems.Add(remitResult?.city);
             remitSelectionChoice.SubItems.Add(remitResult?.state);
@@ -136,7 +145,7 @@ namespace Inventory.Views.UserControls
 
         private ListViewItem CreateListViewItem(freight freightResult)
         {
-            ListViewItem freightSelectionChoice = new ListViewItem((i + 1).ToString());
+            ListViewItem freightSelectionChoice = new ListViewItem();
             freightSelectionChoice.SubItems.Add(freightResult?.NAME);
             freightSelectionChoice.SubItems.Add(freightResult?.CITY);
             freightSelectionChoice.SubItems.Add(freightResult?.STATE);
@@ -156,18 +165,32 @@ namespace Inventory.Views.UserControls
             {
                 case "1":
                     //next page
+                    if (_currentPage < Math.Ceiling((double)_results.Count / _pageSize))
+                    {
+                        _currentPage++;
+                        DisplayResults(_results, _selectedTable);  // Reuse DisplayResults with pagination
+                    }
                     break;
 
                 case "2":
                     //previous page
+                    if (_currentPage > 1)
+                    {
+                        _currentPage--;
+                        DisplayResults(_results, _selectedTable);  // Reuse DisplayResults with pagination
+                    }
                     break;
 
                 case "3":
                     //first page
+                    _currentPage = 1;
+                    DisplayResults(_results, _selectedTable);  // Reuse DisplayResults with pagination
                     break;
 
                 case "4":
-                    //add new (add label through the calling user control to customize verbiage)
+                    //add new
+                    _mainWindow.DisposeControl(this);
+                    SelectedSearchResult?.Invoke(this, new SelectedSearchResultEventArgs(null));
                     break;
 
                 case "5":
