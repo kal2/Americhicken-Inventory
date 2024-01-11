@@ -22,6 +22,8 @@ namespace Inventory
 
             //Sets the initial control to the MenuList
             _activeControlManager.SetActiveControl(new MenuList(this, _activeControlManager));
+
+            Load += (s, e) => dateLabel.Text = DateTime.Now.Date.ToString("d");
         }
 
         //Displays passed control in the main window
@@ -39,12 +41,6 @@ namespace Inventory
         {
             splitContainer2.Panel1.Controls.Remove(control);
             control.Dispose();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //Passes current date to dateLabel
-            dateLabel.Text = DateTime.Now.Date.ToString("d");
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)

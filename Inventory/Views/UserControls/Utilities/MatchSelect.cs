@@ -38,14 +38,8 @@ namespace Inventory.Views.UserControls
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            _activeControlManager = activeControlManager;
-        }
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-
-            //Change focus to desired field after User Control change.
-            selectedItemNumber.Focus();
+            _activeControlManager = activeControlManager; 
+            Load += (s, e) => selectedItemNumber.Focus();
         }
 
         // -- Methods -- //

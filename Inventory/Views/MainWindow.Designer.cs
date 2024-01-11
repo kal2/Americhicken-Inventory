@@ -162,7 +162,6 @@
             Name = "MainWindow";
             Text = "AmeriChicken Inventory";
             WindowState = FormWindowState.Maximized;
-            Load += Form1_Load;
             Shown += MainWindow_Shown;
             KeyDown += MainWindow_KeyDown;
             splitContainer1.Panel1.ResumeLayout(false);
