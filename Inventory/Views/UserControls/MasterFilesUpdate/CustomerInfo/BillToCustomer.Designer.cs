@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            billToCustomerNameTextBox = new TextBox();
+            customerNameTextBox = new TextBox();
             label1 = new Label();
             regNameTextBox = new TextBox();
             label2 = new Label();
@@ -60,7 +60,7 @@
             iLine3TextBox = new TextBox();
             label16 = new Label();
             label28 = new Label();
-            textBox1 = new TextBox();
+            creditLimitTextBox = new TextBox();
             label17 = new Label();
             label18 = new Label();
             termDaysDisplayLabel = new Label();
@@ -68,30 +68,30 @@
             fstSaleDisplayLabel = new Label();
             lastSaleDisplayLabel = new Label();
             label21 = new Label();
-            genBeginDateMaskBox = new MaskedTextBox();
+            dateReviewedMaskBox = new MaskedTextBox();
             label22 = new Label();
             label23 = new Label();
-            credRqstextBox = new TextBox();
-            textBox2 = new TextBox();
+            credRqsTextBox = new TextBox();
+            federatedCustomerTextBox = new TextBox();
             label20 = new Label();
-            textBox3 = new TextBox();
+            pOMessageTextBox = new TextBox();
             label24 = new Label();
-            textBox4 = new TextBox();
+            noteTextBox = new TextBox();
             label25 = new Label();
-            textBox5 = new TextBox();
+            note2TextBox = new TextBox();
             incentiveSalesTextBox = new TextBox();
             label26 = new Label();
             label27 = new Label();
-            textBox6 = new TextBox();
+            creditAppTextBox = new TextBox();
             label29 = new Label();
-            maskedTextBox1 = new MaskedTextBox();
-            maskedTextBox2 = new MaskedTextBox();
-            textBox7 = new TextBox();
+            creditAppDateMaskedTextBox = new MaskedTextBox();
+            financialStatementTextBox = new MaskedTextBox();
+            financialStatmentTextBox = new TextBox();
             label30 = new Label();
             maskedTextBox3 = new MaskedTextBox();
-            textBox8 = new TextBox();
+            dAndBReportTextBox = new TextBox();
             label31 = new Label();
-            maskedTextBox4 = new MaskedTextBox();
+            dAndBDateMaskedTextBox = new MaskedTextBox();
             textBox9 = new TextBox();
             label32 = new Label();
             label33 = new Label();
@@ -100,27 +100,27 @@
             label36 = new Label();
             label37 = new Label();
             label38 = new Label();
-            label39 = new Label();
+            highBalanceDisplayLabel = new Label();
             label40 = new Label();
             label42 = new Label();
-            label43 = new Label();
+            currentBalanceDisplayLabel = new Label();
             label44 = new Label();
             label45 = new Label();
-            label46 = new Label();
-            label41 = new Label();
+            prevSixMonthAvgPayDisplayLabel = new Label();
+            prev25DaysDisplayLabel = new Label();
             SuspendLayout();
             // 
-            // billToCustomerNameTextBox
+            // customerNameTextBox
             // 
-            billToCustomerNameTextBox.BackColor = Color.Maroon;
-            billToCustomerNameTextBox.Font = new Font("Segoe UI", 15F);
-            billToCustomerNameTextBox.ForeColor = Color.White;
-            billToCustomerNameTextBox.Location = new Point(228, 7);
-            billToCustomerNameTextBox.Margin = new Padding(0);
-            billToCustomerNameTextBox.MaxLength = 40;
-            billToCustomerNameTextBox.Name = "billToCustomerNameTextBox";
-            billToCustomerNameTextBox.Size = new Size(550, 34);
-            billToCustomerNameTextBox.TabIndex = 135;
+            customerNameTextBox.BackColor = Color.Maroon;
+            customerNameTextBox.Font = new Font("Segoe UI", 15F);
+            customerNameTextBox.ForeColor = Color.White;
+            customerNameTextBox.Location = new Point(228, 7);
+            customerNameTextBox.Margin = new Padding(0);
+            customerNameTextBox.MaxLength = 40;
+            customerNameTextBox.Name = "customerNameTextBox";
+            customerNameTextBox.Size = new Size(550, 34);
+            customerNameTextBox.TabIndex = 135;
             // 
             // label1
             // 
@@ -479,17 +479,17 @@
             label28.TabIndex = 193;
             label28.UseMnemonic = false;
             // 
-            // textBox1
+            // creditLimitTextBox
             // 
-            textBox1.BackColor = Color.Maroon;
-            textBox1.Font = new Font("Segoe UI", 15F);
-            textBox1.ForeColor = Color.White;
-            textBox1.Location = new Point(160, 320);
-            textBox1.Margin = new Padding(0);
-            textBox1.MaxLength = 7;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(86, 34);
-            textBox1.TabIndex = 195;
+            creditLimitTextBox.BackColor = Color.Maroon;
+            creditLimitTextBox.Font = new Font("Segoe UI", 15F);
+            creditLimitTextBox.ForeColor = Color.White;
+            creditLimitTextBox.Location = new Point(160, 320);
+            creditLimitTextBox.Margin = new Padding(0);
+            creditLimitTextBox.MaxLength = 7;
+            creditLimitTextBox.Name = "creditLimitTextBox";
+            creditLimitTextBox.Size = new Size(86, 34);
+            creditLimitTextBox.TabIndex = 195;
             // 
             // label17
             // 
@@ -568,17 +568,17 @@
             label21.TabIndex = 200;
             label21.Text = "LAST";
             // 
-            // genBeginDateMaskBox
+            // dateReviewedMaskBox
             // 
-            genBeginDateMaskBox.BackColor = Color.Maroon;
-            genBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            genBeginDateMaskBox.ForeColor = Color.White;
-            genBeginDateMaskBox.Location = new Point(189, 389);
-            genBeginDateMaskBox.Mask = "00/00/0000";
-            genBeginDateMaskBox.Name = "genBeginDateMaskBox";
-            genBeginDateMaskBox.Size = new Size(124, 34);
-            genBeginDateMaskBox.TabIndex = 329;
-            genBeginDateMaskBox.ValidatingType = typeof(DateTime);
+            dateReviewedMaskBox.BackColor = Color.Maroon;
+            dateReviewedMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            dateReviewedMaskBox.ForeColor = Color.White;
+            dateReviewedMaskBox.Location = new Point(189, 389);
+            dateReviewedMaskBox.Mask = "00/00/0000";
+            dateReviewedMaskBox.Name = "dateReviewedMaskBox";
+            dateReviewedMaskBox.Size = new Size(124, 34);
+            dateReviewedMaskBox.TabIndex = 329;
+            dateReviewedMaskBox.ValidatingType = typeof(DateTime);
             // 
             // label22
             // 
@@ -602,29 +602,29 @@
             label23.TabIndex = 331;
             label23.Text = "CREDIT REQUESTED BY:";
             // 
-            // credRqstextBox
+            // credRqsTextBox
             // 
-            credRqstextBox.BackColor = Color.Maroon;
-            credRqstextBox.Font = new Font("Segoe UI", 15F);
-            credRqstextBox.ForeColor = Color.White;
-            credRqstextBox.Location = new Point(8, 456);
-            credRqstextBox.Margin = new Padding(0);
-            credRqstextBox.MaxLength = 32;
-            credRqstextBox.Name = "credRqstextBox";
-            credRqstextBox.Size = new Size(530, 34);
-            credRqstextBox.TabIndex = 332;
+            credRqsTextBox.BackColor = Color.Maroon;
+            credRqsTextBox.Font = new Font("Segoe UI", 15F);
+            credRqsTextBox.ForeColor = Color.White;
+            credRqsTextBox.Location = new Point(8, 456);
+            credRqsTextBox.Margin = new Padding(0);
+            credRqsTextBox.MaxLength = 32;
+            credRqsTextBox.Name = "credRqsTextBox";
+            credRqsTextBox.Size = new Size(530, 34);
+            credRqsTextBox.TabIndex = 332;
             // 
-            // textBox2
+            // federatedCustomerTextBox
             // 
-            textBox2.BackColor = Color.Maroon;
-            textBox2.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            textBox2.ForeColor = Color.White;
-            textBox2.Location = new Point(316, 490);
-            textBox2.Margin = new Padding(0);
-            textBox2.MaxLength = 1;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(41, 34);
-            textBox2.TabIndex = 334;
+            federatedCustomerTextBox.BackColor = Color.Maroon;
+            federatedCustomerTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            federatedCustomerTextBox.ForeColor = Color.White;
+            federatedCustomerTextBox.Location = new Point(316, 490);
+            federatedCustomerTextBox.Margin = new Padding(0);
+            federatedCustomerTextBox.MaxLength = 1;
+            federatedCustomerTextBox.Name = "federatedCustomerTextBox";
+            federatedCustomerTextBox.Size = new Size(41, 34);
+            federatedCustomerTextBox.TabIndex = 334;
             // 
             // label20
             // 
@@ -637,17 +637,17 @@
             label20.TabIndex = 333;
             label20.Text = "FEDERATED CUSTOMER (Y/N):";
             // 
-            // textBox3
+            // pOMessageTextBox
             // 
-            textBox3.BackColor = Color.Maroon;
-            textBox3.Font = new Font("Segoe UI", 15F);
-            textBox3.ForeColor = Color.White;
-            textBox3.Location = new Point(111, 525);
-            textBox3.Margin = new Padding(0);
-            textBox3.MaxLength = 20;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(530, 34);
-            textBox3.TabIndex = 336;
+            pOMessageTextBox.BackColor = Color.Maroon;
+            pOMessageTextBox.Font = new Font("Segoe UI", 15F);
+            pOMessageTextBox.ForeColor = Color.White;
+            pOMessageTextBox.Location = new Point(111, 525);
+            pOMessageTextBox.Margin = new Padding(0);
+            pOMessageTextBox.MaxLength = 20;
+            pOMessageTextBox.Name = "pOMessageTextBox";
+            pOMessageTextBox.Size = new Size(530, 34);
+            pOMessageTextBox.TabIndex = 336;
             // 
             // label24
             // 
@@ -660,17 +660,17 @@
             label24.TabIndex = 335;
             label24.Text = "PO MSG:";
             // 
-            // textBox4
+            // noteTextBox
             // 
-            textBox4.BackColor = Color.Maroon;
-            textBox4.Font = new Font("Segoe UI", 15F);
-            textBox4.ForeColor = Color.White;
-            textBox4.Location = new Point(111, 559);
-            textBox4.Margin = new Padding(0);
-            textBox4.MaxLength = 20;
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(1128, 34);
-            textBox4.TabIndex = 338;
+            noteTextBox.BackColor = Color.Maroon;
+            noteTextBox.Font = new Font("Segoe UI", 15F);
+            noteTextBox.ForeColor = Color.White;
+            noteTextBox.Location = new Point(111, 559);
+            noteTextBox.Margin = new Padding(0);
+            noteTextBox.MaxLength = 20;
+            noteTextBox.Name = "noteTextBox";
+            noteTextBox.Size = new Size(1128, 34);
+            noteTextBox.TabIndex = 338;
             // 
             // label25
             // 
@@ -683,17 +683,17 @@
             label25.TabIndex = 337;
             label25.Text = "NOTES:";
             // 
-            // textBox5
+            // note2TextBox
             // 
-            textBox5.BackColor = Color.Maroon;
-            textBox5.Font = new Font("Segoe UI", 15F);
-            textBox5.ForeColor = Color.White;
-            textBox5.Location = new Point(111, 593);
-            textBox5.Margin = new Padding(0);
-            textBox5.MaxLength = 20;
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(1128, 34);
-            textBox5.TabIndex = 339;
+            note2TextBox.BackColor = Color.Maroon;
+            note2TextBox.Font = new Font("Segoe UI", 15F);
+            note2TextBox.ForeColor = Color.White;
+            note2TextBox.Location = new Point(111, 593);
+            note2TextBox.Margin = new Padding(0);
+            note2TextBox.MaxLength = 20;
+            note2TextBox.Name = "note2TextBox";
+            note2TextBox.Size = new Size(1128, 34);
+            note2TextBox.TabIndex = 339;
             // 
             // incentiveSalesTextBox
             // 
@@ -729,17 +729,17 @@
             label27.TabIndex = 342;
             label27.Text = "FILE DOCUMENTS:     (Y,N,R)          DATE";
             // 
-            // textBox6
+            // creditAppTextBox
             // 
-            textBox6.BackColor = Color.Maroon;
-            textBox6.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            textBox6.ForeColor = Color.White;
-            textBox6.Location = new Point(957, 279);
-            textBox6.Margin = new Padding(0);
-            textBox6.MaxLength = 1;
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(41, 34);
-            textBox6.TabIndex = 344;
+            creditAppTextBox.BackColor = Color.Maroon;
+            creditAppTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            creditAppTextBox.ForeColor = Color.White;
+            creditAppTextBox.Location = new Point(957, 279);
+            creditAppTextBox.Margin = new Padding(0);
+            creditAppTextBox.MaxLength = 1;
+            creditAppTextBox.Name = "creditAppTextBox";
+            creditAppTextBox.Size = new Size(41, 34);
+            creditAppTextBox.TabIndex = 344;
             // 
             // label29
             // 
@@ -752,41 +752,41 @@
             label29.TabIndex = 343;
             label29.Text = "CREDIT APP:";
             // 
-            // maskedTextBox1
+            // creditAppDateMaskedTextBox
             // 
-            maskedTextBox1.BackColor = Color.Maroon;
-            maskedTextBox1.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            maskedTextBox1.ForeColor = Color.White;
-            maskedTextBox1.Location = new Point(1036, 279);
-            maskedTextBox1.Mask = "00/00/0000";
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(124, 34);
-            maskedTextBox1.TabIndex = 345;
-            maskedTextBox1.ValidatingType = typeof(DateTime);
+            creditAppDateMaskedTextBox.BackColor = Color.Maroon;
+            creditAppDateMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            creditAppDateMaskedTextBox.ForeColor = Color.White;
+            creditAppDateMaskedTextBox.Location = new Point(1036, 279);
+            creditAppDateMaskedTextBox.Mask = "00/00/0000";
+            creditAppDateMaskedTextBox.Name = "creditAppDateMaskedTextBox";
+            creditAppDateMaskedTextBox.Size = new Size(124, 34);
+            creditAppDateMaskedTextBox.TabIndex = 345;
+            creditAppDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
-            // maskedTextBox2
+            // financialStatementTextBox
             // 
-            maskedTextBox2.BackColor = Color.Maroon;
-            maskedTextBox2.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            maskedTextBox2.ForeColor = Color.White;
-            maskedTextBox2.Location = new Point(1036, 313);
-            maskedTextBox2.Mask = "00/00/0000";
-            maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(124, 34);
-            maskedTextBox2.TabIndex = 348;
-            maskedTextBox2.ValidatingType = typeof(DateTime);
+            financialStatementTextBox.BackColor = Color.Maroon;
+            financialStatementTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            financialStatementTextBox.ForeColor = Color.White;
+            financialStatementTextBox.Location = new Point(1036, 313);
+            financialStatementTextBox.Mask = "00/00/0000";
+            financialStatementTextBox.Name = "financialStatementTextBox";
+            financialStatementTextBox.Size = new Size(124, 34);
+            financialStatementTextBox.TabIndex = 348;
+            financialStatementTextBox.ValidatingType = typeof(DateTime);
             // 
-            // textBox7
+            // financialStatmentTextBox
             // 
-            textBox7.BackColor = Color.Maroon;
-            textBox7.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            textBox7.ForeColor = Color.White;
-            textBox7.Location = new Point(957, 313);
-            textBox7.Margin = new Padding(0);
-            textBox7.MaxLength = 1;
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(41, 34);
-            textBox7.TabIndex = 347;
+            financialStatmentTextBox.BackColor = Color.Maroon;
+            financialStatmentTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            financialStatmentTextBox.ForeColor = Color.White;
+            financialStatmentTextBox.Location = new Point(957, 313);
+            financialStatmentTextBox.Margin = new Padding(0);
+            financialStatmentTextBox.MaxLength = 1;
+            financialStatmentTextBox.Name = "financialStatmentTextBox";
+            financialStatmentTextBox.Size = new Size(41, 34);
+            financialStatmentTextBox.TabIndex = 347;
             // 
             // label30
             // 
@@ -812,17 +812,17 @@
             maskedTextBox3.TabIndex = 351;
             maskedTextBox3.ValidatingType = typeof(DateTime);
             // 
-            // textBox8
+            // dAndBReportTextBox
             // 
-            textBox8.BackColor = Color.Maroon;
-            textBox8.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            textBox8.ForeColor = Color.White;
-            textBox8.Location = new Point(957, 346);
-            textBox8.Margin = new Padding(0);
-            textBox8.MaxLength = 1;
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(41, 34);
-            textBox8.TabIndex = 350;
+            dAndBReportTextBox.BackColor = Color.Maroon;
+            dAndBReportTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            dAndBReportTextBox.ForeColor = Color.White;
+            dAndBReportTextBox.Location = new Point(957, 346);
+            dAndBReportTextBox.Margin = new Padding(0);
+            dAndBReportTextBox.MaxLength = 1;
+            dAndBReportTextBox.Name = "dAndBReportTextBox";
+            dAndBReportTextBox.Size = new Size(41, 34);
+            dAndBReportTextBox.TabIndex = 350;
             // 
             // label31
             // 
@@ -836,17 +836,17 @@
             label31.TabIndex = 349;
             label31.Text = "D&&B REPORT:";
             // 
-            // maskedTextBox4
+            // dAndBDateMaskedTextBox
             // 
-            maskedTextBox4.BackColor = Color.Maroon;
-            maskedTextBox4.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            maskedTextBox4.ForeColor = Color.White;
-            maskedTextBox4.Location = new Point(1036, 379);
-            maskedTextBox4.Mask = "00/00/0000";
-            maskedTextBox4.Name = "maskedTextBox4";
-            maskedTextBox4.Size = new Size(124, 34);
-            maskedTextBox4.TabIndex = 354;
-            maskedTextBox4.ValidatingType = typeof(DateTime);
+            dAndBDateMaskedTextBox.BackColor = Color.Maroon;
+            dAndBDateMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            dAndBDateMaskedTextBox.ForeColor = Color.White;
+            dAndBDateMaskedTextBox.Location = new Point(1036, 379);
+            dAndBDateMaskedTextBox.Mask = "00/00/0000";
+            dAndBDateMaskedTextBox.Name = "dAndBDateMaskedTextBox";
+            dAndBDateMaskedTextBox.Size = new Size(124, 34);
+            dAndBDateMaskedTextBox.TabIndex = 354;
+            dAndBDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
             // textBox9
             // 
@@ -938,16 +938,16 @@
             label38.TabIndex = 361;
             label38.Text = "PREV 6 MO:";
             // 
-            // label39
+            // highBalanceDisplayLabel
             // 
-            label39.AutoSize = true;
-            label39.Font = new Font("Segoe UI", 16F);
-            label39.ForeColor = Color.White;
-            label39.Location = new Point(853, 492);
-            label39.Name = "label39";
-            label39.Size = new Size(85, 30);
-            label39.TabIndex = 360;
-            label39.Text = "$$$$$$";
+            highBalanceDisplayLabel.AutoSize = true;
+            highBalanceDisplayLabel.Font = new Font("Segoe UI", 16F);
+            highBalanceDisplayLabel.ForeColor = Color.White;
+            highBalanceDisplayLabel.Location = new Point(853, 492);
+            highBalanceDisplayLabel.Name = "highBalanceDisplayLabel";
+            highBalanceDisplayLabel.Size = new Size(85, 30);
+            highBalanceDisplayLabel.TabIndex = 360;
+            highBalanceDisplayLabel.Text = "$$$$$$";
             // 
             // label40
             // 
@@ -971,16 +971,16 @@
             label42.TabIndex = 365;
             label42.Text = "PREV 25 DAYS:";
             // 
-            // label43
+            // currentBalanceDisplayLabel
             // 
-            label43.AutoSize = true;
-            label43.Font = new Font("Segoe UI", 16F);
-            label43.ForeColor = Color.White;
-            label43.Location = new Point(853, 522);
-            label43.Name = "label43";
-            label43.Size = new Size(85, 30);
-            label43.TabIndex = 364;
-            label43.Text = "$$$$$$";
+            currentBalanceDisplayLabel.AutoSize = true;
+            currentBalanceDisplayLabel.Font = new Font("Segoe UI", 16F);
+            currentBalanceDisplayLabel.ForeColor = Color.White;
+            currentBalanceDisplayLabel.Location = new Point(853, 522);
+            currentBalanceDisplayLabel.Name = "currentBalanceDisplayLabel";
+            currentBalanceDisplayLabel.Size = new Size(85, 30);
+            currentBalanceDisplayLabel.TabIndex = 364;
+            currentBalanceDisplayLabel.Text = "$$$$$$";
             // 
             // label44
             // 
@@ -1004,80 +1004,80 @@
             label45.TabIndex = 367;
             label45.Text = "AVG PAY DAYS";
             // 
-            // label46
+            // prevSixMonthAvgPayDisplayLabel
             // 
-            label46.AutoSize = true;
-            label46.Font = new Font("Segoe UI", 16F);
-            label46.ForeColor = Color.White;
-            label46.Location = new Point(1126, 492);
-            label46.Name = "label46";
-            label46.Size = new Size(85, 30);
-            label46.TabIndex = 368;
-            label46.Text = "$$$$$$";
+            prevSixMonthAvgPayDisplayLabel.AutoSize = true;
+            prevSixMonthAvgPayDisplayLabel.Font = new Font("Segoe UI", 16F);
+            prevSixMonthAvgPayDisplayLabel.ForeColor = Color.White;
+            prevSixMonthAvgPayDisplayLabel.Location = new Point(1126, 492);
+            prevSixMonthAvgPayDisplayLabel.Name = "prevSixMonthAvgPayDisplayLabel";
+            prevSixMonthAvgPayDisplayLabel.Size = new Size(85, 30);
+            prevSixMonthAvgPayDisplayLabel.TabIndex = 368;
+            prevSixMonthAvgPayDisplayLabel.Text = "$$$$$$";
             // 
-            // label41
+            // prev25DaysDisplayLabel
             // 
-            label41.AutoSize = true;
-            label41.Font = new Font("Segoe UI", 16F);
-            label41.ForeColor = Color.White;
-            label41.Location = new Point(1126, 522);
-            label41.Name = "label41";
-            label41.Size = new Size(85, 30);
-            label41.TabIndex = 369;
-            label41.Text = "$$$$$$";
+            prev25DaysDisplayLabel.AutoSize = true;
+            prev25DaysDisplayLabel.Font = new Font("Segoe UI", 16F);
+            prev25DaysDisplayLabel.ForeColor = Color.White;
+            prev25DaysDisplayLabel.Location = new Point(1126, 522);
+            prev25DaysDisplayLabel.Name = "prev25DaysDisplayLabel";
+            prev25DaysDisplayLabel.Size = new Size(85, 30);
+            prev25DaysDisplayLabel.TabIndex = 369;
+            prev25DaysDisplayLabel.Text = "$$$$$$";
             // 
             // BillToCustomer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(1, 0, 128);
-            Controls.Add(label41);
-            Controls.Add(label46);
+            Controls.Add(prev25DaysDisplayLabel);
+            Controls.Add(prevSixMonthAvgPayDisplayLabel);
             Controls.Add(label45);
             Controls.Add(label42);
-            Controls.Add(label43);
+            Controls.Add(currentBalanceDisplayLabel);
             Controls.Add(label44);
             Controls.Add(label37);
             Controls.Add(label38);
-            Controls.Add(label39);
+            Controls.Add(highBalanceDisplayLabel);
             Controls.Add(label40);
             Controls.Add(label36);
             Controls.Add(label34);
             Controls.Add(label35);
             Controls.Add(label33);
-            Controls.Add(maskedTextBox4);
+            Controls.Add(dAndBDateMaskedTextBox);
             Controls.Add(textBox9);
             Controls.Add(label32);
             Controls.Add(maskedTextBox3);
-            Controls.Add(textBox8);
+            Controls.Add(dAndBReportTextBox);
             Controls.Add(label31);
-            Controls.Add(maskedTextBox2);
-            Controls.Add(textBox7);
+            Controls.Add(financialStatementTextBox);
+            Controls.Add(financialStatmentTextBox);
             Controls.Add(label30);
-            Controls.Add(maskedTextBox1);
-            Controls.Add(textBox6);
+            Controls.Add(creditAppDateMaskedTextBox);
+            Controls.Add(creditAppTextBox);
             Controls.Add(label29);
             Controls.Add(label27);
             Controls.Add(incentiveSalesTextBox);
             Controls.Add(label26);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
+            Controls.Add(note2TextBox);
+            Controls.Add(noteTextBox);
             Controls.Add(label25);
-            Controls.Add(textBox3);
+            Controls.Add(pOMessageTextBox);
             Controls.Add(label24);
-            Controls.Add(textBox2);
+            Controls.Add(federatedCustomerTextBox);
             Controls.Add(label20);
-            Controls.Add(credRqstextBox);
+            Controls.Add(credRqsTextBox);
             Controls.Add(label23);
             Controls.Add(label22);
-            Controls.Add(genBeginDateMaskBox);
+            Controls.Add(dateReviewedMaskBox);
             Controls.Add(lastSaleDisplayLabel);
             Controls.Add(label21);
             Controls.Add(fstSaleDisplayLabel);
             Controls.Add(label19);
             Controls.Add(termDaysDisplayLabel);
             Controls.Add(label18);
-            Controls.Add(textBox1);
+            Controls.Add(creditLimitTextBox);
             Controls.Add(label17);
             Controls.Add(label28);
             Controls.Add(iLine3TextBox);
@@ -1109,7 +1109,7 @@
             Controls.Add(label6);
             Controls.Add(regNameTextBox);
             Controls.Add(label2);
-            Controls.Add(billToCustomerNameTextBox);
+            Controls.Add(customerNameTextBox);
             Controls.Add(label1);
             Name = "BillToCustomer";
             Size = new Size(1290, 637);
@@ -1119,7 +1119,7 @@
 
         #endregion
 
-        private TextBox billToCustomerNameTextBox;
+        private TextBox customerNameTextBox;
         private Label label1;
         private TextBox regNameTextBox;
         private Label label2;
@@ -1151,7 +1151,7 @@
         private TextBox iLine3TextBox;
         private Label label16;
         private Label label28;
-        private TextBox textBox1;
+        private TextBox creditLimitTextBox;
         private Label label17;
         private Label label18;
         private Label termDaysDisplayLabel;
@@ -1159,30 +1159,30 @@
         private Label fstSaleDisplayLabel;
         private Label lastSaleDisplayLabel;
         private Label label21;
-        private MaskedTextBox genBeginDateMaskBox;
+        private MaskedTextBox dateReviewedMaskBox;
         private Label label22;
         private Label label23;
-        private TextBox credRqstextBox;
-        private TextBox textBox2;
+        private TextBox credRqsTextBox;
+        private TextBox federatedCustomerTextBox;
         private Label label20;
-        private TextBox textBox3;
+        private TextBox pOMessageTextBox;
         private Label label24;
-        private TextBox textBox4;
+        private TextBox noteTextBox;
         private Label label25;
-        private TextBox textBox5;
+        private TextBox note2TextBox;
         private TextBox incentiveSalesTextBox;
         private Label label26;
         private Label label27;
-        private TextBox textBox6;
+        private TextBox creditAppTextBox;
         private Label label29;
-        private MaskedTextBox maskedTextBox1;
-        private MaskedTextBox maskedTextBox2;
-        private TextBox textBox7;
+        private MaskedTextBox creditAppDateMaskedTextBox;
+        private MaskedTextBox financialStatementTextBox;
+        private TextBox financialStatmentTextBox;
         private Label label30;
         private MaskedTextBox maskedTextBox3;
-        private TextBox textBox8;
+        private TextBox dAndBReportTextBox;
         private Label label31;
-        private MaskedTextBox maskedTextBox4;
+        private MaskedTextBox dAndBDateMaskedTextBox;
         private TextBox textBox9;
         private Label label32;
         private Label label33;
@@ -1191,13 +1191,13 @@
         private Label label36;
         private Label label37;
         private Label label38;
-        private Label label39;
+        private Label highBalanceDisplayLabel;
         private Label label40;
         private Label label42;
-        private Label label43;
+        private Label currentBalanceDisplayLabel;
         private Label label44;
         private Label label45;
-        private Label label46;
-        private Label label41;
+        private Label prevSixMonthAvgPayDisplayLabel;
+        private Label prev25DaysDisplayLabel;
     }
 }
