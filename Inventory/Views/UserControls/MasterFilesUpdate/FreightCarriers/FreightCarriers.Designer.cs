@@ -105,7 +105,7 @@
             // freightNameTextBox
             // 
             freightNameTextBox.BackColor = Color.Maroon;
-            freightNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightNameTextBox.Font = new Font("Segoe UI", 15F);
             freightNameTextBox.ForeColor = Color.White;
             freightNameTextBox.Location = new Point(120, 49);
             freightNameTextBox.Margin = new Padding(0);
@@ -117,7 +117,7 @@
             // freightStreetTextBox
             // 
             freightStreetTextBox.BackColor = Color.Maroon;
-            freightStreetTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightStreetTextBox.Font = new Font("Segoe UI", 15F);
             freightStreetTextBox.ForeColor = Color.White;
             freightStreetTextBox.Location = new Point(120, 83);
             freightStreetTextBox.Margin = new Padding(0);
@@ -140,7 +140,7 @@
             // freightStateTextBox
             // 
             freightStateTextBox.BackColor = Color.Maroon;
-            freightStateTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightStateTextBox.Font = new Font("Segoe UI", 15F);
             freightStateTextBox.ForeColor = Color.White;
             freightStateTextBox.Location = new Point(120, 153);
             freightStateTextBox.Margin = new Padding(0);
@@ -163,7 +163,7 @@
             // freightZipTextBox
             // 
             freightZipTextBox.BackColor = Color.Maroon;
-            freightZipTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightZipTextBox.Font = new Font("Segoe UI", 15F);
             freightZipTextBox.ForeColor = Color.White;
             freightZipTextBox.Location = new Point(359, 153);
             freightZipTextBox.Margin = new Padding(0);
@@ -186,7 +186,7 @@
             // freightZip4TextBox
             // 
             freightZip4TextBox.BackColor = Color.Maroon;
-            freightZip4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightZip4TextBox.Font = new Font("Segoe UI", 15F);
             freightZip4TextBox.ForeColor = Color.White;
             freightZip4TextBox.Location = new Point(440, 153);
             freightZip4TextBox.Margin = new Padding(0);
@@ -199,7 +199,7 @@
             // 
             freightFaxMaskedTextBox.BackColor = Color.Maroon;
             freightFaxMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            freightFaxMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightFaxMaskedTextBox.Font = new Font("Segoe UI", 15F);
             freightFaxMaskedTextBox.ForeColor = Color.White;
             freightFaxMaskedTextBox.Location = new Point(359, 188);
             freightFaxMaskedTextBox.Mask = "(999) 000-0000";
@@ -212,7 +212,7 @@
             // 
             freightPhoneMaskedTextBox.BackColor = Color.Maroon;
             freightPhoneMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            freightPhoneMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightPhoneMaskedTextBox.Font = new Font("Segoe UI", 15F);
             freightPhoneMaskedTextBox.ForeColor = Color.White;
             freightPhoneMaskedTextBox.Location = new Point(120, 188);
             freightPhoneMaskedTextBox.Mask = "(999) 000-0000";
@@ -246,7 +246,7 @@
             // contactTextBox
             // 
             contactTextBox.BackColor = Color.Maroon;
-            contactTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            contactTextBox.Font = new Font("Segoe UI", 15F);
             contactTextBox.ForeColor = Color.White;
             contactTextBox.Location = new Point(139, 224);
             contactTextBox.Margin = new Padding(0);
@@ -292,7 +292,7 @@
             // 
             payFaxMaskedTextBox.BackColor = Color.Maroon;
             payFaxMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            payFaxMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            payFaxMaskedTextBox.Font = new Font("Segoe UI", 15F);
             payFaxMaskedTextBox.ForeColor = Color.White;
             payFaxMaskedTextBox.Location = new Point(1001, 188);
             payFaxMaskedTextBox.Mask = "(999) 000-0000";
@@ -305,7 +305,7 @@
             // 
             payPhoneMaskedTextBox.BackColor = Color.Maroon;
             payPhoneMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            payPhoneMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            payPhoneMaskedTextBox.Font = new Font("Segoe UI", 15F);
             payPhoneMaskedTextBox.ForeColor = Color.White;
             payPhoneMaskedTextBox.Location = new Point(762, 188);
             payPhoneMaskedTextBox.Mask = "(999) 000-0000";
@@ -339,7 +339,7 @@
             // payZip4TextBox
             // 
             payZip4TextBox.BackColor = Color.Maroon;
-            payZip4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            payZip4TextBox.Font = new Font("Segoe UI", 15F);
             payZip4TextBox.ForeColor = Color.White;
             payZip4TextBox.Location = new Point(1082, 153);
             payZip4TextBox.Margin = new Padding(0);
@@ -351,7 +351,7 @@
             // payZipTextBox
             // 
             payZipTextBox.BackColor = Color.Maroon;
-            payZipTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            payZipTextBox.Font = new Font("Segoe UI", 15F);
             payZipTextBox.ForeColor = Color.White;
             payZipTextBox.Location = new Point(1001, 153);
             payZipTextBox.Margin = new Padding(0);
@@ -374,7 +374,7 @@
             // payStateTextBox
             // 
             payStateTextBox.BackColor = Color.Maroon;
-            payStateTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            payStateTextBox.Font = new Font("Segoe UI", 15F);
             payStateTextBox.ForeColor = Color.White;
             payStateTextBox.Location = new Point(762, 153);
             payStateTextBox.Margin = new Padding(0);
@@ -397,7 +397,7 @@
             // payAddressTextBox
             // 
             payAddressTextBox.BackColor = Color.Maroon;
-            payAddressTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            payAddressTextBox.Font = new Font("Segoe UI", 15F);
             payAddressTextBox.ForeColor = Color.White;
             payAddressTextBox.Location = new Point(762, 83);
             payAddressTextBox.Margin = new Padding(0);
@@ -420,7 +420,7 @@
             // payNameTextBox
             // 
             payNameTextBox.BackColor = Color.Maroon;
-            payNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            payNameTextBox.Font = new Font("Segoe UI", 15F);
             payNameTextBox.ForeColor = Color.White;
             payNameTextBox.Location = new Point(762, 49);
             payNameTextBox.Margin = new Padding(0);
@@ -465,7 +465,7 @@
             // activeHoldTextBox
             // 
             activeHoldTextBox.BackColor = Color.Maroon;
-            activeHoldTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            activeHoldTextBox.Font = new Font("Segoe UI", 15F);
             activeHoldTextBox.ForeColor = Color.White;
             activeHoldTextBox.Location = new Point(265, 294);
             activeHoldTextBox.Margin = new Padding(0);
@@ -477,7 +477,7 @@
             // noteTextBox
             // 
             noteTextBox.BackColor = Color.Maroon;
-            noteTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            noteTextBox.Font = new Font("Segoe UI", 15F);
             noteTextBox.ForeColor = Color.White;
             noteTextBox.Location = new Point(112, 350);
             noteTextBox.Margin = new Padding(0);
@@ -500,7 +500,7 @@
             // dInsuranceTextBox
             // 
             dInsuranceTextBox.BackColor = Color.Maroon;
-            dInsuranceTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            dInsuranceTextBox.Font = new Font("Segoe UI", 15F);
             dInsuranceTextBox.ForeColor = Color.White;
             dInsuranceTextBox.Location = new Point(379, 582);
             dInsuranceTextBox.Margin = new Padding(0);
@@ -523,7 +523,7 @@
             // cInsuranceTextBox
             // 
             cInsuranceTextBox.BackColor = Color.Maroon;
-            cInsuranceTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            cInsuranceTextBox.Font = new Font("Segoe UI", 15F);
             cInsuranceTextBox.ForeColor = Color.White;
             cInsuranceTextBox.Location = new Point(378, 540);
             cInsuranceTextBox.Margin = new Padding(0);
@@ -546,7 +546,7 @@
             // bInsuranceTextBox
             // 
             bInsuranceTextBox.BackColor = Color.Maroon;
-            bInsuranceTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            bInsuranceTextBox.Font = new Font("Segoe UI", 15F);
             bInsuranceTextBox.ForeColor = Color.White;
             bInsuranceTextBox.Location = new Point(378, 498);
             bInsuranceTextBox.Margin = new Padding(0);
@@ -569,7 +569,7 @@
             // aInsuranceTextBox
             // 
             aInsuranceTextBox.BackColor = Color.Maroon;
-            aInsuranceTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            aInsuranceTextBox.Font = new Font("Segoe UI", 15F);
             aInsuranceTextBox.ForeColor = Color.White;
             aInsuranceTextBox.Location = new Point(377, 456);
             aInsuranceTextBox.Margin = new Padding(0);
@@ -614,7 +614,7 @@
             // payCityTextBox
             // 
             payCityTextBox.BackColor = Color.Maroon;
-            payCityTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            payCityTextBox.Font = new Font("Segoe UI", 15F);
             payCityTextBox.ForeColor = Color.White;
             payCityTextBox.Location = new Point(762, 117);
             payCityTextBox.Margin = new Padding(0);
@@ -637,7 +637,7 @@
             // freightCityTextBox
             // 
             freightCityTextBox.BackColor = Color.Maroon;
-            freightCityTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightCityTextBox.Font = new Font("Segoe UI", 15F);
             freightCityTextBox.ForeColor = Color.White;
             freightCityTextBox.Location = new Point(120, 117);
             freightCityTextBox.Margin = new Padding(0);
