@@ -158,4 +158,6 @@ public partial class bil_buy
     public string incen_cd { get; set; }
 
     public string no_incen { get; set; }
+
+    public decimal? extension { get; set; }
 }

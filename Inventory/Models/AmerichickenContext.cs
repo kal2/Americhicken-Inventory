@@ -33,7 +33,7 @@ public partial class AmerichickenContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True;TrustServerCertificate=true;");
+        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -66,6 +66,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.db_dt).HasColumnType("date");
             entity.Property(e => e.db_rpt).HasMaxLength(1);
             entity.Property(e => e.end_date).HasColumnType("date");
+            entity.Property(e => e.extension).HasColumnType("numeric(5, 0)");
             entity.Property(e => e.fax).HasMaxLength(10);
             entity.Property(e => e.fed_cust).HasMaxLength(1);
             entity.Property(e => e.fin_prov).HasMaxLength(1);
