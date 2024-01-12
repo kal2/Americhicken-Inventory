@@ -111,7 +111,7 @@ public partial class bil_buy
 
     public decimal? days_ex { get; set; }
 
-    public string cre_rqst { get; set; }
+    public string cred_rqst { get; set; }
 
     public DateTime? date_rqst { get; set; }
 

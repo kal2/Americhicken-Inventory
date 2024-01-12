@@ -49,9 +49,9 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.beg_date).HasColumnType("date");
             entity.Property(e => e.city).HasMaxLength(20);
             entity.Property(e => e.country).HasMaxLength(28);
-            entity.Property(e => e.cre_rqst).HasMaxLength(32);
             entity.Property(e => e.cred_bal).HasMaxLength(1);
             entity.Property(e => e.cred_lim).HasColumnType("numeric(7, 0)");
+            entity.Property(e => e.cred_rqst).HasMaxLength(32);
             entity.Property(e => e.credap_dt).HasColumnType("date");
             entity.Property(e => e.credit_ap).HasMaxLength(10);
             entity.Property(e => e.cus_bal).HasColumnType("numeric(9, 2)");
