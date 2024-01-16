@@ -56,4 +56,38 @@ public partial class buyer
     public decimal? days_ex { get; set; }
 
     public string used { get; set; }
+
+    public string grp_code { get; set; }
+
+    public string grp_desc { get; set; }
+
+    public string mon_recv { get; set; }
+
+    public string tue_recv { get; set; }
+
+    public string wed_recv { get; set; }
+
+    public string thu_recv { get; set; }
+
+    public string fri_recv { get; set; }
+
+    public string sat_recv { get; set; }
+
+    public string sun_recv { get; set; }
+
+    public string cont_name { get; set; }
+
+    public string cont_nam2 { get; set; }
+
+    public string cont_ph { get; set; }
+
+    public string cont_fax { get; set; }
+
+    public string frt_ph { get; set; }
+
+    public string del_ph { get; set; }
+
+    public string del_mail { get; set; }
+
+    public string del_time { get; set; }
 }

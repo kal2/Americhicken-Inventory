@@ -33,7 +33,7 @@ public partial class AmerichickenContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True");
+        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -129,24 +129,75 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.bbuycode).HasMaxLength(4);
             entity.Property(e => e.buy_code).HasMaxLength(4);
             entity.Property(e => e.city).HasMaxLength(20);
+            entity.Property(e => e.cont_fax)
+                .HasMaxLength(10)
+                .IsFixedLength();
+            entity.Property(e => e.cont_nam2)
+                .HasMaxLength(42)
+                .IsFixedLength();
+            entity.Property(e => e.cont_name)
+                .HasMaxLength(42)
+                .IsFixedLength();
+            entity.Property(e => e.cont_ph)
+                .HasMaxLength(10)
+                .IsFixedLength();
             entity.Property(e => e.country).HasMaxLength(28);
             entity.Property(e => e.cus_bal).HasColumnType("numeric(11, 2)");
             entity.Property(e => e.days_180).HasColumnType("numeric(10, 0)");
             entity.Property(e => e.days_60).HasColumnType("numeric(10, 0)");
             entity.Property(e => e.days_ex).HasColumnType("numeric(10, 0)");
+            entity.Property(e => e.del_mail)
+                .HasMaxLength(28)
+                .IsFixedLength();
+            entity.Property(e => e.del_ph)
+                .HasMaxLength(10)
+                .IsFixedLength();
+            entity.Property(e => e.del_time)
+                .HasMaxLength(12)
+                .IsFixedLength();
             entity.Property(e => e.fax).HasMaxLength(10);
+            entity.Property(e => e.fri_recv)
+                .HasMaxLength(15)
+                .IsFixedLength();
+            entity.Property(e => e.frt_ph)
+                .HasMaxLength(10)
+                .IsFixedLength();
+            entity.Property(e => e.grp_code)
+                .HasMaxLength(4)
+                .IsFixedLength();
+            entity.Property(e => e.grp_desc)
+                .HasMaxLength(20)
+                .IsFixedLength();
             entity.Property(e => e.int_zip).HasMaxLength(8);
             entity.Property(e => e.internat).HasMaxLength(1);
+            entity.Property(e => e.mon_recv)
+                .HasMaxLength(15)
+                .IsFixedLength();
             entity.Property(e => e.name).HasMaxLength(40);
             entity.Property(e => e.note).HasMaxLength(60);
             entity.Property(e => e.phone).HasMaxLength(7);
+            entity.Property(e => e.sat_recv)
+                .HasMaxLength(15)
+                .IsFixedLength();
             entity.Property(e => e.ships_180).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.ships_60).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.ships_ex).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.state).HasMaxLength(2);
             entity.Property(e => e.street).HasMaxLength(40);
             entity.Property(e => e.street2).HasMaxLength(28);
+            entity.Property(e => e.sun_recv)
+                .HasMaxLength(15)
+                .IsFixedLength();
+            entity.Property(e => e.thu_recv)
+                .HasMaxLength(15)
+                .IsFixedLength();
+            entity.Property(e => e.tue_recv)
+                .HasMaxLength(15)
+                .IsFixedLength();
             entity.Property(e => e.used).HasMaxLength(1);
+            entity.Property(e => e.wed_recv)
+                .HasMaxLength(15)
+                .IsFixedLength();
             entity.Property(e => e.zip).HasMaxLength(5);
             entity.Property(e => e.zip4).HasMaxLength(4);
         });
