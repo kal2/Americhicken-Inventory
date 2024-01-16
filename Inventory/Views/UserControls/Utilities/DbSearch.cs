@@ -158,6 +158,14 @@ namespace Inventory.Views.UserControls
                     programLabel = "Freight Carrier";
                     break;
 
+                case "bil_buy":
+                    programLabel = "Customer";
+                    break;
+
+                case "buyer":
+                    programLabel = "Customer";
+                    break;
+
                 default:
                     programLabel = "ERROR";
                     break;

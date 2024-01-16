@@ -88,7 +88,9 @@ namespace Inventory.Views.UserControls
             {
                 { "supplier", item => CreateListViewItem(item as supplier) },
                 { "remitTo", item => CreateListViewItem(item as rem_sup) },
-                { "freight", item => CreateListViewItem(item as freight) }
+                { "freight", item => CreateListViewItem(item as freight) },
+                { "bil_buy", item => CreateListViewItem(item as bil_buy) },
+                { "buyer", item => CreateListViewItem(item as buyer) },
             };
 
             if (!displayHandlers.ContainsKey(selectedTable.Trim()))
@@ -147,6 +149,30 @@ namespace Inventory.Views.UserControls
             freightSelectionChoice.Tag = freightResult;
 
             return freightSelectionChoice;
+        }
+
+        private ListViewItem CreateListViewItem(bil_buy bil_buyResult)
+        {
+            ListViewItem bil_buySelectionChoice = new ListViewItem();
+            bil_buySelectionChoice.SubItems.Add(bil_buyResult?.name);
+            bil_buySelectionChoice.SubItems.Add(bil_buyResult?.city);
+            bil_buySelectionChoice.SubItems.Add(bil_buyResult?.state);
+
+            bil_buySelectionChoice.Tag = bil_buyResult;
+
+            return bil_buySelectionChoice;
+        }
+
+        private ListViewItem CreateListViewItem(buyer buyerResult)
+        {
+            ListViewItem buyerSelectionChoice = new ListViewItem();
+            buyerSelectionChoice.SubItems.Add(buyerResult?.name);
+            buyerSelectionChoice.SubItems.Add(buyerResult?.city);
+            buyerSelectionChoice.SubItems.Add(buyerResult?.state);
+
+            buyerSelectionChoice.Tag = buyerResult;
+
+            return buyerSelectionChoice;
         }
 
 

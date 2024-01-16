@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo;
 
 namespace Inventory.Services
 {
@@ -27,6 +28,10 @@ namespace Inventory.Services
 
                 case "freightCarrier":
                     LoadFreightCarrier();
+                    break;
+
+                case "bil_buy":
+                    LoadBillToCustomer();
                     break;
 
                 default:
@@ -137,6 +142,38 @@ namespace Inventory.Services
                     freightCarrierInstance.GetFreightCarrierData((freight)e!.SelectedResult);
                     _activeControlManager.SetActiveControl(freightCarrierInstance);
                 }
+            }
+        }
+        //Bill To Customer
+        public void LoadBillToCustomer()
+        {
+            BillToCustomer billToCustomerInstance  = new (_mainWindow, _activeControlManager);
+            DbSearch dbSearch = new (_mainWindow, _activeControlManager);
+            dbSearch.SetTable("bil_buy");
+            dbSearch.SearchCompleted += (f3, f4) => HandleBillToSearchCompleted(f3!, f4);
+            _activeControlManager.SetActiveControl(dbSearch);
+
+            void HandleBillToSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
+            {
+                if (e.SearchResults == null)
+                {
+                    _activeControlManager.SetActiveControl(billToCustomerInstance);
+                }
+                else
+                {
+                    MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
+                    matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedBillToSearchResult(f!, f2);
+                    matchSelectInstance.SetMatchSelectLabel("Bill To");
+                    matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
+                    _activeControlManager.SetActiveControl(matchSelectInstance);
+                }
+            }
+
+            void HandleSelectedBillToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
+            {
+                billToCustomerInstance.GetBillToData((bil_buy)e!.SelectedResult);
+                _mainWindow.DisposeControl((UserControl)sender!);
+                _activeControlManager.SetActiveControl(billToCustomerInstance);
             }
         }
     }
