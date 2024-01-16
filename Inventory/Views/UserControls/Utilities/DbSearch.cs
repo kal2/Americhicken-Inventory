@@ -9,23 +9,24 @@ namespace Inventory.Views.UserControls
 {
     public partial class DbSearch : UserControl, IActiveControlManager
     {
-        // -- Class Variables -- //
-
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
-        string selectedTable = string.Empty;
-        string programLabel = string.Empty;
-
-        // -- Event Handlers -- //
+        private string selectedTable = string.Empty;
+        private string programLabel = string.Empty;
 
         public event EventHandler<SearchResultsEventArgs> SearchCompleted;
-        public class SearchResultsEventArgs(List<object> searchResults, string tableSelected) : EventArgs
-        {
-            public List<object> SearchResults { get; } = searchResults;
-            public string TableSelected { get; } = tableSelected;
-        }
 
-        // -- Constructor -- //
+        public class SearchResultsEventArgs : EventArgs
+        {
+            public List<object> SearchResults { get; }
+            public string TableSelected { get; }
+
+            public SearchResultsEventArgs(List<object> searchResults, string tableSelected)
+            {
+                SearchResults = searchResults;
+                TableSelected = tableSelected;
+            }
+        }
 
         public DbSearch(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
@@ -34,11 +35,9 @@ namespace Inventory.Views.UserControls
             _activeControlManager = activeControlManager;
         }
 
-        // -- Methods -- //
-
         public void SetTable(string tableName)
         {
-            if (tableName?.Length == 0)
+            if (string.IsNullOrEmpty(tableName))
             {
                 MessageBox.Show("ERROR: No db table selected to search, please contact developer");
             }
@@ -51,6 +50,7 @@ namespace Inventory.Views.UserControls
                 selectedTable = tableName;
             }
         }
+
         public void SearchDatabase(string searchInput)
         {
             if (ValidationHelper.IsEmpty(searchInput))
@@ -59,9 +59,7 @@ namespace Inventory.Views.UserControls
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    //hide searchpanel
                     _mainWindow.DisposeControl(this);
-                    //search completed event
                     SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null!, selectedTable));
                 }
                 else if (dialogResult == DialogResult.No)
@@ -79,6 +77,7 @@ namespace Inventory.Views.UserControls
 
                 using var context = new AmerichickenContext();
                 var searchResults = new List<object>();
+
                 switch (selectedTable)
                 {
                     case "supplier":
@@ -96,33 +95,29 @@ namespace Inventory.Views.UserControls
                     default:
                         break;
                 }
+
                 if (searchResults.Count == 0)
                 {
                     MessageBox.Show("No results found");
                 }
                 else
                 {
-                    //Sends search results to the SearchResultsEventArgs handler's listener
                     SearchCompleted?.Invoke(this, new SearchResultsEventArgs(searchResults, selectedTable));
                     _mainWindow.DisposeControl(this);
                 }
             }
         }
 
-        //For when the desired search query is already known, you can pass the db table and query directly to the method
         public void PerformSearch(string dbTable, string searchQuery)
         {
             SetTable(dbTable);
             SearchDatabase(searchQuery);
         }
 
-        // -- Event Listeners -- //
-
         public void PerformAction(string userInput)
         {
             switch (userInput)
             {
-                //accepts the user's input and searches the db table selected from Program Switcher
                 case "1":
                     SearchDatabase(searchQuereyTextBox.Text);
                     break;
@@ -132,7 +127,6 @@ namespace Inventory.Views.UserControls
                     searchQuereyTextBox.Focus();
                     break;
 
-                //returns user to main menu
                 case "3":
                     _mainWindow.DisposeControl(this);
                     _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
@@ -150,28 +144,30 @@ namespace Inventory.Views.UserControls
             _mainWindow.SetCommandsLabel("1. Continue    2. Edit    3. Cancel");
             _mainWindow.SetTextBoxLabel("ACTION:");
 
-            if (selectedTable == "supplier")
+            switch (selectedTable)
             {
-                programLabel = "Supplier";
+                case "supplier":
+                    programLabel = "Supplier";
+                    break;
+
+                case "remitTo":
+                    programLabel = "Remit To";
+                    break;
+
+                case "freight":
+                    programLabel = "Freight Carrier";
+                    break;
+
+                default:
+                    programLabel = "ERROR";
+                    break;
             }
-            else if (selectedTable == "remitTo")
-            {
-                programLabel = "Remit To";
-            }
-            else if (selectedTable == "freight")
-            {
-                programLabel = "Freight Carrier";
-            }
-            else
-            {
-                programLabel = "ERROR";
-            }
+
             _mainWindow.SetProgramLabel("Search for " + programLabel);
         }
 
         private void searchQueryTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            //Waits to execute code until enter key is pressed in input area
             if (e.KeyCode == Keys.Enter)
             {
                 SearchDatabase(searchQuereyTextBox.Text);
