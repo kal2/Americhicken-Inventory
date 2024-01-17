@@ -33,5 +33,21 @@
                 "freightCarrier"
             ];
         }
+
+        public static string[] BillToCustomer()
+        {
+            return [
+                "program",
+                "bil_buy"
+            ];
+        }
+
+        public static string[] ShipToCustomer()
+        {
+            return [
+                "program",
+                "buyer"
+            ];
+        }
     }
 }

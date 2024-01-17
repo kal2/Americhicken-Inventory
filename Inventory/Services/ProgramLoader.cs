@@ -67,7 +67,6 @@ namespace Inventory.Services
             void HandleSelectedRemitToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
                 remitToUpdateInfo.GetRemitToData((rem_sup)e!.SelectedResult);
-                _mainWindow.DisposeControl((UserControl)sender!);
                 _activeControlManager.SetActiveControl(remitToUpdateInfo);
             }
         }
@@ -99,7 +98,6 @@ namespace Inventory.Services
             void HandleSelectedSupplierSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
                 shipFromUpdateInfo.GetShipFromData((supplier)e!.SelectedResult);
-                _mainWindow.DisposeControl((UserControl)sender!);
                 _activeControlManager.SetActiveControl(shipFromUpdateInfo);
             }
         }
@@ -172,7 +170,6 @@ namespace Inventory.Services
             void HandleSelectedBillToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
                 billToCustomerInstance.GetBillToData((bil_buy)e!.SelectedResult);
-                _mainWindow.DisposeControl((UserControl)sender!);
                 _activeControlManager.SetActiveControl(billToCustomerInstance);
             }
         }

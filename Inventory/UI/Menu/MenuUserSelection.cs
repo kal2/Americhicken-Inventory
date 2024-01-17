@@ -52,12 +52,12 @@ namespace Inventory.UI.Menu
                         case "1":
 
                             //reindex selected main files
-                            break;
+                        break;
 
                         case "4":
 
                             menuItems = MenuItemLists.MasterFileUpdateMenuItems();
-                            break;
+                        break;
                     }
                     break;
                 case "masterfileupdate":
@@ -66,15 +66,23 @@ namespace Inventory.UI.Menu
                     {
                         case "1":
                             menuItems = ProgramLists.RemitToSupplier();
-                            break;
+                        break;
 
                         case "2":
                             menuItems = ProgramLists.ShipFromSupplier();
-                            break;
+                        break;
+
+                        case "3":
+                            menuItems = ProgramLists.BillToCustomer();
+                        break;
+
+                        case "4":
+                            menuItems = ProgramLists.ShipToCustomer();
+                        break;
 
                         case "5":
                             menuItems = ProgramLists.FreightCarrier();
-                            break;
+                        break;
                     }
                     break;
             }
