@@ -1,16 +1,8 @@
-﻿/*using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;*/
-using System.Globalization;
-/*using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;*/
+﻿using System.Globalization;
 using Inventory.Interfaces;
 using Inventory.Models;
 using Inventory.Services;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
 {
@@ -77,16 +69,16 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             {
                 //Display Freight Insurance Data
                 _freightData = freightData;
-                insTp1TextBox.Text = _freightData.INS_TP1?.Trim();
-                insTp2TextBox.Text = _freightData.INS_TP2?.Trim();
-                insTp3TextBox.Text = _freightData.INS_TP3?.Trim();
-                insTp4TextBox.Text = _freightData.INS_TP4?.Trim();
-                insTp5TextBox.Text = _freightData.INS_TP5?.Trim();
-                policy1TextBox.Text = _freightData.POLICY1?.Trim();
-                policy2TextBox.Text = _freightData.POLICY2?.Trim();
-                policy3TextBox.Text = _freightData.POLICY3?.Trim();
-                policy4TextBox.Text = _freightData.POLICY4?.Trim();
-                policy5TextBox.Text = _freightData.POLICY5?.Trim();
+                insTp1TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP1);
+                insTp2TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP2);
+                insTp3TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP3);
+                insTp4TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP4);
+                insTp5TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP5);
+                policy1TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY1);
+                policy2TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY2);
+                policy3TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY3);
+                policy4TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY4);
+                policy5TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY5);
                 genBeginDateMaskBox.Text = _freightData.GEN_BEG?.ToString("MM/dd/yyyy").Trim();
                 genEndDateMaskBox.Text = _freightData.GEN_END?.ToString("MM/dd/yyyy").Trim();
                 genLetterSentDateMaskBox.Text = _freightData.GEN_LET?.ToString("MM/dd/yyyy").Trim();
@@ -129,63 +121,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             {
                 if (IsDataModified(freightData))
                 {
-                    var existingFreightData = _dbContext.freight.Find(freightData.PK_freight);
-                    if (existingFreightData != null)
-                    {
-                        //Update Freight Insurance Data
-                        existingFreightData.INS_TP1 = insTp1TextBox.Text.Trim();
-                        existingFreightData.INS_TP2 = insTp2TextBox.Text.Trim();
-                        existingFreightData.INS_TP3 = insTp3TextBox.Text.Trim();
-                        existingFreightData.INS_TP4 = insTp4TextBox.Text.Trim();
-                        existingFreightData.INS_TP5 = insTp5TextBox.Text.Trim();
-                        existingFreightData.POLICY1 = policy1TextBox.Text.Trim();
-                        existingFreightData.POLICY2 = policy2TextBox.Text.Trim();
-                        existingFreightData.POLICY3 = policy3TextBox.Text.Trim();
-                        existingFreightData.POLICY4 = policy4TextBox.Text.Trim();
-                        existingFreightData.POLICY5 = policy5TextBox.Text.Trim();
-                        existingFreightData.GEN_BEG = string.IsNullOrEmpty(genBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(genBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var genBeg) ? genBeg : null;
-                        existingFreightData.GEN_END = string.IsNullOrEmpty(genEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(genEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var genEnd) ? genEnd : null;
-                        existingFreightData.GEN_LET = string.IsNullOrEmpty(genLetterSentDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(genLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var genLetter) ? genLetter : null;
-                        existingFreightData.GEN_COV4 = string.IsNullOrEmpty(genCov4TextBox.Text.Trim()) ? null : int.Parse(genCov4TextBox.Text.Trim());
-                        existingFreightData.GEN_COV5 = string.IsNullOrEmpty(genCov5TextBox.Text.Trim()) ? null : int.Parse(genCov5TextBox.Text.Trim());
-                        existingFreightData.GEN_COV6 = string.IsNullOrEmpty(genCov6TextBox.Text.Trim()) ? null : int.Parse(genCov6TextBox.Text.Trim());
-                        existingFreightData.GEN_COV3 = string.IsNullOrEmpty(genCov3TextBox.Text.Trim()) ? null : int.Parse(genCov3TextBox.Text.Trim());
-                        existingFreightData.GEN_COV2 = string.IsNullOrEmpty(genCov2TextBox.Text.Trim()) ? null : int.Parse(genCov2TextBox.Text.Trim());
-                        existingFreightData.GEN_COV1 = string.IsNullOrEmpty(genCov1TextBox.Text.Trim()) ? null : int.Parse(genCov1TextBox.Text.Trim());
-                        existingFreightData.AUTO_BEG = string.IsNullOrEmpty(autoBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(autoBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var autoBeg) ? autoBeg : null;
-                        existingFreightData.AUTO_END = string.IsNullOrEmpty(autoEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(autoEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var autoEnd) ? autoEnd : null;
-                        existingFreightData.AUTO_LET = string.IsNullOrEmpty(autoLetterSentDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(autoLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var autoLetter) ? autoLetter : null;
-                        existingFreightData.AUTO_COV1 = string.IsNullOrEmpty(autoCov1TextBox.Text.Trim()) ? null : int.Parse(autoCov1TextBox.Text.Trim());
-                        existingFreightData.AUTO_COV2 = string.IsNullOrEmpty(autoCov2TextBox.Text.Trim()) ? null : int.Parse(autoCov2TextBox.Text.Trim());
-                        existingFreightData.AUTO_COV3 = string.IsNullOrEmpty(autoCov3TextBox.Text.Trim()) ? null : int.Parse(autoCov3TextBox.Text.Trim());
-                        existingFreightData.AUTO_COV4 = string.IsNullOrEmpty(autoCov4TextBox.Text.Trim()) ? null : int.Parse(autoCov4TextBox.Text.Trim());
-                        existingFreightData.WORK_BEG = string.IsNullOrEmpty(compBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(compBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var compBeg) ? compBeg : null;
-                        existingFreightData.WORK_END = string.IsNullOrEmpty(compEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(compEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var compEnd) ? compEnd : null;
-                        existingFreightData.WORK_LET = string.IsNullOrEmpty(compLetterSentDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(compLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var compLetter) ? compLetter : null;
-                        existingFreightData.WORK_COV1 = string.IsNullOrEmpty(compCov1TextBox.Text.Trim()) ? null : int.Parse(compCov1TextBox.Text.Trim());
-                        existingFreightData.WORK_COV2 = string.IsNullOrEmpty(compCov2TextBox.Text.Trim()) ? null : int.Parse(compCov2TextBox.Text.Trim());
-                        existingFreightData.WORK_COV3 = string.IsNullOrEmpty(compCov3TextBox.Text.Trim()) ? null : int.Parse(compCov3TextBox.Text.Trim());
-                        existingFreightData.CARGO_BEG = string.IsNullOrEmpty(cargoBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(cargoBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var cargoBeg) ? cargoBeg : null;
-                        existingFreightData.CARGO_END = string.IsNullOrEmpty(cargoEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(cargoEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var cargoEnd) ? cargoEnd : null;
-                        existingFreightData.CARGO_LET = string.IsNullOrEmpty(cargoLetterSentDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(cargoLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var cargoLetter) ? cargoLetter : null;
-                        existingFreightData.CARG_COV1 = string.IsNullOrEmpty(cargoCov1TextBox.Text.Trim()) ? null : int.Parse(cargoCov1TextBox.Text.Trim());
-                        existingFreightData.CARG_COV2 = string.IsNullOrEmpty(cargoCov2TextBox.Text.Trim()) ? null : int.Parse(cargoCov2TextBox.Text.Trim());
-                        existingFreightData.CARG_COV3 = string.IsNullOrEmpty(cargoCov3TextBox.Text.Trim()) ? null : int.Parse(cargoCov3TextBox.Text.Trim());
-                        existingFreightData.CARG_COV4 = string.IsNullOrEmpty(cargoCov4TextBox.Text.Trim()) ? null : int.Parse(cargoCov4TextBox.Text.Trim());
-                        existingFreightData.PHY_BEG = string.IsNullOrEmpty(damageBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(damageBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var damageBeg) ? damageBeg : null;
-                        existingFreightData.PHY_END = string.IsNullOrEmpty(damageEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(damageEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var damageEnd) ? damageEnd : null;
-                        existingFreightData.PHY_COV1 = string.IsNullOrEmpty(damageCov1TextBox.Text.Trim()) ? null : int.Parse(damageCov1TextBox.Text.Trim());
-                        existingFreightData.PHY_COV2 = string.IsNullOrEmpty(damageCov2TextBox.Text.Trim()) ? null : int.Parse(damageCov2TextBox.Text.Trim());
-                        existingFreightData.CANCEL = string.IsNullOrEmpty(cancellationTextBox.Text.Trim()) ? null : int.Parse(cancellationTextBox.Text.Trim());
-
-                        _freightData = existingFreightData;
-                        //Save Freight Insurance Data
-                        _dbContext.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("ERROR: Freight Insurance Data not found, please try again or contact developer");
-                    }
+                    UpdateExistingFreight(freightData);
                 }
             }
             else
@@ -193,6 +129,71 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                 MessageBox.Show("ERROR: Freight Insurance Data is null, please try again or contact developer");
             }
             
+        }
+
+        private void UpdateExistingFreight(freight freightData)
+        {
+            var existingFreightData = _dbContext.freight.Find(freightData.PK_freight);
+            if (existingFreightData != null)
+            {
+                SetFreightProperties(existingFreightData);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Freight Insurance Data not found, please try again or contact developer");
+            }
+        }
+
+        private void SetFreightProperties(freight existingFreightData)
+        {
+            //Update Freight Insurance Data
+            existingFreightData.INS_TP1 = StringServices.TrimOrNull(insTp1TextBox.Text);
+            existingFreightData.INS_TP2 = StringServices.TrimOrNull(insTp2TextBox.Text);
+            existingFreightData.INS_TP3 = StringServices.TrimOrNull(insTp3TextBox.Text);
+            existingFreightData.INS_TP4 = StringServices.TrimOrNull(insTp4TextBox.Text);
+            existingFreightData.INS_TP5 = StringServices.TrimOrNull(insTp5TextBox.Text);
+            existingFreightData.POLICY1 = StringServices.TrimOrNull(policy1TextBox.Text);
+            existingFreightData.POLICY2 = StringServices.TrimOrNull(policy2TextBox.Text);
+            existingFreightData.POLICY3 = StringServices.TrimOrNull(policy3TextBox.Text);
+            existingFreightData.POLICY4 = StringServices.TrimOrNull(policy4TextBox.Text);
+            existingFreightData.POLICY5 = StringServices.TrimOrNull(policy5TextBox.Text);
+            existingFreightData.GEN_BEG = string.IsNullOrEmpty(genBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(genBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var genBeg) ? genBeg : null;
+            existingFreightData.GEN_END = string.IsNullOrEmpty(genEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(genEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var genEnd) ? genEnd : null;
+            existingFreightData.GEN_LET = string.IsNullOrEmpty(genLetterSentDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(genLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var genLetter) ? genLetter : null;
+            existingFreightData.GEN_COV4 = string.IsNullOrEmpty(genCov4TextBox.Text.Trim()) ? null : int.Parse(genCov4TextBox.Text.Trim());
+            existingFreightData.GEN_COV5 = string.IsNullOrEmpty(genCov5TextBox.Text.Trim()) ? null : int.Parse(genCov5TextBox.Text.Trim());
+            existingFreightData.GEN_COV6 = string.IsNullOrEmpty(genCov6TextBox.Text.Trim()) ? null : int.Parse(genCov6TextBox.Text.Trim());
+            existingFreightData.GEN_COV3 = string.IsNullOrEmpty(genCov3TextBox.Text.Trim()) ? null : int.Parse(genCov3TextBox.Text.Trim());
+            existingFreightData.GEN_COV2 = string.IsNullOrEmpty(genCov2TextBox.Text.Trim()) ? null : int.Parse(genCov2TextBox.Text.Trim());
+            existingFreightData.GEN_COV1 = string.IsNullOrEmpty(genCov1TextBox.Text.Trim()) ? null : int.Parse(genCov1TextBox.Text.Trim());
+            existingFreightData.AUTO_BEG = string.IsNullOrEmpty(autoBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(autoBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var autoBeg) ? autoBeg : null;
+            existingFreightData.AUTO_END = string.IsNullOrEmpty(autoEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(autoEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var autoEnd) ? autoEnd : null;
+            existingFreightData.AUTO_LET = string.IsNullOrEmpty(autoLetterSentDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(autoLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var autoLetter) ? autoLetter : null;
+            existingFreightData.AUTO_COV1 = string.IsNullOrEmpty(autoCov1TextBox.Text.Trim()) ? null : int.Parse(autoCov1TextBox.Text.Trim());
+            existingFreightData.AUTO_COV2 = string.IsNullOrEmpty(autoCov2TextBox.Text.Trim()) ? null : int.Parse(autoCov2TextBox.Text.Trim());
+            existingFreightData.AUTO_COV3 = string.IsNullOrEmpty(autoCov3TextBox.Text.Trim()) ? null : int.Parse(autoCov3TextBox.Text.Trim());
+            existingFreightData.AUTO_COV4 = string.IsNullOrEmpty(autoCov4TextBox.Text.Trim()) ? null : int.Parse(autoCov4TextBox.Text.Trim());
+            existingFreightData.WORK_BEG = string.IsNullOrEmpty(compBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(compBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var compBeg) ? compBeg : null;
+            existingFreightData.WORK_END = string.IsNullOrEmpty(compEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(compEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var compEnd) ? compEnd : null;
+            existingFreightData.WORK_LET = string.IsNullOrEmpty(compLetterSentDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(compLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var compLetter) ? compLetter : null;
+            existingFreightData.WORK_COV1 = string.IsNullOrEmpty(compCov1TextBox.Text.Trim()) ? null : int.Parse(compCov1TextBox.Text.Trim());
+            existingFreightData.WORK_COV2 = string.IsNullOrEmpty(compCov2TextBox.Text.Trim()) ? null : int.Parse(compCov2TextBox.Text.Trim());
+            existingFreightData.WORK_COV3 = string.IsNullOrEmpty(compCov3TextBox.Text.Trim()) ? null : int.Parse(compCov3TextBox.Text.Trim());
+            existingFreightData.CARGO_BEG = string.IsNullOrEmpty(cargoBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(cargoBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var cargoBeg) ? cargoBeg : null;
+            existingFreightData.CARGO_END = string.IsNullOrEmpty(cargoEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(cargoEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var cargoEnd) ? cargoEnd : null;
+            existingFreightData.CARGO_LET = string.IsNullOrEmpty(cargoLetterSentDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(cargoLetterSentDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var cargoLetter) ? cargoLetter : null;
+            existingFreightData.CARG_COV1 = string.IsNullOrEmpty(cargoCov1TextBox.Text.Trim()) ? null : int.Parse(cargoCov1TextBox.Text.Trim());
+            existingFreightData.CARG_COV2 = string.IsNullOrEmpty(cargoCov2TextBox.Text.Trim()) ? null : int.Parse(cargoCov2TextBox.Text.Trim());
+            existingFreightData.CARG_COV3 = string.IsNullOrEmpty(cargoCov3TextBox.Text.Trim()) ? null : int.Parse(cargoCov3TextBox.Text.Trim());
+            existingFreightData.CARG_COV4 = string.IsNullOrEmpty(cargoCov4TextBox.Text.Trim()) ? null : int.Parse(cargoCov4TextBox.Text.Trim());
+            existingFreightData.PHY_BEG = string.IsNullOrEmpty(damageBeginDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(damageBeginDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var damageBeg) ? damageBeg : null;
+            existingFreightData.PHY_END = string.IsNullOrEmpty(damageEndDateMaskBox.Text.Trim()) ? null : DateTime.TryParse(damageEndDateMaskBox.Text.Trim(), new CultureInfo("en-US"), DateTimeStyles.None, out var damageEnd) ? damageEnd : null;
+            existingFreightData.PHY_COV1 = string.IsNullOrEmpty(damageCov1TextBox.Text.Trim()) ? null : int.Parse(damageCov1TextBox.Text.Trim());
+            existingFreightData.PHY_COV2 = string.IsNullOrEmpty(damageCov2TextBox.Text.Trim()) ? null : int.Parse(damageCov2TextBox.Text.Trim());
+            existingFreightData.CANCEL = string.IsNullOrEmpty(cancellationTextBox.Text.Trim()) ? null : int.Parse(cancellationTextBox.Text.Trim());
+
+            _freightData = existingFreightData;
         }
         private bool IsDataModified(freight freightData)
         {

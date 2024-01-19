@@ -4,8 +4,8 @@
     {
         public static string[] PurchaseOrderAdd()
         {
-            return [
-                //The first item tells the parent that it needs to load the second item, in this case the program named "addPO"
+            return
+            [
                 "program",
                 "addPO"
             ];
@@ -13,7 +13,8 @@
 
         public static string[] RemitToSupplier()
         {
-            return [
+            return
+            [
                 "program",
                 "remitToSupplier"
             ];
@@ -21,14 +22,16 @@
 
         public static string[] ShipFromSupplier()
         {
-            return [
+            return
+            [
                 "program",
                 "shipFromSupplier"
             ];
         }
         public static string[] FreightCarrier()
         {
-            return [
+            return
+            [
                 "program",
                 "freightCarrier"
             ];
@@ -36,7 +39,8 @@
 
         public static string[] BillToCustomer()
         {
-            return [
+            return
+            [
                 "program",
                 "bil_buy"
             ];
@@ -44,7 +48,8 @@
 
         public static string[] ShipToCustomer()
         {
-            return [
+            return
+            [
                 "program",
                 "buyer"
             ];

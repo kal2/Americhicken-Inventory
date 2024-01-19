@@ -234,7 +234,7 @@
             insTp1TextBox.ForeColor = Color.White;
             insTp1TextBox.Location = new Point(20, 43);
             insTp1TextBox.Margin = new Padding(0);
-            insTp1TextBox.MaxLength = 40;
+            insTp1TextBox.MaxLength = 1;
             insTp1TextBox.Name = "insTp1TextBox";
             insTp1TextBox.Size = new Size(34, 34);
             insTp1TextBox.TabIndex = 1;
@@ -593,7 +593,7 @@
             policy1TextBox.ForeColor = Color.White;
             policy1TextBox.Location = new Point(369, 43);
             policy1TextBox.Margin = new Padding(0);
-            policy1TextBox.MaxLength = 40;
+            policy1TextBox.MaxLength = 20;
             policy1TextBox.Name = "policy1TextBox";
             policy1TextBox.Size = new Size(345, 34);
             policy1TextBox.TabIndex = 2;
@@ -605,7 +605,7 @@
             genCov4TextBox.ForeColor = Color.White;
             genCov4TextBox.Location = new Point(559, 88);
             genCov4TextBox.Margin = new Padding(0);
-            genCov4TextBox.MaxLength = 40;
+            genCov4TextBox.MaxLength = 8;
             genCov4TextBox.Name = "genCov4TextBox";
             genCov4TextBox.Size = new Size(124, 34);
             genCov4TextBox.TabIndex = 6;
@@ -617,7 +617,7 @@
             genCov5TextBox.ForeColor = Color.White;
             genCov5TextBox.Location = new Point(559, 122);
             genCov5TextBox.Margin = new Padding(0);
-            genCov5TextBox.MaxLength = 40;
+            genCov5TextBox.MaxLength = 8;
             genCov5TextBox.Name = "genCov5TextBox";
             genCov5TextBox.Size = new Size(124, 34);
             genCov5TextBox.TabIndex = 7;
@@ -629,7 +629,7 @@
             genCov6TextBox.ForeColor = Color.White;
             genCov6TextBox.Location = new Point(559, 156);
             genCov6TextBox.Margin = new Padding(0);
-            genCov6TextBox.MaxLength = 40;
+            genCov6TextBox.MaxLength = 8;
             genCov6TextBox.Name = "genCov6TextBox";
             genCov6TextBox.Size = new Size(124, 34);
             genCov6TextBox.TabIndex = 8;
@@ -641,7 +641,7 @@
             genCov2TextBox.ForeColor = Color.White;
             genCov2TextBox.Location = new Point(1146, 156);
             genCov2TextBox.Margin = new Padding(0);
-            genCov2TextBox.MaxLength = 40;
+            genCov2TextBox.MaxLength = 8;
             genCov2TextBox.Name = "genCov2TextBox";
             genCov2TextBox.Size = new Size(124, 34);
             genCov2TextBox.TabIndex = 11;
@@ -653,7 +653,7 @@
             genCov1TextBox.ForeColor = Color.White;
             genCov1TextBox.Location = new Point(1146, 122);
             genCov1TextBox.Margin = new Padding(0);
-            genCov1TextBox.MaxLength = 40;
+            genCov1TextBox.MaxLength = 8;
             genCov1TextBox.Name = "genCov1TextBox";
             genCov1TextBox.Size = new Size(124, 34);
             genCov1TextBox.TabIndex = 10;
@@ -665,7 +665,7 @@
             genCov3TextBox.ForeColor = Color.White;
             genCov3TextBox.Location = new Point(1146, 88);
             genCov3TextBox.Margin = new Padding(0);
-            genCov3TextBox.MaxLength = 40;
+            genCov3TextBox.MaxLength = 8;
             genCov3TextBox.Name = "genCov3TextBox";
             genCov3TextBox.Size = new Size(124, 34);
             genCov3TextBox.TabIndex = 9;
@@ -710,7 +710,7 @@
             insTp2TextBox.ForeColor = Color.White;
             insTp2TextBox.Location = new Point(20, 198);
             insTp2TextBox.Margin = new Padding(0);
-            insTp2TextBox.MaxLength = 40;
+            insTp2TextBox.MaxLength = 1;
             insTp2TextBox.Name = "insTp2TextBox";
             insTp2TextBox.Size = new Size(34, 34);
             insTp2TextBox.TabIndex = 12;
@@ -722,7 +722,7 @@
             insTp3TextBox.ForeColor = Color.White;
             insTp3TextBox.Location = new Point(20, 317);
             insTp3TextBox.Margin = new Padding(0);
-            insTp3TextBox.MaxLength = 40;
+            insTp3TextBox.MaxLength = 1;
             insTp3TextBox.Name = "insTp3TextBox";
             insTp3TextBox.Size = new Size(34, 34);
             insTp3TextBox.TabIndex = 21;
@@ -734,7 +734,7 @@
             insTp4TextBox.ForeColor = Color.White;
             insTp4TextBox.Location = new Point(20, 402);
             insTp4TextBox.Margin = new Padding(0);
-            insTp4TextBox.MaxLength = 40;
+            insTp4TextBox.MaxLength = 1;
             insTp4TextBox.Name = "insTp4TextBox";
             insTp4TextBox.Size = new Size(34, 34);
             insTp4TextBox.TabIndex = 28;
@@ -746,7 +746,7 @@
             insTp5TextBox.ForeColor = Color.White;
             insTp5TextBox.Location = new Point(20, 521);
             insTp5TextBox.Margin = new Padding(0);
-            insTp5TextBox.MaxLength = 40;
+            insTp5TextBox.MaxLength = 1;
             insTp5TextBox.Name = "insTp5TextBox";
             insTp5TextBox.Size = new Size(34, 34);
             insTp5TextBox.TabIndex = 36;
@@ -758,7 +758,7 @@
             autoCov2TextBox.ForeColor = Color.White;
             autoCov2TextBox.Location = new Point(559, 277);
             autoCov2TextBox.Margin = new Padding(0);
-            autoCov2TextBox.MaxLength = 40;
+            autoCov2TextBox.MaxLength = 8;
             autoCov2TextBox.Name = "autoCov2TextBox";
             autoCov2TextBox.Size = new Size(124, 34);
             autoCov2TextBox.TabIndex = 18;
@@ -770,7 +770,7 @@
             autoCov1TextBox.ForeColor = Color.White;
             autoCov1TextBox.Location = new Point(559, 243);
             autoCov1TextBox.Margin = new Padding(0);
-            autoCov1TextBox.MaxLength = 40;
+            autoCov1TextBox.MaxLength = 8;
             autoCov1TextBox.Name = "autoCov1TextBox";
             autoCov1TextBox.Size = new Size(124, 34);
             autoCov1TextBox.TabIndex = 17;
@@ -782,7 +782,7 @@
             policy2TextBox.ForeColor = Color.White;
             policy2TextBox.Location = new Point(369, 198);
             policy2TextBox.Margin = new Padding(0);
-            policy2TextBox.MaxLength = 40;
+            policy2TextBox.MaxLength = 20;
             policy2TextBox.Name = "policy2TextBox";
             policy2TextBox.Size = new Size(345, 34);
             policy2TextBox.TabIndex = 13;
@@ -794,7 +794,7 @@
             workCov2TextBox.ForeColor = Color.White;
             workCov2TextBox.Location = new Point(559, 481);
             workCov2TextBox.Margin = new Padding(0);
-            workCov2TextBox.MaxLength = 40;
+            workCov2TextBox.MaxLength = 8;
             workCov2TextBox.Name = "workCov2TextBox";
             workCov2TextBox.Size = new Size(124, 34);
             workCov2TextBox.TabIndex = 34;
@@ -806,7 +806,7 @@
             workCov1TextBox.ForeColor = Color.White;
             workCov1TextBox.Location = new Point(559, 447);
             workCov1TextBox.Margin = new Padding(0);
-            workCov1TextBox.MaxLength = 40;
+            workCov1TextBox.MaxLength = 8;
             workCov1TextBox.Name = "workCov1TextBox";
             workCov1TextBox.Size = new Size(124, 34);
             workCov1TextBox.TabIndex = 33;
@@ -818,7 +818,7 @@
             policy4TextBox.ForeColor = Color.White;
             policy4TextBox.Location = new Point(369, 402);
             policy4TextBox.Margin = new Padding(0);
-            policy4TextBox.MaxLength = 40;
+            policy4TextBox.MaxLength = 20;
             policy4TextBox.Name = "policy4TextBox";
             policy4TextBox.Size = new Size(345, 34);
             policy4TextBox.TabIndex = 29;
@@ -830,7 +830,7 @@
             excessCov1TextBox.ForeColor = Color.White;
             excessCov1TextBox.Location = new Point(559, 362);
             excessCov1TextBox.Margin = new Padding(0);
-            excessCov1TextBox.MaxLength = 40;
+            excessCov1TextBox.MaxLength = 8;
             excessCov1TextBox.Name = "excessCov1TextBox";
             excessCov1TextBox.Size = new Size(124, 34);
             excessCov1TextBox.TabIndex = 26;
@@ -842,7 +842,7 @@
             policy3TextBox.ForeColor = Color.White;
             policy3TextBox.Location = new Point(369, 317);
             policy3TextBox.Margin = new Padding(0);
-            policy3TextBox.MaxLength = 40;
+            policy3TextBox.MaxLength = 20;
             policy3TextBox.Name = "policy3TextBox";
             policy3TextBox.Size = new Size(345, 34);
             policy3TextBox.TabIndex = 22;
@@ -854,7 +854,7 @@
             autoCov4TextBox.ForeColor = Color.White;
             autoCov4TextBox.Location = new Point(1146, 277);
             autoCov4TextBox.Margin = new Padding(0);
-            autoCov4TextBox.MaxLength = 40;
+            autoCov4TextBox.MaxLength = 8;
             autoCov4TextBox.Name = "autoCov4TextBox";
             autoCov4TextBox.Size = new Size(124, 34);
             autoCov4TextBox.TabIndex = 20;
@@ -866,7 +866,7 @@
             autoCov3TextBox.ForeColor = Color.White;
             autoCov3TextBox.Location = new Point(1146, 243);
             autoCov3TextBox.Margin = new Padding(0);
-            autoCov3TextBox.MaxLength = 40;
+            autoCov3TextBox.MaxLength = 8;
             autoCov3TextBox.Name = "autoCov3TextBox";
             autoCov3TextBox.Size = new Size(124, 34);
             autoCov3TextBox.TabIndex = 19;
@@ -900,7 +900,7 @@
             workCov3TextBox.ForeColor = Color.White;
             workCov3TextBox.Location = new Point(1146, 447);
             workCov3TextBox.Margin = new Padding(0);
-            workCov3TextBox.MaxLength = 40;
+            workCov3TextBox.MaxLength = 8;
             workCov3TextBox.Name = "workCov3TextBox";
             workCov3TextBox.Size = new Size(124, 34);
             workCov3TextBox.TabIndex = 35;
@@ -923,7 +923,7 @@
             excessCov2TextBox.ForeColor = Color.White;
             excessCov2TextBox.Location = new Point(1146, 362);
             excessCov2TextBox.Margin = new Padding(0);
-            excessCov2TextBox.MaxLength = 40;
+            excessCov2TextBox.MaxLength = 8;
             excessCov2TextBox.Name = "excessCov2TextBox";
             excessCov2TextBox.Size = new Size(124, 34);
             excessCov2TextBox.TabIndex = 27;
@@ -946,7 +946,7 @@
             recallCov1TextBox.ForeColor = Color.White;
             recallCov1TextBox.Location = new Point(559, 566);
             recallCov1TextBox.Margin = new Padding(0);
-            recallCov1TextBox.MaxLength = 41;
+            recallCov1TextBox.MaxLength = 8;
             recallCov1TextBox.Name = "recallCov1TextBox";
             recallCov1TextBox.Size = new Size(124, 34);
             recallCov1TextBox.TabIndex = 239;
@@ -958,7 +958,7 @@
             policy5TextBox.ForeColor = Color.White;
             policy5TextBox.Location = new Point(369, 521);
             policy5TextBox.Margin = new Padding(0);
-            policy5TextBox.MaxLength = 40;
+            policy5TextBox.MaxLength = 20;
             policy5TextBox.Name = "policy5TextBox";
             policy5TextBox.Size = new Size(345, 34);
             policy5TextBox.TabIndex = 37;
@@ -970,9 +970,9 @@
             cancellationTextBox.ForeColor = Color.White;
             cancellationTextBox.Location = new Point(559, 601);
             cancellationTextBox.Margin = new Padding(0);
-            cancellationTextBox.MaxLength = 40;
+            cancellationTextBox.MaxLength = 2;
             cancellationTextBox.Name = "cancellationTextBox";
-            cancellationTextBox.Size = new Size(124, 34);
+            cancellationTextBox.Size = new Size(51, 34);
             cancellationTextBox.TabIndex = 42;
             // 
             // label34
