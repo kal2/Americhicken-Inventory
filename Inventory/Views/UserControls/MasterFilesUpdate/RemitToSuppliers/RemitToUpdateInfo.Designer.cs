@@ -427,7 +427,6 @@
             noteTextBox.Name = "noteTextBox";
             noteTextBox.Size = new Size(915, 34);
             noteTextBox.TabIndex = 18;
-            noteTextBox.Text = "QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ";
             // 
             // label18
             // 

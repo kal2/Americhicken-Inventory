@@ -1,18 +1,6 @@
 ﻿using Inventory.Interfaces;
 using Inventory.Models;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Inventory.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
 {

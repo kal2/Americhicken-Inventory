@@ -248,11 +248,11 @@
             contactTextBox.BackColor = Color.Maroon;
             contactTextBox.Font = new Font("Segoe UI", 15F);
             contactTextBox.ForeColor = Color.White;
-            contactTextBox.Location = new Point(139, 224);
+            contactTextBox.Location = new Point(120, 225);
             contactTextBox.Margin = new Padding(0);
             contactTextBox.MaxLength = 32;
             contactTextBox.Name = "contactTextBox";
-            contactTextBox.Size = new Size(1133, 34);
+            contactTextBox.Size = new Size(1164, 34);
             contactTextBox.TabIndex = 187;
             // 
             // label7
@@ -260,7 +260,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 16F);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(18, 226);
+            label7.Location = new Point(-1, 227);
             label7.Name = "label7";
             label7.Size = new Size(114, 30);
             label7.TabIndex = 145;
