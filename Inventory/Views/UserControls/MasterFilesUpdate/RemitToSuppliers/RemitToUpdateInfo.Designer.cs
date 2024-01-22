@@ -289,7 +289,7 @@
             indemnityContractTextBox.MaxLength = 1;
             indemnityContractTextBox.Name = "indemnityContractTextBox";
             indemnityContractTextBox.Size = new Size(48, 34);
-            indemnityContractTextBox.TabIndex = 10;
+            indemnityContractTextBox.TabIndex = 11;
             // 
             // label4
             // 
@@ -312,7 +312,7 @@
             activeTextBox.MaxLength = 1;
             activeTextBox.Name = "activeTextBox";
             activeTextBox.Size = new Size(48, 34);
-            activeTextBox.TabIndex = 11;
+            activeTextBox.TabIndex = 10;
             // 
             // label5
             // 
@@ -346,7 +346,7 @@
             creditLimitTextBox.MaxLength = 7;
             creditLimitTextBox.Name = "creditLimitTextBox";
             creditLimitTextBox.Size = new Size(154, 34);
-            creditLimitTextBox.TabIndex = 13;
+            creditLimitTextBox.TabIndex = 12;
             // 
             // label7
             // 
@@ -369,7 +369,7 @@
             letterOfCreditTextBox.MaxLength = 7;
             letterOfCreditTextBox.Name = "letterOfCreditTextBox";
             letterOfCreditTextBox.Size = new Size(154, 34);
-            letterOfCreditTextBox.TabIndex = 14;
+            letterOfCreditTextBox.TabIndex = 15;
             // 
             // label13
             // 
@@ -641,7 +641,7 @@
             contractDateMaskedBox.Mask = "00/00/0000";
             contractDateMaskedBox.Name = "contractDateMaskedBox";
             contractDateMaskedBox.Size = new Size(124, 34);
-            contractDateMaskedBox.TabIndex = 12;
+            contractDateMaskedBox.TabIndex = 13;
             contractDateMaskedBox.ValidatingType = typeof(DateTime);
             // 
             // beginDateMaskedBox
@@ -653,7 +653,7 @@
             beginDateMaskedBox.Mask = "00/00/0000";
             beginDateMaskedBox.Name = "beginDateMaskedBox";
             beginDateMaskedBox.Size = new Size(124, 34);
-            beginDateMaskedBox.TabIndex = 15;
+            beginDateMaskedBox.TabIndex = 14;
             beginDateMaskedBox.ValidatingType = typeof(DateTime);
             // 
             // label15

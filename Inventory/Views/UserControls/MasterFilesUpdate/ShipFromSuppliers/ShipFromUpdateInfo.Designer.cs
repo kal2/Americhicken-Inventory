@@ -114,7 +114,7 @@
             // shipFromZipTextBox
             // 
             shipFromZipTextBox.BackColor = Color.Maroon;
-            shipFromZipTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            shipFromZipTextBox.Font = new Font("Segoe UI", 15F);
             shipFromZipTextBox.ForeColor = Color.White;
             shipFromZipTextBox.Location = new Point(208, 424);
             shipFromZipTextBox.Margin = new Padding(0);
@@ -126,7 +126,7 @@
             // shipFromStateTextBox
             // 
             shipFromStateTextBox.BackColor = Color.Maroon;
-            shipFromStateTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            shipFromStateTextBox.Font = new Font("Segoe UI", 15F);
             shipFromStateTextBox.ForeColor = Color.White;
             shipFromStateTextBox.Location = new Point(108, 424);
             shipFromStateTextBox.Margin = new Padding(0);
@@ -138,7 +138,7 @@
             // shipFromCityTextBox
             // 
             shipFromCityTextBox.BackColor = Color.Maroon;
-            shipFromCityTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            shipFromCityTextBox.Font = new Font("Segoe UI", 15F);
             shipFromCityTextBox.ForeColor = Color.White;
             shipFromCityTextBox.Location = new Point(108, 379);
             shipFromCityTextBox.Margin = new Padding(0);
@@ -150,7 +150,7 @@
             // shipFromStreetTextBox
             // 
             shipFromStreetTextBox.BackColor = Color.Maroon;
-            shipFromStreetTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            shipFromStreetTextBox.Font = new Font("Segoe UI", 15F);
             shipFromStreetTextBox.ForeColor = Color.White;
             shipFromStreetTextBox.Location = new Point(108, 337);
             shipFromStreetTextBox.Margin = new Padding(0);
@@ -184,7 +184,7 @@
             // noteTextBox
             // 
             noteTextBox.BackColor = Color.Maroon;
-            noteTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            noteTextBox.Font = new Font("Segoe UI", 15F);
             noteTextBox.ForeColor = Color.White;
             noteTextBox.Location = new Point(343, 490);
             noteTextBox.Margin = new Padding(0);
@@ -207,7 +207,7 @@
             // remitToNameTextBox
             // 
             remitToNameTextBox.BackColor = Color.Maroon;
-            remitToNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            remitToNameTextBox.Font = new Font("Segoe UI", 15F);
             remitToNameTextBox.ForeColor = Color.White;
             remitToNameTextBox.Location = new Point(734, 337);
             remitToNameTextBox.Margin = new Padding(0);
@@ -253,7 +253,7 @@
             // freightEmailTextBox
             // 
             freightEmailTextBox.BackColor = Color.Maroon;
-            freightEmailTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightEmailTextBox.Font = new Font("Segoe UI", 15F);
             freightEmailTextBox.ForeColor = Color.White;
             freightEmailTextBox.Location = new Point(710, 231);
             freightEmailTextBox.Margin = new Padding(0);
@@ -266,7 +266,7 @@
             // 
             freightPhoneMaskTextBox.BackColor = Color.Maroon;
             freightPhoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            freightPhoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            freightPhoneMaskTextBox.Font = new Font("Segoe UI", 15F);
             freightPhoneMaskTextBox.ForeColor = Color.White;
             freightPhoneMaskTextBox.Location = new Point(198, 231);
             freightPhoneMaskTextBox.Mask = "(999) 000-0000";
@@ -279,7 +279,7 @@
             // 
             contactFaxMaskTextBox.BackColor = Color.Maroon;
             contactFaxMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            contactFaxMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            contactFaxMaskTextBox.Font = new Font("Segoe UI", 15F);
             contactFaxMaskTextBox.ForeColor = Color.White;
             contactFaxMaskTextBox.Location = new Point(850, 111);
             contactFaxMaskTextBox.Mask = "(999) 000-0000";
@@ -292,7 +292,7 @@
             // 
             contactPhoneMaskTextBox.BackColor = Color.Maroon;
             contactPhoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            contactPhoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            contactPhoneMaskTextBox.Font = new Font("Segoe UI", 15F);
             contactPhoneMaskTextBox.ForeColor = Color.White;
             contactPhoneMaskTextBox.Location = new Point(850, 57);
             contactPhoneMaskTextBox.Mask = "(999) 000-0000";
@@ -304,7 +304,7 @@
             // contactNameTextBox
             // 
             contactNameTextBox.BackColor = Color.Maroon;
-            contactNameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            contactNameTextBox.Font = new Font("Segoe UI", 15F);
             contactNameTextBox.ForeColor = Color.White;
             contactNameTextBox.Location = new Point(834, 9);
             contactNameTextBox.Margin = new Padding(0);
@@ -317,7 +317,7 @@
             // 
             faxMaskTextBox.BackColor = Color.Maroon;
             faxMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            faxMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            faxMaskTextBox.Font = new Font("Segoe UI", 15F);
             faxMaskTextBox.ForeColor = Color.White;
             faxMaskTextBox.Location = new Point(198, 111);
             faxMaskTextBox.Mask = "(999) 000-0000";
@@ -330,7 +330,7 @@
             // 
             phoneMaskTextBox.BackColor = Color.Maroon;
             phoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            phoneMaskTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            phoneMaskTextBox.Font = new Font("Segoe UI", 15F);
             phoneMaskTextBox.ForeColor = Color.White;
             phoneMaskTextBox.Location = new Point(198, 57);
             phoneMaskTextBox.Mask = "(999) 000-0000";
@@ -342,7 +342,7 @@
             // supnameTextBox
             // 
             supnameTextBox.BackColor = Color.Maroon;
-            supnameTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            supnameTextBox.Font = new Font("Segoe UI", 15F);
             supnameTextBox.ForeColor = Color.White;
             supnameTextBox.Location = new Point(182, 9);
             supnameTextBox.Margin = new Padding(0);

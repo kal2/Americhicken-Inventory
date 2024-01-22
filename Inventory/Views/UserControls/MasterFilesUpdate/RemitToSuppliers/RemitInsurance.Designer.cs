@@ -230,7 +230,7 @@
             // insTp1TextBox
             // 
             insTp1TextBox.BackColor = Color.Maroon;
-            insTp1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            insTp1TextBox.Font = new Font("Segoe UI", 15F);
             insTp1TextBox.ForeColor = Color.White;
             insTp1TextBox.Location = new Point(20, 43);
             insTp1TextBox.Margin = new Padding(0);
@@ -409,7 +409,7 @@
             // genBeginDateMaskBox
             // 
             genBeginDateMaskBox.BackColor = Color.Maroon;
-            genBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            genBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             genBeginDateMaskBox.ForeColor = Color.White;
             genBeginDateMaskBox.Location = new Point(766, 43);
             genBeginDateMaskBox.Mask = "00/00/0000";
@@ -421,7 +421,7 @@
             // genEndDateMaskBox
             // 
             genEndDateMaskBox.BackColor = Color.Maroon;
-            genEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            genEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             genEndDateMaskBox.ForeColor = Color.White;
             genEndDateMaskBox.Location = new Point(968, 43);
             genEndDateMaskBox.Mask = "00/00/0000";
@@ -433,7 +433,7 @@
             // genLetterSentDateMaskBox
             // 
             genLetterSentDateMaskBox.BackColor = Color.Maroon;
-            genLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            genLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             genLetterSentDateMaskBox.ForeColor = Color.White;
             genLetterSentDateMaskBox.Location = new Point(1146, 43);
             genLetterSentDateMaskBox.Mask = "00/00/0000";
@@ -445,7 +445,7 @@
             // autoLetterSentDateMaskBox
             // 
             autoLetterSentDateMaskBox.BackColor = Color.Maroon;
-            autoLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            autoLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             autoLetterSentDateMaskBox.ForeColor = Color.White;
             autoLetterSentDateMaskBox.Location = new Point(1146, 198);
             autoLetterSentDateMaskBox.Mask = "00/00/0000";
@@ -457,7 +457,7 @@
             // autoEndDateMaskBox
             // 
             autoEndDateMaskBox.BackColor = Color.Maroon;
-            autoEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            autoEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             autoEndDateMaskBox.ForeColor = Color.White;
             autoEndDateMaskBox.Location = new Point(968, 198);
             autoEndDateMaskBox.Mask = "00/00/0000";
@@ -469,7 +469,7 @@
             // autoBeginDateMaskBox
             // 
             autoBeginDateMaskBox.BackColor = Color.Maroon;
-            autoBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            autoBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             autoBeginDateMaskBox.ForeColor = Color.White;
             autoBeginDateMaskBox.Location = new Point(766, 198);
             autoBeginDateMaskBox.Mask = "00/00/0000";
@@ -481,7 +481,7 @@
             // excessLetterSentDateMaskBox
             // 
             excessLetterSentDateMaskBox.BackColor = Color.Maroon;
-            excessLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            excessLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             excessLetterSentDateMaskBox.ForeColor = Color.White;
             excessLetterSentDateMaskBox.Location = new Point(1146, 317);
             excessLetterSentDateMaskBox.Mask = "00/00/0000";
@@ -493,7 +493,7 @@
             // excessEndDateMaskBox
             // 
             excessEndDateMaskBox.BackColor = Color.Maroon;
-            excessEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            excessEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             excessEndDateMaskBox.ForeColor = Color.White;
             excessEndDateMaskBox.Location = new Point(968, 317);
             excessEndDateMaskBox.Mask = "00/00/0000";
@@ -505,7 +505,7 @@
             // excessBeginDateMaskBox
             // 
             excessBeginDateMaskBox.BackColor = Color.Maroon;
-            excessBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            excessBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             excessBeginDateMaskBox.ForeColor = Color.White;
             excessBeginDateMaskBox.Location = new Point(766, 317);
             excessBeginDateMaskBox.Mask = "00/00/0000";
@@ -517,7 +517,7 @@
             // workLetterSentDateMaskBox
             // 
             workLetterSentDateMaskBox.BackColor = Color.Maroon;
-            workLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            workLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             workLetterSentDateMaskBox.ForeColor = Color.White;
             workLetterSentDateMaskBox.Location = new Point(1146, 402);
             workLetterSentDateMaskBox.Mask = "00/00/0000";
@@ -529,7 +529,7 @@
             // workEndDateMaskBox
             // 
             workEndDateMaskBox.BackColor = Color.Maroon;
-            workEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            workEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             workEndDateMaskBox.ForeColor = Color.White;
             workEndDateMaskBox.Location = new Point(968, 402);
             workEndDateMaskBox.Mask = "00/00/0000";
@@ -541,7 +541,7 @@
             // workBeginDateMaskBox
             // 
             workBeginDateMaskBox.BackColor = Color.Maroon;
-            workBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            workBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             workBeginDateMaskBox.ForeColor = Color.White;
             workBeginDateMaskBox.Location = new Point(766, 402);
             workBeginDateMaskBox.Mask = "00/00/0000";
@@ -553,7 +553,7 @@
             // recallLetterSentDateMaskBox
             // 
             recallLetterSentDateMaskBox.BackColor = Color.Maroon;
-            recallLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            recallLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             recallLetterSentDateMaskBox.ForeColor = Color.White;
             recallLetterSentDateMaskBox.Location = new Point(1146, 521);
             recallLetterSentDateMaskBox.Mask = "00/00/0000";
@@ -565,7 +565,7 @@
             // recallEndDateMaskBox
             // 
             recallEndDateMaskBox.BackColor = Color.Maroon;
-            recallEndDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            recallEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             recallEndDateMaskBox.ForeColor = Color.White;
             recallEndDateMaskBox.Location = new Point(968, 521);
             recallEndDateMaskBox.Mask = "00/00/0000";
@@ -577,7 +577,7 @@
             // recallBeginDateMaskBox
             // 
             recallBeginDateMaskBox.BackColor = Color.Maroon;
-            recallBeginDateMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            recallBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             recallBeginDateMaskBox.ForeColor = Color.White;
             recallBeginDateMaskBox.Location = new Point(766, 521);
             recallBeginDateMaskBox.Mask = "00/00/0000";
@@ -589,7 +589,7 @@
             // policy1TextBox
             // 
             policy1TextBox.BackColor = Color.Maroon;
-            policy1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            policy1TextBox.Font = new Font("Segoe UI", 15F);
             policy1TextBox.ForeColor = Color.White;
             policy1TextBox.Location = new Point(369, 43);
             policy1TextBox.Margin = new Padding(0);
@@ -601,7 +601,7 @@
             // genCov4TextBox
             // 
             genCov4TextBox.BackColor = Color.Maroon;
-            genCov4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            genCov4TextBox.Font = new Font("Segoe UI", 15F);
             genCov4TextBox.ForeColor = Color.White;
             genCov4TextBox.Location = new Point(559, 88);
             genCov4TextBox.Margin = new Padding(0);
@@ -613,7 +613,7 @@
             // genCov5TextBox
             // 
             genCov5TextBox.BackColor = Color.Maroon;
-            genCov5TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            genCov5TextBox.Font = new Font("Segoe UI", 15F);
             genCov5TextBox.ForeColor = Color.White;
             genCov5TextBox.Location = new Point(559, 122);
             genCov5TextBox.Margin = new Padding(0);
@@ -625,7 +625,7 @@
             // genCov6TextBox
             // 
             genCov6TextBox.BackColor = Color.Maroon;
-            genCov6TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            genCov6TextBox.Font = new Font("Segoe UI", 15F);
             genCov6TextBox.ForeColor = Color.White;
             genCov6TextBox.Location = new Point(559, 156);
             genCov6TextBox.Margin = new Padding(0);
@@ -637,7 +637,7 @@
             // genCov2TextBox
             // 
             genCov2TextBox.BackColor = Color.Maroon;
-            genCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            genCov2TextBox.Font = new Font("Segoe UI", 15F);
             genCov2TextBox.ForeColor = Color.White;
             genCov2TextBox.Location = new Point(1146, 156);
             genCov2TextBox.Margin = new Padding(0);
@@ -649,7 +649,7 @@
             // genCov1TextBox
             // 
             genCov1TextBox.BackColor = Color.Maroon;
-            genCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            genCov1TextBox.Font = new Font("Segoe UI", 15F);
             genCov1TextBox.ForeColor = Color.White;
             genCov1TextBox.Location = new Point(1146, 122);
             genCov1TextBox.Margin = new Padding(0);
@@ -661,7 +661,7 @@
             // genCov3TextBox
             // 
             genCov3TextBox.BackColor = Color.Maroon;
-            genCov3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            genCov3TextBox.Font = new Font("Segoe UI", 15F);
             genCov3TextBox.ForeColor = Color.White;
             genCov3TextBox.Location = new Point(1146, 88);
             genCov3TextBox.Margin = new Padding(0);
@@ -706,7 +706,7 @@
             // insTp2TextBox
             // 
             insTp2TextBox.BackColor = Color.Maroon;
-            insTp2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            insTp2TextBox.Font = new Font("Segoe UI", 15F);
             insTp2TextBox.ForeColor = Color.White;
             insTp2TextBox.Location = new Point(20, 198);
             insTp2TextBox.Margin = new Padding(0);
@@ -718,7 +718,7 @@
             // insTp3TextBox
             // 
             insTp3TextBox.BackColor = Color.Maroon;
-            insTp3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            insTp3TextBox.Font = new Font("Segoe UI", 15F);
             insTp3TextBox.ForeColor = Color.White;
             insTp3TextBox.Location = new Point(20, 317);
             insTp3TextBox.Margin = new Padding(0);
@@ -730,7 +730,7 @@
             // insTp4TextBox
             // 
             insTp4TextBox.BackColor = Color.Maroon;
-            insTp4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            insTp4TextBox.Font = new Font("Segoe UI", 15F);
             insTp4TextBox.ForeColor = Color.White;
             insTp4TextBox.Location = new Point(20, 402);
             insTp4TextBox.Margin = new Padding(0);
@@ -742,7 +742,7 @@
             // insTp5TextBox
             // 
             insTp5TextBox.BackColor = Color.Maroon;
-            insTp5TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            insTp5TextBox.Font = new Font("Segoe UI", 15F);
             insTp5TextBox.ForeColor = Color.White;
             insTp5TextBox.Location = new Point(20, 521);
             insTp5TextBox.Margin = new Padding(0);
@@ -754,7 +754,7 @@
             // autoCov2TextBox
             // 
             autoCov2TextBox.BackColor = Color.Maroon;
-            autoCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            autoCov2TextBox.Font = new Font("Segoe UI", 15F);
             autoCov2TextBox.ForeColor = Color.White;
             autoCov2TextBox.Location = new Point(559, 277);
             autoCov2TextBox.Margin = new Padding(0);
@@ -766,7 +766,7 @@
             // autoCov1TextBox
             // 
             autoCov1TextBox.BackColor = Color.Maroon;
-            autoCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            autoCov1TextBox.Font = new Font("Segoe UI", 15F);
             autoCov1TextBox.ForeColor = Color.White;
             autoCov1TextBox.Location = new Point(559, 243);
             autoCov1TextBox.Margin = new Padding(0);
@@ -778,7 +778,7 @@
             // policy2TextBox
             // 
             policy2TextBox.BackColor = Color.Maroon;
-            policy2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            policy2TextBox.Font = new Font("Segoe UI", 15F);
             policy2TextBox.ForeColor = Color.White;
             policy2TextBox.Location = new Point(369, 198);
             policy2TextBox.Margin = new Padding(0);
@@ -790,7 +790,7 @@
             // workCov2TextBox
             // 
             workCov2TextBox.BackColor = Color.Maroon;
-            workCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            workCov2TextBox.Font = new Font("Segoe UI", 15F);
             workCov2TextBox.ForeColor = Color.White;
             workCov2TextBox.Location = new Point(559, 481);
             workCov2TextBox.Margin = new Padding(0);
@@ -802,7 +802,7 @@
             // workCov1TextBox
             // 
             workCov1TextBox.BackColor = Color.Maroon;
-            workCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            workCov1TextBox.Font = new Font("Segoe UI", 15F);
             workCov1TextBox.ForeColor = Color.White;
             workCov1TextBox.Location = new Point(559, 447);
             workCov1TextBox.Margin = new Padding(0);
@@ -814,7 +814,7 @@
             // policy4TextBox
             // 
             policy4TextBox.BackColor = Color.Maroon;
-            policy4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            policy4TextBox.Font = new Font("Segoe UI", 15F);
             policy4TextBox.ForeColor = Color.White;
             policy4TextBox.Location = new Point(369, 402);
             policy4TextBox.Margin = new Padding(0);
@@ -826,7 +826,7 @@
             // excessCov1TextBox
             // 
             excessCov1TextBox.BackColor = Color.Maroon;
-            excessCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            excessCov1TextBox.Font = new Font("Segoe UI", 15F);
             excessCov1TextBox.ForeColor = Color.White;
             excessCov1TextBox.Location = new Point(559, 362);
             excessCov1TextBox.Margin = new Padding(0);
@@ -838,7 +838,7 @@
             // policy3TextBox
             // 
             policy3TextBox.BackColor = Color.Maroon;
-            policy3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            policy3TextBox.Font = new Font("Segoe UI", 15F);
             policy3TextBox.ForeColor = Color.White;
             policy3TextBox.Location = new Point(369, 317);
             policy3TextBox.Margin = new Padding(0);
@@ -850,7 +850,7 @@
             // autoCov4TextBox
             // 
             autoCov4TextBox.BackColor = Color.Maroon;
-            autoCov4TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            autoCov4TextBox.Font = new Font("Segoe UI", 15F);
             autoCov4TextBox.ForeColor = Color.White;
             autoCov4TextBox.Location = new Point(1146, 277);
             autoCov4TextBox.Margin = new Padding(0);
@@ -862,7 +862,7 @@
             // autoCov3TextBox
             // 
             autoCov3TextBox.BackColor = Color.Maroon;
-            autoCov3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            autoCov3TextBox.Font = new Font("Segoe UI", 15F);
             autoCov3TextBox.ForeColor = Color.White;
             autoCov3TextBox.Location = new Point(1146, 243);
             autoCov3TextBox.Margin = new Padding(0);
@@ -896,7 +896,7 @@
             // workCov3TextBox
             // 
             workCov3TextBox.BackColor = Color.Maroon;
-            workCov3TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            workCov3TextBox.Font = new Font("Segoe UI", 15F);
             workCov3TextBox.ForeColor = Color.White;
             workCov3TextBox.Location = new Point(1146, 447);
             workCov3TextBox.Margin = new Padding(0);
@@ -919,7 +919,7 @@
             // excessCov2TextBox
             // 
             excessCov2TextBox.BackColor = Color.Maroon;
-            excessCov2TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            excessCov2TextBox.Font = new Font("Segoe UI", 15F);
             excessCov2TextBox.ForeColor = Color.White;
             excessCov2TextBox.Location = new Point(1146, 362);
             excessCov2TextBox.Margin = new Padding(0);
@@ -942,19 +942,19 @@
             // recallCov1TextBox
             // 
             recallCov1TextBox.BackColor = Color.Maroon;
-            recallCov1TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            recallCov1TextBox.Font = new Font("Segoe UI", 15F);
             recallCov1TextBox.ForeColor = Color.White;
             recallCov1TextBox.Location = new Point(559, 566);
             recallCov1TextBox.Margin = new Padding(0);
             recallCov1TextBox.MaxLength = 8;
             recallCov1TextBox.Name = "recallCov1TextBox";
             recallCov1TextBox.Size = new Size(124, 34);
-            recallCov1TextBox.TabIndex = 239;
+            recallCov1TextBox.TabIndex = 42;
             // 
             // policy5TextBox
             // 
             policy5TextBox.BackColor = Color.Maroon;
-            policy5TextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            policy5TextBox.Font = new Font("Segoe UI", 15F);
             policy5TextBox.ForeColor = Color.White;
             policy5TextBox.Location = new Point(369, 521);
             policy5TextBox.Margin = new Padding(0);
@@ -966,14 +966,14 @@
             // cancellationTextBox
             // 
             cancellationTextBox.BackColor = Color.Maroon;
-            cancellationTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            cancellationTextBox.Font = new Font("Segoe UI", 15F);
             cancellationTextBox.ForeColor = Color.White;
             cancellationTextBox.Location = new Point(559, 601);
             cancellationTextBox.Margin = new Padding(0);
             cancellationTextBox.MaxLength = 2;
             cancellationTextBox.Name = "cancellationTextBox";
             cancellationTextBox.Size = new Size(51, 34);
-            cancellationTextBox.TabIndex = 42;
+            cancellationTextBox.TabIndex = 43;
             // 
             // label34
             // 

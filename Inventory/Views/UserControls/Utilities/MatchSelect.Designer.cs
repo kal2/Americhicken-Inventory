@@ -96,7 +96,7 @@
             // selectedItemNumber
             // 
             selectedItemNumber.BackColor = Color.Maroon;
-            selectedItemNumber.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            selectedItemNumber.Font = new Font("Segoe UI", 18F);
             selectedItemNumber.ForeColor = Color.White;
             selectedItemNumber.Location = new Point(282, 555);
             selectedItemNumber.Name = "selectedItemNumber";

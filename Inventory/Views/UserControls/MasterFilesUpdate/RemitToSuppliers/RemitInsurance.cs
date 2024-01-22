@@ -18,7 +18,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _activeControlHelper = activeControlManager;
             _mainWindow = mainWindow;
             dbContext = new AmerichickenContext();
-            insTp1TextBox.Focus();
+            this.Load += (s, e) => insTp1TextBox.Focus();
         }
         public void SetProgramLabels()
         {

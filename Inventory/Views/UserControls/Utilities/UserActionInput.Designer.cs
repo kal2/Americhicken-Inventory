@@ -46,7 +46,7 @@
             // actionInput
             // 
             actionInput.BackColor = Color.Maroon;
-            actionInput.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            actionInput.Font = new Font("Segoe UI", 15F);
             actionInput.ForeColor = Color.White;
             actionInput.Location = new Point(114, 23);
             actionInput.Margin = new Padding(0);
