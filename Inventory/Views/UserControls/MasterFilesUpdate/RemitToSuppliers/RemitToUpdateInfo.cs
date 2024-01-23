@@ -41,7 +41,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel    5. Save/Update Insurance");
             _mainWindow.SetTextBoxLabel("ACTION:");
         }
-        public void GetRemitToData(rem_sup remitToObject)
+        public void DisplayRemitToData(rem_sup remitToObject)
         {
             _remitData = remitToObject;
             RemitNameTextBox.Text = StringServices.TrimOrNull(_remitData.name);
@@ -200,7 +200,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     UpdateRemitData(_remitData);
                     _mainWindow.DisposeControl(this);
                     RemitInsurance remitInsuranceInstance = new (_mainWindow, _activeControlManager);
-                    remitInsuranceInstance.GetRemitInsuranceData(_remitData);
+                    remitInsuranceInstance.DisplayRemitInsuranceData(_remitData);
                     _activeControlManager.SetActiveControl(remitInsuranceInstance);
 
                     break;

@@ -66,7 +66,7 @@ namespace Inventory.Services
 
             void HandleSelectedRemitToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
-                remitToUpdateInfo.GetRemitToData((rem_sup)e!.SelectedResult);
+                remitToUpdateInfo.DisplayRemitToData((rem_sup)e!.SelectedResult);
                 _activeControlManager.SetActiveControl(remitToUpdateInfo);
             }
         }
