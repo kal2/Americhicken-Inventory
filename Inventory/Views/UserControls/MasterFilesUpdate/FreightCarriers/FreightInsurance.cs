@@ -46,7 +46,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                     //Cancel
                     _mainWindow.DisposeControl(this);
                     FreightCarriers freightCarriers = new FreightCarriers(_mainWindow, _activeControlManager);
-                    freightCarriers.GetFreightCarrierData(_freightData);
+                    freightCarriers.DisplayFreightCarrierData(_freightData);
                     _activeControlManager.SetActiveControl(freightCarriers);
                     break;
                 case "4":

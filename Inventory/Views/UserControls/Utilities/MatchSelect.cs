@@ -1,5 +1,4 @@
 ﻿using Inventory.Models;
-using Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers;
 using Inventory.Services;
 using Inventory.Interfaces;
 
@@ -246,7 +245,7 @@ namespace Inventory.Views.UserControls
             {
                 if (resultSelectionListView.SelectedItems.Count > 0)
                 {
-                    object selectedObject = resultSelectionListView.SelectedItems[0].Tag;
+                    object? selectedObject = resultSelectionListView.SelectedItems[0].Tag;
 
                     SelectedSearchResult?.Invoke(this, new SelectedSearchResultEventArgs(selectedObject));
                 }

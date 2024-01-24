@@ -1,13 +1,7 @@
-﻿using Inventory.Interfaces;
-using Inventory.Views.UserControls;
+﻿using Inventory.Views.UserControls;
 using Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers;
 using Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers;
 using Inventory.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo;
 
 namespace Inventory.Services
@@ -32,6 +26,10 @@ namespace Inventory.Services
 
                 case "bil_buy":
                     LoadBillToCustomer();
+                    break;
+
+                case "buyer":
+                    LoadShipToCustomer();
                     break;
 
                 default:
@@ -131,15 +129,48 @@ namespace Inventory.Services
 
             void HandleSelectedFreightCarrierSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
-                if (e.SelectedResult == null)
+                if (e.SelectedResult != null)
                 {
-                    _activeControlManager.SetActiveControl(freightCarrierInstance);
+                    freightCarrierInstance.DisplayFreightCarrierData((freight)e!.SelectedResult);
+                }
+                _activeControlManager.SetActiveControl(freightCarrierInstance);
+            }
+        }
+        //Ship To Customer
+        public void LoadShipToCustomer()
+        {
+            ShipToCustomer shipToCustomer = new (_mainWindow, _activeControlManager);
+            DbSearch dbSearch = new (_mainWindow, _activeControlManager);
+            dbSearch.SetTable("buyer");
+            dbSearch.SearchCompleted += (f3, f4) => HandleBuyerSearchCompleted(f3!, f4);
+            _activeControlManager.SetActiveControl(dbSearch);
+
+            void HandleBuyerSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
+            {
+                if (e.SearchResults == null)
+                {
+                    _activeControlManager.SetActiveControl(shipToCustomer);
                 }
                 else
                 {
-                    freightCarrierInstance.GetFreightCarrierData((freight)e!.SelectedResult);
-                    _activeControlManager.SetActiveControl(freightCarrierInstance);
+                    MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
+                    matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedBuyerSearchResult(f!, f2);
+                    matchSelectInstance.SetMatchSelectLabel("Buyer");
+                    matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
+                    if (e.SearchResults.Count > 1)
+                    {
+                        _activeControlManager.SetActiveControl(matchSelectInstance);
+                    }
                 }
+            }
+
+            void HandleSelectedBuyerSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
+            {
+                if (e.SelectedResult != null)
+                {
+                shipToCustomer.DisplayShipToCustomerData((buyer)e!.SelectedResult);
+                }
+                _activeControlManager.SetActiveControl(shipToCustomer);
             }
         }
         //Bill To Customer

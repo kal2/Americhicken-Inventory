@@ -19,7 +19,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             _activeControlManager = activeControlManager; 
             dbContext = new AmerichickenContext();
 
-            //Focus on first textbox when form loads
             this.Load += (s, e) => freightNameTextBox.Focus();
         }
         public void SetProgramLabels()
@@ -33,15 +32,12 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             switch (userInput)
             {
                 case "1":
-                    //SaveFreightCarrier
                     UpdateFreightCarrierData(_freightData);
                     break;
                 case "2":
-                    //EditFreightCarrier
                     freightNameTextBox.Focus();
                     break;
                 case "3":
-                    //DeleteFreightCarrier
                     DialogResult dialogResult = MessageBox.Show("You are about to delete a freight carrier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (dialogResult == DialogResult.Yes)
                         {
@@ -57,12 +53,10 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                         }
                     break;
                 case "4":
-                    //MainMenu
                     _mainWindow.DisposeControl(this);
                     _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
                     break;
                 case "5":
-                    //FeightInsurance
                     UpdateFreightCarrierData(_freightData);
                     FreightInsurance freightInsurance = new(_mainWindow, _activeControlManager);
                     freightInsurance.GetFreightInsuranceData(_freightData);
@@ -74,10 +68,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                     break;
             }
         }
-        public void GetFreightCarrierData(freight freightData)
+        public void DisplayFreightCarrierData(freight freightData)
         {
             _freightData = freightData;
-            //Display Freight Carrier Data
             freightNameTextBox.Text = StringServices.TrimOrNull(_freightData.NAME);
             freightStreetTextBox.Text = StringServices.TrimOrNull(_freightData.STREET);
             freightCityTextBox.Text = StringServices.TrimOrNull(_freightData.CITY);
@@ -211,9 +204,10 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
         }
         private void DeleteFreight(freight freightData)
         {
-            if (freightData != null)
+            var existingFreightData = dbContext.freight.Find(freightData.PK_freight);
+            if (existingFreightData != null)
             {
-                dbContext.freight.Remove(freightData);
+                dbContext.freight.Remove(existingFreightData);
                 dbContext.SaveChanges();
             }
             else

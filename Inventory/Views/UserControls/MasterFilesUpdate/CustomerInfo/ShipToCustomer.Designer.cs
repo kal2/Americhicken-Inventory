@@ -404,7 +404,6 @@
             receivingTuesdayTextBox.Name = "receivingTuesdayTextBox";
             receivingTuesdayTextBox.Size = new Size(248, 34);
             receivingTuesdayTextBox.TabIndex = 349;
-            receivingTuesdayTextBox.TextChanged += textBox4_TextChanged;
             // 
             // label14
             // 

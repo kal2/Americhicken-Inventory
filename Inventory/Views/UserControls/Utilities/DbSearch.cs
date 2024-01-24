@@ -1,8 +1,6 @@
 ﻿using Inventory.Models;
-using Inventory.Views.UserControls;
 using Inventory.Services;
 using Microsoft.EntityFrameworkCore;
-using System.DirectoryServices;
 using Inventory.Interfaces;
 
 namespace Inventory.Views.UserControls
@@ -41,7 +39,7 @@ namespace Inventory.Views.UserControls
             {
                 MessageBox.Show("ERROR: No db table selected to search, please contact developer");
             }
-            else if (tableName != "supplier" && tableName != "remitTo" && tableName != "freight")
+            else if (tableName != "supplier" && tableName != "remitTo" && tableName != "freight" && tableName != "bil_buy" && tableName != "buyer")
             {
                 MessageBox.Show("ERROR: Invalid db table name, please contact developer");
             }
@@ -90,6 +88,14 @@ namespace Inventory.Views.UserControls
 
                     case "freight":
                         searchResults = context.freight.Where(s => EF.Functions.Like(s.NAME, searchInput + "%")).ToList().Cast<object>().ToList();
+                        break;
+                    
+                    case "bil_buy":
+                        searchResults = context.bil_buy.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
+                        break;
+
+                    case "buyer":
+                        searchResults = context.buyer.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
                         break;
 
                     default:

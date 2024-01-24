@@ -1,6 +1,4 @@
 ﻿using Inventory.UI.Data;
-using System;
-using System.Collections.Generic;
 
 namespace Inventory.UI.Menu
 {
