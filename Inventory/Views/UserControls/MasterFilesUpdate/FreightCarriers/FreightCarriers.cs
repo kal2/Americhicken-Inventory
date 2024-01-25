@@ -38,30 +38,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                     freightNameTextBox.Focus();
                     break;
                 case "3":
-                    DialogResult dialogResult = MessageBox.Show("You are about to delete a freight carrier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            DeleteFreight(_freightData!);
-                        }
-                        else if (dialogResult == DialogResult.No)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            MessageBox.Show("ERROR: Something went wrong deleting the freight carrier, please contact developer");
-                        }
+                    DeleteFreight(_freightData!);
                     break;
                 case "4":
                     _mainWindow.DisposeControl(this);
                     _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
                     break;
                 case "5":
-                    UpdateFreightCarrierData(_freightData);
-                    FreightInsurance freightInsurance = new(_mainWindow, _activeControlManager);
-                    freightInsurance.GetFreightInsuranceData(_freightData);
-                    _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(freightInsurance);
+                    SaveAndUpdateInsurance();
                     break;
                 default:
                     MessageBox.Show("ERROR: Invalid input, please contact developer");
@@ -94,20 +78,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             bInsuranceTextBox.Text = StringServices.TrimOrNull(_freightData.INS_CO2);
             cInsuranceTextBox.Text = StringServices.TrimOrNull(_freightData.INS_CO3);
             dInsuranceTextBox.Text = StringServices.TrimOrNull(_freightData.INS_CO4);
-        }
-        private void UpdateFreightCarrierData(freight freightData)
-        {
-            if (freightData != null)
-            {
-                if (IsDataModified(freightData))
-                {
-                    UpdateExistingFreight(freightData);
-                }
-            }
-            else
-            {
-                CreateNewFreight();
-            }
         }
 
         private void UpdateExistingFreight(freight freightData)
@@ -202,17 +172,52 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                    freightData.INS_CO3 != cInsuranceTextBox.Text ||
                    freightData.INS_CO4 != dInsuranceTextBox.Text;
         }
-        private void DeleteFreight(freight freightData)
+        private void UpdateFreightCarrierData(freight freightData)
         {
-            var existingFreightData = dbContext.freight.Find(freightData.PK_freight);
-            if (existingFreightData != null)
+            if (freightData != null)
             {
-                dbContext.freight.Remove(existingFreightData);
-                dbContext.SaveChanges();
+                if (IsDataModified(freightData))
+                {
+                    UpdateExistingFreight(freightData);
+                }
             }
             else
             {
-                MessageBox.Show("ERROR: Freight Carrier not found, please contact developer");
+                CreateNewFreight();
+            }
+        }
+
+        private void SaveAndUpdateInsurance()
+        {
+            UpdateFreightCarrierData(_freightData);
+            FreightInsurance freightInsurance = new(_mainWindow, _activeControlManager);
+            freightInsurance.GetFreightInsuranceData(_freightData);
+            _mainWindow.DisposeControl(this);
+            _activeControlManager.SetActiveControl(freightInsurance);
+        }
+        private void DeleteFreight(freight freightData)
+        {
+            DialogResult dialogResult = MessageBox.Show("You are about to delete a freight carrier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                var existingFreightData = dbContext.freight.Find(freightData.PK_freight);
+                if (existingFreightData != null)
+                {
+                    dbContext.freight.Remove(existingFreightData);
+                    dbContext.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Freight Carrier not found, please contact developer");
+                }
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Something went wrong deleting the freight carrier, please contact developer");
             }
         }
     }

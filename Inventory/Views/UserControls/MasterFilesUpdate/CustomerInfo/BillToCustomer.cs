@@ -43,10 +43,13 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             switch (userInput)
             {
                 case "1":
+                    UpdateBillToData(_bil_Buy);
                     break;
                 case "2":
+                    customerNameTextBox.Focus();
                     break;
                 case "3":
+
                     break;
                 case "4":
                     break;
@@ -59,6 +62,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         }
         public void DisplayBillToData(bil_buy bil_Buy)
         {
+            _bil_Buy = bil_Buy;
             //TODO: Get data from passed object and populate fields
             customerNameTextBox.Text = bil_Buy.name;
             regNameTextBox.Text = bil_Buy.reg_name;
@@ -92,13 +96,130 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             //ToDO: Figure out where the credit date is, going to use my best guess for the time being
             credDateMaskedTextBox.Text = bil_Buy.date_rqst.ToString();
         }
-        private void IsDataModified(bil_buy bil_Buy)
+        private bool IsDataModified(bil_buy bil_Buy)
         {
             //TODO: Check if data has been modified
+            return bil_Buy == null || !customerNameTextBox.Text.Equals(bil_Buy.name) ||
+                   !regNameTextBox.Text.Equals(bil_Buy.reg_name) ||
+                   !phoneMaskedTextBox.Text.Equals(bil_Buy.area_code + bil_Buy.phone) ||
+                   !faxMaskedTextBox.Text.Equals(bil_Buy.fax) ||
+                   !activeTextBox.Text.Equals(bil_Buy.active) ||
+                   !internationalTextBox.Text.Equals(bil_Buy.internat) ||
+                   !streetTextBox.Text.Equals(bil_Buy.street) ||
+                   !cityTextBox.Text.Equals(bil_Buy.city) ||
+                   !stateTextBox.Text.Equals(bil_Buy.state) ||
+                   !zipTextBox.Text.Equals(bil_Buy.zip) ||
+                   !zip4TextBox.Text.Equals(bil_Buy.zip4) ||
+                   !iLine1TextBox.Text.Equals(bil_Buy.iline1) ||
+                   !iLine2TextBox.Text.Equals(bil_Buy.iline2) ||
+                   !iLine3TextBox.Text.Equals(bil_Buy.iline3) ||
+                   !incentiveSalesTextBox.Text.Equals(bil_Buy.incen_cd) ||
+                   !creditLimitTextBox.Text.Equals(bil_Buy.cred_lim.ToString()) ||
+                   !dateReviewedMaskBox.Text.Equals(bil_Buy.date_rvwd.ToString()) ||
+                   !credRqsTextBox.Text.Equals(bil_Buy.cred_rqst) ||
+                   !federatedCustomerTextBox.Text.Equals(bil_Buy.fed_cust) ||
+                   !pOMessageTextBox.Text.Equals(bil_Buy.po_warn) ||
+                   !noteTextBox.Text.Equals(bil_Buy.note) ||
+                   !note2TextBox.Text.Equals(bil_Buy.note2) ||
+                   !creditAppTextBox.Text.Equals(bil_Buy.credit_ap) ||
+                   !creditAppDateMaskedTextBox.Text.Equals(bil_Buy.credap_dt.ToString()) ||
+                   !financialDateMaskedTextBox.Text.Equals(bil_Buy.fin_prov) ||
+                   !financialDateMaskedTextBox.Text.Equals(bil_Buy.date_fin.ToString()) ||
+                   !dAndBReportTextBox.Text.Equals(bil_Buy.db_rpt) ||
+                   !credDateMaskedTextBox.Text.Equals(bil_Buy.db_dt.ToString()) ||
+                   !letterOfCredTextBox.Text.Equals(bil_Buy.let_crd.ToString()) ||
+                   !credDateMaskedTextBox.Text.Equals(bil_Buy.date_rqst.ToString());
         }
-        private void UpdateBillTo(bil_buy bil_Buy)
+        private void SetBillToProperties(bil_buy existingBillTo)
+        {
+            _bil_Buy = existingBillTo;
+            existingBillTo.name = customerNameTextBox.Text;
+            existingBillTo.reg_name = regNameTextBox.Text;
+            existingBillTo.area_code = phoneMaskedTextBox.Text.Substring(0, 3);
+            existingBillTo.phone = phoneMaskedTextBox.Text.Substring(3, 7);
+            existingBillTo.fax = faxMaskedTextBox.Text;
+            existingBillTo.active = activeTextBox.Text;
+            existingBillTo.internat = internationalTextBox.Text;
+            existingBillTo.street = streetTextBox.Text;
+            existingBillTo.city = cityTextBox.Text;
+            existingBillTo.state = stateTextBox.Text;
+            existingBillTo.zip = zipTextBox.Text;
+            existingBillTo.zip4 = zip4TextBox.Text;
+            existingBillTo.iline1 = iLine1TextBox.Text;
+            existingBillTo.iline2 = iLine2TextBox.Text;
+            existingBillTo.iline3 = iLine3TextBox.Text;
+            existingBillTo.incen_cd = incentiveSalesTextBox.Text;
+            existingBillTo.cred_lim = Convert.ToDecimal(creditLimitTextBox.Text);
+            existingBillTo.date_rvwd = Convert.ToDateTime(dateReviewedMaskBox.Text);
+            existingBillTo.cred_rqst = credRqsTextBox.Text;
+            existingBillTo.fed_cust = federatedCustomerTextBox.Text;
+            existingBillTo.po_warn = pOMessageTextBox.Text;
+            existingBillTo.note = noteTextBox.Text;
+            existingBillTo.note2 = note2TextBox.Text;
+            existingBillTo.credit_ap = creditAppTextBox.Text;
+            existingBillTo.credap_dt = Convert.ToDateTime(creditAppDateMaskedTextBox.Text);
+            existingBillTo.fin_prov = financialDateMaskedTextBox.Text;
+            existingBillTo.date_fin = Convert.ToDateTime(financialDateMaskedTextBox.Text);
+            existingBillTo.db_rpt = dAndBReportTextBox.Text;
+            existingBillTo.db_dt = Convert.ToDateTime(credDateMaskedTextBox.Text);
+            existingBillTo.let_crd = Convert.ToDecimal(letterOfCredTextBox.Text);
+            existingBillTo.date_rqst = Convert.ToDateTime(credDateMaskedTextBox.Text);
+        }
+        private void UpdateExistingBillToData(bil_buy bil_Buy)
+        {
+            var existingBillTo = dbContext.bil_buy.Find(bil_Buy.PK_bil_buy);
+            if (existingBillTo != null)
+            {
+                SetBillToProperties(existingBillTo);
+
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Freight Carrier not found, please contact developer");
+            }
+            
+        }
+
+        private void CreateNewBillTo()
+        {
+            DialogResult dialogResult = MessageBox.Show("You are about to add a new freight carrier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                bil_buy bil_Buy = new();
+                SetBillToProperties(bil_Buy);
+                _bil_Buy = bil_Buy;
+                dbContext.bil_buy.Add(bil_Buy);
+                dbContext.SaveChanges();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Something went wrong, please contact developer");
+            }
+        }
+        private void UpdateBillToData(bil_buy bil_Buy)
         {
             //ToDo: Update data in database
+            if (bil_Buy != null)
+            {
+                if (IsDataModified(bil_Buy))
+                {
+                    UpdateExistingBillToData(bil_Buy);
+                }
+            }
+            else
+            {
+                CreateNewBillTo();
+            }
+        }
+
+        private void DeleteBillToData(bil_buy bil_Buy)
+        {
+
         }
     }
 }
