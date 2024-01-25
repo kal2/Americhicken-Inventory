@@ -206,7 +206,7 @@
             // activeTextBox
             // 
             activeTextBox.BackColor = Color.Maroon;
-            activeTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            activeTextBox.Font = new Font("Segoe UI", 15F);
             activeTextBox.ForeColor = Color.White;
             activeTextBox.Location = new Point(1242, 7);
             activeTextBox.Margin = new Padding(0);
@@ -229,7 +229,7 @@
             // internationalTextBox
             // 
             internationalTextBox.BackColor = Color.Maroon;
-            internationalTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            internationalTextBox.Font = new Font("Segoe UI", 15F);
             internationalTextBox.ForeColor = Color.White;
             internationalTextBox.Location = new Point(1242, 41);
             internationalTextBox.Margin = new Padding(0);
@@ -571,7 +571,7 @@
             // dateReviewedMaskBox
             // 
             dateReviewedMaskBox.BackColor = Color.Maroon;
-            dateReviewedMaskBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            dateReviewedMaskBox.Font = new Font("Segoe UI", 15F);
             dateReviewedMaskBox.ForeColor = Color.White;
             dateReviewedMaskBox.Location = new Point(189, 389);
             dateReviewedMaskBox.Mask = "00/00/0000";
@@ -617,7 +617,7 @@
             // federatedCustomerTextBox
             // 
             federatedCustomerTextBox.BackColor = Color.Maroon;
-            federatedCustomerTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            federatedCustomerTextBox.Font = new Font("Segoe UI", 15F);
             federatedCustomerTextBox.ForeColor = Color.White;
             federatedCustomerTextBox.Location = new Point(316, 490);
             federatedCustomerTextBox.Margin = new Padding(0);
@@ -732,7 +732,7 @@
             // creditAppTextBox
             // 
             creditAppTextBox.BackColor = Color.Maroon;
-            creditAppTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            creditAppTextBox.Font = new Font("Segoe UI", 15F);
             creditAppTextBox.ForeColor = Color.White;
             creditAppTextBox.Location = new Point(957, 279);
             creditAppTextBox.Margin = new Padding(0);
@@ -755,7 +755,7 @@
             // creditAppDateMaskedTextBox
             // 
             creditAppDateMaskedTextBox.BackColor = Color.Maroon;
-            creditAppDateMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            creditAppDateMaskedTextBox.Font = new Font("Segoe UI", 15F);
             creditAppDateMaskedTextBox.ForeColor = Color.White;
             creditAppDateMaskedTextBox.Location = new Point(1036, 279);
             creditAppDateMaskedTextBox.Mask = "00/00/0000";
@@ -767,7 +767,7 @@
             // financialDateMaskedTextBox
             // 
             financialDateMaskedTextBox.BackColor = Color.Maroon;
-            financialDateMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            financialDateMaskedTextBox.Font = new Font("Segoe UI", 15F);
             financialDateMaskedTextBox.ForeColor = Color.White;
             financialDateMaskedTextBox.Location = new Point(1036, 313);
             financialDateMaskedTextBox.Mask = "00/00/0000";
@@ -779,7 +779,7 @@
             // financialStatmentTextBox
             // 
             financialStatmentTextBox.BackColor = Color.Maroon;
-            financialStatmentTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            financialStatmentTextBox.Font = new Font("Segoe UI", 15F);
             financialStatmentTextBox.ForeColor = Color.White;
             financialStatmentTextBox.Location = new Point(957, 313);
             financialStatmentTextBox.Margin = new Padding(0);
@@ -803,7 +803,7 @@
             // maskedTextBox3
             // 
             maskedTextBox3.BackColor = Color.Maroon;
-            maskedTextBox3.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            maskedTextBox3.Font = new Font("Segoe UI", 15F);
             maskedTextBox3.ForeColor = Color.White;
             maskedTextBox3.Location = new Point(1036, 346);
             maskedTextBox3.Mask = "00/00/0000";
@@ -815,7 +815,7 @@
             // dAndBReportTextBox
             // 
             dAndBReportTextBox.BackColor = Color.Maroon;
-            dAndBReportTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            dAndBReportTextBox.Font = new Font("Segoe UI", 15F);
             dAndBReportTextBox.ForeColor = Color.White;
             dAndBReportTextBox.Location = new Point(957, 346);
             dAndBReportTextBox.Margin = new Padding(0);
@@ -839,7 +839,7 @@
             // credDateMaskedTextBox
             // 
             credDateMaskedTextBox.BackColor = Color.Maroon;
-            credDateMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            credDateMaskedTextBox.Font = new Font("Segoe UI", 15F);
             credDateMaskedTextBox.ForeColor = Color.White;
             credDateMaskedTextBox.Location = new Point(1036, 379);
             credDateMaskedTextBox.Mask = "00/00/0000";
@@ -851,7 +851,7 @@
             // letterOfCredTextBox
             // 
             letterOfCredTextBox.BackColor = Color.Maroon;
-            letterOfCredTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            letterOfCredTextBox.Font = new Font("Segoe UI", 15F);
             letterOfCredTextBox.ForeColor = Color.White;
             letterOfCredTextBox.Location = new Point(957, 379);
             letterOfCredTextBox.Margin = new Padding(0);

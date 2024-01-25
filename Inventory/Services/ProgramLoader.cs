@@ -200,7 +200,7 @@ namespace Inventory.Services
 
             void HandleSelectedBillToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
-                billToCustomerInstance.GetBillToData((bil_buy)e!.SelectedResult);
+                billToCustomerInstance.DisplayBillToData((bil_buy)e!.SelectedResult);
                 _activeControlManager.SetActiveControl(billToCustomerInstance);
             }
         }
