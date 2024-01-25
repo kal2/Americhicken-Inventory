@@ -57,9 +57,40 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                     break;
             }
         }
-        public void GetBillToData(bil_buy bil_Buy)
+        public void DisplayBillToData(bil_buy bil_Buy)
         {
-            //TODO: Get data from database and populate fields
+            //TODO: Get data from passed object and populate fields
+            customerNameTextBox.Text = bil_Buy.name;
+            regNameTextBox.Text = bil_Buy.reg_name;
+            phoneMaskedTextBox.Text = bil_Buy.area_code + bil_Buy.phone;
+            faxMaskedTextBox.Text = bil_Buy.fax;
+            activeTextBox.Text = bil_Buy.active;
+            internationalTextBox.Text = bil_Buy.internat;
+            streetTextBox.Text = bil_Buy.street;
+            cityTextBox.Text = bil_Buy.city;
+            stateTextBox.Text = bil_Buy.state;
+            zipTextBox.Text = bil_Buy.zip;
+            zip4TextBox.Text = bil_Buy.zip4;
+            iLine1TextBox.Text = bil_Buy.iline1;
+            iLine2TextBox.Text = bil_Buy.iline2;
+            iLine3TextBox.Text = bil_Buy.iline3;
+            incentiveSalesTextBox.Text = bil_Buy.incen_cd;
+            creditLimitTextBox.Text = bil_Buy.cred_lim.ToString();
+            dateReviewedMaskBox.Text = bil_Buy.date_rvwd.ToString();
+            credRqsTextBox.Text = bil_Buy.cred_rqst;
+            federatedCustomerTextBox.Text = bil_Buy.fed_cust;
+            pOMessageTextBox.Text = bil_Buy.po_warn;
+            noteTextBox.Text = bil_Buy.note;
+            note2TextBox.Text = bil_Buy.note2;
+            creditAppTextBox.Text = bil_Buy.credit_ap;
+            creditAppDateMaskedTextBox.Text = bil_Buy.credap_dt.ToString();
+            financialDateMaskedTextBox.Text = bil_Buy.fin_prov;
+            financialDateMaskedTextBox.Text = bil_Buy.date_fin.ToString();
+            dAndBReportTextBox.Text = bil_Buy.db_rpt;
+            credDateMaskedTextBox.Text = bil_Buy.db_dt.ToString();
+            letterOfCredTextBox.Text = bil_Buy.let_crd.ToString();
+            //ToDO: Figure out where the credit date is, going to use my best guess for the time being
+            credDateMaskedTextBox.Text = bil_Buy.date_rqst.ToString();
         }
         private void IsDataModified(bil_buy bil_Buy)
         {

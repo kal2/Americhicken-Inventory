@@ -85,14 +85,14 @@
             creditAppTextBox = new TextBox();
             label29 = new Label();
             creditAppDateMaskedTextBox = new MaskedTextBox();
-            financialStatementTextBox = new MaskedTextBox();
+            financialDateMaskedTextBox = new MaskedTextBox();
             financialStatmentTextBox = new TextBox();
             label30 = new Label();
             maskedTextBox3 = new MaskedTextBox();
             dAndBReportTextBox = new TextBox();
             label31 = new Label();
-            dAndBDateMaskedTextBox = new MaskedTextBox();
-            textBox9 = new TextBox();
+            credDateMaskedTextBox = new MaskedTextBox();
+            letterOfCredTextBox = new TextBox();
             label32 = new Label();
             label33 = new Label();
             label34 = new Label();
@@ -764,17 +764,17 @@
             creditAppDateMaskedTextBox.TabIndex = 345;
             creditAppDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
-            // financialStatementTextBox
+            // financialDateMaskedTextBox
             // 
-            financialStatementTextBox.BackColor = Color.Maroon;
-            financialStatementTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            financialStatementTextBox.ForeColor = Color.White;
-            financialStatementTextBox.Location = new Point(1036, 313);
-            financialStatementTextBox.Mask = "00/00/0000";
-            financialStatementTextBox.Name = "financialStatementTextBox";
-            financialStatementTextBox.Size = new Size(124, 34);
-            financialStatementTextBox.TabIndex = 348;
-            financialStatementTextBox.ValidatingType = typeof(DateTime);
+            financialDateMaskedTextBox.BackColor = Color.Maroon;
+            financialDateMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            financialDateMaskedTextBox.ForeColor = Color.White;
+            financialDateMaskedTextBox.Location = new Point(1036, 313);
+            financialDateMaskedTextBox.Mask = "00/00/0000";
+            financialDateMaskedTextBox.Name = "financialDateMaskedTextBox";
+            financialDateMaskedTextBox.Size = new Size(124, 34);
+            financialDateMaskedTextBox.TabIndex = 348;
+            financialDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
             // financialStatmentTextBox
             // 
@@ -836,29 +836,29 @@
             label31.TabIndex = 349;
             label31.Text = "D&&B REPORT:";
             // 
-            // dAndBDateMaskedTextBox
+            // credDateMaskedTextBox
             // 
-            dAndBDateMaskedTextBox.BackColor = Color.Maroon;
-            dAndBDateMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            dAndBDateMaskedTextBox.ForeColor = Color.White;
-            dAndBDateMaskedTextBox.Location = new Point(1036, 379);
-            dAndBDateMaskedTextBox.Mask = "00/00/0000";
-            dAndBDateMaskedTextBox.Name = "dAndBDateMaskedTextBox";
-            dAndBDateMaskedTextBox.Size = new Size(124, 34);
-            dAndBDateMaskedTextBox.TabIndex = 354;
-            dAndBDateMaskedTextBox.ValidatingType = typeof(DateTime);
+            credDateMaskedTextBox.BackColor = Color.Maroon;
+            credDateMaskedTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            credDateMaskedTextBox.ForeColor = Color.White;
+            credDateMaskedTextBox.Location = new Point(1036, 379);
+            credDateMaskedTextBox.Mask = "00/00/0000";
+            credDateMaskedTextBox.Name = "credDateMaskedTextBox";
+            credDateMaskedTextBox.Size = new Size(124, 34);
+            credDateMaskedTextBox.TabIndex = 354;
+            credDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
-            // textBox9
+            // letterOfCredTextBox
             // 
-            textBox9.BackColor = Color.Maroon;
-            textBox9.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            textBox9.ForeColor = Color.White;
-            textBox9.Location = new Point(957, 379);
-            textBox9.Margin = new Padding(0);
-            textBox9.MaxLength = 1;
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(41, 34);
-            textBox9.TabIndex = 353;
+            letterOfCredTextBox.BackColor = Color.Maroon;
+            letterOfCredTextBox.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            letterOfCredTextBox.ForeColor = Color.White;
+            letterOfCredTextBox.Location = new Point(957, 379);
+            letterOfCredTextBox.Margin = new Padding(0);
+            letterOfCredTextBox.MaxLength = 1;
+            letterOfCredTextBox.Name = "letterOfCredTextBox";
+            letterOfCredTextBox.Size = new Size(41, 34);
+            letterOfCredTextBox.TabIndex = 353;
             // 
             // label32
             // 
@@ -1045,13 +1045,13 @@
             Controls.Add(label34);
             Controls.Add(label35);
             Controls.Add(label33);
-            Controls.Add(dAndBDateMaskedTextBox);
-            Controls.Add(textBox9);
+            Controls.Add(credDateMaskedTextBox);
+            Controls.Add(letterOfCredTextBox);
             Controls.Add(label32);
             Controls.Add(maskedTextBox3);
             Controls.Add(dAndBReportTextBox);
             Controls.Add(label31);
-            Controls.Add(financialStatementTextBox);
+            Controls.Add(financialDateMaskedTextBox);
             Controls.Add(financialStatmentTextBox);
             Controls.Add(label30);
             Controls.Add(creditAppDateMaskedTextBox);
@@ -1176,14 +1176,14 @@
         private TextBox creditAppTextBox;
         private Label label29;
         private MaskedTextBox creditAppDateMaskedTextBox;
-        private MaskedTextBox financialStatementTextBox;
+        private MaskedTextBox financialDateMaskedTextBox;
         private TextBox financialStatmentTextBox;
         private Label label30;
         private MaskedTextBox maskedTextBox3;
         private TextBox dAndBReportTextBox;
         private Label label31;
-        private MaskedTextBox dAndBDateMaskedTextBox;
-        private TextBox textBox9;
+        private MaskedTextBox credDateMaskedTextBox;
+        private TextBox letterOfCredTextBox;
         private Label label32;
         private Label label33;
         private Label label34;
