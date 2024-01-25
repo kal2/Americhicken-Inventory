@@ -55,10 +55,6 @@
             label11 = new Label();
             label18 = new Label();
             label19 = new Label();
-            label12 = new Label();
-            label13 = new Label();
-            actionInput = new TextBox();
-            label14 = new Label();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
             textBox5 = new TextBox();
@@ -76,7 +72,7 @@
             // pOLabel
             // 
             pOLabel.AutoSize = true;
-            pOLabel.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            pOLabel.Font = new Font("Segoe UI", 16F);
             pOLabel.Location = new Point(2, 3);
             pOLabel.Margin = new Padding(1, 0, 1, 0);
             pOLabel.Name = "pOLabel";
@@ -86,39 +82,45 @@
             // 
             // salesPersonNumber
             // 
-            salesPersonNumber.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            salesPersonNumber.BackColor = Color.Maroon;
+            salesPersonNumber.Font = new Font("Segoe UI", 15F);
+            salesPersonNumber.ForeColor = Color.White;
             salesPersonNumber.Location = new Point(69, 0);
             salesPersonNumber.Margin = new Padding(0);
             salesPersonNumber.MaxLength = 2;
             salesPersonNumber.Name = "salesPersonNumber";
-            salesPersonNumber.Size = new Size(40, 36);
+            salesPersonNumber.Size = new Size(40, 34);
             salesPersonNumber.TabIndex = 1;
             // 
             // purchaseOrderNumber
             // 
-            purchaseOrderNumber.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            purchaseOrderNumber.BackColor = Color.Maroon;
+            purchaseOrderNumber.Font = new Font("Segoe UI", 15F);
+            purchaseOrderNumber.ForeColor = Color.White;
             purchaseOrderNumber.Location = new Point(136, 0);
             purchaseOrderNumber.Margin = new Padding(0);
             purchaseOrderNumber.MaxLength = 5;
             purchaseOrderNumber.Name = "purchaseOrderNumber";
-            purchaseOrderNumber.Size = new Size(104, 36);
+            purchaseOrderNumber.Size = new Size(104, 34);
             purchaseOrderNumber.TabIndex = 2;
             // 
             // orderRevisionNumber
             // 
-            orderRevisionNumber.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            orderRevisionNumber.BackColor = Color.Maroon;
+            orderRevisionNumber.Font = new Font("Segoe UI", 15F);
+            orderRevisionNumber.ForeColor = Color.White;
             orderRevisionNumber.Location = new Point(262, 0);
             orderRevisionNumber.Margin = new Padding(0);
             orderRevisionNumber.MaxLength = 2;
             orderRevisionNumber.Name = "orderRevisionNumber";
-            orderRevisionNumber.Size = new Size(44, 36);
+            orderRevisionNumber.Size = new Size(44, 34);
             orderRevisionNumber.TabIndex = 3;
             // 
             // pOHyphen1
             // 
             pOHyphen1.AutoSize = true;
             pOHyphen1.BackColor = Color.Transparent;
-            pOHyphen1.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            pOHyphen1.Font = new Font("Segoe UI", 16F);
             pOHyphen1.Location = new Point(114, 3);
             pOHyphen1.Margin = new Padding(0);
             pOHyphen1.Name = "pOHyphen1";
@@ -130,7 +132,7 @@
             // 
             pOHyphenLabel2.AutoSize = true;
             pOHyphenLabel2.BackColor = Color.Transparent;
-            pOHyphenLabel2.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            pOHyphenLabel2.Font = new Font("Segoe UI", 16F);
             pOHyphenLabel2.Location = new Point(240, 3);
             pOHyphenLabel2.Margin = new Padding(0);
             pOHyphenLabel2.Name = "pOHyphenLabel2";
@@ -141,7 +143,7 @@
             // brokerLabel
             // 
             brokerLabel.AutoSize = true;
-            brokerLabel.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            brokerLabel.Font = new Font("Segoe UI", 16F);
             brokerLabel.Location = new Point(855, 3);
             brokerLabel.Name = "brokerLabel";
             brokerLabel.Size = new Size(104, 30);
@@ -151,7 +153,7 @@
             // brokerNameLabel
             // 
             brokerNameLabel.AutoSize = true;
-            brokerNameLabel.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            brokerNameLabel.Font = new Font("Segoe UI", 16F);
             brokerNameLabel.Location = new Point(965, 3);
             brokerNameLabel.Name = "brokerNameLabel";
             brokerNameLabel.Size = new Size(127, 30);
@@ -161,7 +163,8 @@
             // holdCheckBox
             // 
             holdCheckBox.AutoSize = true;
-            holdCheckBox.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            holdCheckBox.Font = new Font("Segoe UI", 16F);
+            holdCheckBox.ForeColor = Color.White;
             holdCheckBox.Location = new Point(1192, 3);
             holdCheckBox.Name = "holdCheckBox";
             holdCheckBox.Size = new Size(89, 34);
@@ -173,7 +176,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 16F);
             label1.Location = new Point(2, 61);
             label1.Margin = new Padding(1, 0, 1, 0);
             label1.Name = "label1";
@@ -184,7 +187,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 16F);
             label2.Location = new Point(192, 61);
             label2.Margin = new Padding(1, 0, 1, 0);
             label2.Name = "label2";
@@ -195,7 +198,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 16F);
             label3.Location = new Point(367, 61);
             label3.Margin = new Padding(1, 0, 1, 0);
             label3.Name = "label3";
@@ -206,7 +209,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Font = new Font("Segoe UI", 16F);
             label4.Location = new Point(681, 61);
             label4.Margin = new Padding(1, 0, 1, 0);
             label4.Name = "label4";
@@ -217,7 +220,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 16F);
             label5.Location = new Point(929, 61);
             label5.Margin = new Padding(1, 0, 1, 0);
             label5.Name = "label5";
@@ -227,58 +230,68 @@
             // 
             // orderDateInput
             // 
-            orderDateInput.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            orderDateInput.BackColor = Color.Maroon;
+            orderDateInput.Font = new Font("Segoe UI", 15F);
+            orderDateInput.ForeColor = Color.White;
             orderDateInput.Location = new Point(10, 91);
             orderDateInput.Margin = new Padding(0);
             orderDateInput.MaxLength = 5;
             orderDateInput.Name = "orderDateInput";
-            orderDateInput.Size = new Size(127, 36);
+            orderDateInput.Size = new Size(127, 34);
             orderDateInput.TabIndex = 14;
             // 
             // shipDateInput
             // 
-            shipDateInput.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            shipDateInput.BackColor = Color.Maroon;
+            shipDateInput.Font = new Font("Segoe UI", 15F);
+            shipDateInput.ForeColor = Color.White;
             shipDateInput.Location = new Point(192, 91);
             shipDateInput.Margin = new Padding(0);
             shipDateInput.MaxLength = 5;
             shipDateInput.Name = "shipDateInput";
-            shipDateInput.Size = new Size(127, 36);
+            shipDateInput.Size = new Size(127, 34);
             shipDateInput.TabIndex = 15;
             // 
             // delReqdInput
             // 
-            delReqdInput.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            delReqdInput.BackColor = Color.Maroon;
+            delReqdInput.Font = new Font("Segoe UI", 15F);
+            delReqdInput.ForeColor = Color.White;
             delReqdInput.Location = new Point(367, 91);
             delReqdInput.Margin = new Padding(0);
             delReqdInput.MaxLength = 5;
             delReqdInput.Name = "delReqdInput";
-            delReqdInput.Size = new Size(127, 36);
+            delReqdInput.Size = new Size(127, 34);
             delReqdInput.TabIndex = 16;
             // 
             // textBox1
             // 
-            textBox1.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox1.BackColor = Color.Maroon;
+            textBox1.Font = new Font("Segoe UI", 15F);
+            textBox1.ForeColor = Color.White;
             textBox1.Location = new Point(681, 91);
             textBox1.Margin = new Padding(0);
             textBox1.MaxLength = 5;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(197, 36);
+            textBox1.Size = new Size(197, 34);
             textBox1.TabIndex = 17;
             // 
             // textBox2
             // 
-            textBox2.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox2.BackColor = Color.Maroon;
+            textBox2.Font = new Font("Segoe UI", 15F);
+            textBox2.ForeColor = Color.White;
             textBox2.Location = new Point(929, 91);
             textBox2.Margin = new Padding(0);
             textBox2.MaxLength = 5;
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(350, 36);
+            textBox2.Size = new Size(350, 34);
             textBox2.TabIndex = 18;
             // 
             // label6
             // 
-            label6.BackColor = Color.Black;
-            label6.BorderStyle = BorderStyle.FixedSingle;
+            label6.BackColor = Color.White;
+            label6.BorderStyle = BorderStyle.Fixed3D;
             label6.Location = new Point(11, 143);
             label6.Name = "label6";
             label6.Size = new Size(1270, 2);
@@ -287,7 +300,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI", 16F);
             label7.Location = new Point(517, 164);
             label7.Margin = new Padding(1, 0, 1, 0);
             label7.Name = "label7";
@@ -298,7 +311,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Font = new Font("Segoe UI", 16F);
             label8.Location = new Point(11, 194);
             label8.Margin = new Padding(1, 0, 1, 0);
             label8.Name = "label8";
@@ -309,7 +322,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Font = new Font("Segoe UI", 16F);
             label9.Location = new Point(681, 194);
             label9.Margin = new Padding(1, 0, 1, 0);
             label9.Name = "label9";
@@ -320,8 +333,8 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.Location = new Point(506, 354);
+            label10.Font = new Font("Segoe UI", 16F);
+            label10.Location = new Point(506, 412);
             label10.Margin = new Padding(1, 0, 1, 0);
             label10.Name = "label10";
             label10.Size = new Size(278, 30);
@@ -330,9 +343,9 @@
             // 
             // label11
             // 
-            label11.BackColor = Color.Black;
-            label11.BorderStyle = BorderStyle.FixedSingle;
-            label11.Location = new Point(11, 343);
+            label11.BackColor = Color.White;
+            label11.BorderStyle = BorderStyle.Fixed3D;
+            label11.Location = new Point(11, 401);
             label11.Name = "label11";
             label11.Size = new Size(1270, 2);
             label11.TabIndex = 29;
@@ -340,8 +353,8 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label18.Location = new Point(681, 395);
+            label18.Font = new Font("Segoe UI", 16F);
+            label18.Location = new Point(681, 442);
             label18.Margin = new Padding(1, 0, 1, 0);
             label18.Name = "label18";
             label18.Size = new Size(91, 30);
@@ -351,169 +364,151 @@
             // label19
             // 
             label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label19.Location = new Point(11, 395);
+            label19.Font = new Font("Segoe UI", 16F);
+            label19.Location = new Point(11, 442);
             label19.Margin = new Padding(1, 0, 1, 0);
             label19.Name = "label19";
             label19.Size = new Size(98, 30);
             label19.TabIndex = 31;
             label19.Text = "SHIP TO:";
             // 
-            // label12
-            // 
-            label12.BackColor = Color.Black;
-            label12.BorderStyle = BorderStyle.FixedSingle;
-            label12.Location = new Point(11, 537);
-            label12.Name = "label12";
-            label12.Size = new Size(1270, 2);
-            label12.TabIndex = 39;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label13.Location = new Point(11, 559);
-            label13.Margin = new Padding(1, 0, 1, 0);
-            label13.Name = "label13";
-            label13.Size = new Size(97, 30);
-            label13.TabIndex = 40;
-            label13.Text = "ACTION:";
-            // 
-            // actionInput
-            // 
-            actionInput.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            actionInput.Location = new Point(109, 556);
-            actionInput.Margin = new Padding(0);
-            actionInput.MaxLength = 2;
-            actionInput.Name = "actionInput";
-            actionInput.Size = new Size(40, 36);
-            actionInput.TabIndex = 31;
-            actionInput.KeyDown += actionInput_KeyDown;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label14.Location = new Point(192, 559);
-            label14.Margin = new Padding(1, 0, 1, 0);
-            label14.Name = "label14";
-            label14.Size = new Size(554, 30);
-            label14.TabIndex = 42;
-            label14.Text = "1. Item Page    2. Edit    3. Cancel Add    4. Update Notes";
-            // 
             // textBox3
             // 
-            textBox3.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox3.BackColor = Color.Maroon;
+            textBox3.Font = new Font("Segoe UI", 15F);
+            textBox3.ForeColor = Color.White;
             textBox3.Location = new Point(10, 229);
             textBox3.Margin = new Padding(0, 1, 0, 1);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(484, 36);
+            textBox3.Size = new Size(484, 34);
             textBox3.TabIndex = 19;
             // 
             // textBox4
             // 
-            textBox4.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox4.Location = new Point(10, 263);
+            textBox4.BackColor = Color.Maroon;
+            textBox4.Font = new Font("Segoe UI", 15F);
+            textBox4.ForeColor = Color.White;
+            textBox4.Location = new Point(10, 267);
             textBox4.Margin = new Padding(0, 1, 0, 1);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(484, 36);
+            textBox4.Size = new Size(484, 34);
             textBox4.TabIndex = 20;
             // 
             // textBox5
             // 
-            textBox5.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox5.Location = new Point(10, 295);
+            textBox5.BackColor = Color.Maroon;
+            textBox5.Font = new Font("Segoe UI", 15F);
+            textBox5.ForeColor = Color.White;
+            textBox5.Location = new Point(10, 305);
             textBox5.Margin = new Padding(0, 1, 0, 1);
             textBox5.Name = "textBox5";
-            textBox5.Size = new Size(484, 36);
+            textBox5.Size = new Size(484, 34);
             textBox5.TabIndex = 21;
             // 
             // textBox6
             // 
-            textBox6.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox6.Location = new Point(681, 295);
+            textBox6.BackColor = Color.Maroon;
+            textBox6.Font = new Font("Segoe UI", 15F);
+            textBox6.ForeColor = Color.White;
+            textBox6.Location = new Point(681, 310);
             textBox6.Margin = new Padding(0, 1, 0, 1);
             textBox6.Name = "textBox6";
-            textBox6.Size = new Size(484, 36);
+            textBox6.Size = new Size(484, 34);
             textBox6.TabIndex = 24;
             // 
             // textBox7
             // 
-            textBox7.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox7.Location = new Point(681, 263);
+            textBox7.BackColor = Color.Maroon;
+            textBox7.Font = new Font("Segoe UI", 15F);
+            textBox7.ForeColor = Color.White;
+            textBox7.Location = new Point(681, 272);
             textBox7.Margin = new Padding(0, 1, 0, 1);
             textBox7.Name = "textBox7";
-            textBox7.Size = new Size(484, 36);
+            textBox7.Size = new Size(484, 34);
             textBox7.TabIndex = 23;
             // 
             // textBox8
             // 
-            textBox8.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox8.BackColor = Color.Maroon;
+            textBox8.Font = new Font("Segoe UI", 15F);
+            textBox8.ForeColor = Color.White;
             textBox8.Location = new Point(681, 234);
             textBox8.Margin = new Padding(0, 1, 0, 1);
             textBox8.Name = "textBox8";
-            textBox8.Size = new Size(484, 36);
+            textBox8.Size = new Size(484, 34);
             textBox8.TabIndex = 22;
             // 
             // textBox9
             // 
-            textBox9.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox9.Location = new Point(10, 492);
+            textBox9.BackColor = Color.Maroon;
+            textBox9.Font = new Font("Segoe UI", 15F);
+            textBox9.ForeColor = Color.White;
+            textBox9.Location = new Point(10, 549);
             textBox9.Margin = new Padding(0, 1, 0, 1);
             textBox9.Name = "textBox9";
-            textBox9.Size = new Size(484, 36);
+            textBox9.Size = new Size(484, 34);
             textBox9.TabIndex = 27;
             // 
             // textBox10
             // 
-            textBox10.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox10.Location = new Point(10, 460);
+            textBox10.BackColor = Color.Maroon;
+            textBox10.Font = new Font("Segoe UI", 15F);
+            textBox10.ForeColor = Color.White;
+            textBox10.Location = new Point(10, 511);
             textBox10.Margin = new Padding(0, 1, 0, 1);
             textBox10.Name = "textBox10";
-            textBox10.Size = new Size(484, 36);
+            textBox10.Size = new Size(484, 34);
             textBox10.TabIndex = 26;
             // 
             // textBox11
             // 
-            textBox11.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox11.Location = new Point(10, 426);
+            textBox11.BackColor = Color.Maroon;
+            textBox11.Font = new Font("Segoe UI", 15F);
+            textBox11.ForeColor = Color.White;
+            textBox11.Location = new Point(10, 473);
             textBox11.Margin = new Padding(0, 1, 0, 1);
             textBox11.Name = "textBox11";
-            textBox11.Size = new Size(484, 36);
+            textBox11.Size = new Size(484, 34);
             textBox11.TabIndex = 25;
             // 
             // textBox12
             // 
-            textBox12.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox12.Location = new Point(681, 492);
+            textBox12.BackColor = Color.Maroon;
+            textBox12.Font = new Font("Segoe UI", 15F);
+            textBox12.ForeColor = Color.White;
+            textBox12.Location = new Point(681, 549);
             textBox12.Margin = new Padding(0, 1, 0, 1);
             textBox12.Name = "textBox12";
-            textBox12.Size = new Size(484, 36);
+            textBox12.Size = new Size(484, 34);
             textBox12.TabIndex = 30;
             // 
             // textBox13
             // 
-            textBox13.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox13.Location = new Point(681, 460);
+            textBox13.BackColor = Color.Maroon;
+            textBox13.Font = new Font("Segoe UI", 15F);
+            textBox13.ForeColor = Color.White;
+            textBox13.Location = new Point(681, 511);
             textBox13.Margin = new Padding(0, 1, 0, 1);
             textBox13.Name = "textBox13";
-            textBox13.Size = new Size(484, 36);
+            textBox13.Size = new Size(484, 34);
             textBox13.TabIndex = 29;
             // 
             // textBox14
             // 
-            textBox14.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox14.Location = new Point(681, 426);
+            textBox14.BackColor = Color.Maroon;
+            textBox14.Font = new Font("Segoe UI", 15F);
+            textBox14.ForeColor = Color.White;
+            textBox14.Location = new Point(681, 473);
             textBox14.Margin = new Padding(0, 1, 0, 1);
             textBox14.Name = "textBox14";
-            textBox14.Size = new Size(484, 36);
+            textBox14.Size = new Size(484, 34);
             textBox14.TabIndex = 28;
             // 
             // AddPO
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Blue;
+            BackColor = Color.FromArgb(1, 0, 128);
             Controls.Add(textBox12);
             Controls.Add(textBox13);
             Controls.Add(textBox14);
@@ -526,10 +521,6 @@
             Controls.Add(textBox5);
             Controls.Add(textBox4);
             Controls.Add(textBox3);
-            Controls.Add(label14);
-            Controls.Add(actionInput);
-            Controls.Add(label13);
-            Controls.Add(label12);
             Controls.Add(label18);
             Controls.Add(label19);
             Controls.Add(label10);
@@ -557,7 +548,7 @@
             Controls.Add(purchaseOrderNumber);
             Controls.Add(salesPersonNumber);
             Controls.Add(pOLabel);
-            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 9F);
             ForeColor = Color.White;
             Name = "AddPO";
             Size = new Size(1290, 600);
@@ -594,10 +585,6 @@
         private Label label11;
         private Label label18;
         private Label label19;
-        private Label label12;
-        private Label label13;
-        private TextBox actionInput;
-        private Label label14;
         private TextBox textBox3;
         private TextBox textBox4;
         private TextBox textBox5;
