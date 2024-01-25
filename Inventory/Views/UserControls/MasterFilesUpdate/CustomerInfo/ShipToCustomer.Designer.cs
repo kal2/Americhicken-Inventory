@@ -99,7 +99,7 @@
             customerShipToTextBox.MaxLength = 40;
             customerShipToTextBox.Name = "customerShipToTextBox";
             customerShipToTextBox.Size = new Size(625, 34);
-            customerShipToTextBox.TabIndex = 137;
+            customerShipToTextBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -122,7 +122,7 @@
             phoneNumberMaskedTextBox.Mask = "(999) 000-0000";
             phoneNumberMaskedTextBox.Name = "phoneNumberMaskedTextBox";
             phoneNumberMaskedTextBox.Size = new Size(174, 34);
-            phoneNumberMaskedTextBox.TabIndex = 146;
+            phoneNumberMaskedTextBox.TabIndex = 2;
             phoneNumberMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label6
@@ -146,7 +146,7 @@
             faxNumberMaskedTextBox.Mask = "(999) 000-0000";
             faxNumberMaskedTextBox.Name = "faxNumberMaskedTextBox";
             faxNumberMaskedTextBox.Size = new Size(174, 34);
-            faxNumberMaskedTextBox.TabIndex = 148;
+            faxNumberMaskedTextBox.TabIndex = 3;
             faxNumberMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label2
@@ -170,7 +170,7 @@
             contactName1TextBox.MaxLength = 42;
             contactName1TextBox.Name = "contactName1TextBox";
             contactName1TextBox.Size = new Size(625, 34);
-            contactName1TextBox.TabIndex = 151;
+            contactName1TextBox.TabIndex = 4;
             // 
             // label3
             // 
@@ -193,7 +193,7 @@
             contactName2TextBox.MaxLength = 42;
             contactName2TextBox.Name = "contactName2TextBox";
             contactName2TextBox.Size = new Size(625, 34);
-            contactName2TextBox.TabIndex = 153;
+            contactName2TextBox.TabIndex = 5;
             // 
             // label4
             // 
@@ -216,7 +216,7 @@
             contactPhoneMaskedTextBox.Mask = "(999) 000-0000";
             contactPhoneMaskedTextBox.Name = "contactPhoneMaskedTextBox";
             contactPhoneMaskedTextBox.Size = new Size(174, 34);
-            contactPhoneMaskedTextBox.TabIndex = 154;
+            contactPhoneMaskedTextBox.TabIndex = 6;
             contactPhoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label5
@@ -240,7 +240,7 @@
             freightContactPhoneMaskedTextBox.Mask = "(999) 000-0000";
             freightContactPhoneMaskedTextBox.Name = "freightContactPhoneMaskedTextBox";
             freightContactPhoneMaskedTextBox.Size = new Size(174, 34);
-            freightContactPhoneMaskedTextBox.TabIndex = 156;
+            freightContactPhoneMaskedTextBox.TabIndex = 8;
             freightContactPhoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label7
@@ -264,7 +264,7 @@
             contactFaxMaskedTextBox.Mask = "(999) 000-0000";
             contactFaxMaskedTextBox.Name = "contactFaxMaskedTextBox";
             contactFaxMaskedTextBox.Size = new Size(174, 34);
-            contactFaxMaskedTextBox.TabIndex = 158;
+            contactFaxMaskedTextBox.TabIndex = 7;
             contactFaxMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label8
@@ -288,7 +288,7 @@
             deliveryPhoneMaskedTextBox.Mask = "(999) 000-0000";
             deliveryPhoneMaskedTextBox.Name = "deliveryPhoneMaskedTextBox";
             deliveryPhoneMaskedTextBox.Size = new Size(174, 34);
-            deliveryPhoneMaskedTextBox.TabIndex = 160;
+            deliveryPhoneMaskedTextBox.TabIndex = 9;
             deliveryPhoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label9
@@ -312,7 +312,7 @@
             deliveryEmailTextBox.MaxLength = 28;
             deliveryEmailTextBox.Name = "deliveryEmailTextBox";
             deliveryEmailTextBox.Size = new Size(449, 34);
-            deliveryEmailTextBox.TabIndex = 163;
+            deliveryEmailTextBox.TabIndex = 10;
             // 
             // label10
             // 
@@ -335,7 +335,7 @@
             receivingHoursTextBox.MaxLength = 12;
             receivingHoursTextBox.Name = "receivingHoursTextBox";
             receivingHoursTextBox.Size = new Size(207, 34);
-            receivingHoursTextBox.TabIndex = 343;
+            receivingHoursTextBox.TabIndex = 11;
             // 
             // label26
             // 
@@ -358,7 +358,7 @@
             receivingMondayTextBox.MaxLength = 15;
             receivingMondayTextBox.Name = "receivingMondayTextBox";
             receivingMondayTextBox.Size = new Size(248, 34);
-            receivingMondayTextBox.TabIndex = 345;
+            receivingMondayTextBox.TabIndex = 12;
             // 
             // label11
             // 
@@ -403,7 +403,7 @@
             receivingTuesdayTextBox.MaxLength = 15;
             receivingTuesdayTextBox.Name = "receivingTuesdayTextBox";
             receivingTuesdayTextBox.Size = new Size(248, 34);
-            receivingTuesdayTextBox.TabIndex = 349;
+            receivingTuesdayTextBox.TabIndex = 13;
             // 
             // label14
             // 
@@ -426,7 +426,7 @@
             receivingWednesdayTextBox.MaxLength = 15;
             receivingWednesdayTextBox.Name = "receivingWednesdayTextBox";
             receivingWednesdayTextBox.Size = new Size(248, 34);
-            receivingWednesdayTextBox.TabIndex = 351;
+            receivingWednesdayTextBox.TabIndex = 14;
             // 
             // label15
             // 
@@ -449,7 +449,7 @@
             receivingSaturdayTextBox.MaxLength = 15;
             receivingSaturdayTextBox.Name = "receivingSaturdayTextBox";
             receivingSaturdayTextBox.Size = new Size(248, 34);
-            receivingSaturdayTextBox.TabIndex = 357;
+            receivingSaturdayTextBox.TabIndex = 17;
             // 
             // label16
             // 
@@ -472,7 +472,7 @@
             receivingFridayTextBox.MaxLength = 15;
             receivingFridayTextBox.Name = "receivingFridayTextBox";
             receivingFridayTextBox.Size = new Size(248, 34);
-            receivingFridayTextBox.TabIndex = 355;
+            receivingFridayTextBox.TabIndex = 16;
             // 
             // label17
             // 
@@ -495,7 +495,7 @@
             receivingThursdayTextBox.MaxLength = 15;
             receivingThursdayTextBox.Name = "receivingThursdayTextBox";
             receivingThursdayTextBox.Size = new Size(248, 34);
-            receivingThursdayTextBox.TabIndex = 353;
+            receivingThursdayTextBox.TabIndex = 15;
             // 
             // label18
             // 
@@ -518,7 +518,7 @@
             receivingSundayTextBox.MaxLength = 15;
             receivingSundayTextBox.Name = "receivingSundayTextBox";
             receivingSundayTextBox.Size = new Size(248, 34);
-            receivingSundayTextBox.TabIndex = 359;
+            receivingSundayTextBox.TabIndex = 18;
             // 
             // label19
             // 
@@ -552,7 +552,7 @@
             shipToAddressTextBox.MaxLength = 40;
             shipToAddressTextBox.Name = "shipToAddressTextBox";
             shipToAddressTextBox.Size = new Size(628, 34);
-            shipToAddressTextBox.TabIndex = 361;
+            shipToAddressTextBox.TabIndex = 19;
             // 
             // shipToCityTextBox
             // 
@@ -564,7 +564,7 @@
             shipToCityTextBox.MaxLength = 40;
             shipToCityTextBox.Name = "shipToCityTextBox";
             shipToCityTextBox.Size = new Size(550, 34);
-            shipToCityTextBox.TabIndex = 363;
+            shipToCityTextBox.TabIndex = 20;
             // 
             // label20
             // 
@@ -587,7 +587,7 @@
             noteTextBox.MaxLength = 60;
             noteTextBox.Name = "noteTextBox";
             noteTextBox.Size = new Size(912, 34);
-            noteTextBox.TabIndex = 365;
+            noteTextBox.TabIndex = 24;
             // 
             // label22
             // 
@@ -632,7 +632,7 @@
             groupCodeTextBox.MaxLength = 4;
             groupCodeTextBox.Name = "groupCodeTextBox";
             groupCodeTextBox.Size = new Size(79, 34);
-            groupCodeTextBox.TabIndex = 368;
+            groupCodeTextBox.TabIndex = 25;
             // 
             // label24
             // 
@@ -655,7 +655,7 @@
             groupDescriptionTextBox.MaxLength = 20;
             groupDescriptionTextBox.Name = "groupDescriptionTextBox";
             groupDescriptionTextBox.Size = new Size(335, 34);
-            groupDescriptionTextBox.TabIndex = 371;
+            groupDescriptionTextBox.TabIndex = 26;
             // 
             // label25
             // 
@@ -678,7 +678,7 @@
             shipToZip4TextBox.MaxLength = 4;
             shipToZip4TextBox.Name = "shipToZip4TextBox";
             shipToZip4TextBox.Size = new Size(59, 34);
-            shipToZip4TextBox.TabIndex = 376;
+            shipToZip4TextBox.TabIndex = 23;
             // 
             // shipToZipTextBox
             // 
@@ -690,7 +690,7 @@
             shipToZipTextBox.MaxLength = 5;
             shipToZipTextBox.Name = "shipToZipTextBox";
             shipToZipTextBox.Size = new Size(72, 34);
-            shipToZipTextBox.TabIndex = 375;
+            shipToZipTextBox.TabIndex = 22;
             // 
             // label27
             // 
@@ -713,7 +713,7 @@
             shipToStateTextBox.MaxLength = 2;
             shipToStateTextBox.Name = "shipToStateTextBox";
             shipToStateTextBox.Size = new Size(58, 34);
-            shipToStateTextBox.TabIndex = 373;
+            shipToStateTextBox.TabIndex = 21;
             // 
             // label29
             // 
@@ -736,7 +736,7 @@
             principalBillToNameTextBox.MaxLength = 40;
             principalBillToNameTextBox.Name = "principalBillToNameTextBox";
             principalBillToNameTextBox.Size = new Size(636, 34);
-            principalBillToNameTextBox.TabIndex = 378;
+            principalBillToNameTextBox.TabIndex = 27;
             // 
             // label30
             // 

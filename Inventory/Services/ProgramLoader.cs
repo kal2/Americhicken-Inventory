@@ -168,7 +168,7 @@ namespace Inventory.Services
             {
                 if (e.SelectedResult != null)
                 {
-                shipToCustomer.DisplayShipToCustomerData((buyer)e!.SelectedResult);
+                    shipToCustomer.DisplayShipToCustomerData((buyer)e!.SelectedResult);
                 }
                 _activeControlManager.SetActiveControl(shipToCustomer);
             }
@@ -194,13 +194,19 @@ namespace Inventory.Services
                     matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedBillToSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Bill To");
                     matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
-                    _activeControlManager.SetActiveControl(matchSelectInstance);
+                    if (e.SearchResults.Count > 1)
+                    {
+                        _activeControlManager.SetActiveControl(matchSelectInstance);
+                    }
                 }
             }
 
             void HandleSelectedBillToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
-                billToCustomerInstance.DisplayBillToData((bil_buy)e!.SelectedResult);
+                if (e.SelectedResult != null)
+                {
+                    billToCustomerInstance.DisplayBillToData((bil_buy)e!.SelectedResult);
+                }
                 _activeControlManager.SetActiveControl(billToCustomerInstance);
             }
         }

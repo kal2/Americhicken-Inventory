@@ -9,7 +9,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
         private readonly AmerichickenContext dbContext;
-        private buyer _buyer = new();
+        private buyer? _buyer = null;
 
 
         public ShipToCustomer(MainWindow mainWindow, ActiveControlManager activeControlManager)

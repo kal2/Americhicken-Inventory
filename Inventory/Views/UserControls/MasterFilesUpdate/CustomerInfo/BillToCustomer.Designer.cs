@@ -86,7 +86,7 @@
             label29 = new Label();
             creditAppDateMaskedTextBox = new MaskedTextBox();
             financialDateMaskedTextBox = new MaskedTextBox();
-            financialStatmentTextBox = new TextBox();
+            financialStatementTextBox = new TextBox();
             label30 = new Label();
             maskedTextBox3 = new MaskedTextBox();
             dAndBReportTextBox = new TextBox();
@@ -120,7 +120,7 @@
             customerNameTextBox.MaxLength = 40;
             customerNameTextBox.Name = "customerNameTextBox";
             customerNameTextBox.Size = new Size(550, 34);
-            customerNameTextBox.TabIndex = 135;
+            customerNameTextBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -130,7 +130,7 @@
             label1.Location = new Point(39, 9);
             label1.Name = "label1";
             label1.Size = new Size(186, 30);
-            label1.TabIndex = 134;
+            label1.TabIndex = 0;
             label1.Text = "BILL NAME (DBA):";
             // 
             // regNameTextBox
@@ -143,7 +143,7 @@
             regNameTextBox.MaxLength = 40;
             regNameTextBox.Name = "regNameTextBox";
             regNameTextBox.Size = new Size(550, 34);
-            regNameTextBox.TabIndex = 137;
+            regNameTextBox.TabIndex = 2;
             // 
             // label2
             // 
@@ -166,7 +166,7 @@
             phoneMaskedTextBox.Mask = "(999) 000-0000";
             phoneMaskedTextBox.Name = "phoneMaskedTextBox";
             phoneMaskedTextBox.Size = new Size(174, 34);
-            phoneMaskedTextBox.TabIndex = 144;
+            phoneMaskedTextBox.TabIndex = 3;
             phoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label6
@@ -190,7 +190,7 @@
             extensionTextBox.MaxLength = 5;
             extensionTextBox.Name = "extensionTextBox";
             extensionTextBox.Size = new Size(75, 34);
-            extensionTextBox.TabIndex = 147;
+            extensionTextBox.TabIndex = 4;
             // 
             // label3
             // 
@@ -213,7 +213,7 @@
             activeTextBox.MaxLength = 1;
             activeTextBox.Name = "activeTextBox";
             activeTextBox.Size = new Size(41, 34);
-            activeTextBox.TabIndex = 149;
+            activeTextBox.TabIndex = 6;
             // 
             // label4
             // 
@@ -236,7 +236,7 @@
             internationalTextBox.MaxLength = 1;
             internationalTextBox.Name = "internationalTextBox";
             internationalTextBox.Size = new Size(41, 34);
-            internationalTextBox.TabIndex = 151;
+            internationalTextBox.TabIndex = 7;
             // 
             // label5
             // 
@@ -259,7 +259,7 @@
             faxMaskedTextBox.Mask = "(999) 000-0000";
             faxMaskedTextBox.Name = "faxMaskedTextBox";
             faxMaskedTextBox.Size = new Size(174, 34);
-            faxMaskedTextBox.TabIndex = 152;
+            faxMaskedTextBox.TabIndex = 5;
             faxMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label7
@@ -305,7 +305,7 @@
             streetTextBox.MaxLength = 40;
             streetTextBox.Name = "streetTextBox";
             streetTextBox.Size = new Size(530, 34);
-            streetTextBox.TabIndex = 157;
+            streetTextBox.TabIndex = 8;
             // 
             // label10
             // 
@@ -328,7 +328,7 @@
             cityTextBox.MaxLength = 20;
             cityTextBox.Name = "cityTextBox";
             cityTextBox.Size = new Size(530, 34);
-            cityTextBox.TabIndex = 159;
+            cityTextBox.TabIndex = 9;
             // 
             // label11
             // 
@@ -351,7 +351,7 @@
             stateTextBox.MaxLength = 2;
             stateTextBox.Name = "stateTextBox";
             stateTextBox.Size = new Size(58, 34);
-            stateTextBox.TabIndex = 161;
+            stateTextBox.TabIndex = 10;
             // 
             // label12
             // 
@@ -374,7 +374,7 @@
             zip4TextBox.MaxLength = 4;
             zip4TextBox.Name = "zip4TextBox";
             zip4TextBox.Size = new Size(59, 34);
-            zip4TextBox.TabIndex = 186;
+            zip4TextBox.TabIndex = 12;
             // 
             // zipTextBox
             // 
@@ -386,7 +386,7 @@
             zipTextBox.MaxLength = 5;
             zipTextBox.Name = "zipTextBox";
             zipTextBox.Size = new Size(72, 34);
-            zipTextBox.TabIndex = 185;
+            zipTextBox.TabIndex = 11;
             // 
             // label13
             // 
@@ -409,7 +409,7 @@
             iLine1TextBox.MaxLength = 35;
             iLine1TextBox.Name = "iLine1TextBox";
             iLine1TextBox.Size = new Size(530, 34);
-            iLine1TextBox.TabIndex = 188;
+            iLine1TextBox.TabIndex = 13;
             // 
             // label14
             // 
@@ -432,7 +432,7 @@
             iLine2TextBox.MaxLength = 35;
             iLine2TextBox.Name = "iLine2TextBox";
             iLine2TextBox.Size = new Size(530, 34);
-            iLine2TextBox.TabIndex = 190;
+            iLine2TextBox.TabIndex = 14;
             // 
             // label15
             // 
@@ -455,7 +455,7 @@
             iLine3TextBox.MaxLength = 35;
             iLine3TextBox.Name = "iLine3TextBox";
             iLine3TextBox.Size = new Size(530, 34);
-            iLine3TextBox.TabIndex = 192;
+            iLine3TextBox.TabIndex = 15;
             // 
             // label16
             // 
@@ -489,7 +489,7 @@
             creditLimitTextBox.MaxLength = 7;
             creditLimitTextBox.Name = "creditLimitTextBox";
             creditLimitTextBox.Size = new Size(86, 34);
-            creditLimitTextBox.TabIndex = 195;
+            creditLimitTextBox.TabIndex = 17;
             // 
             // label17
             // 
@@ -577,7 +577,7 @@
             dateReviewedMaskBox.Mask = "00/00/0000";
             dateReviewedMaskBox.Name = "dateReviewedMaskBox";
             dateReviewedMaskBox.Size = new Size(124, 34);
-            dateReviewedMaskBox.TabIndex = 329;
+            dateReviewedMaskBox.TabIndex = 18;
             dateReviewedMaskBox.ValidatingType = typeof(DateTime);
             // 
             // label22
@@ -612,7 +612,7 @@
             credRqsTextBox.MaxLength = 32;
             credRqsTextBox.Name = "credRqsTextBox";
             credRqsTextBox.Size = new Size(530, 34);
-            credRqsTextBox.TabIndex = 332;
+            credRqsTextBox.TabIndex = 19;
             // 
             // federatedCustomerTextBox
             // 
@@ -624,7 +624,7 @@
             federatedCustomerTextBox.MaxLength = 1;
             federatedCustomerTextBox.Name = "federatedCustomerTextBox";
             federatedCustomerTextBox.Size = new Size(41, 34);
-            federatedCustomerTextBox.TabIndex = 334;
+            federatedCustomerTextBox.TabIndex = 20;
             // 
             // label20
             // 
@@ -647,7 +647,7 @@
             pOMessageTextBox.MaxLength = 20;
             pOMessageTextBox.Name = "pOMessageTextBox";
             pOMessageTextBox.Size = new Size(530, 34);
-            pOMessageTextBox.TabIndex = 336;
+            pOMessageTextBox.TabIndex = 21;
             // 
             // label24
             // 
@@ -670,7 +670,7 @@
             noteTextBox.MaxLength = 20;
             noteTextBox.Name = "noteTextBox";
             noteTextBox.Size = new Size(1128, 34);
-            noteTextBox.TabIndex = 338;
+            noteTextBox.TabIndex = 22;
             // 
             // label25
             // 
@@ -693,7 +693,7 @@
             note2TextBox.MaxLength = 20;
             note2TextBox.Name = "note2TextBox";
             note2TextBox.Size = new Size(1128, 34);
-            note2TextBox.TabIndex = 339;
+            note2TextBox.TabIndex = 23;
             // 
             // incentiveSalesTextBox
             // 
@@ -705,7 +705,7 @@
             incentiveSalesTextBox.MaxLength = 20;
             incentiveSalesTextBox.Name = "incentiveSalesTextBox";
             incentiveSalesTextBox.Size = new Size(338, 34);
-            incentiveSalesTextBox.TabIndex = 341;
+            incentiveSalesTextBox.TabIndex = 16;
             // 
             // label26
             // 
@@ -739,7 +739,7 @@
             creditAppTextBox.MaxLength = 1;
             creditAppTextBox.Name = "creditAppTextBox";
             creditAppTextBox.Size = new Size(41, 34);
-            creditAppTextBox.TabIndex = 344;
+            creditAppTextBox.TabIndex = 24;
             // 
             // label29
             // 
@@ -761,7 +761,7 @@
             creditAppDateMaskedTextBox.Mask = "00/00/0000";
             creditAppDateMaskedTextBox.Name = "creditAppDateMaskedTextBox";
             creditAppDateMaskedTextBox.Size = new Size(124, 34);
-            creditAppDateMaskedTextBox.TabIndex = 345;
+            creditAppDateMaskedTextBox.TabIndex = 25;
             creditAppDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
             // financialDateMaskedTextBox
@@ -773,24 +773,23 @@
             financialDateMaskedTextBox.Mask = "00/00/0000";
             financialDateMaskedTextBox.Name = "financialDateMaskedTextBox";
             financialDateMaskedTextBox.Size = new Size(124, 34);
-            financialDateMaskedTextBox.TabIndex = 348;
+            financialDateMaskedTextBox.TabIndex = 27;
             financialDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
-            // financialStatmentTextBox
+            // financialStatementTextBox
             // 
-            financialStatmentTextBox.BackColor = Color.Maroon;
-            financialStatmentTextBox.Font = new Font("Segoe UI", 15F);
-            financialStatmentTextBox.ForeColor = Color.White;
-            financialStatmentTextBox.Location = new Point(957, 313);
-            financialStatmentTextBox.Margin = new Padding(0);
-            financialStatmentTextBox.MaxLength = 1;
-            financialStatmentTextBox.Name = "financialStatmentTextBox";
-            financialStatmentTextBox.Size = new Size(41, 34);
-            financialStatmentTextBox.TabIndex = 347;
+            financialStatementTextBox.BackColor = Color.Maroon;
+            financialStatementTextBox.Font = new Font("Segoe UI", 15F);
+            financialStatementTextBox.ForeColor = Color.White;
+            financialStatementTextBox.Location = new Point(957, 313);
+            financialStatementTextBox.Margin = new Padding(0);
+            financialStatementTextBox.MaxLength = 1;
+            financialStatementTextBox.Name = "financialStatementTextBox";
+            financialStatementTextBox.Size = new Size(41, 34);
+            financialStatementTextBox.TabIndex = 26;
             // 
             // label30
             // 
-            label30.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label30.AutoSize = true;
             label30.Font = new Font("Segoe UI", 16F);
             label30.ForeColor = Color.White;
@@ -809,7 +808,7 @@
             maskedTextBox3.Mask = "00/00/0000";
             maskedTextBox3.Name = "maskedTextBox3";
             maskedTextBox3.Size = new Size(124, 34);
-            maskedTextBox3.TabIndex = 351;
+            maskedTextBox3.TabIndex = 29;
             maskedTextBox3.ValidatingType = typeof(DateTime);
             // 
             // dAndBReportTextBox
@@ -822,11 +821,10 @@
             dAndBReportTextBox.MaxLength = 1;
             dAndBReportTextBox.Name = "dAndBReportTextBox";
             dAndBReportTextBox.Size = new Size(41, 34);
-            dAndBReportTextBox.TabIndex = 350;
+            dAndBReportTextBox.TabIndex = 28;
             // 
             // label31
             // 
-            label31.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label31.AutoSize = true;
             label31.Font = new Font("Segoe UI", 16F);
             label31.ForeColor = Color.White;
@@ -845,7 +843,7 @@
             credDateMaskedTextBox.Mask = "00/00/0000";
             credDateMaskedTextBox.Name = "credDateMaskedTextBox";
             credDateMaskedTextBox.Size = new Size(124, 34);
-            credDateMaskedTextBox.TabIndex = 354;
+            credDateMaskedTextBox.TabIndex = 31;
             credDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
             // letterOfCredTextBox
@@ -858,11 +856,11 @@
             letterOfCredTextBox.MaxLength = 1;
             letterOfCredTextBox.Name = "letterOfCredTextBox";
             letterOfCredTextBox.Size = new Size(41, 34);
-            letterOfCredTextBox.TabIndex = 353;
+            letterOfCredTextBox.TabIndex = 30;
             // 
             // label32
             // 
-            label32.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label32.Anchor = AnchorStyles.Right;
             label32.AutoSize = true;
             label32.Font = new Font("Segoe UI", 16F);
             label32.ForeColor = Color.White;
@@ -1052,7 +1050,7 @@
             Controls.Add(dAndBReportTextBox);
             Controls.Add(label31);
             Controls.Add(financialDateMaskedTextBox);
-            Controls.Add(financialStatmentTextBox);
+            Controls.Add(financialStatementTextBox);
             Controls.Add(label30);
             Controls.Add(creditAppDateMaskedTextBox);
             Controls.Add(creditAppTextBox);
@@ -1177,7 +1175,7 @@
         private Label label29;
         private MaskedTextBox creditAppDateMaskedTextBox;
         private MaskedTextBox financialDateMaskedTextBox;
-        private TextBox financialStatmentTextBox;
+        private TextBox financialStatementTextBox;
         private Label label30;
         private MaskedTextBox maskedTextBox3;
         private TextBox dAndBReportTextBox;

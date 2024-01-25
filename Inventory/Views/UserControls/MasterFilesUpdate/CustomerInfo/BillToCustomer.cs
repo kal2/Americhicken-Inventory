@@ -19,7 +19,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
         private readonly AmerichickenContext dbContext;
-        private bil_buy _bil_Buy = new();
+        private bil_buy? _bil_Buy = null;
         public BillToCustomer(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
@@ -64,33 +64,36 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         {
             _bil_Buy = bil_Buy;
 
-            customerNameTextBox.Text = bil_Buy.name;
-            regNameTextBox.Text = bil_Buy.reg_name;
-            phoneMaskedTextBox.Text = bil_Buy.area_code + bil_Buy.phone;
-            faxMaskedTextBox.Text = bil_Buy.fax;
-            activeTextBox.Text = bil_Buy.active;
-            internationalTextBox.Text = bil_Buy.internat;
-            streetTextBox.Text = bil_Buy.street;
-            cityTextBox.Text = bil_Buy.city;
-            stateTextBox.Text = bil_Buy.state;
-            zipTextBox.Text = bil_Buy.zip;
-            zip4TextBox.Text = bil_Buy.zip4;
-            iLine1TextBox.Text = bil_Buy.iline1;
-            iLine2TextBox.Text = bil_Buy.iline2;
-            iLine3TextBox.Text = bil_Buy.iline3;
-            incentiveSalesTextBox.Text = bil_Buy.incen_cd;
-            creditLimitTextBox.Text = bil_Buy.cred_lim.ToString();
-            dateReviewedMaskBox.Text = bil_Buy.date_rvwd.ToString();
-            credRqsTextBox.Text = bil_Buy.cred_rqst;
-            federatedCustomerTextBox.Text = bil_Buy.fed_cust;
-            pOMessageTextBox.Text = bil_Buy.po_warn;
-            noteTextBox.Text = bil_Buy.note;
-            note2TextBox.Text = bil_Buy.note2;
-            creditAppTextBox.Text = bil_Buy.credit_ap;
+            customerNameTextBox.Text = StringServices.TrimOrNull(bil_Buy.name);
+            regNameTextBox.Text = StringServices.TrimOrNull(bil_Buy.reg_name);
+            phoneMaskedTextBox.Text = StringServices.TrimOrNull(bil_Buy.area_code + bil_Buy.phone);
+            faxMaskedTextBox.Text = StringServices.TrimOrNull(bil_Buy.fax);
+            activeTextBox.Text = StringServices.TrimOrNull(bil_Buy.active);
+            internationalTextBox.Text = StringServices.TrimOrNull(bil_Buy.internat);
+            streetTextBox.Text = StringServices.TrimOrNull(bil_Buy.street);
+            cityTextBox.Text = StringServices.TrimOrNull(bil_Buy.city);
+            stateTextBox.Text = StringServices.TrimOrNull(bil_Buy.state);
+            zipTextBox.Text = StringServices.TrimOrNull(bil_Buy.zip);
+            zip4TextBox.Text = StringServices.TrimOrNull(bil_Buy.zip4);
+            iLine1TextBox.Text = StringServices.TrimOrNull(bil_Buy.iline1);
+            iLine2TextBox.Text = StringServices.TrimOrNull(bil_Buy.iline2);
+            iLine3TextBox.Text = StringServices.TrimOrNull(bil_Buy.iline3);
+
+            //ToDo: Make search for incentive sales
+            //incentiveSalesTextBox.Text = StringServices.TrimOrNull(bil_Buy.incen_cd);
+
+            creditLimitTextBox.Text = StringServices.TrimOrNull(bil_Buy.cred_lim.ToString());
+            dateReviewedMaskBox.Text = StringServices.TrimOrNull(bil_Buy.date_rvwd.ToString());
+            credRqsTextBox.Text = StringServices.TrimOrNull(bil_Buy.cred_rqst);
+            federatedCustomerTextBox.Text = StringServices.TrimOrNull(bil_Buy.fed_cust);
+            pOMessageTextBox.Text = StringServices.TrimOrNull(bil_Buy.po_warn);
+            noteTextBox.Text = StringServices.TrimOrNull(bil_Buy.note);
+            note2TextBox.Text = StringServices.TrimOrNull(bil_Buy.note2);
+            creditAppTextBox.Text = StringServices.TrimOrNull(bil_Buy.credit_ap);
             creditAppDateMaskedTextBox.Text = bil_Buy.credap_dt.ToString();
-            financialDateMaskedTextBox.Text = bil_Buy.fin_prov;
+            financialStatementTextBox.Text = StringServices.TrimOrNull(bil_Buy.fin_prov);
             financialDateMaskedTextBox.Text = bil_Buy.date_fin.ToString();
-            dAndBReportTextBox.Text = bil_Buy.db_rpt;
+            dAndBReportTextBox.Text = StringServices.TrimOrNull(bil_Buy.db_rpt);
             credDateMaskedTextBox.Text = bil_Buy.db_dt.ToString();
             letterOfCredTextBox.Text = bil_Buy.let_crd.ToString();
             //ToDO: Figure out where the credit date is, going to use my best guess for the time being
@@ -112,7 +115,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                    !iLine1TextBox.Text.Equals(bil_Buy.iline1) ||
                    !iLine2TextBox.Text.Equals(bil_Buy.iline2) ||
                    !iLine3TextBox.Text.Equals(bil_Buy.iline3) ||
-                   !incentiveSalesTextBox.Text.Equals(bil_Buy.incen_cd) ||
                    !creditLimitTextBox.Text.Equals(bil_Buy.cred_lim.ToString()) ||
                    !dateReviewedMaskBox.Text.Equals(bil_Buy.date_rvwd.ToString()) ||
                    !credRqsTextBox.Text.Equals(bil_Buy.cred_rqst) ||
@@ -122,7 +124,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                    !note2TextBox.Text.Equals(bil_Buy.note2) ||
                    !creditAppTextBox.Text.Equals(bil_Buy.credit_ap) ||
                    !creditAppDateMaskedTextBox.Text.Equals(bil_Buy.credap_dt.ToString()) ||
-                   !financialDateMaskedTextBox.Text.Equals(bil_Buy.fin_prov) ||
+                   !financialStatementTextBox.Text.Equals(bil_Buy.fin_prov) ||
                    !financialDateMaskedTextBox.Text.Equals(bil_Buy.date_fin.ToString()) ||
                    !dAndBReportTextBox.Text.Equals(bil_Buy.db_rpt) ||
                    !credDateMaskedTextBox.Text.Equals(bil_Buy.db_dt.ToString()) ||
@@ -132,34 +134,37 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         private void SetBillToProperties(bil_buy existingBillTo)
         {
             _bil_Buy = existingBillTo;
-            existingBillTo.name = customerNameTextBox.Text;
-            existingBillTo.reg_name = regNameTextBox.Text;
-            existingBillTo.area_code = phoneMaskedTextBox.Text.Substring(0, 3);
-            existingBillTo.phone = phoneMaskedTextBox.Text.Substring(3, 7);
-            existingBillTo.fax = faxMaskedTextBox.Text;
-            existingBillTo.active = activeTextBox.Text;
-            existingBillTo.internat = internationalTextBox.Text;
-            existingBillTo.street = streetTextBox.Text;
-            existingBillTo.city = cityTextBox.Text;
-            existingBillTo.state = stateTextBox.Text;
-            existingBillTo.zip = zipTextBox.Text;
-            existingBillTo.zip4 = zip4TextBox.Text;
-            existingBillTo.iline1 = iLine1TextBox.Text;
-            existingBillTo.iline2 = iLine2TextBox.Text;
-            existingBillTo.iline3 = iLine3TextBox.Text;
-            existingBillTo.incen_cd = incentiveSalesTextBox.Text;
+            existingBillTo.name = StringServices.TrimOrNull(customerNameTextBox.Text);
+            existingBillTo.reg_name = StringServices.TrimOrNull(regNameTextBox.Text);
+            existingBillTo.area_code = StringServices.TrimOrNull(phoneMaskedTextBox.Text.Substring(0, 3));
+            existingBillTo.phone = StringServices.TrimOrNull(phoneMaskedTextBox.Text.Substring(3, 7));
+            existingBillTo.fax = StringServices.TrimOrNull(faxMaskedTextBox.Text);
+            existingBillTo.active = StringServices.TrimOrNull(activeTextBox.Text);
+            existingBillTo.internat = StringServices.TrimOrNull(internationalTextBox.Text);
+            existingBillTo.street = StringServices.TrimOrNull(streetTextBox.Text);
+            existingBillTo.city = StringServices.TrimOrNull(cityTextBox.Text);
+            existingBillTo.state = StringServices.TrimOrNull(stateTextBox.Text);
+            existingBillTo.zip = StringServices.TrimOrNull(zipTextBox.Text);
+            existingBillTo.zip4 = StringServices.TrimOrNull(zip4TextBox.Text);
+            existingBillTo.iline1 = StringServices.TrimOrNull(iLine1TextBox.Text);
+            existingBillTo.iline2 = StringServices.TrimOrNull(iLine2TextBox.Text);
+            existingBillTo.iline3 = StringServices.TrimOrNull(iLine3TextBox.Text);
+
+            //ToDo: Make search for incentive sales
+            //existingBillTo.incen_cd = StringServices.TrimOrNull(incentiveSalesTextBox.Text);
+
             existingBillTo.cred_lim = Convert.ToDecimal(creditLimitTextBox.Text);
             existingBillTo.date_rvwd = Convert.ToDateTime(dateReviewedMaskBox.Text);
-            existingBillTo.cred_rqst = credRqsTextBox.Text;
-            existingBillTo.fed_cust = federatedCustomerTextBox.Text;
-            existingBillTo.po_warn = pOMessageTextBox.Text;
-            existingBillTo.note = noteTextBox.Text;
-            existingBillTo.note2 = note2TextBox.Text;
-            existingBillTo.credit_ap = creditAppTextBox.Text;
+            existingBillTo.cred_rqst = StringServices.TrimOrNull(credRqsTextBox.Text);
+            existingBillTo.fed_cust = StringServices.TrimOrNull(federatedCustomerTextBox.Text);
+            existingBillTo.po_warn = StringServices.TrimOrNull(pOMessageTextBox.Text);
+            existingBillTo.note = StringServices.TrimOrNull(noteTextBox.Text);
+            existingBillTo.note2 = StringServices.TrimOrNull(note2TextBox.Text);
+            existingBillTo.credit_ap = StringServices.TrimOrNull(creditAppTextBox.Text);
             existingBillTo.credap_dt = Convert.ToDateTime(creditAppDateMaskedTextBox.Text);
-            existingBillTo.fin_prov = financialDateMaskedTextBox.Text;
+            existingBillTo.fin_prov = StringServices.TrimOrNull(financialStatementTextBox.Text);
             existingBillTo.date_fin = Convert.ToDateTime(financialDateMaskedTextBox.Text);
-            existingBillTo.db_rpt = dAndBReportTextBox.Text;
+            existingBillTo.db_rpt = StringServices.TrimOrNull(dAndBReportTextBox.Text);
             existingBillTo.db_dt = Convert.ToDateTime(credDateMaskedTextBox.Text);
             existingBillTo.let_crd = Convert.ToDecimal(letterOfCredTextBox.Text);
             existingBillTo.date_rqst = Convert.ToDateTime(credDateMaskedTextBox.Text);
