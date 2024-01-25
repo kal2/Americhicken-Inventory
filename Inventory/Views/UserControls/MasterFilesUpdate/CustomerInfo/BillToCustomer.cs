@@ -36,7 +36,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         {
             _mainWindow.SetProgramLabel("Freight Carrier");
             _mainWindow.SetTextBoxLabel("Action: ");
-            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Main Menu    5. Save/Update Insurance");
+            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Main Menu");
         }
         public void PerformAction(string userInput)
         {
@@ -49,21 +49,21 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                     customerNameTextBox.Focus();
                     break;
                 case "3":
-
+                    DeleteBillToData(_bil_Buy);
                     break;
                 case "4":
-                    break;
-                case "5":
+                    _mainWindow.DisposeControl(this);
+                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
                     break;
                 default:
-                    MessageBox.Show("ERROR: Invalid input, please contact developer");
+                    MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
                     break;
             }
         }
         public void DisplayBillToData(bil_buy bil_Buy)
         {
             _bil_Buy = bil_Buy;
-            //TODO: Get data from passed object and populate fields
+
             customerNameTextBox.Text = bil_Buy.name;
             regNameTextBox.Text = bil_Buy.reg_name;
             phoneMaskedTextBox.Text = bil_Buy.area_code + bil_Buy.phone;
@@ -98,7 +98,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         }
         private bool IsDataModified(bil_buy bil_Buy)
         {
-            //TODO: Check if data has been modified
             return bil_Buy == null || !customerNameTextBox.Text.Equals(bil_Buy.name) ||
                    !regNameTextBox.Text.Equals(bil_Buy.reg_name) ||
                    !phoneMaskedTextBox.Text.Equals(bil_Buy.area_code + bil_Buy.phone) ||
@@ -203,7 +202,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         }
         private void UpdateBillToData(bil_buy bil_Buy)
         {
-            //ToDo: Update data in database
             if (bil_Buy != null)
             {
                 if (IsDataModified(bil_Buy))
@@ -219,7 +217,21 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
 
         private void DeleteBillToData(bil_buy bil_Buy)
         {
-
+            DialogResult dialogResult = MessageBox.Show("You are about to delete a this entry." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                var existingBillTo = dbContext.bil_buy.Find(bil_Buy.PK_bil_buy);
+                dbContext.bil_buy.Remove(existingBillTo!);
+                dbContext.SaveChanges();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Something went wrong, please contact developer");
+            }
         }
     }
 }
