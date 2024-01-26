@@ -166,15 +166,26 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                 MessageBox.Show("ERROR: Something went wrong creating new customer shipping info, please contact developer");
             }
         }
-        private void UpdateShipToCustomer(buyer buyer)
+        private void UpdateExistingShipToCustomer(buyer buyerData)
         {
-            var existingBuyer = dbContext.buyer.Find(buyer.PK_buyer);
+            var existingBuyer = dbContext.buyer.Find(buyerData.PK_buyer);
             if (existingBuyer != null)
             {
-                if (IsDataModified(existingBuyer))
+                SetShipToCustomerData(existingBuyer);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Something went wrong updating customer shipping info, please contact developer");
+            }
+        }
+        private void UpdateShipToCustomer(buyer buyer)
+        {
+            if (buyer != null)
+            {
+                if (IsDataModified(buyer))
                 {
-                    SetShipToCustomerData(existingBuyer);
-                    dbContext.SaveChanges();
+                    UpdateExistingShipToCustomer(buyer);
                 }
             }
             else
