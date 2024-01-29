@@ -49,11 +49,11 @@
             // 
             dateLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             dateLabel.AutoSize = true;
-            dateLabel.Font = new Font("Segoe UI", 12F);
-            dateLabel.Location = new Point(1281, 35);
+            dateLabel.Font = new Font("Segoe UI", 15F);
+            dateLabel.Location = new Point(1270, 28);
             dateLabel.Name = "dateLabel";
             dateLabel.RightToLeft = RightToLeft.No;
-            dateLabel.Size = new Size(40, 21);
+            dateLabel.Size = new Size(51, 28);
             dateLabel.TabIndex = 6;
             dateLabel.Text = "date";
             dateLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -62,10 +62,10 @@
             // 
             programLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             programLabel.AutoSize = true;
-            programLabel.Font = new Font("Segoe UI", 12F);
-            programLabel.Location = new Point(3, 35);
+            programLabel.Font = new Font("Segoe UI", 15F);
+            programLabel.Location = new Point(3, 28);
             programLabel.Name = "programLabel";
-            programLabel.Size = new Size(89, 21);
+            programLabel.Size = new Size(111, 28);
             programLabel.TabIndex = 5;
             programLabel.Text = "Main Menu";
             // 
@@ -73,10 +73,10 @@
             // 
             companyLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             companyLabel.AutoSize = true;
-            companyLabel.Font = new Font("Segoe UI", 12F);
-            companyLabel.Location = new Point(3, 7);
+            companyLabel.Font = new Font("Segoe UI", 15F);
+            companyLabel.Location = new Point(3, 0);
             companyLabel.Name = "companyLabel";
-            companyLabel.Size = new Size(134, 21);
+            companyLabel.Size = new Size(166, 28);
             companyLabel.TabIndex = 4;
             companyLabel.Text = "AmeriChicken, Inc";
             // 

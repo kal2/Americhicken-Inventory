@@ -33,6 +33,7 @@ namespace Inventory
             control.Visible = true;
             control.Dock = DockStyle.Fill;
             control.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            control.BorderStyle = BorderStyle.Fixed3D;
             control.BringToFront();
             splitContainer2.Panel1.Refresh();
         }

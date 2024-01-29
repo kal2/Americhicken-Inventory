@@ -66,7 +66,7 @@
             salespersonNameTextBox.BackColor = Color.Maroon;
             salespersonNameTextBox.Font = new Font("Segoe UI", 15F);
             salespersonNameTextBox.ForeColor = Color.White;
-            salespersonNameTextBox.Location = new Point(402, 31);
+            salespersonNameTextBox.Location = new Point(397, 31);
             salespersonNameTextBox.Margin = new Padding(0);
             salespersonNameTextBox.MaxLength = 40;
             salespersonNameTextBox.Name = "salespersonNameTextBox";
@@ -78,7 +78,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(174, 33);
+            label1.Location = new Point(169, 33);
             label1.Name = "label1";
             label1.Size = new Size(225, 30);
             label1.TabIndex = 136;

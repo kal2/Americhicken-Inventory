@@ -72,8 +72,6 @@
             eInsuranceTextBox = new TextBox();
             label26 = new Label();
             label19 = new Label();
-            label27 = new Label();
-            label28 = new Label();
             label29 = new Label();
             remitZip4TextBox = new TextBox();
             contractDateMaskedBox = new MaskedTextBox();
@@ -87,7 +85,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(185, 13);
+            label1.Location = new Point(185, 9);
             label1.Name = "label1";
             label1.Size = new Size(211, 30);
             label1.TabIndex = 101;
@@ -98,7 +96,7 @@
             RemitNameTextBox.BackColor = Color.Maroon;
             RemitNameTextBox.Font = new Font("Segoe UI", 15F);
             RemitNameTextBox.ForeColor = Color.White;
-            RemitNameTextBox.Location = new Point(399, 10);
+            RemitNameTextBox.Location = new Point(399, 6);
             RemitNameTextBox.Margin = new Padding(0);
             RemitNameTextBox.MaxLength = 40;
             RemitNameTextBox.Name = "RemitNameTextBox";
@@ -111,7 +109,7 @@
             faxMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             faxMaskTextBox.Font = new Font("Segoe UI", 15F);
             faxMaskTextBox.ForeColor = Color.White;
-            faxMaskTextBox.Location = new Point(641, 55);
+            faxMaskTextBox.Location = new Point(641, 43);
             faxMaskTextBox.Mask = "(999) 000-0000";
             faxMaskTextBox.Name = "faxMaskTextBox";
             faxMaskTextBox.Size = new Size(174, 34);
@@ -124,7 +122,7 @@
             phoneMaskTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             phoneMaskTextBox.Font = new Font("Segoe UI", 15F);
             phoneMaskTextBox.ForeColor = Color.White;
-            phoneMaskTextBox.Location = new Point(399, 55);
+            phoneMaskTextBox.Location = new Point(399, 43);
             phoneMaskTextBox.Mask = "(999) 000-0000";
             phoneMaskTextBox.Name = "phoneMaskTextBox";
             phoneMaskTextBox.Size = new Size(174, 34);
@@ -136,7 +134,7 @@
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 16F);
             label17.ForeColor = Color.White;
-            label17.Location = new Point(579, 58);
+            label17.Location = new Point(579, 46);
             label17.Name = "label17";
             label17.Size = new Size(55, 30);
             label17.TabIndex = 118;
@@ -147,7 +145,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 16F);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(209, 58);
+            label2.Location = new Point(209, 46);
             label2.Name = "label2";
             label2.Size = new Size(184, 30);
             label2.TabIndex = 117;
@@ -158,7 +156,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 16F);
             label12.ForeColor = Color.White;
-            label12.Location = new Point(54, 102);
+            label12.Location = new Point(61, 89);
             label12.Name = "label12";
             label12.Size = new Size(75, 30);
             label12.TabIndex = 128;
@@ -169,7 +167,7 @@
             remitZipTextBox.BackColor = Color.Maroon;
             remitZipTextBox.Font = new Font("Segoe UI", 15F);
             remitZipTextBox.ForeColor = Color.White;
-            remitZipTextBox.Location = new Point(959, 144);
+            remitZipTextBox.Location = new Point(959, 122);
             remitZipTextBox.Margin = new Padding(0);
             remitZipTextBox.MaxLength = 5;
             remitZipTextBox.Name = "remitZipTextBox";
@@ -181,7 +179,7 @@
             remitStateTextBox.BackColor = Color.Maroon;
             remitStateTextBox.Font = new Font("Segoe UI", 15F);
             remitStateTextBox.ForeColor = Color.White;
-            remitStateTextBox.Location = new Point(859, 144);
+            remitStateTextBox.Location = new Point(859, 122);
             remitStateTextBox.Margin = new Padding(0);
             remitStateTextBox.MaxLength = 2;
             remitStateTextBox.Name = "remitStateTextBox";
@@ -193,7 +191,7 @@
             remitCityTextBox.BackColor = Color.Maroon;
             remitCityTextBox.Font = new Font("Segoe UI", 15F);
             remitCityTextBox.ForeColor = Color.White;
-            remitCityTextBox.Location = new Point(399, 147);
+            remitCityTextBox.Location = new Point(399, 122);
             remitCityTextBox.Margin = new Padding(0);
             remitCityTextBox.MaxLength = 20;
             remitCityTextBox.Name = "remitCityTextBox";
@@ -205,7 +203,7 @@
             remitStreetTextBox.BackColor = Color.Maroon;
             remitStreetTextBox.Font = new Font("Segoe UI", 15F);
             remitStreetTextBox.ForeColor = Color.White;
-            remitStreetTextBox.Location = new Point(399, 102);
+            remitStreetTextBox.Location = new Point(399, 85);
             remitStreetTextBox.Margin = new Padding(0);
             remitStreetTextBox.MaxLength = 40;
             remitStreetTextBox.Name = "remitStreetTextBox";
@@ -217,7 +215,7 @@
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 16F);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(907, 147);
+            label11.Location = new Point(907, 124);
             label11.Name = "label11";
             label11.Size = new Size(49, 30);
             label11.TabIndex = 136;
@@ -228,7 +226,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 16F);
             label10.ForeColor = Color.White;
-            label10.Location = new Point(781, 147);
+            label10.Location = new Point(781, 124);
             label10.Name = "label10";
             label10.Size = new Size(75, 30);
             label10.TabIndex = 135;
@@ -239,7 +237,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 16F);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(334, 150);
+            label9.Location = new Point(334, 124);
             label9.Name = "label9";
             label9.Size = new Size(62, 30);
             label9.TabIndex = 134;
@@ -250,7 +248,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 16F);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(307, 105);
+            label8.Location = new Point(307, 88);
             label8.Name = "label8";
             label8.Size = new Size(89, 30);
             label8.TabIndex = 133;
@@ -261,7 +259,7 @@
             payNetDaysTextBox.BackColor = Color.Maroon;
             payNetDaysTextBox.Font = new Font("Segoe UI", 15F);
             payNetDaysTextBox.ForeColor = Color.White;
-            payNetDaysTextBox.Location = new Point(399, 199);
+            payNetDaysTextBox.Location = new Point(399, 163);
             payNetDaysTextBox.Margin = new Padding(0);
             payNetDaysTextBox.MaxLength = 3;
             payNetDaysTextBox.Name = "payNetDaysTextBox";
@@ -273,7 +271,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 16F);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(176, 202);
+            label3.Location = new Point(176, 166);
             label3.Name = "label3";
             label3.Size = new Size(212, 30);
             label3.TabIndex = 138;
@@ -284,7 +282,7 @@
             indemnityContractTextBox.BackColor = Color.Maroon;
             indemnityContractTextBox.Font = new Font("Segoe UI", 15F);
             indemnityContractTextBox.ForeColor = Color.White;
-            indemnityContractTextBox.Location = new Point(1058, 198);
+            indemnityContractTextBox.Location = new Point(1058, 164);
             indemnityContractTextBox.Margin = new Padding(0);
             indemnityContractTextBox.MaxLength = 1;
             indemnityContractTextBox.Name = "indemnityContractTextBox";
@@ -296,7 +294,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 16F);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(745, 201);
+            label4.Location = new Point(745, 167);
             label4.Name = "label4";
             label4.Size = new Size(306, 30);
             label4.TabIndex = 140;
@@ -307,19 +305,20 @@
             activeTextBox.BackColor = Color.Maroon;
             activeTextBox.Font = new Font("Segoe UI", 15F);
             activeTextBox.ForeColor = Color.White;
-            activeTextBox.Location = new Point(694, 199);
+            activeTextBox.Location = new Point(399, 201);
             activeTextBox.Margin = new Padding(0);
             activeTextBox.MaxLength = 1;
             activeTextBox.Name = "activeTextBox";
             activeTextBox.Size = new Size(48, 34);
             activeTextBox.TabIndex = 10;
+            activeTextBox.TextChanged += activeTextBox_TextChanged;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 16F);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(450, 202);
+            label5.Location = new Point(155, 204);
             label5.Name = "label5";
             label5.Size = new Size(240, 30);
             label5.TabIndex = 142;
@@ -330,7 +329,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 16F);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(786, 244);
+            label6.Location = new Point(786, 204);
             label6.Name = "label6";
             label6.Size = new Size(184, 30);
             label6.TabIndex = 144;
@@ -341,19 +340,19 @@
             creditLimitTextBox.BackColor = Color.Maroon;
             creditLimitTextBox.Font = new Font("Segoe UI", 15F);
             creditLimitTextBox.ForeColor = Color.White;
-            creditLimitTextBox.Location = new Point(399, 242);
+            creditLimitTextBox.Location = new Point(399, 239);
             creditLimitTextBox.Margin = new Padding(0);
             creditLimitTextBox.MaxLength = 7;
             creditLimitTextBox.Name = "creditLimitTextBox";
             creditLimitTextBox.Size = new Size(154, 34);
-            creditLimitTextBox.TabIndex = 12;
+            creditLimitTextBox.TabIndex = 13;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 16F);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(248, 245);
+            label7.Location = new Point(248, 242);
             label7.Name = "label7";
             label7.Size = new Size(149, 30);
             label7.TabIndex = 146;
@@ -364,19 +363,19 @@
             letterOfCreditTextBox.BackColor = Color.Maroon;
             letterOfCreditTextBox.Font = new Font("Segoe UI", 15F);
             letterOfCreditTextBox.ForeColor = Color.White;
-            letterOfCreditTextBox.Location = new Point(952, 284);
+            letterOfCreditTextBox.Location = new Point(399, 278);
             letterOfCreditTextBox.Margin = new Padding(0);
             letterOfCreditTextBox.MaxLength = 7;
             letterOfCreditTextBox.Name = "letterOfCreditTextBox";
             letterOfCreditTextBox.Size = new Size(154, 34);
-            letterOfCreditTextBox.TabIndex = 15;
+            letterOfCreditTextBox.TabIndex = 14;
             // 
             // label13
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 16F);
             label13.ForeColor = Color.White;
-            label13.Location = new Point(700, 287);
+            label13.Location = new Point(147, 281);
             label13.Name = "label13";
             label13.Size = new Size(250, 30);
             label13.TabIndex = 148;
@@ -387,7 +386,7 @@
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 16F);
             label14.ForeColor = Color.White;
-            label14.Location = new Point(257, 284);
+            label14.Location = new Point(594, 280);
             label14.Name = "label14";
             label14.Size = new Size(134, 30);
             label14.TabIndex = 150;
@@ -398,7 +397,7 @@
             guarantorTextBox.BackColor = Color.Maroon;
             guarantorTextBox.Font = new Font("Segoe UI", 15F);
             guarantorTextBox.ForeColor = Color.White;
-            guarantorTextBox.Location = new Point(777, 323);
+            guarantorTextBox.Location = new Point(399, 317);
             guarantorTextBox.Margin = new Padding(0);
             guarantorTextBox.MaxLength = 20;
             guarantorTextBox.Name = "guarantorTextBox";
@@ -410,7 +409,7 @@
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 16F);
             label16.ForeColor = Color.White;
-            label16.Location = new Point(629, 325);
+            label16.Location = new Point(251, 319);
             label16.Name = "label16";
             label16.Size = new Size(145, 30);
             label16.TabIndex = 154;
@@ -421,7 +420,7 @@
             noteTextBox.BackColor = Color.Maroon;
             noteTextBox.Font = new Font("Segoe UI", 15F);
             noteTextBox.ForeColor = Color.White;
-            noteTextBox.Location = new Point(227, 360);
+            noteTextBox.Location = new Point(227, 357);
             noteTextBox.Margin = new Padding(0);
             noteTextBox.MaxLength = 60;
             noteTextBox.Name = "noteTextBox";
@@ -433,7 +432,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 16F);
             label18.ForeColor = Color.White;
-            label18.Location = new Point(149, 363);
+            label18.Location = new Point(149, 360);
             label18.Name = "label18";
             label18.Size = new Size(73, 30);
             label18.TabIndex = 156;
@@ -581,40 +580,18 @@
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI", 16F);
             label19.ForeColor = Color.White;
-            label19.Location = new Point(38, 147);
+            label19.Location = new Point(45, 119);
             label19.Name = "label19";
             label19.Size = new Size(105, 30);
             label19.TabIndex = 169;
             label19.Text = "ADDRESS";
-            // 
-            // label27
-            // 
-            label27.BorderStyle = BorderStyle.Fixed3D;
-            label27.Font = new Font("Segoe UI", 16F);
-            label27.ForeColor = Color.White;
-            label27.Location = new Point(21, 187);
-            label27.Name = "label27";
-            label27.Size = new Size(1250, 1);
-            label27.TabIndex = 170;
-            label27.UseMnemonic = false;
-            // 
-            // label28
-            // 
-            label28.BorderStyle = BorderStyle.Fixed3D;
-            label28.Font = new Font("Segoe UI", 16F);
-            label28.ForeColor = Color.White;
-            label28.Location = new Point(19, 94);
-            label28.Name = "label28";
-            label28.Size = new Size(1250, 1);
-            label28.TabIndex = 171;
-            label28.UseMnemonic = false;
             // 
             // label29
             // 
             label29.AutoSize = true;
             label29.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
             label29.ForeColor = Color.White;
-            label29.Location = new Point(1026, 146);
+            label29.Location = new Point(1026, 124);
             label29.Name = "label29";
             label29.Size = new Size(22, 30);
             label29.TabIndex = 172;
@@ -625,7 +602,7 @@
             remitZip4TextBox.BackColor = Color.Maroon;
             remitZip4TextBox.Font = new Font("Segoe UI", 15F);
             remitZip4TextBox.ForeColor = Color.White;
-            remitZip4TextBox.Location = new Point(1051, 145);
+            remitZip4TextBox.Location = new Point(1051, 122);
             remitZip4TextBox.Margin = new Padding(0);
             remitZip4TextBox.MaxLength = 4;
             remitZip4TextBox.Name = "remitZip4TextBox";
@@ -637,11 +614,11 @@
             contractDateMaskedBox.BackColor = Color.Maroon;
             contractDateMaskedBox.Font = new Font("Segoe UI", 15F);
             contractDateMaskedBox.ForeColor = Color.White;
-            contractDateMaskedBox.Location = new Point(982, 242);
+            contractDateMaskedBox.Location = new Point(982, 202);
             contractDateMaskedBox.Mask = "00/00/0000";
             contractDateMaskedBox.Name = "contractDateMaskedBox";
             contractDateMaskedBox.Size = new Size(124, 34);
-            contractDateMaskedBox.TabIndex = 13;
+            contractDateMaskedBox.TabIndex = 12;
             contractDateMaskedBox.ValidatingType = typeof(DateTime);
             // 
             // beginDateMaskedBox
@@ -649,11 +626,11 @@
             beginDateMaskedBox.BackColor = Color.Maroon;
             beginDateMaskedBox.Font = new Font("Segoe UI", 15F);
             beginDateMaskedBox.ForeColor = Color.White;
-            beginDateMaskedBox.Location = new Point(399, 281);
+            beginDateMaskedBox.Location = new Point(736, 277);
             beginDateMaskedBox.Mask = "00/00/0000";
             beginDateMaskedBox.Name = "beginDateMaskedBox";
             beginDateMaskedBox.Size = new Size(124, 34);
-            beginDateMaskedBox.TabIndex = 14;
+            beginDateMaskedBox.TabIndex = 15;
             beginDateMaskedBox.ValidatingType = typeof(DateTime);
             // 
             // label15
@@ -661,7 +638,7 @@
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 16F);
             label15.ForeColor = Color.White;
-            label15.Location = new Point(308, 324);
+            label15.Location = new Point(891, 278);
             label15.Name = "label15";
             label15.Size = new Size(84, 30);
             label15.TabIndex = 152;
@@ -672,7 +649,7 @@
             expireDateMaskedBox.BackColor = Color.Maroon;
             expireDateMaskedBox.Font = new Font("Segoe UI", 15F);
             expireDateMaskedBox.ForeColor = Color.White;
-            expireDateMaskedBox.Location = new Point(399, 323);
+            expireDateMaskedBox.Location = new Point(982, 277);
             expireDateMaskedBox.Mask = "00/00/0000";
             expireDateMaskedBox.Name = "expireDateMaskedBox";
             expireDateMaskedBox.Size = new Size(124, 34);
@@ -689,8 +666,6 @@
             Controls.Add(contractDateMaskedBox);
             Controls.Add(remitZip4TextBox);
             Controls.Add(label29);
-            Controls.Add(label28);
-            Controls.Add(label27);
             Controls.Add(label12);
             Controls.Add(label19);
             Controls.Add(eInsuranceTextBox);
@@ -789,8 +764,6 @@
         private TextBox eInsuranceTextBox;
         private Label label26;
         private Label label19;
-        private Label label27;
-        private Label label28;
         private Label label29;
         private TextBox remitZip4TextBox;
         private MaskedTextBox contractDateMaskedBox;

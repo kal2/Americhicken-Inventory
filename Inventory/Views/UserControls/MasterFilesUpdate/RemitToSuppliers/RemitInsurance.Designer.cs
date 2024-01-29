@@ -188,7 +188,7 @@
             label6.BorderStyle = BorderStyle.Fixed3D;
             label6.Font = new Font("Segoe UI", 16F);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(20, 635);
+            label6.Location = new Point(20, 600);
             label6.Name = "label6";
             label6.Size = new Size(1250, 1);
             label6.TabIndex = 172;

@@ -473,7 +473,7 @@
             label28.BorderStyle = BorderStyle.Fixed3D;
             label28.Font = new Font("Segoe UI", 16F);
             label28.ForeColor = Color.White;
-            label28.Location = new Point(22, 257);
+            label28.Location = new Point(20, 306);
             label28.Name = "label28";
             label28.Size = new Size(1250, 1);
             label28.TabIndex = 193;
@@ -484,7 +484,7 @@
             creditLimitTextBox.BackColor = Color.Maroon;
             creditLimitTextBox.Font = new Font("Segoe UI", 15F);
             creditLimitTextBox.ForeColor = Color.White;
-            creditLimitTextBox.Location = new Point(160, 320);
+            creditLimitTextBox.Location = new Point(171, 326);
             creditLimitTextBox.Margin = new Padding(0);
             creditLimitTextBox.MaxLength = 7;
             creditLimitTextBox.Name = "creditLimitTextBox";
@@ -496,7 +496,7 @@
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 16F);
             label17.ForeColor = Color.White;
-            label17.Location = new Point(8, 322);
+            label17.Location = new Point(19, 328);
             label17.Name = "label17";
             label17.Size = new Size(149, 30);
             label17.TabIndex = 194;
@@ -507,7 +507,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 16F);
             label18.ForeColor = Color.White;
-            label18.Location = new Point(276, 322);
+            label18.Location = new Point(287, 328);
             label18.Name = "label18";
             label18.Size = new Size(130, 30);
             label18.TabIndex = 196;
@@ -518,7 +518,7 @@
             termDaysDisplayLabel.AutoSize = true;
             termDaysDisplayLabel.Font = new Font("Segoe UI", 16F);
             termDaysDisplayLabel.ForeColor = Color.White;
-            termDaysDisplayLabel.Location = new Point(412, 322);
+            termDaysDisplayLabel.Location = new Point(423, 328);
             termDaysDisplayLabel.Name = "termDaysDisplayLabel";
             termDaysDisplayLabel.Size = new Size(39, 30);
             termDaysDisplayLabel.TabIndex = 197;
@@ -529,7 +529,7 @@
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI", 16F);
             label19.ForeColor = Color.White;
-            label19.Location = new Point(8, 356);
+            label19.Location = new Point(19, 362);
             label19.Name = "label19";
             label19.Size = new Size(119, 30);
             label19.TabIndex = 198;
@@ -540,7 +540,7 @@
             fstSaleDisplayLabel.AutoSize = true;
             fstSaleDisplayLabel.Font = new Font("Segoe UI", 16F);
             fstSaleDisplayLabel.ForeColor = Color.White;
-            fstSaleDisplayLabel.Location = new Point(133, 356);
+            fstSaleDisplayLabel.Location = new Point(144, 362);
             fstSaleDisplayLabel.Name = "fstSaleDisplayLabel";
             fstSaleDisplayLabel.Size = new Size(122, 30);
             fstSaleDisplayLabel.TabIndex = 199;
@@ -551,7 +551,7 @@
             lastSaleDisplayLabel.AutoSize = true;
             lastSaleDisplayLabel.Font = new Font("Segoe UI", 16F);
             lastSaleDisplayLabel.ForeColor = Color.White;
-            lastSaleDisplayLabel.Location = new Point(344, 356);
+            lastSaleDisplayLabel.Location = new Point(355, 362);
             lastSaleDisplayLabel.Name = "lastSaleDisplayLabel";
             lastSaleDisplayLabel.Size = new Size(122, 30);
             lastSaleDisplayLabel.TabIndex = 201;
@@ -562,7 +562,7 @@
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 16F);
             label21.ForeColor = Color.White;
-            label21.Location = new Point(276, 356);
+            label21.Location = new Point(287, 362);
             label21.Name = "label21";
             label21.Size = new Size(62, 30);
             label21.TabIndex = 200;
@@ -573,7 +573,7 @@
             dateReviewedMaskBox.BackColor = Color.Maroon;
             dateReviewedMaskBox.Font = new Font("Segoe UI", 15F);
             dateReviewedMaskBox.ForeColor = Color.White;
-            dateReviewedMaskBox.Location = new Point(189, 389);
+            dateReviewedMaskBox.Location = new Point(200, 395);
             dateReviewedMaskBox.Mask = "00/00/0000";
             dateReviewedMaskBox.Name = "dateReviewedMaskBox";
             dateReviewedMaskBox.Size = new Size(124, 34);
@@ -585,7 +585,7 @@
             label22.AutoSize = true;
             label22.Font = new Font("Segoe UI", 16F);
             label22.ForeColor = Color.White;
-            label22.Location = new Point(8, 391);
+            label22.Location = new Point(19, 397);
             label22.Name = "label22";
             label22.Size = new Size(175, 30);
             label22.TabIndex = 330;
@@ -596,7 +596,7 @@
             label23.AutoSize = true;
             label23.Font = new Font("Segoe UI", 16F);
             label23.ForeColor = Color.White;
-            label23.Location = new Point(8, 426);
+            label23.Location = new Point(19, 432);
             label23.Name = "label23";
             label23.Size = new Size(242, 30);
             label23.TabIndex = 331;
@@ -607,7 +607,7 @@
             credRqsTextBox.BackColor = Color.Maroon;
             credRqsTextBox.Font = new Font("Segoe UI", 15F);
             credRqsTextBox.ForeColor = Color.White;
-            credRqsTextBox.Location = new Point(8, 456);
+            credRqsTextBox.Location = new Point(19, 462);
             credRqsTextBox.Margin = new Padding(0);
             credRqsTextBox.MaxLength = 32;
             credRqsTextBox.Name = "credRqsTextBox";
@@ -619,7 +619,7 @@
             federatedCustomerTextBox.BackColor = Color.Maroon;
             federatedCustomerTextBox.Font = new Font("Segoe UI", 15F);
             federatedCustomerTextBox.ForeColor = Color.White;
-            federatedCustomerTextBox.Location = new Point(316, 490);
+            federatedCustomerTextBox.Location = new Point(327, 496);
             federatedCustomerTextBox.Margin = new Padding(0);
             federatedCustomerTextBox.MaxLength = 1;
             federatedCustomerTextBox.Name = "federatedCustomerTextBox";
@@ -631,7 +631,7 @@
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 16F);
             label20.ForeColor = Color.White;
-            label20.Location = new Point(8, 492);
+            label20.Location = new Point(19, 498);
             label20.Name = "label20";
             label20.Size = new Size(305, 30);
             label20.TabIndex = 333;
@@ -642,7 +642,7 @@
             pOMessageTextBox.BackColor = Color.Maroon;
             pOMessageTextBox.Font = new Font("Segoe UI", 15F);
             pOMessageTextBox.ForeColor = Color.White;
-            pOMessageTextBox.Location = new Point(111, 525);
+            pOMessageTextBox.Location = new Point(116, 568);
             pOMessageTextBox.Margin = new Padding(0);
             pOMessageTextBox.MaxLength = 20;
             pOMessageTextBox.Name = "pOMessageTextBox";
@@ -654,7 +654,7 @@
             label24.AutoSize = true;
             label24.Font = new Font("Segoe UI", 16F);
             label24.ForeColor = Color.White;
-            label24.Location = new Point(8, 527);
+            label24.Location = new Point(13, 570);
             label24.Name = "label24";
             label24.Size = new Size(100, 30);
             label24.TabIndex = 335;
@@ -665,7 +665,7 @@
             noteTextBox.BackColor = Color.Maroon;
             noteTextBox.Font = new Font("Segoe UI", 15F);
             noteTextBox.ForeColor = Color.White;
-            noteTextBox.Location = new Point(111, 559);
+            noteTextBox.Location = new Point(116, 602);
             noteTextBox.Margin = new Padding(0);
             noteTextBox.MaxLength = 20;
             noteTextBox.Name = "noteTextBox";
@@ -677,7 +677,7 @@
             label25.AutoSize = true;
             label25.Font = new Font("Segoe UI", 16F);
             label25.ForeColor = Color.White;
-            label25.Location = new Point(23, 561);
+            label25.Location = new Point(28, 604);
             label25.Name = "label25";
             label25.Size = new Size(85, 30);
             label25.TabIndex = 337;
@@ -688,7 +688,7 @@
             note2TextBox.BackColor = Color.Maroon;
             note2TextBox.Font = new Font("Segoe UI", 15F);
             note2TextBox.ForeColor = Color.White;
-            note2TextBox.Location = new Point(111, 593);
+            note2TextBox.Location = new Point(116, 636);
             note2TextBox.Margin = new Padding(0);
             note2TextBox.MaxLength = 20;
             note2TextBox.Name = "note2TextBox";
@@ -700,7 +700,7 @@
             incentiveSalesTextBox.BackColor = Color.Maroon;
             incentiveSalesTextBox.Font = new Font("Segoe UI", 15F);
             incentiveSalesTextBox.ForeColor = Color.White;
-            incentiveSalesTextBox.Location = new Point(200, 271);
+            incentiveSalesTextBox.Location = new Point(870, 250);
             incentiveSalesTextBox.Margin = new Padding(0);
             incentiveSalesTextBox.MaxLength = 20;
             incentiveSalesTextBox.Name = "incentiveSalesTextBox";
@@ -712,7 +712,7 @@
             label26.AutoSize = true;
             label26.Font = new Font("Segoe UI", 16F);
             label26.ForeColor = Color.White;
-            label26.Location = new Point(8, 273);
+            label26.Location = new Point(678, 252);
             label26.Name = "label26";
             label26.Size = new Size(189, 30);
             label26.TabIndex = 340;
@@ -723,7 +723,7 @@
             label27.AutoSize = true;
             label27.Font = new Font("Segoe UI", 16F);
             label27.ForeColor = Color.White;
-            label27.Location = new Point(735, 245);
+            label27.Location = new Point(740, 290);
             label27.Name = "label27";
             label27.Size = new Size(398, 30);
             label27.TabIndex = 342;
@@ -734,7 +734,7 @@
             creditAppTextBox.BackColor = Color.Maroon;
             creditAppTextBox.Font = new Font("Segoe UI", 15F);
             creditAppTextBox.ForeColor = Color.White;
-            creditAppTextBox.Location = new Point(957, 279);
+            creditAppTextBox.Location = new Point(962, 324);
             creditAppTextBox.Margin = new Padding(0);
             creditAppTextBox.MaxLength = 1;
             creditAppTextBox.Name = "creditAppTextBox";
@@ -746,7 +746,7 @@
             label29.AutoSize = true;
             label29.Font = new Font("Segoe UI", 16F);
             label29.ForeColor = Color.White;
-            label29.Location = new Point(789, 279);
+            label29.Location = new Point(794, 324);
             label29.Name = "label29";
             label29.Size = new Size(133, 30);
             label29.TabIndex = 343;
@@ -757,7 +757,7 @@
             creditAppDateMaskedTextBox.BackColor = Color.Maroon;
             creditAppDateMaskedTextBox.Font = new Font("Segoe UI", 15F);
             creditAppDateMaskedTextBox.ForeColor = Color.White;
-            creditAppDateMaskedTextBox.Location = new Point(1036, 279);
+            creditAppDateMaskedTextBox.Location = new Point(1041, 324);
             creditAppDateMaskedTextBox.Mask = "00/00/0000";
             creditAppDateMaskedTextBox.Name = "creditAppDateMaskedTextBox";
             creditAppDateMaskedTextBox.Size = new Size(124, 34);
@@ -769,7 +769,7 @@
             financialDateMaskedTextBox.BackColor = Color.Maroon;
             financialDateMaskedTextBox.Font = new Font("Segoe UI", 15F);
             financialDateMaskedTextBox.ForeColor = Color.White;
-            financialDateMaskedTextBox.Location = new Point(1036, 313);
+            financialDateMaskedTextBox.Location = new Point(1041, 358);
             financialDateMaskedTextBox.Mask = "00/00/0000";
             financialDateMaskedTextBox.Name = "financialDateMaskedTextBox";
             financialDateMaskedTextBox.Size = new Size(124, 34);
@@ -781,7 +781,7 @@
             financialStatementTextBox.BackColor = Color.Maroon;
             financialStatementTextBox.Font = new Font("Segoe UI", 15F);
             financialStatementTextBox.ForeColor = Color.White;
-            financialStatementTextBox.Location = new Point(957, 313);
+            financialStatementTextBox.Location = new Point(962, 358);
             financialStatementTextBox.Margin = new Padding(0);
             financialStatementTextBox.MaxLength = 1;
             financialStatementTextBox.Name = "financialStatementTextBox";
@@ -793,7 +793,7 @@
             label30.AutoSize = true;
             label30.Font = new Font("Segoe UI", 16F);
             label30.ForeColor = Color.White;
-            label30.Location = new Point(735, 313);
+            label30.Location = new Point(740, 358);
             label30.Name = "label30";
             label30.Size = new Size(187, 30);
             label30.TabIndex = 346;
@@ -804,7 +804,7 @@
             maskedTextBox3.BackColor = Color.Maroon;
             maskedTextBox3.Font = new Font("Segoe UI", 15F);
             maskedTextBox3.ForeColor = Color.White;
-            maskedTextBox3.Location = new Point(1036, 346);
+            maskedTextBox3.Location = new Point(1041, 391);
             maskedTextBox3.Mask = "00/00/0000";
             maskedTextBox3.Name = "maskedTextBox3";
             maskedTextBox3.Size = new Size(124, 34);
@@ -816,7 +816,7 @@
             dAndBReportTextBox.BackColor = Color.Maroon;
             dAndBReportTextBox.Font = new Font("Segoe UI", 15F);
             dAndBReportTextBox.ForeColor = Color.White;
-            dAndBReportTextBox.Location = new Point(957, 346);
+            dAndBReportTextBox.Location = new Point(962, 391);
             dAndBReportTextBox.Margin = new Padding(0);
             dAndBReportTextBox.MaxLength = 1;
             dAndBReportTextBox.Name = "dAndBReportTextBox";
@@ -828,7 +828,7 @@
             label31.AutoSize = true;
             label31.Font = new Font("Segoe UI", 16F);
             label31.ForeColor = Color.White;
-            label31.Location = new Point(775, 346);
+            label31.Location = new Point(780, 391);
             label31.Name = "label31";
             label31.Size = new Size(147, 30);
             label31.TabIndex = 349;
@@ -839,7 +839,7 @@
             credDateMaskedTextBox.BackColor = Color.Maroon;
             credDateMaskedTextBox.Font = new Font("Segoe UI", 15F);
             credDateMaskedTextBox.ForeColor = Color.White;
-            credDateMaskedTextBox.Location = new Point(1036, 379);
+            credDateMaskedTextBox.Location = new Point(1041, 424);
             credDateMaskedTextBox.Mask = "00/00/0000";
             credDateMaskedTextBox.Name = "credDateMaskedTextBox";
             credDateMaskedTextBox.Size = new Size(124, 34);
@@ -851,7 +851,7 @@
             letterOfCredTextBox.BackColor = Color.Maroon;
             letterOfCredTextBox.Font = new Font("Segoe UI", 15F);
             letterOfCredTextBox.ForeColor = Color.White;
-            letterOfCredTextBox.Location = new Point(957, 379);
+            letterOfCredTextBox.Location = new Point(962, 424);
             letterOfCredTextBox.Margin = new Padding(0);
             letterOfCredTextBox.MaxLength = 1;
             letterOfCredTextBox.Name = "letterOfCredTextBox";
@@ -860,11 +860,10 @@
             // 
             // label32
             // 
-            label32.Anchor = AnchorStyles.Right;
             label32.AutoSize = true;
             label32.Font = new Font("Segoe UI", 16F);
             label32.ForeColor = Color.White;
-            label32.Location = new Point(742, 381);
+            label32.Location = new Point(747, 426);
             label32.Name = "label32";
             label32.Size = new Size(180, 30);
             label32.TabIndex = 352;
@@ -876,7 +875,7 @@
             label33.BorderStyle = BorderStyle.Fixed3D;
             label33.Font = new Font("Segoe UI", 16F);
             label33.ForeColor = Color.White;
-            label33.Location = new Point(703, 276);
+            label33.Location = new Point(708, 321);
             label33.Name = "label33";
             label33.Size = new Size(500, 1);
             label33.TabIndex = 355;
@@ -887,7 +886,7 @@
             label34.BorderStyle = BorderStyle.Fixed3D;
             label34.Font = new Font("Segoe UI", 16F);
             label34.ForeColor = Color.White;
-            label34.Location = new Point(703, 455);
+            label34.Location = new Point(708, 500);
             label34.Name = "label34";
             label34.Size = new Size(500, 1);
             label34.TabIndex = 357;
@@ -898,7 +897,7 @@
             label35.AutoSize = true;
             label35.Font = new Font("Segoe UI", 16F);
             label35.ForeColor = Color.White;
-            label35.Location = new Point(728, 424);
+            label35.Location = new Point(728, 470);
             label35.Name = "label35";
             label35.Size = new Size(199, 30);
             label35.TabIndex = 356;
@@ -909,7 +908,7 @@
             label36.AutoSize = true;
             label36.Font = new Font("Segoe UI", 16F);
             label36.ForeColor = Color.White;
-            label36.Location = new Point(820, 451);
+            label36.Location = new Point(809, 500);
             label36.Name = "label36";
             label36.Size = new Size(118, 30);
             label36.TabIndex = 358;
@@ -920,7 +919,7 @@
             label37.AutoSize = true;
             label37.Font = new Font("Segoe UI", 16F);
             label37.ForeColor = Color.White;
-            label37.Location = new Point(1064, 492);
+            label37.Location = new Point(1038, 540);
             label37.Name = "label37";
             label37.Size = new Size(0, 30);
             label37.TabIndex = 362;
@@ -930,7 +929,7 @@
             label38.AutoSize = true;
             label38.Font = new Font("Segoe UI", 16F);
             label38.ForeColor = Color.White;
-            label38.Location = new Point(991, 492);
+            label38.Location = new Point(965, 535);
             label38.Name = "label38";
             label38.Size = new Size(129, 30);
             label38.TabIndex = 361;
@@ -941,7 +940,7 @@
             highBalanceDisplayLabel.AutoSize = true;
             highBalanceDisplayLabel.Font = new Font("Segoe UI", 16F);
             highBalanceDisplayLabel.ForeColor = Color.White;
-            highBalanceDisplayLabel.Location = new Point(853, 492);
+            highBalanceDisplayLabel.Location = new Point(842, 534);
             highBalanceDisplayLabel.Name = "highBalanceDisplayLabel";
             highBalanceDisplayLabel.Size = new Size(85, 30);
             highBalanceDisplayLabel.TabIndex = 360;
@@ -952,7 +951,7 @@
             label40.AutoSize = true;
             label40.Font = new Font("Segoe UI", 16F);
             label40.ForeColor = Color.White;
-            label40.Location = new Point(769, 492);
+            label40.Location = new Point(758, 534);
             label40.Name = "label40";
             label40.Size = new Size(71, 30);
             label40.TabIndex = 359;
@@ -963,7 +962,7 @@
             label42.AutoSize = true;
             label42.Font = new Font("Segoe UI", 16F);
             label42.ForeColor = Color.White;
-            label42.Location = new Point(966, 522);
+            label42.Location = new Point(940, 570);
             label42.Name = "label42";
             label42.Size = new Size(154, 30);
             label42.TabIndex = 365;
@@ -974,7 +973,7 @@
             currentBalanceDisplayLabel.AutoSize = true;
             currentBalanceDisplayLabel.Font = new Font("Segoe UI", 16F);
             currentBalanceDisplayLabel.ForeColor = Color.White;
-            currentBalanceDisplayLabel.Location = new Point(853, 522);
+            currentBalanceDisplayLabel.Location = new Point(842, 569);
             currentBalanceDisplayLabel.Name = "currentBalanceDisplayLabel";
             currentBalanceDisplayLabel.Size = new Size(85, 30);
             currentBalanceDisplayLabel.TabIndex = 364;
@@ -985,7 +984,7 @@
             label44.AutoSize = true;
             label44.Font = new Font("Segoe UI", 16F);
             label44.ForeColor = Color.White;
-            label44.Location = new Point(728, 522);
+            label44.Location = new Point(717, 569);
             label44.Name = "label44";
             label44.Size = new Size(112, 30);
             label44.TabIndex = 363;
@@ -996,7 +995,7 @@
             label45.AutoSize = true;
             label45.Font = new Font("Segoe UI", 16F);
             label45.ForeColor = Color.White;
-            label45.Location = new Point(1085, 451);
+            label45.Location = new Point(1059, 501);
             label45.Name = "label45";
             label45.Size = new Size(149, 30);
             label45.TabIndex = 367;
@@ -1007,7 +1006,7 @@
             prevSixMonthAvgPayDisplayLabel.AutoSize = true;
             prevSixMonthAvgPayDisplayLabel.Font = new Font("Segoe UI", 16F);
             prevSixMonthAvgPayDisplayLabel.ForeColor = Color.White;
-            prevSixMonthAvgPayDisplayLabel.Location = new Point(1126, 492);
+            prevSixMonthAvgPayDisplayLabel.Location = new Point(1100, 535);
             prevSixMonthAvgPayDisplayLabel.Name = "prevSixMonthAvgPayDisplayLabel";
             prevSixMonthAvgPayDisplayLabel.Size = new Size(85, 30);
             prevSixMonthAvgPayDisplayLabel.TabIndex = 368;
@@ -1018,7 +1017,7 @@
             prev25DaysDisplayLabel.AutoSize = true;
             prev25DaysDisplayLabel.Font = new Font("Segoe UI", 16F);
             prev25DaysDisplayLabel.ForeColor = Color.White;
-            prev25DaysDisplayLabel.Location = new Point(1126, 522);
+            prev25DaysDisplayLabel.Location = new Point(1100, 570);
             prev25DaysDisplayLabel.Name = "prev25DaysDisplayLabel";
             prev25DaysDisplayLabel.Size = new Size(85, 30);
             prev25DaysDisplayLabel.TabIndex = 369;
@@ -1110,7 +1109,7 @@
             Controls.Add(customerNameTextBox);
             Controls.Add(label1);
             Name = "BillToCustomer";
-            Size = new Size(1290, 637);
+            Size = new Size(1290, 688);
             ResumeLayout(false);
             PerformLayout();
         }

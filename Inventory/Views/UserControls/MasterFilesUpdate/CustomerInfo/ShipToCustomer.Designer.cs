@@ -87,6 +87,8 @@
             label30 = new Label();
             principalStreetDisplayLabel = new Label();
             pricipalCityStateDisplayLabel = new Label();
+            label32 = new Label();
+            label31 = new Label();
             SuspendLayout();
             // 
             // customerShipToTextBox
@@ -536,11 +538,11 @@
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 16F);
             label21.ForeColor = Color.White;
-            label21.Location = new Point(90, 398);
+            label21.Location = new Point(197, 398);
             label21.Name = "label21";
-            label21.Size = new Size(196, 30);
+            label21.Size = new Size(89, 30);
             label21.TabIndex = 360;
-            label21.Text = "SHIP TO ADDRESS:";
+            label21.Text = "STREET:";
             // 
             // shipToAddressTextBox
             // 
@@ -771,11 +773,35 @@
             pricipalCityStateDisplayLabel.TabIndex = 380;
             pricipalCityStateDisplayLabel.Text = "CITY, STATE ZIP";
             // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            label32.Font = new Font("Segoe UI", 16F);
+            label32.ForeColor = Color.White;
+            label32.Location = new Point(20, 398);
+            label32.Name = "label32";
+            label32.Size = new Size(180, 30);
+            label32.TabIndex = 381;
+            label32.Text = "SHIP TO ADDR->";
+            // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.Font = new Font("Segoe UI", 16F);
+            label31.ForeColor = Color.White;
+            label31.Location = new Point(64, 428);
+            label31.Name = "label31";
+            label31.Size = new Size(136, 30);
+            label31.TabIndex = 382;
+            label31.Text = "------------>";
+            // 
             // ShipToCustomer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(1, 0, 128);
+            Controls.Add(label31);
+            Controls.Add(label32);
             Controls.Add(pricipalCityStateDisplayLabel);
             Controls.Add(principalStreetDisplayLabel);
             Controls.Add(principalBillToNameTextBox);
@@ -903,5 +929,7 @@
         private Label label30;
         private Label principalStreetDisplayLabel;
         private Label pricipalCityStateDisplayLabel;
+        private Label label32;
+        private Label label31;
     }
 }

@@ -101,7 +101,6 @@
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
-            label6 = new Label();
             label27 = new Label();
             label5 = new Label();
             label4 = new Label();
@@ -219,7 +218,7 @@
             cancellationTextBox.BackColor = Color.Maroon;
             cancellationTextBox.Font = new Font("Segoe UI", 15F);
             cancellationTextBox.ForeColor = Color.White;
-            cancellationTextBox.Location = new Point(282, 641);
+            cancellationTextBox.Location = new Point(559, 631);
             cancellationTextBox.Margin = new Padding(0);
             cancellationTextBox.MaxLength = 2;
             cancellationTextBox.Name = "cancellationTextBox";
@@ -753,7 +752,7 @@
             label25.AutoSize = true;
             label25.Font = new Font("Segoe UI", 16F);
             label25.ForeColor = Color.White;
-            label25.Location = new Point(23, 643);
+            label25.Location = new Point(300, 633);
             label25.Name = "label25";
             label25.Size = new Size(256, 30);
             label25.TabIndex = 390;
@@ -960,17 +959,6 @@
             label7.TabIndex = 373;
             label7.UseMnemonic = false;
             // 
-            // label6
-            // 
-            label6.BorderStyle = BorderStyle.Fixed3D;
-            label6.Font = new Font("Segoe UI", 16F);
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(20, 635);
-            label6.Name = "label6";
-            label6.Size = new Size(1250, 1);
-            label6.TabIndex = 372;
-            label6.UseMnemonic = false;
-            // 
             // label27
             // 
             label27.BorderStyle = BorderStyle.Fixed3D;
@@ -1126,7 +1114,6 @@
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(label7);
-            Controls.Add(label6);
             Controls.Add(label27);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -1216,7 +1203,6 @@
         private Label label9;
         private Label label8;
         private Label label7;
-        private Label label6;
         private Label label27;
         private Label label5;
         private Label label4;

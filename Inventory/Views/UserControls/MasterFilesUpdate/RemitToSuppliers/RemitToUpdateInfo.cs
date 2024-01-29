@@ -115,7 +115,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 DialogResult dialogResult = MessageBox.Show("You are about to add a new Remit To entry." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    rem_sup newRemitEntry = new ()
+                    rem_sup newRemitEntry = new()
                     {
                         name = StringServices.TrimOrNull(RemitNameTextBox.Text),
                         area_code = phoneMaskTextBox.Text[..3],
@@ -126,11 +126,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         state = StringServices.TrimOrNull(remitStateTextBox.Text),
                         zip = StringServices.TrimOrNull(remitZipTextBox.Text),
                         zip4 = StringServices.TrimOrNull(remitZip4TextBox.Text),
-                        net_days = string.IsNullOrEmpty(payNetDaysTextBox.Text.Trim()) ? null: int.Parse(payNetDaysTextBox.Text),
+                        net_days = string.IsNullOrEmpty(payNetDaysTextBox.Text.Trim()) ? null : int.Parse(payNetDaysTextBox.Text),
                         indem_flg = StringServices.TrimOrNull(indemnityContractTextBox.Text),
                         active = StringServices.TrimOrNull(activeTextBox.Text),
                         indem_dt = string.IsNullOrEmpty(contractDateMaskedBox.Text.Trim()) ? null : DateTime.TryParse(contractDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var contrDate) ? contrDate : null,
-                        cred_lim = string.IsNullOrEmpty(creditLimitTextBox.Text.Trim()) ? null : int.TryParse(creditLimitTextBox.Text, out var credLim) ? credLim :null,
+                        cred_lim = string.IsNullOrEmpty(creditLimitTextBox.Text.Trim()) ? null : int.TryParse(creditLimitTextBox.Text, out var credLim) ? credLim : null,
                         let_crd = string.IsNullOrEmpty(letterOfCreditTextBox.Text.Trim()) ? null : int.TryParse(letterOfCreditTextBox.Text, out var lettCred) ? lettCred : null,
                         beg_date = string.IsNullOrEmpty(beginDateMaskedBox.Text.Trim()) ? null : DateTime.TryParse(beginDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var begDate) ? begDate : null,
                         end_date = string.IsNullOrEmpty(expireDateMaskedBox.Text.Trim()) ? null : DateTime.TryParse(expireDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var expireDate) ? expireDate : null,
@@ -170,7 +170,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             }
             else
             {
-                   MessageBox.Show("ERROR: Remit Data is null. Please try again or contact developer.");
+                MessageBox.Show("ERROR: Remit Data is null. Please try again or contact developer.");
             }
         }
 
@@ -199,7 +199,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     //save/update insurance
                     UpdateRemitData(_remitData);
                     _mainWindow.DisposeControl(this);
-                    RemitInsurance remitInsuranceInstance = new (_mainWindow, _activeControlManager);
+                    RemitInsurance remitInsuranceInstance = new(_mainWindow, _activeControlManager);
                     remitInsuranceInstance.DisplayRemitInsuranceData(_remitData);
                     _activeControlManager.SetActiveControl(remitInsuranceInstance);
 
@@ -208,6 +208,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     MessageBox.Show("ERROR: Invalid user input, please contact developer");
                     break;
             }
+        }
+
+        private void activeTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
