@@ -1,8 +1,5 @@
 ﻿using Inventory.Interfaces;
 using Inventory.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.DirectoryServices;
 using Inventory.Services;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
@@ -32,9 +29,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         public void SetProgramLabels()
         {
+            _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE SHIPPED FROM SUPPLIER INFORMATION");
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
             _mainWindow.SetTextBoxLabel("ACTION:");
-            _mainWindow.SetProgramLabel("View/Edit Ship From Supplier Info");
         }
 
         public void GetShipFromData(supplier supplierObject)

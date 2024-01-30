@@ -1,7 +1,5 @@
 ﻿using Inventory.Interfaces;
 using Inventory.UI.Menu;
-using Inventory.Views.UserControls;
-using Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers;
 using Inventory.Services;
 
 namespace Inventory
@@ -34,6 +32,7 @@ namespace Inventory
 
             if (_currentMenu != "program")
             {
+                _mainWindow.SetProgramLabel(menuItems[1]);
                 PopulateMenuList(menuItems);
             }
             else
@@ -44,7 +43,7 @@ namespace Inventory
 
         private void PopulateMenuList(string[] menuItems)
         {
-            menuListBox.Items.AddRange(menuItems[1..]);
+            menuListBox.Items.AddRange(menuItems[2..]);
             menuListBox.EndUpdate();
         }
 

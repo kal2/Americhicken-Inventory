@@ -23,9 +23,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
         }
         public void SetProgramLabels()
         {
-            _mainWindow.SetProgramLabel("Freight Carrier");
+            _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE FREIGHT CARRIER INFORMATION");
             _mainWindow.SetTextBoxLabel("Action: ");
-            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Main Menu    5. Save/Update Insurance");
+            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel    5. Save/Update Insurance");
         }
         public void PerformAction(string userInput)
         {

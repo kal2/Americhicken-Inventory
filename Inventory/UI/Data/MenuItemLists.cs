@@ -7,6 +7,7 @@
         {
             return [
                 "main",
+                "Main Menu",
                 "1 - PURCHASE ORDERS",
                 "2 - CUSTOMER INVOICES",
                 "3 - DISBURSEMENTS / SUPPLIER INVOICES",
@@ -22,6 +23,7 @@
         {
             return [
                 "purchase",
+                "PURCHASE ORDERS Menu",
                 "1 - ADD PURCHASE ORDER(S)",
                 "2 - CHANGE PURCHASE ORDER(S)",
                 "3 - VIEW PURCHASE ORDER(S)",
@@ -50,6 +52,7 @@
         {
             return [
                 "filemaintenence",
+                "FILE MAINTENANCE MENU",
                 "1 - REINDEX SELECTED MAIN FILES (Normally use this to Reindex)",
                 "2 - REINDEX ALL/SPECIFIC DATA FILES",
                 "3 - CREATE SUPPLEMENTAL CUST/SUP/FRT INQUIRY FILES",
@@ -65,6 +68,7 @@
         {
             return [
                 "masterfileupdate",
+                "MASTER FILE UPDATE MENU",
                 "1 - REMIT TO SUPPLIERS",
                 "2 - SHIPPED FROM SUPPLIERS",
                 "3 - BILL TO CUSTOMERS",

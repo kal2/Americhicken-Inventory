@@ -22,9 +22,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         }
         public void SetProgramLabels()
         {
-            _mainWindow.SetProgramLabel("Remit Insurance");
+            _mainWindow.SetProgramLabel("ADD REMIT TO SUPPLIER INFORMATION");
             _mainWindow.SetTextBoxLabel("Action: ");
-            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Cancel    4. Main Menu");
+            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Cancel");
         }
 
         private void SetTextBoxText(TextBox textBox, object? value)

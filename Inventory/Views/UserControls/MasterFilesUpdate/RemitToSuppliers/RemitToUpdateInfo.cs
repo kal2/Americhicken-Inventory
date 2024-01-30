@@ -37,7 +37,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         // -- methods -- //
         public void SetProgramLabels()
         {
-            _mainWindow.SetProgramLabel("Remit To Update Info");
+            _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE REMIT TO SUPPLIER INFORMATION");
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel    5. Save/Update Insurance");
             _mainWindow.SetTextBoxLabel("ACTION:");
         }

@@ -29,9 +29,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.Salesperson
         }
         public void SetProgramLabels()
         {
-            _mainWindow.SetProgramLabel("Salesperson");
+            _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE SALESPERSON INFORMATION");
             _mainWindow.SetTextBoxLabel("Action: ");
-            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Main Menu    5. Save/Update Insurance");
+            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
         }
 
         public void PerformAction(string userInput)
