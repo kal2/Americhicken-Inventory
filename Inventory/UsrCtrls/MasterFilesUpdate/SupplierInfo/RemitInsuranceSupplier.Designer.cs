@@ -1,6 +1,6 @@
 ﻿namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
-    partial class RemitInsurance
+    partial class RemitInsuranceSupplier
     {
         /// <summary> 
         /// Required designer variable.

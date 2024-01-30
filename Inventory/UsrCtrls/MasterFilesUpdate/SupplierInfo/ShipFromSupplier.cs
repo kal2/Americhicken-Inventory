@@ -4,7 +4,7 @@ using Inventory.Services;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
-    public partial class ShipFromUpdateInfo : UserControl, IActiveControlManager
+    public partial class ShipFromSupplier : UserControl, IActiveControlManager
     {
         //--------Class Variables--------//
 
@@ -16,7 +16,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         //--------Constructor--------//
 
-        public ShipFromUpdateInfo(MainWindow mainWindow, ActiveControlManager activeControlManager)
+        public ShipFromSupplier(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
             _mainWindow = mainWindow;

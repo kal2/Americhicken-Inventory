@@ -1,6 +1,6 @@
 ﻿namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
-    partial class ShipFromUpdateInfo
+    partial class ShipFromSupplier
     {
         /// <summary> 
         /// Required designer variable.

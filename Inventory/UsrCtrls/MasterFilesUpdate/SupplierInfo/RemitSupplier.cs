@@ -14,7 +14,7 @@ using Inventory.Services;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
-    public partial class RemitToUpdateInfo : UserControl, IActiveControlManager
+    public partial class RemitSupplier : UserControl, IActiveControlManager
     {
         // -- class variables -- //
         private readonly MainWindow _mainWindow;
@@ -22,7 +22,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         private rem_sup _remitData;
         private readonly AmerichickenContext dbContext;
 
-        public RemitToUpdateInfo(MainWindow mainWindow, ActiveControlManager activeControlManager)
+        public RemitSupplier(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
 
@@ -199,7 +199,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     //save/update insurance
                     UpdateRemitData(_remitData);
                     _mainWindow.DisposeControl(this);
-                    RemitInsurance remitInsuranceInstance = new(_mainWindow, _activeControlManager);
+                    RemitInsuranceSupplier remitInsuranceInstance = new(_mainWindow, _activeControlManager);
                     remitInsuranceInstance.DisplayRemitInsuranceData(_remitData);
                     _activeControlManager.SetActiveControl(remitInsuranceInstance);
 

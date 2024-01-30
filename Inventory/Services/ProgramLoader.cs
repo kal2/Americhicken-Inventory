@@ -40,7 +40,7 @@ namespace Inventory.Services
     //Remit To Supplier
         public void LoadRemitToSupplier()
         {
-            RemitToUpdateInfo remitToUpdateInfo = new (_mainWindow, _activeControlManager);
+            RemitSupplier remitToUpdateInfo = new (_mainWindow, _activeControlManager);
             DbSearch dbSearch = new (_mainWindow, _activeControlManager);
             dbSearch.SetTable("remitTo");
             dbSearch.SearchCompleted += (f3, f4) => HandleRemitToSearchCompleted(f3!, f4);
@@ -71,7 +71,7 @@ namespace Inventory.Services
     //Ship From Supplier
         public void LoadShipFromSupplier()
         {
-            ShipFromUpdateInfo shipFromUpdateInfo = new (_mainWindow, _activeControlManager);
+            ShipFromSupplier shipFromUpdateInfo = new (_mainWindow, _activeControlManager);
             DbSearch dbSearch = new (_mainWindow, _activeControlManager);
             dbSearch.SetTable("supplier");
             dbSearch.SearchCompleted += (f3, f4) => HandleSupplierSearchCompleted(f3!, f4);

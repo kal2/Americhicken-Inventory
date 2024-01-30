@@ -5,14 +5,14 @@ using Inventory.Services;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
-    public partial class RemitInsurance : UserControl, IActiveControlManager
+    public partial class RemitInsuranceSupplier : UserControl, IActiveControlManager
     {
         // --- class variables --- //
         private readonly ActiveControlManager _activeControlHelper;
         private readonly MainWindow _mainWindow;
         private readonly AmerichickenContext dbContext;
         private rem_sup _remitData;
-        public RemitInsurance(MainWindow mainWindow, ActiveControlManager activeControlManager)
+        public RemitInsuranceSupplier(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
             _activeControlHelper = activeControlManager;
@@ -273,7 +273,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     break;
                 case "3":
                     //cancel
-                    RemitToUpdateInfo remitInstance = new(_mainWindow, _activeControlHelper);
+                    RemitSupplier remitInstance = new(_mainWindow, _activeControlHelper);
                     remitInstance.DisplayRemitToData(_remitData);
                     _mainWindow.DisposeControl(this);
                     _activeControlHelper.SetActiveControl(remitInstance);
