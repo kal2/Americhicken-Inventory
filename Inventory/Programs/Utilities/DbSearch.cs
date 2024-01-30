@@ -153,23 +153,23 @@ namespace Inventory.Views.UserControls
             switch (selectedTable)
             {
                 case "supplier":
-                    programLabel = "Supplier";
+                    programLabel = "SUPPLIER";
                     break;
 
                 case "remitTo":
-                    programLabel = "Remit To";
+                    programLabel = "REMIT TO";
                     break;
 
                 case "freight":
-                    programLabel = "Freight Carrier";
+                    programLabel = "FREIGHT CARRIER";
                     break;
 
                 case "bil_buy":
-                    programLabel = "Customer";
+                    programLabel = "CUSTOMER";
                     break;
 
                 case "buyer":
-                    programLabel = "Customer";
+                    programLabel = "CUSTOMER";
                     break;
 
                 default:
@@ -177,7 +177,7 @@ namespace Inventory.Views.UserControls
                     break;
             }
 
-            _mainWindow.SetProgramLabel("Search for " + programLabel);
+            _mainWindow.SetProgramLabel("SEARCH FOR " + programLabel);
         }
 
         private void searchQueryTextBox_KeyDown(object sender, KeyEventArgs e)
