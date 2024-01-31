@@ -41,8 +41,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                     DeleteFreight(_freightData!);
                     break;
                 case "4":
-                    _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
+                    using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
+                    {
+                        _mainWindow.DisposeControl(this);
+                        _programLoader.LoadProgram("freightCarrier");
+                    }
                     break;
                 case "5":
                     SaveAndUpdateInsurance();

@@ -41,8 +41,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                     DeleteShipToCustomer(_buyer);
                     break;
                 case "4":
-                    _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
+                    using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
+                    {
+                        _mainWindow.DisposeControl(this);
+                        _programLoader.LoadProgram("buyer");
+                    }
                     break;
                 default:
                     MessageBox.Show("ERROR: Invalid input, please contact developer");

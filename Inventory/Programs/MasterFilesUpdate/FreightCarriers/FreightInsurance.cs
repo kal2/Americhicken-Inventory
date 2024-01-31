@@ -35,24 +35,16 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             switch (userInput)
             {
                 case "1":
-                    //Save
                     UpdateFreightInsuranceData(_freightData);
                     break;
                 case "2":
-                    //Edit
                     insTp1TextBox.Focus();
                     break;
                 case "3":
-                    //Cancel
-                    _mainWindow.DisposeControl(this);
                     FreightCarriers freightCarriers = new FreightCarriers(_mainWindow, _activeControlManager);
                     freightCarriers.DisplayFreightCarrierData(_freightData);
-                    _activeControlManager.SetActiveControl(freightCarriers);
-                    break;
-                case "4":
-                    //Main Menu
                     _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
+                    _activeControlManager.SetActiveControl(freightCarriers);
                     break;
                 default:
                     MessageBox.Show("ERROR: Invalid input, please try again or contact developer");

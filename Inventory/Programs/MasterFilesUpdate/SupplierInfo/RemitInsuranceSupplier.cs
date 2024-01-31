@@ -277,12 +277,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     remitInstance.DisplayRemitToData(_remitData);
                     _mainWindow.DisposeControl(this);
                     _activeControlHelper.SetActiveControl(remitInstance);
-
-                    break;
-                case "4":
-                    //main menu
-                    _mainWindow.DisposeControl(this);
-                    _activeControlHelper.SetActiveControl(new MenuList(_mainWindow, _activeControlHelper));
                     break;
                 default:
                     MessageBox.Show("Invalid input, please try again or contact developer");

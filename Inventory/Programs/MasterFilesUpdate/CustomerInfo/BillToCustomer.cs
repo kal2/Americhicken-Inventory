@@ -42,8 +42,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                     DeleteBillToData(_bil_Buy);
                     break;
                 case "4":
-                    _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
+                    using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
+                    {
+                        _mainWindow.DisposeControl(this);
+                        _programLoader.LoadProgram("bil_buy");
+                    }
                     break;
                 default:
                     MessageBox.Show("ERROR: Invalid input, please try again or contact developer");

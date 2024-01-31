@@ -33,8 +33,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             //wait for control to load then focus remitnametextbox
             this.Load += (s, e) => RemitNameTextBox.Focus();
         }
-
-        // -- methods -- //
         public void SetProgramLabels()
         {
             _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE REMIT TO SUPPLIER INFORMATION");
@@ -179,24 +177,22 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             switch (userInput)
             {
                 case "1":
-                    //save
                     UpdateRemitData(_remitData);
                     break;
                 case "2":
-                    //edit
                     RemitNameTextBox.Focus();
                     break;
                 case "3":
-                    //delete
                     DeleteRemitTo(_remitData);
                     break;
                 case "4":
-                    //cancel
-                    _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
+                    using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
+                    {
+                        _mainWindow.DisposeControl(this);
+                        _programLoader.LoadProgram("remitToSupplier");
+                    }
                     break;
                 case "5":
-                    //save/update insurance
                     UpdateRemitData(_remitData);
                     _mainWindow.DisposeControl(this);
                     RemitInsuranceSupplier remitInsuranceInstance = new(_mainWindow, _activeControlManager);

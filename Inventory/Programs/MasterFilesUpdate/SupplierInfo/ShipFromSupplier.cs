@@ -203,17 +203,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             switch (userInput)
             {
                 case "1":
-                    //add or update supplier
                     UpdateSupplier(_supplierData!);
                     break;
 
                 case "2":
-                    //return to edit supplier info
                     supnameTextBox.Focus();
                     break;
 
                 case "3":
-                    //delete supplier
                     DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this supplier?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (dialogResult == DialogResult.Yes)
@@ -231,9 +228,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     break;
 
                 case "4":
-                    //returns user to main menu
-                    _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
+                    using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
+                    {
+                        _mainWindow.DisplayControl(this);
+                        _programLoader.LoadProgram("shipFromSupplier");
+                    }
                     break;
 
                 default:

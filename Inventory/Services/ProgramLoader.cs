@@ -6,8 +6,12 @@ using Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo;
 
 namespace Inventory.Services
 {
-    public class ProgramLoader(MainWindow _mainWindow, ActiveControlManager _activeControlManager)
+    public class ProgramLoader(MainWindow _mainWindow, ActiveControlManager _activeControlManager) : IDisposable
     {
+        public void Dispose()
+        {
+            
+        }
         public void LoadProgram(string programName)
         {
             switch (programName)
