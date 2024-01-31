@@ -44,7 +44,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                     using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
                     {
                         _mainWindow.DisposeControl(this);
-                        _programLoader.LoadProgram("freightCarrier");
+                        _programLoader.LoadProgram("freight");
                     }
                     break;
                 case "5":

@@ -1,13 +1,13 @@
 ﻿using Inventory.Models;
 using Inventory.Services;
 using Inventory.Interfaces;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using System.Net.Http.Headers;
 
 namespace Inventory.Views.UserControls
 {
     public partial class MatchSelect : UserControl, IActiveControlManager
     {
-        // -- Class Variables -- //
-
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
         private string matchSelectLabel = string.Empty;
@@ -16,8 +16,6 @@ namespace Inventory.Views.UserControls
         private int i = 0;
         private readonly int _pageSize = 11;
         private int _currentPage = 1;
-
-        // -- Event Handlers -- //
 
         public event EventHandler<SelectedSearchResultEventArgs> SelectedSearchResult;
 
@@ -31,8 +29,6 @@ namespace Inventory.Views.UserControls
             }
         }
 
-        // -- Constructor -- //
-
         public MatchSelect(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
@@ -40,8 +36,6 @@ namespace Inventory.Views.UserControls
             _activeControlManager = activeControlManager; 
             Load += (s, e) => selectedItemNumber.Focus();
         }
-
-        // -- Methods -- //
 
         public void SetMatchSelectLabel(string label)
         {
@@ -75,7 +69,7 @@ namespace Inventory.Views.UserControls
             {
                 _results = results;
                 _selectedTable = selectedTable;
-                DisplayResults(results, selectedTable);
+                DisplayResults(_results, _selectedTable);
             }
         }
 
@@ -86,7 +80,7 @@ namespace Inventory.Views.UserControls
             Dictionary<string, Func<object, ListViewItem>> displayHandlers = new Dictionary<string, Func<object, ListViewItem>>()
             {
                 { "supplier", item => CreateListViewItem(item as supplier) },
-                { "remitTo", item => CreateListViewItem(item as rem_sup) },
+                { "rem_sup", item => CreateListViewItem(item as rem_sup) },
                 { "freight", item => CreateListViewItem(item as freight) },
                 { "bil_buy", item => CreateListViewItem(item as bil_buy) },
                 { "buyer", item => CreateListViewItem(item as buyer) },
@@ -174,10 +168,6 @@ namespace Inventory.Views.UserControls
             return buyerSelectionChoice;
         }
 
-
-
-        // -- Event Listeners -- //
-
         public void PerformAction(string userInput)
         {
             switch (userInput)
@@ -187,7 +177,7 @@ namespace Inventory.Views.UserControls
                     if (_currentPage < Math.Ceiling((double)_results.Count / _pageSize))
                     {
                         _currentPage++;
-                        DisplayResults(_results, _selectedTable);  // Reuse DisplayResults with pagination
+                        DisplayResults(_results, _selectedTable);
                     }
                     break;
 
@@ -196,14 +186,14 @@ namespace Inventory.Views.UserControls
                     if (_currentPage > 1)
                     {
                         _currentPage--;
-                        DisplayResults(_results, _selectedTable);  // Reuse DisplayResults with pagination
+                        DisplayResults(_results, _selectedTable);
                     }
                     break;
 
                 case "3":
                     //first page
                     _currentPage = 1;
-                    DisplayResults(_results, _selectedTable);  // Reuse DisplayResults with pagination
+                    DisplayResults(_results, _selectedTable);
                     break;
 
                 case "4":
@@ -213,9 +203,11 @@ namespace Inventory.Views.UserControls
                     break;
 
                 case "5":
-                    //Main Menu
-                    _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
+                    //Cancel
+                    using (var programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
+                    {
+                        programLoader.LoadProgram(_selectedTable);
+                    }
                     break;
             }
             _mainWindow.ClearTextBox();

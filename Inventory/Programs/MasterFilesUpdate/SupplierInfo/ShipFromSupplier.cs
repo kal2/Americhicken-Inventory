@@ -5,16 +5,11 @@ using Inventory.Services;
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
     public partial class ShipFromSupplier : UserControl, IActiveControlManager
-    {
-        //--------Class Variables--------//
-
-        private readonly MainWindow _mainWindow;
+    {private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
         private supplier? _supplierData;
         private rem_sup? remitToObject;
         private readonly AmerichickenContext dbContext;
-
-        //--------Constructor--------//
 
         public ShipFromSupplier(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
@@ -25,8 +20,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             dbContext = new AmerichickenContext();
         }
 
-        //--------Methods--------//
-
         public void SetProgramLabels()
         {
             _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE SHIPPED FROM SUPPLIER INFORMATION");
@@ -36,8 +29,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         public void GetShipFromData(supplier supplierObject)
         {
-            // If casting succeeded, and supplierObject is not null.
-            // Assign all the appropriate object data to the corresponding fields to display/edit.
             _supplierData = supplierObject;
             supnameTextBox.Text = supplierObject.name?.ToString().Trim();
             phoneMaskTextBox.Text = $"{supplierObject.area_code?.ToString().Trim() + supplierObject.phone?.ToString().Trim()}";
@@ -53,7 +44,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             shipFromZipTextBox.Text = supplierObject.zip?.ToString().Trim();
             noteTextBox.Text = supplierObject.note?.ToString().Trim();
 
-            // If the supplier has a remit to code, get the remit to data and display it
             if (supplierObject.rsupcode != null)
             {
                 remitToObject = dbContext.rem_sup.SingleOrDefault(s => s.rsupcode == supplierObject.rsupcode);
@@ -69,14 +59,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         {
             if (supplierData != null)
             {
-                // Compare the modified values with the original values to detect changes, and only save if changes are detected
                 if (IsDataModified(supplierData))
                 {
-                    // Update the supplier in the database
                     var existingSupplier = dbContext.supplier.Find(supplierData.PK_supplier);
                     if (existingSupplier != null)
                     {
-                        // Update the properties with the modified values
                         existingSupplier.name = supnameTextBox.Text.Trim();
                         existingSupplier.area_code = phoneMaskTextBox.Text.Trim()[..3];
                         existingSupplier.phone = phoneMaskTextBox.Text.Trim()[3..];
@@ -93,7 +80,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         existingSupplier.note = noteTextBox.Text.Trim();
                         existingSupplier.rsupcode = remitToObject!.rsupcode;
 
-                        dbContext.SaveChanges(); // Save changes to the database
+                        dbContext.SaveChanges();
                     }
                     else
                     {
@@ -106,7 +93,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 DialogResult dialogResult = MessageBox.Show("You are about to add a new supplier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    //Grab user inputs and save to new supplier in db table
                     supplier newSupplier = new()
                     {
                         name = supnameTextBox.Text.Trim(),
@@ -144,12 +130,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         {
             if (supplierData != null)
             {
-                // Delete the supplier from the database
                 var existingSupplier = dbContext.supplier.Find(supplierData.PK_supplier);
                 if (existingSupplier != null)
                 {
                     dbContext.supplier.Remove(existingSupplier);
-                    dbContext.SaveChanges(); // Save changes to the database
+                    dbContext.SaveChanges();
                 }
                 else
                 {
@@ -164,7 +149,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private void DisplayRemitData(rem_sup remData)
         {
-            // Display the remit to data if one is associated with the supplier
             remitToObject = remData;
             if (remitToObject != null)
             {
@@ -180,7 +164,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private bool IsDataModified(supplier supplierData)
         {
-            // Compare the user interface values with the original data, return true if differences are detected
             return supplierData == null || supnameTextBox.Text != supplierData.name ||
                    phoneMaskTextBox.Text != supplierData.area_code + supplierData.phone ||
                    faxMaskTextBox.Text != supplierData.fax ||
@@ -195,9 +178,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                    shipFromZipTextBox.Text != supplierData.zip ||
                    remitToObject!.rsupcode != supplierData.rsupcode;
         }
-
-        //--------Event Listeners--------//
-
         public void PerformAction(string userInput)
         {
             switch (userInput)
@@ -231,7 +211,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
                     {
                         _mainWindow.DisplayControl(this);
-                        _programLoader.LoadProgram("shipFromSupplier");
+                        _programLoader.LoadProgram("supplier");
                     }
                     break;
 
@@ -244,7 +224,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private void RemitToNameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            //Waits to execute code until enter key is pressed in input area
             if (e.KeyCode == Keys.Enter)
             {
                 if (remitToNameTextBox.Text.Length != 0)
@@ -261,8 +240,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 }
             }
         }
-
-        //Store the search results along with the db table searched in order to load the appropriate program and pass the data to display/edit
         public void HandleSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
         {
             MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);

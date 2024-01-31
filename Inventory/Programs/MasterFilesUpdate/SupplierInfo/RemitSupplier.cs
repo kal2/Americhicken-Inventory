@@ -189,7 +189,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
                     {
                         _mainWindow.DisposeControl(this);
-                        _programLoader.LoadProgram("remitToSupplier");
+                        _programLoader.LoadProgram("rem_sup");
                     }
                     break;
                 case "5":

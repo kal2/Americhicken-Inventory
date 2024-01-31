@@ -16,15 +16,15 @@ namespace Inventory.Services
         {
             switch (programName)
             {
-                case "remitToSupplier":
+                case "rem_sup":
                     LoadRemitToSupplier();
                     break;
 
-                case "shipFromSupplier":
+                case "supplier":
                     LoadShipFromSupplier();
                     break;
 
-                case "freightCarrier":
+                case "freight":
                     LoadFreightCarrier();
                     break;
 

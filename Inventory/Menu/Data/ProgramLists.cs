@@ -16,7 +16,7 @@
             return
             [
                 "program",
-                "remitToSupplier"
+                "rem_sup"
             ];
         }
 
@@ -25,7 +25,7 @@
             return
             [
                 "program",
-                "shipFromSupplier"
+                "supplier"
             ];
         }
         public static string[] FreightCarrier()
@@ -33,7 +33,7 @@
             return
             [
                 "program",
-                "freightCarrier"
+                "freight"
             ];
         }
 
