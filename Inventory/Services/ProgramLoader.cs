@@ -44,6 +44,7 @@ namespace Inventory.Services
     //Remit To Supplier
         public void LoadRemitToSupplier()
         {
+            _mainWindow.SetLastMenuDisplayed("masterfileupdate");
             RemitSupplier remitToUpdateInfo = new (_mainWindow, _activeControlManager);
             DbSearch dbSearch = new (_mainWindow, _activeControlManager);
             dbSearch.SetTable("remitTo");
@@ -75,6 +76,7 @@ namespace Inventory.Services
     //Ship From Supplier
         public void LoadShipFromSupplier()
         {
+            _mainWindow.SetLastMenuDisplayed("masterfileupdate");
             ShipFromSupplier shipFromUpdateInfo = new (_mainWindow, _activeControlManager);
             DbSearch dbSearch = new (_mainWindow, _activeControlManager);
             dbSearch.SetTable("supplier");
@@ -106,6 +108,7 @@ namespace Inventory.Services
     //Freight Carrier
         public void LoadFreightCarrier()
         {
+            _mainWindow.SetLastMenuDisplayed("masterfileupdate");
             FreightCarriers freightCarrierInstance = new (_mainWindow, _activeControlManager);
             DbSearch dbSearch = new (_mainWindow, _activeControlManager);
             dbSearch.SetTable("freight");
@@ -143,6 +146,7 @@ namespace Inventory.Services
         //Ship To Customer
         public void LoadShipToCustomer()
         {
+            _mainWindow.SetLastMenuDisplayed("masterfileupdate");
             ShipToCustomer shipToCustomer = new (_mainWindow, _activeControlManager);
             DbSearch dbSearch = new (_mainWindow, _activeControlManager);
             dbSearch.SetTable("buyer");
@@ -180,6 +184,7 @@ namespace Inventory.Services
         //Bill To Customer
         public void LoadBillToCustomer()
         {
+            _mainWindow.SetLastMenuDisplayed("masterfileupdate");
             BillToCustomer billToCustomerInstance  = new (_mainWindow, _activeControlManager);
             DbSearch dbSearch = new (_mainWindow, _activeControlManager);
             dbSearch.SetTable("bil_buy");

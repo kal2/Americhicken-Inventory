@@ -1,6 +1,7 @@
 ﻿using Inventory.Interfaces;
 using Inventory.UI.Menu;
 using Inventory.Services;
+using Inventory.UI.Data;
 
 namespace Inventory
 {
@@ -21,15 +22,42 @@ namespace Inventory
         {
             _mainWindow.SetProgramLabel("Menu List");
         }
-
-        public void PerformAction(string userInput)
+        public void SetCurrentMenu(string menu)
+        {
+            _currentMenu = menu;
+        }
+        public void PerformAction(string? userInput)
         {
             menuListBox.BeginUpdate();
             menuListBox.Items.Clear();
 
-            var menuItems = MenuUserSelection.UserMenuSelection(_currentMenu, userInput);
-            _currentMenu = menuItems[0];
+            string[] menuItems;
 
+            if (userInput == null)
+            {
+                switch (_currentMenu)
+                {
+                    case "main":
+                        menuItems = MenuItemLists.MainMenu();
+                        break;
+                    case "filemaintenence":
+                        menuItems = MenuItemLists.FileMaintenenceMenuItems();
+                        break;
+                    case "masterfileupdate":
+                        menuItems = MenuItemLists.MasterFileUpdateMenuItems();
+                        break;
+                    default:
+                        menuItems = MenuItemLists.MainMenu();
+                        break;
+                }
+            }
+            else
+            {
+                menuItems = MenuUserSelection.UserMenuSelection(_currentMenu, userInput);
+                _currentMenu = menuItems[0];
+
+               
+            }
             if (_currentMenu != "program")
             {
                 _mainWindow.SetProgramLabel(menuItems[1]);
@@ -49,8 +77,10 @@ namespace Inventory
 
         private void LoadProgram(string programName)
         {
-            var programLoader = new ProgramLoader(_mainWindow, _activeControlManager);
-            programLoader.LoadProgram(programName);
+            using (var programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
+            {
+                programLoader.LoadProgram(programName);
+            }
         }
     }
 }

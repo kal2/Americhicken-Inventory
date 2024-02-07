@@ -1,32 +1,22 @@
-using Inventory.Models;
-using Inventory.Purchase_Orders;
-using Inventory.Views.UserControls;
-using Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers;
-using System.DirectoryServices;
-using Inventory.Interfaces;
 using Inventory.Services;
-using System.Windows.Forms.VisualStyles;
 
 namespace Inventory
 {
     public partial class MainWindow : Form
     {
-        // -- Class Variables -- //
         private readonly ActiveControlManager _activeControlManager;
+        private string _lastMenuDisplayed;
 
         public MainWindow()
         {
             InitializeComponent();
 
             _activeControlManager = new ActiveControlManager(this);
-
-            //Sets the initial control to the MenuList
             _activeControlManager.SetActiveControl(new MenuList(this, _activeControlManager));
 
             Load += (s, e) => dateLabel.Text = DateTime.Now.Date.ToString("d");
         }
 
-        //Displays passed control in the main window
         public void DisplayControl(UserControl control)
         {
             splitContainer2.Panel1.Controls.Add(control);
@@ -46,7 +36,6 @@ namespace Inventory
 
         private void MainWindow_Shown(object sender, EventArgs e)
         {
-            //Sets focus to user input field
             userActionInputMain.actionInput.Focus();
         }
 
@@ -96,6 +85,18 @@ namespace Inventory
             userActionInputMain.actionInput.KeyDown -= handler;
         }
 
+        public void SetLastMenuDisplayed(string currentMenu)
+        {
+            _lastMenuDisplayed = currentMenu;
+        }
+
+        public void DisplayLastMenu()
+        {
+            MenuList menuList = new(this, _activeControlManager);
+            menuList.SetCurrentMenu(_lastMenuDisplayed);
+            menuList.PerformAction(null);
+            _activeControlManager.SetActiveControl(menuList);
+        }
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.PageDown)

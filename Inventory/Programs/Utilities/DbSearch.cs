@@ -53,21 +53,8 @@ namespace Inventory.Views.UserControls
         {
             if (ValidationHelper.IsEmpty(searchInput))
             {
-                DialogResult dialogResult = MessageBox.Show("SearchBox is Empty. Do you want to add a new entry?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (dialogResult == DialogResult.Yes)
-                {
-                    _mainWindow.DisposeControl(this);
-                    SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null!, selectedTable));
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("ERROR: Something went wrong checking searchbox text, please contact developer");
-                }
+                _mainWindow.DisposeControl(this);
+                _mainWindow.DisplayLastMenu();
             }
             else
             {
@@ -89,7 +76,7 @@ namespace Inventory.Views.UserControls
                     case "freight":
                         searchResults = context.freight.Where(s => EF.Functions.Like(s.NAME, searchInput + "%")).ToList().Cast<object>().ToList();
                         break;
-                    
+
                     case "bil_buy":
                         searchResults = context.bil_buy.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
                         break;
@@ -104,7 +91,9 @@ namespace Inventory.Views.UserControls
 
                 if (searchResults.Count == 0)
                 {
-                    MessageBox.Show("No results found");
+                    //No Results Found. Woud you like to add a new entry?
+
+                    SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null!, selectedTable));
                 }
                 else
                 {
@@ -135,7 +124,7 @@ namespace Inventory.Views.UserControls
 
                 case "3":
                     _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(new MenuList(_mainWindow, _activeControlManager));
+                    _mainWindow.DisplayLastMenu();
                     break;
 
                 default:
