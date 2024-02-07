@@ -4,18 +4,15 @@ namespace Inventory.Services
 {
     public class ActiveControlManager
     {
-        // -- Class Variables -- //
         private MainWindow _mainWindow;
         private IActiveControlManager _activeControl;
 
-        // -- Constructor -- //
         public ActiveControlManager(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
             _mainWindow.AttachTextBoxKeyDownHandler(HandleUserInput);
         }
 
-        // -- Methods -- //
         public void SetActiveControl(IActiveControlManager activeControl)
         {
             _activeControl = activeControl;

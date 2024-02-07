@@ -1,4 +1,5 @@
 using Inventory.Services;
+using System.Windows.Forms;
 
 namespace Inventory
 {
@@ -92,11 +93,18 @@ namespace Inventory
 
         public void DisplayLastMenu()
         {
-            MenuList menuList = new(this, _activeControlManager);
-            menuList.SetCurrentMenu(_lastMenuDisplayed);
-            menuList.PerformAction(null);
-            _activeControlManager.SetActiveControl(menuList);
+            MenuList _menuList = new(this, _activeControlManager);
+            _menuList.SetCurrentMenu(_lastMenuDisplayed);
+            _activeControlManager.SetActiveControl(_menuList);
+            _menuList.PerformAction(null);
+            FocusTextBox();
         }
+
+        public void AskConfirmation(string message)
+        {
+            //display new control with message and "Y/N" options in panel 2
+        }
+
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.PageDown)
