@@ -25,6 +25,7 @@ namespace Inventory.Services
 
         private void HandleUserInput(object sender, KeyEventArgs e)
         {
+            // If the user presses the enter key the "PerformAction" method, passing in user input, is called on the active control
             if (_activeControl != null)
             {
                 if (e.KeyCode == Keys.Enter)

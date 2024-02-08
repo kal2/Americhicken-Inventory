@@ -178,10 +178,10 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             
         }
 
-        private void CreateNewBillTo()
+        private async void CreateNewBillTo()
         {
-            DialogResult dialogResult = MessageBox.Show("You are about to add a new freight carrier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.Yes)
+            bool userAnswer = await _mainWindow.DisplayUserConfirmation("You Are About to Make a New Bill To Customer. Would you like to continue?");
+            if (userAnswer == true)
             {
                 bil_buy bil_Buy = new();
                 SetBillToProperties(bil_Buy);
@@ -189,7 +189,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                 dbContext.bil_buy.Add(bil_Buy);
                 dbContext.SaveChanges();
             }
-            else if (dialogResult == DialogResult.No)
+            else if (userAnswer == false)
             {
                 return;
             }

@@ -37,7 +37,7 @@
             warningLabel.AutoSize = true;
             warningLabel.Font = new Font("Segoe UI", 16F);
             warningLabel.ForeColor = Color.White;
-            warningLabel.Location = new Point(235, 35);
+            warningLabel.Location = new Point(235, 28);
             warningLabel.Name = "warningLabel";
             warningLabel.Size = new Size(796, 30);
             warningLabel.TabIndex = 0;
@@ -48,12 +48,13 @@
             confirmationInput.BackColor = Color.Maroon;
             confirmationInput.Font = new Font("Segoe UI", 15F);
             confirmationInput.ForeColor = Color.White;
-            confirmationInput.Location = new Point(1034, 33);
+            confirmationInput.Location = new Point(1034, 26);
             confirmationInput.Margin = new Padding(0);
             confirmationInput.MaxLength = 2;
             confirmationInput.Name = "confirmationInput";
             confirmationInput.Size = new Size(40, 34);
             confirmationInput.TabIndex = 47;
+            confirmationInput.KeyDown += confirmationInput_KeyDown;
             // 
             // UserConfirmation
             // 
