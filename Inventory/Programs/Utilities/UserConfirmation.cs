@@ -7,17 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Inventory.Services;
 
-namespace Inventory.Views.UserControls.Utilities
+namespace Inventory.Programs.Utilities
 {
-    public partial class UserActionInput : UserControl
+    public partial class UserConfirmation : UserControl
     {
-
-        public UserActionInput()
+        public UserConfirmation()
         {
             InitializeComponent();
-
         }
     }
 }
