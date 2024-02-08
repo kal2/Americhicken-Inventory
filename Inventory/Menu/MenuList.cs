@@ -21,8 +21,6 @@ namespace Inventory
         public void SetProgramLabels()
         {
             _mainWindow.SetProgramLabel("Menu List");
-            _mainWindow.SetCommandsLabel("");
-            _mainWindow.SetTextBoxLabel("CHOICE: ");
         }
         public void SetCurrentMenu(string menu)
         {
