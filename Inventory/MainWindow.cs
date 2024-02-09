@@ -36,36 +36,33 @@ namespace Inventory
             _activeControlManager.SetActiveControl(menuList);
         }
 
+        public bool AskUserConfirmation(string? message)
+        {
+            bool _confirmation = false;
+            bool _userAnswered = false;
+
+            UserConfirmation _userConfirmation = new UserConfirmation();
+            _userConfirmation.UserChoice += (s, e) =>
+
+            DisplayUserConfirmation(_userConfirmation, message);
+
+
+        }
 
         //NEED TO SEPERATE THIS INTO "DISPLAY > PROCESS > DISPOSE > RETURN" METHODS SO THAT THIS MIGHT ACTUALLY WORK
-        public async Task<bool> DisplayUserConfirmation(string? message)
+        public void DisplayUserConfirmation(UserConfirmation userConfirmation, string? message)
         {
-            bool _userAnswer = false;
             userActionInputMain.Visible = false;
-            UserConfirmation _userConfirmation = new UserConfirmation();
 
             if (message != null)
             {
-                _userConfirmation.SetMessage(message);
+                userConfirmation.SetMessage(message);
             }
 
-            _userConfirmation.UserChoice += (s, e) =>
-            {
-                _userAnswer = e.UserChoice;
-                // Dispose of the confirmation control and restore visibility
-                _userConfirmation.Dispose();
-                userActionInputMain.Visible = true;
-            };
-
-            splitContainer2.Panel2.Controls.Add(_userConfirmation);
-            _userConfirmation.Dock = DockStyle.Fill;
-            _userConfirmation.BringToFront();
+            splitContainer2.Panel2.Controls.Add(userConfirmation);
+            userConfirmation.Dock = DockStyle.Fill;
+            userConfirmation.BringToFront();
             splitContainer2.Panel2.Refresh();
-
-            // Await the user's choice asynchronously
-            await Task.Yield();  // Allow UI to update and handle user interaction
-
-            return _userAnswer;
         }
 
         public void DisposeControl(UserControl control)
