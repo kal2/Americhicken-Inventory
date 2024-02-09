@@ -34,6 +34,7 @@
             splitContainer1 = new SplitContainer();
             tableLayoutPanel1 = new TableLayoutPanel();
             splitContainer2 = new SplitContainer();
+            mainUserConfirmation = new Programs.Utilities.UserConfirmation();
             userActionInputMain = new Views.UserControls.Utilities.UserActionInput();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -133,11 +134,21 @@
             // 
             // splitContainer2.Panel2
             // 
+            splitContainer2.Panel2.Controls.Add(mainUserConfirmation);
             splitContainer2.Panel2.Controls.Add(userActionInputMain);
             splitContainer2.Size = new Size(1324, 801);
             splitContainer2.SplitterDistance = 703;
             splitContainer2.TabIndex = 1;
             splitContainer2.TabStop = false;
+            // 
+            // mainUserConfirmation
+            // 
+            mainUserConfirmation.BackColor = Color.Transparent;
+            mainUserConfirmation.Location = new Point(8, 4);
+            mainUserConfirmation.Name = "mainUserConfirmation";
+            mainUserConfirmation.Size = new Size(1309, 86);
+            mainUserConfirmation.TabIndex = 1;
+            mainUserConfirmation.Visible = false;
             // 
             // userActionInputMain
             // 
@@ -184,5 +195,6 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Views.UserControls.Utilities.UserActionInput userActionInputMain;
         private SplitContainer splitContainer2;
+        private Programs.Utilities.UserConfirmation mainUserConfirmation;
     }
 }

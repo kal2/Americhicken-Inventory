@@ -1,6 +1,7 @@
 ﻿using Inventory.Models;
 using Inventory.Services;
 using Inventory.Interfaces;
+using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
 {
@@ -178,24 +179,31 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             
         }
 
-        private async void CreateNewBillTo()
+        private void CreateNewBillTo()
         {
-            bool userAnswer = await _mainWindow.DisplayUserConfirmation("You Are About to Make a New Bill To Customer. Would you like to continue?");
-            if (userAnswer == true)
+            _mainWindow.AttachConfirmationEventListener(HandleUserInput);
+
+            _mainWindow.AskUserConfirmation("You Are About to Make a New Bill To Customer. Would you like to continue?");
+
+            void HandleUserInput(object sender, UserConfirmationEventArgs e)
             {
-                bil_buy bil_Buy = new();
-                SetBillToProperties(bil_Buy);
-                _bil_Buy = bil_Buy;
-                dbContext.bil_buy.Add(bil_Buy);
-                dbContext.SaveChanges();
-            }
-            else if (userAnswer == false)
-            {
-                return;
-            }
-            else
-            {
-                MessageBox.Show("ERROR: Something went wrong, please contact developer");
+                if (e.UserChoice == true)
+                {
+                    bil_buy bil_Buy = new();
+                    SetBillToProperties(bil_Buy);
+                    _bil_Buy = bil_Buy;
+                    dbContext.bil_buy.Add(bil_Buy);
+                    dbContext.SaveChanges();
+                }
+                else if (e.UserChoice == false)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Something went wrong, please contact developer");
+                }
+                _mainWindow.DetachConfirmationEventListener(HandleUserInput);
             }
         }
         private void UpdateBillToData(bil_buy bil_Buy)

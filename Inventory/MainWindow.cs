@@ -1,5 +1,7 @@
 using Inventory.Services;
 using Inventory.Programs.Utilities;
+using System.Runtime.CompilerServices;
+using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory
 {
@@ -28,6 +30,12 @@ namespace Inventory
             splitContainer2.Panel1.Refresh();
         }
 
+        public void DisposeControl(UserControl control)
+        {
+            splitContainer2.Panel1.Controls.Remove(control);
+            control.Dispose();
+        }
+
         public void DisplayLastMenu()
         {
             MenuList menuList = new(this, _activeControlManager);
@@ -36,39 +44,38 @@ namespace Inventory
             _activeControlManager.SetActiveControl(menuList);
         }
 
-        public bool AskUserConfirmation(string? message)
+
+        //Added user confirmation to main form to allow event handling mainUserConfirmation
+        //ToDo: Add event handling for user confirmation
+        public void AttachConfirmationEventListener(EventHandler<UserConfirmationEventArgs> handler)
         {
-            bool _confirmation = false;
-            bool _userAnswered = false;
-
-            UserConfirmation _userConfirmation = new UserConfirmation();
-            _userConfirmation.UserChoice += (s, e) =>
-
-            DisplayUserConfirmation(_userConfirmation, message);
-
-
+            mainUserConfirmation.UserChoice += handler;
         }
 
-        //NEED TO SEPERATE THIS INTO "DISPLAY > PROCESS > DISPOSE > RETURN" METHODS SO THAT THIS MIGHT ACTUALLY WORK
-        public void DisplayUserConfirmation(UserConfirmation userConfirmation, string? message)
+        public void DetachConfirmationEventListener(EventHandler<UserConfirmationEventArgs> handler)
+        {
+            mainUserConfirmation.UserChoice -= handler;
+        }
+        public void AskUserConfirmation(string? message)
+        {
+            DisplayUserConfirmation(message);
+        }
+
+        public void DisplayUserConfirmation(string? message)
         {
             userActionInputMain.Visible = false;
+            mainUserConfirmation.Visible = true;
 
             if (message != null)
             {
-                userConfirmation.SetMessage(message);
+                mainUserConfirmation.SetMessage(message);
             }
-
-            splitContainer2.Panel2.Controls.Add(userConfirmation);
-            userConfirmation.Dock = DockStyle.Fill;
-            userConfirmation.BringToFront();
-            splitContainer2.Panel2.Refresh();
         }
 
-        public void DisposeControl(UserControl control)
+        private void DisposeUserConfirmation(UserConfirmation userConfirmation)
         {
-            splitContainer2.Panel1.Controls.Remove(control);
-            control.Dispose();
+            mainUserConfirmation.Visible = false;
+            userActionInputMain.Visible = true;
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
