@@ -22,13 +22,13 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             Load += (s, e) => customerNameTextBox.Focus();
         }
 
-
         public void SetProgramLabels()
         {
             _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE BILL TO CUSTOMER INFORMATION");
             _mainWindow.SetTextBoxLabel("Action: ");
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
         }
+
         public void PerformAction(string userInput)
         {
             switch (userInput)
@@ -54,6 +54,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                     break;
             }
         }
+
         public void DisplayBillToData(bil_buy bil_Buy)
         {
             _bil_Buy = bil_Buy;
@@ -125,6 +126,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                    !letterOfCredTextBox.Text.Equals(bil_Buy.let_crd.ToString()) ||
                    !credDateMaskedTextBox.Text.Equals(bil_Buy.date_rqst.ToString());
         }
+
         private void SetBillToProperties(bil_buy existingBillTo)
         {
             _bil_Buy = existingBillTo;
@@ -163,6 +165,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             existingBillTo.let_crd = Convert.ToDecimal(letterOfCredTextBox.Text);
             existingBillTo.date_rqst = Convert.ToDateTime(credDateMaskedTextBox.Text);
         }
+
         private void UpdateExistingBillToData(bil_buy bil_Buy)
         {
             var existingBillTo = dbContext.bil_buy.Find(bil_Buy.PK_bil_buy);
@@ -183,7 +186,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         {
             _mainWindow.AttachConfirmationEventListener(HandleUserInput);
 
-            _mainWindow.AskUserConfirmation("You Are About to Make a New Bill To Customer. Would you like to continue?");
+            _mainWindow.AskUserConfirmation("You Are About to Make a New Bill To Customer. Would you like to continue?  (Y/N)");
 
             void HandleUserInput(object sender, UserConfirmationEventArgs e)
             {
@@ -206,6 +209,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                 _mainWindow.DetachConfirmationEventListener(HandleUserInput);
             }
         }
+
         private void UpdateBillToData(bil_buy bil_Buy)
         {
             if (bil_Buy != null)

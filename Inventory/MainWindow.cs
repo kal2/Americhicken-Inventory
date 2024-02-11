@@ -55,7 +55,9 @@ namespace Inventory
         public void DetachConfirmationEventListener(EventHandler<UserConfirmationEventArgs> handler)
         {
             mainUserConfirmation.UserChoice -= handler;
+            HideUserConfirmation();
         }
+
         public void AskUserConfirmation(string? message)
         {
             DisplayUserConfirmation(message);
@@ -72,7 +74,7 @@ namespace Inventory
             }
         }
 
-        private void DisposeUserConfirmation(UserConfirmation userConfirmation)
+        private void HideUserConfirmation()
         {
             mainUserConfirmation.Visible = false;
             userActionInputMain.Visible = true;

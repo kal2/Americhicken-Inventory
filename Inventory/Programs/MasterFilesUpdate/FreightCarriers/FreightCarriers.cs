@@ -1,6 +1,7 @@
 ﻿using Inventory.Interfaces;
 using Inventory.Models;
 using Inventory.Services;
+using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
 {
@@ -21,12 +22,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
 
             this.Load += (s, e) => freightNameTextBox.Focus();
         }
+
         public void SetProgramLabels()
         {
             _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE FREIGHT CARRIER INFORMATION");
             _mainWindow.SetTextBoxLabel("Action: ");
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel    5. Save/Update Insurance");
         }
+
         public void PerformAction(string userInput)
         {
             switch (userInput)
@@ -54,33 +57,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                     MessageBox.Show("ERROR: Invalid input, please contact developer");
                     break;
             }
-        }
-        public void DisplayFreightCarrierData(freight freightData)
-        {
-            _freightData = freightData;
-            freightNameTextBox.Text = StringServices.TrimOrNull(_freightData.NAME);
-            freightStreetTextBox.Text = StringServices.TrimOrNull(_freightData.STREET);
-            freightCityTextBox.Text = StringServices.TrimOrNull(_freightData.CITY);
-            freightStateTextBox.Text = StringServices.TrimOrNull(_freightData.STATE);
-            freightZipTextBox.Text = StringServices.TrimOrNull(_freightData.ZIP);
-            freightZip4TextBox.Text = StringServices.TrimOrNull(_freightData.ZIP4);
-            freightPhoneMaskedTextBox.Text = StringServices.TrimOrNull(_freightData.AREA_CODE) + StringServices.TrimOrNull(_freightData.PHONE);
-            freightFaxMaskedTextBox.Text = StringServices.TrimOrNull(_freightData.FAX_AREA) + StringServices.TrimOrNull(_freightData.FAX_PHONE);
-            contactTextBox.Text = StringServices.TrimOrNull(_freightData.FRT_CONT);
-            payNameTextBox.Text = StringServices.TrimOrNull(_freightData.PAY_NAME);
-            payAddressTextBox.Text = StringServices.TrimOrNull(_freightData.PAY_STREET);
-            payCityTextBox.Text = StringServices.TrimOrNull(_freightData.PAY_CITY);
-            payStateTextBox.Text = StringServices.TrimOrNull(_freightData.PAY_STATE);
-            payZipTextBox.Text = StringServices.TrimOrNull(_freightData.PAY_ZIP);
-            payZip4TextBox.Text = StringServices.TrimOrNull(_freightData.PAY_ZIP4);
-            payPhoneMaskedTextBox.Text = StringServices.TrimOrNull(_freightData.PAY_AREA) + StringServices.TrimOrNull(_freightData.PAY_PHONE);
-            payFaxMaskedTextBox.Text = StringServices.TrimOrNull(_freightData.PAY_FAREA) + StringServices.TrimOrNull(_freightData.PAY_FPHONE);
-            activeHoldTextBox.Text = StringServices.TrimOrNull(_freightData.ACTIVE);
-            noteTextBox.Text = StringServices.TrimOrNull(_freightData.NOTE);
-            aInsuranceTextBox.Text = StringServices.TrimOrNull(_freightData.INS_CO1);
-            bInsuranceTextBox.Text = StringServices.TrimOrNull(_freightData.INS_CO2);
-            cInsuranceTextBox.Text = StringServices.TrimOrNull(_freightData.INS_CO3);
-            dInsuranceTextBox.Text = StringServices.TrimOrNull(_freightData.INS_CO4);
         }
 
         private void UpdateExistingFreight(freight freightData)
@@ -116,6 +92,90 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             {
                 MessageBox.Show("ERROR: Something went wrong adding the freight carrier, please contact developer");
             }
+        }
+
+        private void UpdateFreightCarrierData(freight freightData)
+        {
+            if (freightData != null)
+            {
+                if (IsDataModified(freightData))
+                {
+                    UpdateExistingFreight(freightData);
+                }
+            }
+            else
+            {
+                CreateNewFreight();
+            }
+        }
+
+        private void SaveAndUpdateInsurance()
+        {
+            UpdateFreightCarrierData(_freightData);
+            FreightInsurance freightInsurance = new(_mainWindow, _activeControlManager);
+            freightInsurance.GetFreightInsuranceData(_freightData);
+            _mainWindow.DisposeControl(this);
+            _activeControlManager.SetActiveControl(freightInsurance);
+        }
+
+        private void DeleteFreight(freight freightData)
+        {
+            _mainWindow.AttachConfirmationEventListener(HandleUserInput);
+
+            _mainWindow.AskUserConfirmation("You are about to delete a freight carrier. Would you like to continue?   (Y/N)");
+            void HandleUserInput(object sender, UserConfirmationEventArgs e)
+            {
+                if (e.UserChoice == true)
+                {
+                    var existingFreightData = dbContext.freight.Find(freightData.PK_freight);
+                    if (existingFreightData != null)
+                    {
+                        dbContext.freight.Remove(existingFreightData);
+                        dbContext.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: Freight Carrier not found, please contact developer");
+                    }
+                }
+                else if (e.UserChoice == false)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Something went wrong deleting the freight carrier, please contact developer");
+                }
+            _mainWindow.DetachConfirmationEventListener(HandleUserInput);
+            }
+        }
+
+        public void DisplayFreightCarrierData(freight freightData)
+        {
+            _freightData = freightData;
+            freightNameTextBox.Text = _freightData.NAME;
+            freightStreetTextBox.Text = _freightData.STREET;
+            freightCityTextBox.Text = _freightData.CITY;
+            freightStateTextBox.Text = _freightData.STATE;
+            freightZipTextBox.Text = _freightData.ZIP;
+            freightZip4TextBox.Text = _freightData.ZIP4;
+            freightPhoneMaskedTextBox.Text = _freightData.AREA_CODE + _freightData.PHONE;
+            freightFaxMaskedTextBox.Text = _freightData.FAX_AREA + _freightData.FAX_PHONE;
+            contactTextBox.Text = _freightData.FRT_CONT;
+            payNameTextBox.Text = _freightData.PAY_NAME;
+            payAddressTextBox.Text = _freightData.PAY_STREET;
+            payCityTextBox.Text = _freightData.PAY_CITY;
+            payStateTextBox.Text = _freightData.PAY_STATE;
+            payZipTextBox.Text = _freightData.PAY_ZIP;
+            payZip4TextBox.Text = _freightData.PAY_ZIP4;
+            payPhoneMaskedTextBox.Text = _freightData.PAY_AREA + _freightData.PAY_PHONE;
+            payFaxMaskedTextBox.Text = _freightData.PAY_FAREA + _freightData.PAY_FPHONE;
+            activeHoldTextBox.Text = _freightData.ACTIVE;
+            noteTextBox.Text = _freightData.NOTE;
+            aInsuranceTextBox.Text = _freightData.INS_CO1;
+            bInsuranceTextBox.Text = _freightData.INS_CO2;
+            cInsuranceTextBox.Text = _freightData.INS_CO3;
+            dInsuranceTextBox.Text = _freightData.INS_CO4;
         }
 
         private void SetFreightProperties(freight freightData)
@@ -174,54 +234,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                    freightData.INS_CO2 != bInsuranceTextBox.Text ||
                    freightData.INS_CO3 != cInsuranceTextBox.Text ||
                    freightData.INS_CO4 != dInsuranceTextBox.Text;
-        }
-        private void UpdateFreightCarrierData(freight freightData)
-        {
-            if (freightData != null)
-            {
-                if (IsDataModified(freightData))
-                {
-                    UpdateExistingFreight(freightData);
-                }
-            }
-            else
-            {
-                CreateNewFreight();
-            }
-        }
-
-        private void SaveAndUpdateInsurance()
-        {
-            UpdateFreightCarrierData(_freightData);
-            FreightInsurance freightInsurance = new(_mainWindow, _activeControlManager);
-            freightInsurance.GetFreightInsuranceData(_freightData);
-            _mainWindow.DisposeControl(this);
-            _activeControlManager.SetActiveControl(freightInsurance);
-        }
-        private void DeleteFreight(freight freightData)
-        {
-            DialogResult dialogResult = MessageBox.Show("You are about to delete a freight carrier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.Yes)
-            {
-                var existingFreightData = dbContext.freight.Find(freightData.PK_freight);
-                if (existingFreightData != null)
-                {
-                    dbContext.freight.Remove(existingFreightData);
-                    dbContext.SaveChanges();
-                }
-                else
-                {
-                    MessageBox.Show("ERROR: Freight Carrier not found, please contact developer");
-                }
-            }
-            else if (dialogResult == DialogResult.No)
-            {
-                return;
-            }
-            else
-            {
-                MessageBox.Show("ERROR: Something went wrong deleting the freight carrier, please contact developer");
-            }
         }
     }
 }

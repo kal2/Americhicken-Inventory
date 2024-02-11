@@ -28,6 +28,14 @@ namespace Inventory.Programs.Utilities
         public UserConfirmation()
         {
             InitializeComponent();
+
+            this.VisibleChanged += (s, e) =>
+            {
+                if (this.Visible)
+                {
+                    confirmationInput.Focus();
+                }
+            };
         }
 
         public void SetMessage(string message)
