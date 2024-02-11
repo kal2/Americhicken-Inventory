@@ -2,7 +2,8 @@
 {
     public static class MenuItemLists
     {
-        //Passes menu items to caller
+        //Convert these into MenuItem Classes
+        //https://g.co/gemini/share/f90d026ceeef 
         public static string[] MainMenu()
         {
             return [

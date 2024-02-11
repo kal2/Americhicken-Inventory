@@ -12,7 +12,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         private readonly AmerichickenContext dbContext;
         private buyer? _buyer = null;
 
-
         public ShipToCustomer(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();

@@ -22,10 +22,12 @@ namespace Inventory
         {
             _mainWindow.SetProgramLabel("Menu List");
         }
+
         public void SetCurrentMenu(string menu)
         {
             _currentMenu = menu;
         }
+
         public void PerformAction(string? userInput)
         {
             menuListBox.BeginUpdate();

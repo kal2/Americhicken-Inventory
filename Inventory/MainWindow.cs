@@ -142,6 +142,14 @@ namespace Inventory
             {
                 FocusTextBox();
             }
+            else if (e.KeyCode == Keys.Down)
+            {
+                SendKeys.Send("{TAB}");
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                SendKeys.Send("+{TAB}");
+            }
         }
     }
 }
