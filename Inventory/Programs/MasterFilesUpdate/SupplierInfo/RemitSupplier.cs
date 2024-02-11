@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inventory.Interfaces;
 using Inventory.Models;
+using Inventory.Programs.Utilities;
 using Inventory.Services;
+using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
@@ -110,43 +112,49 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("You are about to add a new Remit To entry." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
+                _mainWindow.AttachConfirmationEventListener(HandleUserInput);
+                _mainWindow.AskUserConfirmation("You are about to add a new Remit To entry. Would you like to continue?  (Y/N)");
+                void HandleUserInput(object sender, UserConfirmationEventArgs e)
                 {
-                    rem_sup newRemitEntry = new()
+                    if (e.UserChoice == true)
                     {
-                        name = StringServices.TrimOrNull(RemitNameTextBox.Text),
-                        area_code = phoneMaskTextBox.Text[..3],
-                        phone = phoneMaskTextBox.Text.Substring(3, 7),
-                        fax = StringServices.TrimOrNull(faxMaskTextBox.Text),
-                        street = StringServices.TrimOrNull(remitStreetTextBox.Text),
-                        city = StringServices.TrimOrNull(remitCityTextBox.Text),
-                        state = StringServices.TrimOrNull(remitStateTextBox.Text),
-                        zip = StringServices.TrimOrNull(remitZipTextBox.Text),
-                        zip4 = StringServices.TrimOrNull(remitZip4TextBox.Text),
-                        net_days = string.IsNullOrEmpty(payNetDaysTextBox.Text.Trim()) ? null : int.Parse(payNetDaysTextBox.Text),
-                        indem_flg = StringServices.TrimOrNull(indemnityContractTextBox.Text),
-                        active = StringServices.TrimOrNull(activeTextBox.Text),
-                        indem_dt = string.IsNullOrEmpty(contractDateMaskedBox.Text.Trim()) ? null : DateTime.TryParse(contractDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var contrDate) ? contrDate : null,
-                        cred_lim = string.IsNullOrEmpty(creditLimitTextBox.Text.Trim()) ? null : int.TryParse(creditLimitTextBox.Text, out var credLim) ? credLim : null,
-                        let_crd = string.IsNullOrEmpty(letterOfCreditTextBox.Text.Trim()) ? null : int.TryParse(letterOfCreditTextBox.Text, out var lettCred) ? lettCred : null,
-                        beg_date = string.IsNullOrEmpty(beginDateMaskedBox.Text.Trim()) ? null : DateTime.TryParse(beginDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var begDate) ? begDate : null,
-                        end_date = string.IsNullOrEmpty(expireDateMaskedBox.Text.Trim()) ? null : DateTime.TryParse(expireDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var expireDate) ? expireDate : null,
-                        guaran = StringServices.TrimOrNull(guarantorTextBox.Text),
-                        note = StringServices.TrimOrNull(noteTextBox.Text),
-                        ins_co1 = StringServices.TrimOrNull(aInsuranceTextBox.Text),
-                        ins_co2 = StringServices.TrimOrNull(bInsuranceTextBox.Text),
-                        ins_co3 = StringServices.TrimOrNull(cInsuranceTextBox.Text),
-                        ins_co4 = StringServices.TrimOrNull(dInsuranceTextBox.Text),
-                        ins_co5 = StringServices.TrimOrNull(eInsuranceTextBox.Text)
+                        rem_sup newRemitEntry = new()
+                        {
+                            name = StringServices.TrimOrNull(RemitNameTextBox.Text),
+                            area_code = phoneMaskTextBox.Text[..3],
+                            phone = phoneMaskTextBox.Text.Substring(3, 7),
+                            fax = StringServices.TrimOrNull(faxMaskTextBox.Text),
+                            street = StringServices.TrimOrNull(remitStreetTextBox.Text),
+                            city = StringServices.TrimOrNull(remitCityTextBox.Text),
+                            state = StringServices.TrimOrNull(remitStateTextBox.Text),
+                            zip = StringServices.TrimOrNull(remitZipTextBox.Text),
+                            zip4 = StringServices.TrimOrNull(remitZip4TextBox.Text),
+                            net_days = string.IsNullOrEmpty(payNetDaysTextBox.Text.Trim()) ? null : int.Parse(payNetDaysTextBox.Text),
+                            indem_flg = StringServices.TrimOrNull(indemnityContractTextBox.Text),
+                            active = StringServices.TrimOrNull(activeTextBox.Text),
+                            indem_dt = string.IsNullOrEmpty(contractDateMaskedBox.Text.Trim()) ? null : DateTime.TryParse(contractDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var contrDate) ? contrDate : null,
+                            cred_lim = string.IsNullOrEmpty(creditLimitTextBox.Text.Trim()) ? null : int.TryParse(creditLimitTextBox.Text, out var credLim) ? credLim : null,
+                            let_crd = string.IsNullOrEmpty(letterOfCreditTextBox.Text.Trim()) ? null : int.TryParse(letterOfCreditTextBox.Text, out var lettCred) ? lettCred : null,
+                            beg_date = string.IsNullOrEmpty(beginDateMaskedBox.Text.Trim()) ? null : DateTime.TryParse(beginDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var begDate) ? begDate : null,
+                            end_date = string.IsNullOrEmpty(expireDateMaskedBox.Text.Trim()) ? null : DateTime.TryParse(expireDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var expireDate) ? expireDate : null,
+                            guaran = StringServices.TrimOrNull(guarantorTextBox.Text),
+                            note = StringServices.TrimOrNull(noteTextBox.Text),
+                            ins_co1 = StringServices.TrimOrNull(aInsuranceTextBox.Text),
+                            ins_co2 = StringServices.TrimOrNull(bInsuranceTextBox.Text),
+                            ins_co3 = StringServices.TrimOrNull(cInsuranceTextBox.Text),
+                            ins_co4 = StringServices.TrimOrNull(dInsuranceTextBox.Text),
+                            ins_co5 = StringServices.TrimOrNull(eInsuranceTextBox.Text)
 
-                    };
-                    dbContext.rem_sup.Add(newRemitEntry);
-                    dbContext.SaveChanges();
-                    _remitData = newRemitEntry;
+                        };
+                        dbContext.rem_sup.Add(newRemitEntry);
+                        dbContext.SaveChanges();
+                        _remitData = newRemitEntry;
+                    }
+                    _mainWindow.DetachConfirmationEventListener(HandleUserInput);
                 }
             }
         }
+
         public bool IsDataModified(rem_sup remitToData)
         {
             return remitToData == null || remitToData.name != RemitNameTextBox.Text || remitToData.area_code + remitToData.phone != phoneMaskTextBox.Text || remitToData.fax != faxMaskTextBox.Text || remitToData.street != remitStreetTextBox.Text || remitToData.city != remitCityTextBox.Text || remitToData.state != remitStateTextBox.Text || remitToData.zip != remitZipTextBox.Text || remitToData.zip4 != remitZip4TextBox.Text || remitToData.net_days != int.Parse(payNetDaysTextBox.Text) || remitToData.indem_flg != indemnityContractTextBox.Text || remitToData.active != activeTextBox.Text || remitToData.indem_dt != DateTime.Parse(contractDateMaskedBox.Text, new CultureInfo("en-US")) || remitToData.cred_lim != int.Parse(creditLimitTextBox.Text) || remitToData.beg_date != DateTime.Parse(beginDateMaskedBox.Text, new CultureInfo("en-US")) || remitToData.end_date != DateTime.Parse(expireDateMaskedBox.Text, new CultureInfo("en-US")) || remitToData.guaran != guarantorTextBox.Text || remitToData.note != noteTextBox.Text || remitToData.ins_co1 != aInsuranceTextBox.Text || remitToData.ins_co2 != bInsuranceTextBox.Text || remitToData.ins_co3 != cInsuranceTextBox.Text || remitToData.ins_co4 != dInsuranceTextBox.Text || remitToData.ins_co5 != eInsuranceTextBox.Text;

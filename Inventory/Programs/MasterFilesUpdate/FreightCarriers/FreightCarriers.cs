@@ -1,6 +1,7 @@
 ﻿using Inventory.Interfaces;
 using Inventory.Models;
 using Inventory.Services;
+using System.Windows.Forms;
 using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
@@ -75,22 +76,28 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
 
         private void CreateNewFreight()
         {
-            DialogResult dialogResult = MessageBox.Show("You are about to add a new freight carrier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.Yes)
+            _mainWindow.AttachConfirmationEventListener(HandleUserConfirmation);
+            _mainWindow.AskUserConfirmation("You are about to add a new freight carrier. Would you like to continue?   (Y/N)");
+            
+            void HandleUserConfirmation(object sender, UserConfirmationEventArgs e)
             {
-                freight newFreight = new();
-                SetFreightProperties(newFreight);
-                _freightData = newFreight;
-                dbContext.freight.Add(newFreight);
-                dbContext.SaveChanges();
-            }
-            else if (dialogResult == DialogResult.No)
-            {
-                return;
-            }
-            else
-            {
-                MessageBox.Show("ERROR: Something went wrong adding the freight carrier, please contact developer");
+                if (e.UserChoice == true)
+                {
+                    freight newFreight = new();
+                    SetFreightProperties(newFreight);
+                    _freightData = newFreight;
+                    dbContext.freight.Add(newFreight);
+                    dbContext.SaveChanges();
+                }
+                else if (e.UserChoice == false)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Something went wrong adding the freight carrier, please contact developer");
+                }
+                _mainWindow.DetachConfirmationEventListener(HandleUserConfirmation);
             }
         }
 
@@ -208,6 +215,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             freightData.INS_CO3 = StringServices.TrimOrNull(cInsuranceTextBox.Text);
             freightData.INS_CO4 = StringServices.TrimOrNull(dInsuranceTextBox.Text);
         }
+
         private bool IsDataModified(freight freightData)
         {
 

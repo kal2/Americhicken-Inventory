@@ -1,6 +1,7 @@
 ﻿using Inventory.Models;
 using Inventory.Services;
 using Inventory.Interfaces;
+using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
 {
@@ -152,23 +153,31 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         }
         private void CreateNewShipToCustomer()
         {
-            DialogResult dialogResult = MessageBox.Show("You are about to add a new freight carrier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.Yes)
+            _mainWindow.AttachConfirmationEventListener(HandleUserInput);
+            _mainWindow.AskUserConfirmation("You are about to add a new freight carrier. Would you like to continue?");
+
+            void HandleUserInput(object sender, UserConfirmationEventArgs e)
             {
-                buyer buyer = new();
-                SetShipToCustomerData(buyer);
-                dbContext.buyer.Add(buyer);
-                dbContext.SaveChanges();
+                if (e.UserChoice == true)
+                {
+                    buyer buyer = new();
+                    SetShipToCustomerData(buyer);
+                    dbContext.buyer.Add(buyer);
+                    dbContext.SaveChanges();
+                }
+                else if (e.UserChoice == false)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Something went wrong creating new customer shipping info, please contact developer");
+                }
+
             }
-            else if (dialogResult == DialogResult.No)
-            {
-                return;
-            }
-            else
-            {
-                MessageBox.Show("ERROR: Something went wrong creating new customer shipping info, please contact developer");
-            }
+            _mainWindow.DetachConfirmationEventListener(HandleUserInput);
         }
+
         private void UpdateExistingShipToCustomer(buyer buyerData)
         {
             var existingBuyer = dbContext.buyer.Find(buyerData.PK_buyer);
@@ -182,6 +191,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                 MessageBox.Show("ERROR: Something went wrong updating customer shipping info, please contact developer");
             }
         }
+
         private void UpdateShipToCustomer(buyer buyer)
         {
             if (buyer != null)
@@ -196,30 +206,37 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                 CreateNewShipToCustomer();
             }
         }
+
         private void DeleteShipToCustomer(buyer buyer)
         {
-            var existingBuyer = dbContext.buyer.Find(buyer.PK_buyer);
-            if (existingBuyer != null)
+            _mainWindow.AttachConfirmationEventListener(HandleUserInput);
+            _mainWindow.AskUserConfirmation("You are about to delete this customer shipping info. Would you like to continue?");
+            void HandleUserInput(object sender, UserConfirmationEventArgs e)
             {
-                DialogResult dialogResult = MessageBox.Show("You are about to delete this customer shipping info." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
+                var existingBuyer = dbContext.buyer.Find(buyer.PK_buyer);
+                if (existingBuyer != null)
                 {
-                    dbContext.buyer.Remove(existingBuyer);
-                    dbContext.SaveChanges();
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    return;
+                    if (e.UserChoice == true)
+                    {
+                        dbContext.buyer.Remove(existingBuyer);
+                        dbContext.SaveChanges();
+                    }
+                    else if (e.UserChoice == false)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: Something went wrong deleting customer shipping info, please contact developer");
+                    }
                 }
                 else
                 {
                     MessageBox.Show("ERROR: Something went wrong deleting customer shipping info, please contact developer");
                 }
+                _mainWindow.DetachConfirmationEventListener(HandleUserInput);
             }
-            else
-            {
-                MessageBox.Show("ERROR: Something went wrong deleting customer shipping info, please contact developer");
-            }
+            
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Inventory.Interfaces;
 using Inventory.Models;
 using Inventory.Services;
+using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
@@ -90,60 +91,76 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("You are about to add a new supplier." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
+                _mainWindow.AttachConfirmationEventListener(HandleUserInput);
+                _mainWindow.AskUserConfirmation("You are about to add a new supplier. Would you like to continue?  (Y/N)");
+                void HandleUserInput(object sender, UserConfirmationEventArgs e)
                 {
-                    supplier newSupplier = new()
+                    if (e.UserChoice == true)
                     {
-                        name = supnameTextBox.Text.Trim(),
-                        area_code = phoneMaskTextBox.Text.Trim()[..3],
-                        phone = phoneMaskTextBox.Text.Trim()[3..],
-                        fax = faxMaskTextBox.Text.Trim(),
-                        cont_name = contactNameTextBox.Text.Trim(),
-                        cont_phone = contactPhoneMaskTextBox.Text.Trim(),
-                        cont_fax = contactFaxMaskTextBox.Text.Trim(),
-                        freight_phone = freightPhoneMaskTextBox.Text.Trim(),
-                        freight_email = freightEmailTextBox.Text.Trim(),
-                        street = shipFromStreetTextBox.Text.Trim(),
-                        city = shipFromCityTextBox.Text.Trim(),
-                        state = shipFromStateTextBox.Text.ToUpper().Trim(),
-                        zip = shipFromZipTextBox.Text.Trim(),
-                        note = noteTextBox.Text.Trim(),
-                        rsupcode = remitToObject!.rsupcode
-                    };
-                    dbContext.supplier.Add(newSupplier);
-                    dbContext.SaveChanges();
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("ERROR: Something went wrong adding a new supplier, please contact developer");
-                    return;
+                        supplier newSupplier = new()
+                        {
+                            name = supnameTextBox.Text.Trim(),
+                            area_code = phoneMaskTextBox.Text.Trim()[..3],
+                            phone = phoneMaskTextBox.Text.Trim()[3..],
+                            fax = faxMaskTextBox.Text.Trim(),
+                            cont_name = contactNameTextBox.Text.Trim(),
+                            cont_phone = contactPhoneMaskTextBox.Text.Trim(),
+                            cont_fax = contactFaxMaskTextBox.Text.Trim(),
+                            freight_phone = freightPhoneMaskTextBox.Text.Trim(),
+                            freight_email = freightEmailTextBox.Text.Trim(),
+                            street = shipFromStreetTextBox.Text.Trim(),
+                            city = shipFromCityTextBox.Text.Trim(),
+                            state = shipFromStateTextBox.Text.ToUpper().Trim(),
+                            zip = shipFromZipTextBox.Text.Trim(),
+                            note = noteTextBox.Text.Trim(),
+                            rsupcode = remitToObject!.rsupcode
+                        };
+                        dbContext.supplier.Add(newSupplier);
+                        dbContext.SaveChanges();
+                    }
+                    else if (e.UserChoice == false)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: Something went wrong adding a new supplier, please contact developer");
+                        return;
+                    }
+                    _mainWindow.DetachConfirmationEventListener(HandleUserInput);
                 }
             }
         }
 
         private void DeleteSupplier(supplier supplierData)
         {
-            if (supplierData != null)
+            _mainWindow.AttachConfirmationEventListener(HandleUserInput);
+            _mainWindow.AskUserConfirmation("You are about to delete this supplier. Would you like to continue?  (Y/N)");
+
+            void HandleUserInput(object sender, UserConfirmationEventArgs e)
             {
-                var existingSupplier = dbContext.supplier.Find(supplierData.PK_supplier);
-                if (existingSupplier != null)
+                if (e.UserChoice == true)
                 {
-                    dbContext.supplier.Remove(existingSupplier);
-                    dbContext.SaveChanges();
+                    var existingSupplier = dbContext.supplier.Find(supplierData.PK_supplier);
+                    if (existingSupplier != null)
+                    {
+                        dbContext.supplier.Remove(existingSupplier);
+                        dbContext.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: Supplier not found in database. Please try again or contact developer.");
+                    }
+                }
+                else if (e.UserChoice == false)
+                {
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("ERROR: Supplier not found in database. Please try again or contact developer.");
+                    MessageBox.Show("ERROR: Something went wrong deleting the supplier, please contact developer");
                 }
-            }
-            else
-            {
-                MessageBox.Show("ERROR: Supplier not found on client side. Please try again or contact developer.");
+                _mainWindow.DetachConfirmationEventListener(HandleUserInput);
             }
         }
 
@@ -191,20 +208,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     break;
 
                 case "3":
-                    DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this supplier?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        DeleteSupplier(_supplierData!);
-                    }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("ERROR: Something went wrong deleting the supplier, please contact developer");
-                    }
+                    DeleteSupplier(_supplierData!);
                     break;
 
                 case "4":

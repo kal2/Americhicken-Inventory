@@ -227,20 +227,26 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
 
         private void DeleteBillToData(bil_buy bil_Buy)
         {
-            DialogResult dialogResult = MessageBox.Show("You are about to delete a this entry." + Environment.NewLine + "Would you like to continue?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.Yes)
+            _mainWindow.AttachConfirmationEventListener(HandleUserConfirmation);
+            _mainWindow.AskUserConfirmation("You are about to delete a this entry. Would you like to continue?  (Y/N)");
+
+            void HandleUserConfirmation(object sender, UserConfirmationEventArgs e)
             {
-                var existingBillTo = dbContext.bil_buy.Find(bil_Buy.PK_bil_buy);
-                dbContext.bil_buy.Remove(existingBillTo!);
-                dbContext.SaveChanges();
-            }
-            else if (dialogResult == DialogResult.No)
-            {
-                return;
-            }
-            else
-            {
-                MessageBox.Show("ERROR: Something went wrong, please contact developer");
+                if (e.UserChoice == true)
+                {
+                    var existingBillTo = dbContext.bil_buy.Find(bil_Buy.PK_bil_buy);
+                    dbContext.bil_buy.Remove(existingBillTo!);
+                    dbContext.SaveChanges();
+                }
+                else if (e.UserChoice == false)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Something went wrong, please contact developer");
+                }
+                _mainWindow.DetachConfirmationEventListener(HandleUserConfirmation);
             }
         }
     }
