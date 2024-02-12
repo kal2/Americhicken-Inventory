@@ -33,7 +33,7 @@ namespace Inventory
             menuListBox.BeginUpdate();
             menuListBox.Items.Clear();
 
-            string[] menuItems;
+            List<MenuItem> menuItems;
 
             if (userInput == null)
             {
@@ -56,24 +56,33 @@ namespace Inventory
             else
             {
                 menuItems = MenuUserSelection.UserMenuSelection(_currentMenu, userInput);
-                _currentMenu = menuItems[0];
+                _currentMenu = menuItems[0].Description;
+            }
 
-               
-            }
-            if (_currentMenu != "program")
+            bool userInputFound = menuItems.Any(item => item.Key == userInput);
+
+            if (userInputFound)
             {
-                _mainWindow.SetProgramLabel(menuItems[1]);
-                PopulateMenuList(menuItems);
-            }
-            else
-            {
-                LoadProgram(menuItems[1]);
+                MenuItem selectedMenuItem = menuItems.Find(item => item.Key == userInput);
+
+                if (selectedMenuItem.LoadProgram == null)
+                {
+                    _mainWindow.SetProgramLabel(menuItems[1].Description);
+                    PopulateMenuList(menuItems);
+                }
+                else
+                {
+                    LoadProgram(selectedMenuItem.LoadProgram);
+                }
             }
         }
 
-        private void PopulateMenuList(string[] menuItems)
+        private void PopulateMenuList(List<MenuItem> menuItems)
         {
-            menuListBox.Items.AddRange(menuItems[2..]);
+            foreach (var menuItem in menuItems.GetRange(2, menuItems.Count - 2))
+            {
+                menuListBox.Items.Add($"{menuItem.Key} - {menuItem.Description}");
+            }
             menuListBox.EndUpdate();
         }
 
@@ -86,4 +95,3 @@ namespace Inventory
         }
     }
 }
-
