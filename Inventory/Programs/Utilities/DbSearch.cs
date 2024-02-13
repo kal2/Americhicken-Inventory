@@ -109,19 +109,22 @@ namespace Inventory.Views.UserControls
             SearchDatabase(searchQuery);
         }
 
-        public Dictionary<string, Action> GetAvailableActions()
+        public Dictionary<string, Action> AvailableActions
         {
-            return new Dictionary<string, Action>
+            get
             {
-                { "1", () => SearchDatabase(searchQuereyTextBox.Text) },
-                { "2", () => searchQuereyTextBox.Clear() },
-                { "3", () => {_mainWindow.DisposeControl(this); _mainWindow.DisplayLastMenu(); } }
-            };
+                return new Dictionary<string, Action>
+                {
+                    { "1", () => SearchDatabase(searchQuereyTextBox.Text) },
+                    { "2", () => searchQuereyTextBox.Clear() },
+                    { "3", () => {_mainWindow.DisposeControl(this); _mainWindow.DisplayLastMenu(); } }
+                };
+            }
         }
 
         public void PerformAction(string userInput)
         {
-            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            if (AvailableActions.TryGetValue(userInput, out var action))
             {
                 action();
             }

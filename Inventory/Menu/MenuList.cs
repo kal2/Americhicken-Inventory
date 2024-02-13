@@ -16,6 +16,13 @@ namespace Inventory
             InitializeComponent();
             _mainWindow = mainWindow;
             _activeControlManager = activeControlManager;
+
+            AvailableActions = new Dictionary<string, Action>();
+            List<MenuItem> mainMenuItems = MenuItemLists.MainMenu();
+            foreach (var menuItem in mainMenuItems.GetRange(2, mainMenuItems.Count - 2))
+            {
+                AvailableActions.Add(menuItem.Key, null);
+            }
         }
 
         public void SetProgramLabels()
@@ -64,10 +71,8 @@ namespace Inventory
             }
         }
 
-        public Dictionary<string, Action> GetAvailableActions()
-        {
-            return null;
-        }
+        public Dictionary<string, Action> AvailableActions { get; private set; }
+
 
         public void PerformAction(string? userInput)
         {
@@ -91,11 +96,12 @@ namespace Inventory
 
         private void PopulateMenuList(List<MenuItem> menuItems)
         {
+            AvailableActions.Clear();
             foreach (var menuItem in menuItems.GetRange(2, menuItems.Count - 2))
             {
                 menuListBox.Items.Add($"{menuItem.Key} - {menuItem.Description}");
+                AvailableActions.Add(menuItem.Key, null );
             }
-            menuListBox.EndUpdate();
         }
 
         private void LoadProgram(string programName)

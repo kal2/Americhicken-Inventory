@@ -44,9 +44,6 @@ namespace Inventory
             _activeControlManager.SetActiveControl(menuList);
         }
 
-
-        //Added user confirmation to main form to allow event handling mainUserConfirmation
-        //ToDo: Add event handling for user confirmation
         public void AttachConfirmationEventListener(EventHandler<UserConfirmationEventArgs> handler)
         {
             mainUserConfirmation.UserChoice += handler;
@@ -114,6 +111,16 @@ namespace Inventory
         public void SetCommandsLabel(string text)
         {
             userActionInputMain.userActionCommandsLabel.Text = text;
+        }
+
+        public void AttachTextBoxTextChangedHandler(EventHandler handler)
+        {
+            userActionInputMain.actionInput.TextChanged += handler;
+        }
+
+        public void DetachTextBoxTextChangedHandler(EventHandler handler)
+        {
+            userActionInputMain.actionInput.TextChanged -= handler;
         }
 
         public void AttachTextBoxKeyDownHandler(KeyEventHandler handler)

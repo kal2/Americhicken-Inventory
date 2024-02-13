@@ -27,27 +27,30 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             _mainWindow.SetTextBoxLabel("Action: ");
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
         }
-
-        public Dictionary<string, Action> GetAvailableActions()
+        private void ExitProgram()
         {
-            return new Dictionary<string, Action>
+            using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
             {
-                { "1", () => UpdateShipToCustomer(_buyer) },
-                { "2", () => customerShipToTextBox.Focus() },
-                { "3", () => DeleteShipToCustomer(_buyer) },
-                { "4", () =>
+                _mainWindow.DisposeControl(this);
+                _programLoader.LoadProgram("buyer");
+            }
+        }
+        public Dictionary<string, Action> AvailableActions
+        {
+            get
+            {
+                return new Dictionary<string, Action>
                 {
-                    using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
-                    {
-                        _mainWindow.DisposeControl(this);
-                        _programLoader.LoadProgram("buyer");
-                    }
-                } }
-            };
+                    { "1", () => UpdateShipToCustomer(_buyer) },
+                    { "2", () => customerShipToTextBox.Focus() },
+                    { "3", () => DeleteShipToCustomer(_buyer) },
+                    { "4", () => ExitProgram() }
+                };
+            }
         }
         public void PerformAction(string userInput)
         {
-            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            if (AvailableActions.TryGetValue(userInput, out var action))
             {
                 action();
             }

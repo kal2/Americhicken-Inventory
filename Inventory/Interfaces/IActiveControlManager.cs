@@ -10,6 +10,6 @@ namespace Inventory.Interfaces
     {
         void PerformAction(string userInput);
         void SetProgramLabels();
-        Dictionary<string, Action> GetAvailableActions();
+        Dictionary<string, Action> AvailableActions { get; }
     }
 }

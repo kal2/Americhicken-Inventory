@@ -39,18 +39,22 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             _activeControlManager.SetActiveControl(freightCarriers);
         }
 
-        public Dictionary<string, Action> GetAvailableActions()
+        public Dictionary<string, Action> AvailableActions 
         {
-            return new Dictionary<string, Action>
+            get
             {
-                { "1", () => UpdateFreightInsuranceData(_freightData)},
-                { "2", () => insTp1TextBox.Focus() },
-                { "3", () => LoadFreightCarriers() }
-            };
+                return new Dictionary<string, Action>
+                {
+                    { "1", () => UpdateFreightInsuranceData(_freightData)},
+                    { "2", () => insTp1TextBox.Focus() },
+                    { "3", () => LoadFreightCarriers() }
+                };
+            }
         }
+
         public void PerformAction(string userInput)
         {
-            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            if (AvailableActions.TryGetValue(userInput, out var action))
             {
                 action();
             }

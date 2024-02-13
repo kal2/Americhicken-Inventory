@@ -209,20 +209,24 @@ namespace Inventory.Views.UserControls
         }
 
 
-        public Dictionary<string, Action> GetAvailableActions()
+        public Dictionary<string, Action> AvailableActions
         {
-            return new Dictionary<string, Action>
+            get
             {
-                {"1", () => NextPage() },
-                {"2", () => PreviousPage() },
-                {"3", () => FirstPage() },
-                {"4", () => AddNew() },
-                {"5", () => Cancel() }
-            };
+                return new Dictionary<string, Action>
+                {
+                    {"1", () => NextPage() },
+                    {"2", () => PreviousPage() },
+                    {"3", () => FirstPage() },
+                    {"4", () => AddNew() },
+                    {"5", () => Cancel() }
+                };
+            }
         }
+
         public void PerformAction(string userInput)
         {
-            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            if (AvailableActions.TryGetValue(userInput, out var action))
             {
                 action();
             }

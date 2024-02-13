@@ -197,21 +197,24 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _activeControlManager.SetActiveControl(remitInsuranceInstance);
         }
 
-        public Dictionary<string, Action> GetAvailableActions()
+        public Dictionary<string, Action> AvailableActions
         {
-            return new Dictionary<string, Action>
+            get
             {
-                {"1", () => UpdateRemitData(_remitData) },
-                {"2", () => RemitNameTextBox.Focus() },
-                {"3", () => DeleteRemitTo(_remitData) },
-                {"4", () => ExitProgram() },
-                {"5", () => LoadInsuranceProgram() },
-            };
+                return new Dictionary<string, Action>
+                {
+                    {"1", () => UpdateRemitData(_remitData) },
+                    {"2", () => RemitNameTextBox.Focus() },
+                    {"3", () => DeleteRemitTo(_remitData) },
+                    {"4", () => ExitProgram() },
+                    {"5", () => LoadInsuranceProgram() },
+                };
+            }
         }
 
         public void PerformAction(string userInput)
         {
-            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            if (AvailableActions.TryGetValue(userInput, out var action))
             {
                 action();
             }

@@ -268,18 +268,21 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _activeControlHelper.SetActiveControl(remitInstance);
         }
 
-        public Dictionary<string, Action> GetAvailableActions()
+        public Dictionary<string, Action> AvailableActions
         {
-            return new Dictionary<string, Action>
+            get
             {
-                {"1", () => UpdateRemitInsuranceData(_remitData)},
-                {"2", () => insTp1TextBox.Focus()},
-                {"3", () => LoadSupplierProgram()}
-            };
+                return new Dictionary<string, Action>
+                {
+                    {"1", () => UpdateRemitInsuranceData(_remitData)},
+                    {"2", () => insTp1TextBox.Focus()},
+                    {"3", () => LoadSupplierProgram()}
+                };
+            }
         }
         public void PerformAction(string userInput)
         {
-            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            if (AvailableActions.TryGetValue(userInput, out var action))
             {
                 action();
             }

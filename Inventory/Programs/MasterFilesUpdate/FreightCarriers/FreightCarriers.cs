@@ -40,21 +40,24 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             }
         }
 
-        public Dictionary<string, Action> GetAvailableActions()
+        public Dictionary<string, Action> AvailableActions
         {
-            return new Dictionary<string, Action>
+            get
             {
-                { "1", () => UpdateFreightCarrierData(_freightData) },
-                { "2", () => freightNameTextBox.Focus() },
-                { "3", () => DeleteFreight(_freightData!) },
-                { "4", () => ExitProgram() },
-                { "5", () => SaveAndUpdateInsurance() }
-            };
+                return new Dictionary<string, Action>
+                {
+                    { "1", () => UpdateFreightCarrierData(_freightData) },
+                    { "2", () => freightNameTextBox.Focus() },
+                    { "3", () => DeleteFreight(_freightData!) },
+                    { "4", () => ExitProgram() },
+                    { "5", () => SaveAndUpdateInsurance() }
+                };
+            }
         }
 
         public void PerformAction(string userInput)
         {
-            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            if (AvailableActions.TryGetValue(userInput, out var action))
             {
                 action();
             }

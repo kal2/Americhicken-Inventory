@@ -196,26 +196,31 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                    remitToObject!.rsupcode != supplierData.rsupcode;
         }
 
-        public Dictionary<string, Action> GetAvailableActions()
+        private void ExitProgram()
         {
-            return new Dictionary<string, Action>
+            using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
             {
-                { "1", () => UpdateSupplier(_supplierData!) },
-                { "2", () => supnameTextBox.Focus() },
-                { "3", () => DeleteSupplier(_supplierData!) },
-                { "4", () =>
+                _mainWindow.DisplayControl(this);
+                _programLoader.LoadProgram("supplier");
+            }
+        }
+
+        public Dictionary<string, Action> AvailableActions
+        {
+            get
+            {
+                return new Dictionary<string, Action>
                 {
-                    using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
-                    {
-                        _mainWindow.DisplayControl(this);
-                        _programLoader.LoadProgram("supplier");
-                    }
-                } }
+                    { "1", () => UpdateSupplier(_supplierData!) },
+                    { "2", () => supnameTextBox.Focus() },
+                    { "3", () => DeleteSupplier(_supplierData!) },
+                    { "4", () => ExitProgram() }
             };
+            }
         }
         public void PerformAction(string userInput)
         {
-            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            if (AvailableActions.TryGetValue(userInput, out var action))
             {
                 action();
             }

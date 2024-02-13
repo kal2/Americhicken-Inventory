@@ -1,4 +1,5 @@
 ﻿using Inventory.Interfaces;
+using Inventory.UI.Data;
 
 namespace Inventory.Services
 {
@@ -12,7 +13,8 @@ namespace Inventory.Services
         public ActiveControlManager(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
-            _mainWindow.AttachTextBoxKeyDownHandler(HandleUserInput);
+            _mainWindow.AttachTextBoxTextChangedHandler(HandleUserInput);
+            _mainWindow.AttachTextBoxKeyDownHandler(HandleEnterKeyPressed);
         }
 
         // -- Methods -- //
@@ -23,16 +25,54 @@ namespace Inventory.Services
             _activeControl.SetProgramLabels();
         }
 
-        private void HandleUserInput(object sender, KeyEventArgs e)
+        private void HandleEnterKeyPressed(object sender, KeyEventArgs e)
         {
-            // If the user presses the enter key the "PerformAction" method, passing in user input, is called on the active control
+            if (_activeControl != null && e.KeyCode == Keys.Enter)
+            {
+                string userInput = _mainWindow.GetTextBoxText();
+                if (!string.IsNullOrEmpty(userInput))
+                {
+                    _activeControl.PerformAction(userInput);
+                    _mainWindow.ClearTextBox();
+                }
+            }
+        }
+
+        private void HandleUserInput(object sender, EventArgs e)
+        {
+            _mainWindow.SetCommandsLabel("");
             if (_activeControl != null)
             {
-                if (e.KeyCode == Keys.Enter)
+                string userInput = _mainWindow.GetTextBoxText();
+                if (!string.IsNullOrEmpty(userInput))
                 {
-                    _activeControl.PerformAction(_mainWindow.GetTextBoxText());
+                    List<Action> matchingActions = new List<Action>();
 
-                    _mainWindow.ClearTextBox();
+                    foreach (var action in _activeControl.AvailableActions)
+                    {
+                        if (action.Key.ToUpper().Contains(userInput.ToUpper()))
+                        {
+                            matchingActions.Add(action.Value);
+                        }
+                    }
+
+                    if (matchingActions.Count > 0)
+                    {
+                        //If there is only one match, perform the action, if there are multiple wait until enter key is pressed
+
+                        if (matchingActions.Count > 1)
+                        {
+                            _mainWindow.SetCommandsLabel("Multiple commands found. Press enter to continue.");
+                            // Perform the first matching action
+                        }
+                        else
+                        {
+                            // Perform the first matching action
+                            _activeControl.PerformAction(userInput);
+
+                            _mainWindow.ClearTextBox();
+                        }
+                    }
                 }
             }
         }

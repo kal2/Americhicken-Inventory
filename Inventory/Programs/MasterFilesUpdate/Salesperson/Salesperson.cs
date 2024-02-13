@@ -34,20 +34,23 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.Salesperson
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
         }
 
-        public Dictionary<string, Action> GetAvailableActions()
+        public Dictionary<string, Action> AvailableActions
         {
-            return new Dictionary<string, Action>
+            get
             {
-                { "1", () => PerformAction("1") },
-                { "2", () => PerformAction("2") },
-                { "3", () => PerformAction("3") },
-                { "4", () => PerformAction("4") }
-            };
+                return new Dictionary<string, Action>
+                {
+                    { "1", () => PerformAction("1") },
+                    { "2", () => PerformAction("2") },
+                    { "3", () => PerformAction("3") },
+                    { "4", () => PerformAction("4") }
+                };
+            }
         }
 
         public void PerformAction(string userInput)
         {
-            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            if (AvailableActions.TryGetValue(userInput, out var action))
             {
                 action();
             }
