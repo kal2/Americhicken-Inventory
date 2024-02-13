@@ -40,7 +40,6 @@ namespace Inventory.Services
 
         private void HandleUserInput(object sender, EventArgs e)
         {
-            _mainWindow.SetCommandsLabel("");
             if (_activeControl != null)
             {
                 string userInput = _mainWindow.GetTextBoxText();
@@ -50,7 +49,7 @@ namespace Inventory.Services
 
                     foreach (var action in _activeControl.AvailableActions)
                     {
-                        if (action.Key.ToUpper().Contains(userInput.ToUpper()))
+                        if (action.Key.ToUpper().StartsWith(userInput.ToUpper()))
                         {
                             matchingActions.Add(action.Value);
                         }

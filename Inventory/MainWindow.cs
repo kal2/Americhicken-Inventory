@@ -110,6 +110,7 @@ namespace Inventory
 
         public void SetCommandsLabel(string text)
         {
+            userActionInputMain.userActionCommandsLabel.Text = "";
             userActionInputMain.userActionCommandsLabel.Text = text;
         }
 
