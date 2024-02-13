@@ -31,32 +31,36 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel    5. Save/Update Insurance");
         }
 
+        private void ExitProgram()
+        {
+            using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
+            {
+                _mainWindow.DisposeControl(this);
+                _programLoader.LoadProgram("freight");
+            }
+        }
+
+        public Dictionary<string, Action> GetAvailableActions()
+        {
+            return new Dictionary<string, Action>
+            {
+                { "1", () => UpdateFreightCarrierData(_freightData) },
+                { "2", () => freightNameTextBox.Focus() },
+                { "3", () => DeleteFreight(_freightData!) },
+                { "4", () => ExitProgram() },
+                { "5", () => SaveAndUpdateInsurance() }
+            };
+        }
+
         public void PerformAction(string userInput)
         {
-            switch (userInput)
+            if (GetAvailableActions().TryGetValue(userInput, out var action))
             {
-                case "1":
-                    UpdateFreightCarrierData(_freightData);
-                    break;
-                case "2":
-                    freightNameTextBox.Focus();
-                    break;
-                case "3":
-                    DeleteFreight(_freightData!);
-                    break;
-                case "4":
-                    using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
-                    {
-                        _mainWindow.DisposeControl(this);
-                        _programLoader.LoadProgram("freight");
-                    }
-                    break;
-                case "5":
-                    SaveAndUpdateInsurance();
-                    break;
-                default:
-                    MessageBox.Show("ERROR: Invalid input, please contact developer");
-                    break;
+                action();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
             }
         }
 

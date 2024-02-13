@@ -29,29 +29,33 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
         }
 
-        public void PerformAction(string userInput)
+        public Dictionary<string, Action> GetAvailableActions()
         {
-            switch (userInput)
+            return new Dictionary<string, Action>
             {
-                case "1":
-                    UpdateBillToData(_bil_Buy);
-                    break;
-                case "2":
-                    customerNameTextBox.Focus();
-                    break;
-                case "3":
-                    DeleteBillToData(_bil_Buy);
-                    break;
-                case "4":
+                { "1", () => UpdateBillToData(_bil_Buy) },
+                { "2", () => customerNameTextBox.Focus() },
+                { "3", () => DeleteBillToData(_bil_Buy) },
+                { "4", () =>
+                {
                     using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
                     {
                         _mainWindow.DisposeControl(this);
                         _programLoader.LoadProgram("bil_buy");
                     }
-                    break;
-                default:
-                    MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
-                    break;
+                }}
+            };
+        }
+
+        public void PerformAction(string userInput)
+        {
+            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            {
+                action();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
             }
         }
 

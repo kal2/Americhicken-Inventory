@@ -168,49 +168,68 @@ namespace Inventory.Views.UserControls
             return buyerSelectionChoice;
         }
 
+        private void NextPage()
+        {
+            if (_currentPage < Math.Ceiling((double)_results.Count / _pageSize))
+            {
+                _currentPage++;
+                DisplayResults(_results, _selectedTable);
+            }
+        }
+
+        private void PreviousPage()
+        {
+            if (_currentPage > 1)
+            {
+                _currentPage--;
+                DisplayResults(_results, _selectedTable);
+            }
+        }
+
+        private void FirstPage()
+        {
+            _currentPage = 1;
+            DisplayResults(_results, _selectedTable);
+        }
+
+        private void AddNew()
+        {
+            _mainWindow.DisposeControl(this);
+            SelectedSearchResult?.Invoke(this, new SelectedSearchResultEventArgs(null));
+        }
+
+        private void Cancel()
+        {
+            using (var programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
+            {
+                programLoader.LoadProgram(_selectedTable);
+                _mainWindow.DisposeControl(this);
+                _mainWindow.DisplayLastMenu();
+            }
+        }
+
+
+        public Dictionary<string, Action> GetAvailableActions()
+        {
+            return new Dictionary<string, Action>
+            {
+                {"1", () => NextPage() },
+                {"2", () => PreviousPage() },
+                {"3", () => FirstPage() },
+                {"4", () => AddNew() },
+                {"5", () => Cancel() }
+            };
+        }
         public void PerformAction(string userInput)
         {
-            switch (userInput)
+            if (GetAvailableActions().TryGetValue(userInput, out var action))
             {
-                case "1":
-                    //next page
-                    if (_currentPage < Math.Ceiling((double)_results.Count / _pageSize))
-                    {
-                        _currentPage++;
-                        DisplayResults(_results, _selectedTable);
-                    }
-                    break;
-
-                case "2":
-                    //previous page
-                    if (_currentPage > 1)
-                    {
-                        _currentPage--;
-                        DisplayResults(_results, _selectedTable);
-                    }
-                    break;
-
-                case "3":
-                    //first page
-                    _currentPage = 1;
-                    DisplayResults(_results, _selectedTable);
-                    break;
-
-                case "4":
-                    //add new
-                    _mainWindow.DisposeControl(this);
-                    SelectedSearchResult?.Invoke(this, new SelectedSearchResultEventArgs(null));
-                    break;
-
-                case "5":
-                    //Cancel
-                    using (var programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
-                    {
-                        programLoader.LoadProgram(_selectedTable);
-                    }
-                    break;
+                action();
             }
-            _mainWindow.ClearTextBox();
+            else
+            {
+                MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
+            }
         }
 
         public void SetProgramLabels()

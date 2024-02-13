@@ -179,38 +179,45 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 MessageBox.Show("ERROR: Remit Data is null. Please try again or contact developer.");
             }
         }
+        private void ExitProgram()
+        {
+            using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager)) 
+            {
+                _mainWindow.DisposeControl(this);
+                _mainWindow.DisplayLastMenu();
+            }
+        }
+
+        private void LoadInsuranceProgram()
+        {
+            UpdateRemitData(_remitData);
+            _mainWindow.DisposeControl(this);
+            RemitInsuranceSupplier remitInsuranceInstance = new(_mainWindow, _activeControlManager);
+            remitInsuranceInstance.DisplayRemitInsuranceData(_remitData);
+            _activeControlManager.SetActiveControl(remitInsuranceInstance);
+        }
+
+        public Dictionary<string, Action> GetAvailableActions()
+        {
+            return new Dictionary<string, Action>
+            {
+                {"1", () => UpdateRemitData(_remitData) },
+                {"2", () => RemitNameTextBox.Focus() },
+                {"3", () => DeleteRemitTo(_remitData) },
+                {"4", () => ExitProgram() },
+                {"5", () => LoadInsuranceProgram() },
+            };
+        }
 
         public void PerformAction(string userInput)
         {
-            switch (userInput)
+            if (GetAvailableActions().TryGetValue(userInput, out var action))
             {
-                case "1":
-                    UpdateRemitData(_remitData);
-                    break;
-                case "2":
-                    RemitNameTextBox.Focus();
-                    break;
-                case "3":
-                    DeleteRemitTo(_remitData);
-                    break;
-                case "4":
-                    using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
-                    {
-                        _mainWindow.DisposeControl(this);
-                        _programLoader.LoadProgram("rem_sup");
-                    }
-                    break;
-                case "5":
-                    UpdateRemitData(_remitData);
-                    _mainWindow.DisposeControl(this);
-                    RemitInsuranceSupplier remitInsuranceInstance = new(_mainWindow, _activeControlManager);
-                    remitInsuranceInstance.DisplayRemitInsuranceData(_remitData);
-                    _activeControlManager.SetActiveControl(remitInsuranceInstance);
-
-                    break;
-                default:
-                    MessageBox.Show("ERROR: Invalid user input, please contact developer");
-                    break;
+                action();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
             }
         }
 

@@ -30,25 +30,33 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             _mainWindow.SetTextBoxLabel("Action: ");
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Cancel");
         }
+
+        private void LoadFreightCarriers()
+        {
+            FreightCarriers freightCarriers = new FreightCarriers(_mainWindow, _activeControlManager);
+            freightCarriers.DisplayFreightCarrierData(_freightData);
+            _mainWindow.DisposeControl(this);
+            _activeControlManager.SetActiveControl(freightCarriers);
+        }
+
+        public Dictionary<string, Action> GetAvailableActions()
+        {
+            return new Dictionary<string, Action>
+            {
+                { "1", () => UpdateFreightInsuranceData(_freightData)},
+                { "2", () => insTp1TextBox.Focus() },
+                { "3", () => LoadFreightCarriers() }
+            };
+        }
         public void PerformAction(string userInput)
         {
-            switch (userInput)
+            if (GetAvailableActions().TryGetValue(userInput, out var action))
             {
-                case "1":
-                    UpdateFreightInsuranceData(_freightData);
-                    break;
-                case "2":
-                    insTp1TextBox.Focus();
-                    break;
-                case "3":
-                    FreightCarriers freightCarriers = new FreightCarriers(_mainWindow, _activeControlManager);
-                    freightCarriers.DisplayFreightCarrierData(_freightData);
-                    _mainWindow.DisposeControl(this);
-                    _activeControlManager.SetActiveControl(freightCarriers);
-                    break;
-                default:
-                    MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
-                    break;
+                action();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
             }
         }
         public void GetFreightInsuranceData(freight freightData)

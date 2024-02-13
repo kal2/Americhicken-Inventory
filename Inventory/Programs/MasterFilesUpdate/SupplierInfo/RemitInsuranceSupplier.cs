@@ -259,28 +259,33 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                    remitToData.reca_cov1 != decimal.Parse(recallCov1TextBox.Text.Trim()) ||
                    remitToData.cancel != decimal.Parse(cancellationTextBox.Text.Trim());
         }
+
+        private void LoadSupplierProgram()
+        {
+            RemitSupplier remitInstance = new(_mainWindow, _activeControlHelper);
+            remitInstance.DisplayRemitToData(_remitData);
+            _mainWindow.DisposeControl(this);
+            _activeControlHelper.SetActiveControl(remitInstance);
+        }
+
+        public Dictionary<string, Action> GetAvailableActions()
+        {
+            return new Dictionary<string, Action>
+            {
+                {"1", () => UpdateRemitInsuranceData(_remitData)},
+                {"2", () => insTp1TextBox.Focus()},
+                {"3", () => LoadSupplierProgram()}
+            };
+        }
         public void PerformAction(string userInput)
         {
-            switch (userInput)
+            if (GetAvailableActions().TryGetValue(userInput, out var action))
             {
-                case "1":
-                    //save
-                    UpdateRemitInsuranceData(_remitData);
-                    break;
-                case "2":
-                    //edit
-                    insTp1TextBox.Focus();
-                    break;
-                case "3":
-                    //cancel
-                    RemitSupplier remitInstance = new(_mainWindow, _activeControlHelper);
-                    remitInstance.DisplayRemitToData(_remitData);
-                    _mainWindow.DisposeControl(this);
-                    _activeControlHelper.SetActiveControl(remitInstance);
-                    break;
-                default:
-                    MessageBox.Show("Invalid input, please try again or contact developer");
-                    break;
+                action();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
             }
         }
     }

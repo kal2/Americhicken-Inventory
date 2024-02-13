@@ -9,6 +9,8 @@ namespace Inventory.UI.Menu
             {("main", "1"), MenuItemLists.POMenuItems},
             {("main", "8"), MenuItemLists.FileMaintenenceMenuItems},
             {("filemaintenence", "4"), MenuItemLists.MasterFileUpdateMenuItems},
+            {("filemaintenence", "9"), MenuItemLists.MainMenu},
+            {("masterfileupdate", "99"), MenuItemLists.FileMaintenenceMenuItems},
         };
 
         public static List<MenuItem> UserMenuSelection(string currentMenu, string userSelection)

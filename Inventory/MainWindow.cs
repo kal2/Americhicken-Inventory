@@ -96,11 +96,6 @@ namespace Inventory
             userActionInputMain.actionInput.Focus();
         }
 
-        public void SetTextBoxText(string text)
-        {
-            userActionInputMain.actionInput.Text = text;
-        }
-
         public string GetTextBoxText()
         {
             return userActionInputMain.actionInput.Text;

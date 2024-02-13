@@ -34,25 +34,26 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.Salesperson
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
         }
 
+        public Dictionary<string, Action> GetAvailableActions()
+        {
+            return new Dictionary<string, Action>
+            {
+                { "1", () => PerformAction("1") },
+                { "2", () => PerformAction("2") },
+                { "3", () => PerformAction("3") },
+                { "4", () => PerformAction("4") }
+            };
+        }
+
         public void PerformAction(string userInput)
         {
-            switch (userInput)
+            if (GetAvailableActions().TryGetValue(userInput, out var action))
             {
-                case "1":
-                    //save
-                    break;
-                case "2":
-                    //edit
-                    break;
-                case "3":
-                    //delete
-                    break;
-                case "4":
-                    //main menu
-                    break;
-                default:
-                    //error
-                    break;
+                action();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
             }
         }
     }

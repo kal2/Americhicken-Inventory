@@ -195,35 +195,34 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                    shipFromZipTextBox.Text != supplierData.zip ||
                    remitToObject!.rsupcode != supplierData.rsupcode;
         }
-        public void PerformAction(string userInput)
+
+        public Dictionary<string, Action> GetAvailableActions()
         {
-            switch (userInput)
+            return new Dictionary<string, Action>
             {
-                case "1":
-                    UpdateSupplier(_supplierData!);
-                    break;
-
-                case "2":
-                    supnameTextBox.Focus();
-                    break;
-
-                case "3":
-                    DeleteSupplier(_supplierData!);
-                    break;
-
-                case "4":
+                { "1", () => UpdateSupplier(_supplierData!) },
+                { "2", () => supnameTextBox.Focus() },
+                { "3", () => DeleteSupplier(_supplierData!) },
+                { "4", () =>
+                {
                     using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
                     {
                         _mainWindow.DisplayControl(this);
                         _programLoader.LoadProgram("supplier");
                     }
-                    break;
-
-                default:
-                    MessageBox.Show("Invalid input. Please try again.");
-                    break;
+                } }
+            };
+        }
+        public void PerformAction(string userInput)
+        {
+            if (GetAvailableActions().TryGetValue(userInput, out var action))
+            {
+                action();
             }
-            _mainWindow.ClearTextBox();
+            else
+            {
+                MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
+            }
         }
 
         private void RemitToNameTextBox_KeyDown(object sender, KeyEventArgs e)

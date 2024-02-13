@@ -109,28 +109,25 @@ namespace Inventory.Views.UserControls
             SearchDatabase(searchQuery);
         }
 
+        public Dictionary<string, Action> GetAvailableActions()
+        {
+            return new Dictionary<string, Action>
+            {
+                { "1", () => SearchDatabase(searchQuereyTextBox.Text) },
+                { "2", () => searchQuereyTextBox.Clear() },
+                { "3", () => {_mainWindow.DisposeControl(this); _mainWindow.DisplayLastMenu(); } }
+            };
+        }
+
         public void PerformAction(string userInput)
         {
-            switch (userInput)
+            if (GetAvailableActions().TryGetValue(userInput, out var action))
             {
-                case "1":
-                    SearchDatabase(searchQuereyTextBox.Text);
-                    break;
-
-                case "2":
-                    searchQuereyTextBox.Clear();
-                    searchQuereyTextBox.Focus();
-                    break;
-
-                case "3":
-                    _mainWindow.DisposeControl(this);
-                    _mainWindow.DisplayLastMenu();
-                    break;
-
-                default:
-                    MessageBox.Show("Invalid input. Please try again.");
-                    _mainWindow.ClearTextBox();
-                    break;
+                action();
+            }
+            else
+            {
+                MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
             }
         }
 
