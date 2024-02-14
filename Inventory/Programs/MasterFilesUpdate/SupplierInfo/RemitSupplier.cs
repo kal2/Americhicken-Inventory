@@ -45,7 +45,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         {
             _remitData = remitToObject;
             RemitNameTextBox.Text = StringServices.TrimOrNull(_remitData.name);
-            phoneMaskTextBox.Text = StringServices.TrimOrNull(_remitData.area_code) + StringServices.TrimOrNull(_remitData.phone);
+            phoneMaskTextBox.Text = StringServices.TrimOrNull(_remitData.phone);
             faxMaskTextBox.Text = StringServices.TrimOrNull(_remitData.fax);
             remitStreetTextBox.Text = StringServices.TrimOrNull(_remitData.street);
             remitCityTextBox.Text = StringServices.TrimOrNull(_remitData.city);
@@ -78,8 +78,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     if (existingRemData != null)
                     {
                         existingRemData.name = StringServices.TrimOrNull(RemitNameTextBox.Text);
-                        existingRemData.area_code = phoneMaskTextBox.Text.Trim().Length >= 3 ? phoneMaskTextBox.Text.Trim()[..3] : null;
-                        existingRemData.phone = phoneMaskTextBox.Text.Trim().Length >= 10 ? phoneMaskTextBox.Text.Trim()[3..] : null;
+                        existingRemData.phone = phoneMaskTextBox.Text;
                         existingRemData.fax = StringServices.TrimOrNull(faxMaskTextBox.Text);
                         existingRemData.street = StringServices.TrimOrNull(remitStreetTextBox.Text);
                         existingRemData.city = StringServices.TrimOrNull(remitCityTextBox.Text);
@@ -121,8 +120,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         rem_sup newRemitEntry = new()
                         {
                             name = StringServices.TrimOrNull(RemitNameTextBox.Text),
-                            area_code = phoneMaskTextBox.Text[..3],
-                            phone = phoneMaskTextBox.Text.Substring(3, 7),
+                            phone = phoneMaskTextBox.Text,
                             fax = StringServices.TrimOrNull(faxMaskTextBox.Text),
                             street = StringServices.TrimOrNull(remitStreetTextBox.Text),
                             city = StringServices.TrimOrNull(remitCityTextBox.Text),
@@ -157,7 +155,29 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         public bool IsDataModified(rem_sup remitToData)
         {
-            return remitToData == null || remitToData.name != RemitNameTextBox.Text || remitToData.area_code + remitToData.phone != phoneMaskTextBox.Text || remitToData.fax != faxMaskTextBox.Text || remitToData.street != remitStreetTextBox.Text || remitToData.city != remitCityTextBox.Text || remitToData.state != remitStateTextBox.Text || remitToData.zip != remitZipTextBox.Text || remitToData.zip4 != remitZip4TextBox.Text || remitToData.net_days != int.Parse(payNetDaysTextBox.Text) || remitToData.indem_flg != indemnityContractTextBox.Text || remitToData.active != activeTextBox.Text || remitToData.indem_dt != DateTime.Parse(contractDateMaskedBox.Text, new CultureInfo("en-US")) || remitToData.cred_lim != int.Parse(creditLimitTextBox.Text) || remitToData.beg_date != DateTime.Parse(beginDateMaskedBox.Text, new CultureInfo("en-US")) || remitToData.end_date != DateTime.Parse(expireDateMaskedBox.Text, new CultureInfo("en-US")) || remitToData.guaran != guarantorTextBox.Text || remitToData.note != noteTextBox.Text || remitToData.ins_co1 != aInsuranceTextBox.Text || remitToData.ins_co2 != bInsuranceTextBox.Text || remitToData.ins_co3 != cInsuranceTextBox.Text || remitToData.ins_co4 != dInsuranceTextBox.Text || remitToData.ins_co5 != eInsuranceTextBox.Text;
+            return remitToData == null ||
+                remitToData.name != RemitNameTextBox.Text ||
+                remitToData.phone != phoneMaskTextBox.Text ||
+                remitToData.fax != faxMaskTextBox.Text ||
+                remitToData.street != remitStreetTextBox.Text ||
+                remitToData.city != remitCityTextBox.Text ||
+                remitToData.state != remitStateTextBox.Text ||
+                remitToData.zip != remitZipTextBox.Text ||
+                remitToData.zip4 != remitZip4TextBox.Text ||
+                remitToData.net_days != int.Parse(payNetDaysTextBox.Text) ||
+                remitToData.indem_flg != indemnityContractTextBox.Text ||
+                remitToData.active != activeTextBox.Text ||
+                remitToData.indem_dt != DateTime.Parse(contractDateMaskedBox.Text, new CultureInfo("en-US")) ||
+                remitToData.cred_lim != int.Parse(creditLimitTextBox.Text) ||
+                remitToData.beg_date != DateTime.Parse(beginDateMaskedBox.Text, new CultureInfo("en-US")) ||
+                remitToData.end_date != DateTime.Parse(expireDateMaskedBox.Text, new CultureInfo("en-US")) ||
+                remitToData.guaran != guarantorTextBox.Text ||
+                remitToData.note != noteTextBox.Text ||
+                remitToData.ins_co1 != aInsuranceTextBox.Text ||
+                remitToData.ins_co2 != bInsuranceTextBox.Text ||
+                remitToData.ins_co3 != cInsuranceTextBox.Text ||
+                remitToData.ins_co4 != dInsuranceTextBox.Text ||
+                remitToData.ins_co5 != eInsuranceTextBox.Text;
         }
         public void DeleteRemitTo(rem_sup remitToData)
         {

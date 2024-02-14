@@ -63,8 +63,6 @@ public partial class bil_buy
 
     public string note2 { get; set; }
 
-    public string area_code { get; set; }
-
     public string phone { get; set; }
 
     public string fax { get; set; }

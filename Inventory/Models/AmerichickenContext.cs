@@ -33,7 +33,7 @@ public partial class AmerichickenContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -43,7 +43,6 @@ public partial class AmerichickenContext : DbContext
 
             entity.Property(e => e.PK_bil_buy).HasDefaultValueSql("(newid())");
             entity.Property(e => e.active).HasMaxLength(1);
-            entity.Property(e => e.area_code).HasMaxLength(3);
             entity.Property(e => e.bal_calc).HasColumnType("numeric(9, 2)");
             entity.Property(e => e.bbuycode).HasMaxLength(4);
             entity.Property(e => e.beg_date).HasColumnType("date");
@@ -91,7 +90,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.no_shrtrpt).HasMaxLength(1);
             entity.Property(e => e.note).HasMaxLength(60);
             entity.Property(e => e.note2).HasMaxLength(60);
-            entity.Property(e => e.phone).HasMaxLength(7);
+            entity.Property(e => e.phone).HasMaxLength(10);
             entity.Property(e => e.po_attn).HasMaxLength(20);
             entity.Property(e => e.po_warn).HasMaxLength(20);
             entity.Property(e => e.reg_name).HasMaxLength(40);
@@ -125,7 +124,6 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_buyer);
 
             entity.Property(e => e.PK_buyer).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.area_code).HasMaxLength(3);
             entity.Property(e => e.bbuycode).HasMaxLength(4);
             entity.Property(e => e.buy_code).HasMaxLength(4);
             entity.Property(e => e.city).HasMaxLength(20);
@@ -175,7 +173,7 @@ public partial class AmerichickenContext : DbContext
                 .IsFixedLength();
             entity.Property(e => e.name).HasMaxLength(40);
             entity.Property(e => e.note).HasMaxLength(60);
-            entity.Property(e => e.phone).HasMaxLength(7);
+            entity.Property(e => e.phone).HasMaxLength(10);
             entity.Property(e => e.sat_recv)
                 .HasMaxLength(15)
                 .IsFixedLength();
@@ -208,7 +206,6 @@ public partial class AmerichickenContext : DbContext
 
             entity.Property(e => e.PK_freight).HasDefaultValueSql("(newid())");
             entity.Property(e => e.ACTIVE).HasMaxLength(1);
-            entity.Property(e => e.AREA_CODE).HasMaxLength(3);
             entity.Property(e => e.AUTO_BEG).HasColumnType("date");
             entity.Property(e => e.AUTO_COV).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.AUTO_COV1).HasColumnType("numeric(8, 0)");
@@ -227,8 +224,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.CARG_COV3).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.CARG_COV4).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.CITY).HasMaxLength(20);
-            entity.Property(e => e.FAX_AREA).HasMaxLength(3);
-            entity.Property(e => e.FAX_PHONE).HasMaxLength(7);
+            entity.Property(e => e.FAX_PHONE).HasMaxLength(10);
             entity.Property(e => e.FRT_CODE).HasMaxLength(4);
             entity.Property(e => e.FRT_CONT).HasMaxLength(32);
             entity.Property(e => e.GEN_BEG).HasColumnType("date");
@@ -259,17 +255,15 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.INS_TP5).HasMaxLength(1);
             entity.Property(e => e.NAME).HasMaxLength(40);
             entity.Property(e => e.NOTE).HasMaxLength(65);
-            entity.Property(e => e.PAY_AREA).HasMaxLength(3);
             entity.Property(e => e.PAY_CITY).HasMaxLength(20);
-            entity.Property(e => e.PAY_FAREA).HasMaxLength(3);
-            entity.Property(e => e.PAY_FPHONE).HasMaxLength(7);
+            entity.Property(e => e.PAY_FPHONE).HasMaxLength(10);
             entity.Property(e => e.PAY_NAME).HasMaxLength(40);
-            entity.Property(e => e.PAY_PHONE).HasMaxLength(7);
+            entity.Property(e => e.PAY_PHONE).HasMaxLength(10);
             entity.Property(e => e.PAY_STATE).HasMaxLength(2);
             entity.Property(e => e.PAY_STREET).HasMaxLength(40);
             entity.Property(e => e.PAY_ZIP).HasMaxLength(5);
             entity.Property(e => e.PAY_ZIP4).HasMaxLength(4);
-            entity.Property(e => e.PHONE).HasMaxLength(7);
+            entity.Property(e => e.PHONE).HasMaxLength(10);
             entity.Property(e => e.PHY_BEG).HasColumnType("date");
             entity.Property(e => e.PHY_COV1).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.PHY_COV2).HasColumnType("numeric(8, 0)");
@@ -416,7 +410,6 @@ public partial class AmerichickenContext : DbContext
 
             entity.Property(e => e.PK_rem_sup).HasDefaultValueSql("(newid())");
             entity.Property(e => e.active).HasMaxLength(1);
-            entity.Property(e => e.area_code).HasMaxLength(3);
             entity.Property(e => e.auto_beg).HasColumnType("date");
             entity.Property(e => e.auto_cov).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.auto_cov1).HasColumnType("numeric(8, 0)");
@@ -473,7 +466,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.net_days).HasColumnType("numeric(3, 0)");
             entity.Property(e => e.note).HasMaxLength(60);
             entity.Property(e => e.pay_zip4).HasMaxLength(4);
-            entity.Property(e => e.phone).HasMaxLength(7);
+            entity.Property(e => e.phone).HasMaxLength(10);
             entity.Property(e => e.policy1).HasMaxLength(20);
             entity.Property(e => e.policy2).HasMaxLength(20);
             entity.Property(e => e.policy3).HasMaxLength(20);
@@ -539,7 +532,6 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_supplier);
 
             entity.Property(e => e.PK_supplier).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.area_code).HasMaxLength(3);
             entity.Property(e => e.city).HasMaxLength(20);
             entity.Property(e => e.cont_fax).HasMaxLength(10);
             entity.Property(e => e.cont_name).HasMaxLength(40);
@@ -549,7 +541,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.freight_phone).HasMaxLength(10);
             entity.Property(e => e.name).HasMaxLength(50);
             entity.Property(e => e.note).HasMaxLength(60);
-            entity.Property(e => e.phone).HasMaxLength(7);
+            entity.Property(e => e.phone).HasMaxLength(10);
             entity.Property(e => e.pu_code).HasMaxLength(4);
             entity.Property(e => e.rsupcode).HasMaxLength(4);
             entity.Property(e => e.state).HasMaxLength(50);

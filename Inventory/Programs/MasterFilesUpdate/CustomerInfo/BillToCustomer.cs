@@ -70,7 +70,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
 
             customerNameTextBox.Text = StringServices.TrimOrNull(bil_Buy.name);
             regNameTextBox.Text = StringServices.TrimOrNull(bil_Buy.reg_name);
-            phoneMaskedTextBox.Text = StringServices.TrimOrNull(bil_Buy.area_code + bil_Buy.phone);
+            phoneMaskedTextBox.Text = StringServices.TrimOrNull(bil_Buy.phone);
             faxMaskedTextBox.Text = StringServices.TrimOrNull(bil_Buy.fax);
             activeTextBox.Text = StringServices.TrimOrNull(bil_Buy.active);
             internationalTextBox.Text = StringServices.TrimOrNull(bil_Buy.internat);
@@ -107,7 +107,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         {
             return bil_Buy == null || !customerNameTextBox.Text.Equals(bil_Buy.name) ||
                    !regNameTextBox.Text.Equals(bil_Buy.reg_name) ||
-                   !phoneMaskedTextBox.Text.Equals(bil_Buy.area_code + bil_Buy.phone) ||
+                   !phoneMaskedTextBox.Text.Equals(bil_Buy.phone) ||
                    !faxMaskedTextBox.Text.Equals(bil_Buy.fax) ||
                    !activeTextBox.Text.Equals(bil_Buy.active) ||
                    !internationalTextBox.Text.Equals(bil_Buy.internat) ||
@@ -141,8 +141,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             _bil_Buy = existingBillTo;
             existingBillTo.name = StringServices.TrimOrNull(customerNameTextBox.Text);
             existingBillTo.reg_name = StringServices.TrimOrNull(regNameTextBox.Text);
-            existingBillTo.area_code = StringServices.TrimOrNull(phoneMaskedTextBox.Text.Substring(0, 3));
-            existingBillTo.phone = StringServices.TrimOrNull(phoneMaskedTextBox.Text.Substring(3, 7));
+            existingBillTo.phone = StringServices.TrimOrNull(phoneMaskedTextBox.Text);
             existingBillTo.fax = StringServices.TrimOrNull(faxMaskedTextBox.Text);
             existingBillTo.active = StringServices.TrimOrNull(activeTextBox.Text);
             existingBillTo.internat = StringServices.TrimOrNull(internationalTextBox.Text);

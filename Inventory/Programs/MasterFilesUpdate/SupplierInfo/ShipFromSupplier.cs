@@ -32,7 +32,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         {
             _supplierData = supplierObject;
             supnameTextBox.Text = supplierObject.name?.ToString().Trim();
-            phoneMaskTextBox.Text = $"{supplierObject.area_code?.ToString().Trim() + supplierObject.phone?.ToString().Trim()}";
+            phoneMaskTextBox.Text = supplierObject.phone?.ToString().Trim();
             faxMaskTextBox.Text = supplierObject.fax?.ToString().Trim();
             contactNameTextBox.Text = supplierObject.cont_name?.ToString().Trim();
             contactPhoneMaskTextBox.Text = supplierObject.cont_phone?.ToString().Trim();
@@ -66,8 +66,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     if (existingSupplier != null)
                     {
                         existingSupplier.name = supnameTextBox.Text.Trim();
-                        existingSupplier.area_code = phoneMaskTextBox.Text.Trim()[..3];
-                        existingSupplier.phone = phoneMaskTextBox.Text.Trim()[3..];
+                        existingSupplier.phone = phoneMaskTextBox.Text.Trim();
                         existingSupplier.fax = faxMaskTextBox.Text.Trim();
                         existingSupplier.cont_name = contactNameTextBox.Text.Trim();
                         existingSupplier.cont_phone = contactPhoneMaskTextBox.Text.Trim();
@@ -100,8 +99,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         supplier newSupplier = new()
                         {
                             name = supnameTextBox.Text.Trim(),
-                            area_code = phoneMaskTextBox.Text.Trim()[..3],
-                            phone = phoneMaskTextBox.Text.Trim()[3..],
+                            phone = phoneMaskTextBox.Text.Trim(),
                             fax = faxMaskTextBox.Text.Trim(),
                             cont_name = contactNameTextBox.Text.Trim(),
                             cont_phone = contactPhoneMaskTextBox.Text.Trim(),
@@ -182,7 +180,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         private bool IsDataModified(supplier supplierData)
         {
             return supplierData == null || supnameTextBox.Text != supplierData.name ||
-                   phoneMaskTextBox.Text != supplierData.area_code + supplierData.phone ||
+                   phoneMaskTextBox.Text != supplierData.phone ||
                    faxMaskTextBox.Text != supplierData.fax ||
                    contactNameTextBox.Text != supplierData.cont_name ||
                    contactPhoneMaskTextBox.Text != supplierData.cont_phone ||

@@ -65,7 +65,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             _buyer = buyer;
 
             customerShipToTextBox.Text = StringServices.TrimOrNull(_buyer.name);
-            phoneNumberMaskedTextBox.Text = StringServices.TrimOrNull(_buyer.area_code + _buyer.phone);
+            phoneNumberMaskedTextBox.Text = StringServices.TrimOrNull(_buyer.phone);
             faxNumberMaskedTextBox.Text = StringServices.TrimOrNull(_buyer.fax);
             contactName1TextBox.Text = StringServices.TrimOrNull(_buyer.cont_name);
             contactName2TextBox.Text = StringServices.TrimOrNull(_buyer.cont_nam2);
@@ -98,7 +98,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         private bool IsDataModified(buyer buyer)
         {
             return buyer == null || buyer.name != customerShipToTextBox.Text ||
-                buyer.area_code + buyer.phone != phoneNumberMaskedTextBox.Text ||
+                buyer.phone != phoneNumberMaskedTextBox.Text ||
                 buyer.fax != faxNumberMaskedTextBox.Text ||
                 buyer.cont_name != contactName1TextBox.Text ||
                 buyer.cont_nam2 != contactName2TextBox.Text ||
@@ -128,8 +128,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
         private void SetShipToCustomerData(buyer buyer)
         {
             buyer.name = StringServices.TrimOrNull(customerShipToTextBox.Text);
-            buyer.area_code = phoneNumberMaskedTextBox.Text.Substring(0, 3);
-            buyer.phone = phoneNumberMaskedTextBox.Text.Substring(3);
+            buyer.phone = phoneNumberMaskedTextBox.Text;
             buyer.fax = StringServices.TrimOrNull(faxNumberMaskedTextBox.Text);
             buyer.cont_name = StringServices.TrimOrNull(contactName1TextBox.Text);
             buyer.cont_nam2 = StringServices.TrimOrNull(contactName2TextBox.Text);

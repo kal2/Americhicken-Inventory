@@ -33,8 +33,6 @@ public partial class buyer
 
     public string note { get; set; }
 
-    public string area_code { get; set; }
-
     public string phone { get; set; }
 
     public string fax { get; set; }

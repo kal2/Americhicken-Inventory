@@ -8,8 +8,8 @@ namespace Inventory.Interfaces
 {
     public interface IActiveControlManager
     {
-        void PerformAction(string userInput);
         void SetProgramLabels();
         Dictionary<string, Action> AvailableActions { get; }
+        void PerformAction(string userInput);
     }
 }

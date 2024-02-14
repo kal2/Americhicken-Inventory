@@ -37,8 +37,6 @@ public partial class rem_sup
 
     public string note { get; set; }
 
-    public string area_code { get; set; }
-
     public string phone { get; set; }
 
     public string fax { get; set; }

@@ -23,8 +23,6 @@ public partial class freight
 
     public string ZIP4 { get; set; }
 
-    public string AREA_CODE { get; set; }
-
     public string PHONE { get; set; }
 
     public string FRT_CONT { get; set; }
@@ -39,15 +37,9 @@ public partial class freight
 
     public string PAY_ZIP4 { get; set; }
 
-    public string PAY_AREA { get; set; }
-
     public string PAY_PHONE { get; set; }
 
-    public string FAX_AREA { get; set; }
-
     public string FAX_PHONE { get; set; }
-
-    public string PAY_FAREA { get; set; }
 
     public string PAY_FPHONE { get; set; }
 
