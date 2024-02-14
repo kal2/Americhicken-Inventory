@@ -41,6 +41,7 @@ namespace Inventory
             MenuList menuList = new(this, _activeControlManager);
             menuList.SetCurrentMenu(_lastMenuDisplayed);
             menuList.PerformAction(null);
+            FocusTextBox();
             _activeControlManager.SetActiveControl(menuList);
         }
 

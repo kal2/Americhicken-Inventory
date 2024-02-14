@@ -1,5 +1,6 @@
 ﻿using Inventory.Interfaces;
 using Inventory.UI.Data;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Inventory.Services
 {
@@ -33,31 +34,19 @@ namespace Inventory.Services
                 string userInput = _mainWindow.GetTextBoxText();
                 if (!string.IsNullOrEmpty(userInput))
                 {
-                    List<Action> matchingActions = new List<Action>();
+                    var actionsCopy = new Dictionary<string, Action>(_activeControl.AvailableActions);
 
-                    foreach (var action in _activeControl.AvailableActions)
+                    foreach (var action in actionsCopy)
                     {
-                        if (action.Key.ToUpper().StartsWith(userInput.ToUpper()))
+                        if (action.Key == userInput) // Check for exact match
                         {
-                            matchingActions.Add(action.Value);
-                        }
-                    }
-
-                    if (matchingActions.Count > 0)
-                    {
-                        //If there is only one match, perform the action, if there are multiple wait until enter key is pressed
-
-                        if (matchingActions.Count > 1)
-                        {
-                            _mainWindow.SetCommandsLabel("Multiple commands found. Press enter to continue.");
-                            // Perform the first matching action
-                        }
-                        else
-                        {
-                            // Perform the first matching action
+                            _mainWindow.SetCommandsLabel("");
                             _activeControl.PerformAction(userInput);
-
                             _mainWindow.ClearTextBox();
+                        }
+                        else if (action.Key.StartsWith(userInput))
+                        {
+                            _mainWindow.SetCommandsLabel("Close match or multiple matches found. Press ENTER to submit choice.");
                         }
                     }
                 }
