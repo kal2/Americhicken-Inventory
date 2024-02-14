@@ -19,11 +19,12 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _activeControlManager = activeControlManager;
 
             dbContext = new AmerichickenContext();
+            Load += (s, e) => supnameTextBox.Focus();
         }
 
         public void SetProgramLabels()
         {
-            _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE SHIPPED FROM SUPPLIER INFORMATION");
+            _mainWindow.SetProgramLabel("ADD/CHANGE/DELETE SHIPPED FROM SUPPLIER INFORMATION");
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
             _mainWindow.SetTextBoxLabel("ACTION:");
         }

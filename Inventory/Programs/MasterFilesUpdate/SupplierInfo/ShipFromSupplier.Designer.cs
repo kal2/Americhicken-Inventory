@@ -184,7 +184,7 @@
             noteTextBox.MaxLength = 50;
             noteTextBox.Name = "noteTextBox";
             noteTextBox.Size = new Size(670, 27);
-            noteTextBox.TabIndex = 13;
+            noteTextBox.TabIndex = 12;
             // 
             // label13
             // 
@@ -208,7 +208,7 @@
             remitToNameTextBox.MaxLength = 40;
             remitToNameTextBox.Name = "remitToNameTextBox";
             remitToNameTextBox.Size = new Size(493, 27);
-            remitToNameTextBox.TabIndex = 12;
+            remitToNameTextBox.TabIndex = 13;
             remitToNameTextBox.KeyDown += RemitToNameTextBox_KeyDown;
             // 
             // freightEmailTextBox
