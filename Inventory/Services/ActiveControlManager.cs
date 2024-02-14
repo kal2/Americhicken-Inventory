@@ -23,19 +23,7 @@ namespace Inventory.Services
             _activeControl = activeControl;
             _mainWindow.DisplayControl(_activeControl as UserControl);
             _activeControl.SetProgramLabels();
-        }
-
-        private void HandleEnterKeyPressed(object sender, KeyEventArgs e)
-        {
-            if (_activeControl != null && e.KeyCode == Keys.Enter)
-            {
-                string userInput = _mainWindow.GetTextBoxText();
-                if (!string.IsNullOrEmpty(userInput))
-                {
-                    _activeControl.PerformAction(userInput);
-                    _mainWindow.ClearTextBox();
-                }
-            }
+            AttachKeyPressEventHandlers(_activeControl as UserControl);
         }
 
         private void HandleUserInput(object sender, EventArgs e)
@@ -75,5 +63,51 @@ namespace Inventory.Services
                 }
             }
         }
+
+        private void HandleEnterKeyPressed(object sender, KeyEventArgs e)
+        {
+            if (_activeControl != null && e.KeyCode == Keys.Enter)
+            {
+                string userInput = _mainWindow.GetTextBoxText();
+                if (!string.IsNullOrEmpty(userInput))
+                {
+                    _activeControl.PerformAction(userInput);
+                    _mainWindow.ClearTextBox();
+                }
+            }
+        }
+
+
+
+
+
+        private void AttachKeyPressEventHandlers(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c is TextBox)
+                {
+                    ((TextBox)c).KeyPress += TextBox_KeyPress;
+                }
+                else if (c.Controls.Count > 0)
+                {
+                    AttachKeyPressEventHandlers(c);
+                }
+            }
+        }
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = Char.ToUpperInvariant(e.KeyChar);
+        }
+
+
+
+
+
+
+
+
+
     }
 }
