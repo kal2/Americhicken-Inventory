@@ -113,13 +113,14 @@
             // customerNameTextBox
             // 
             customerNameTextBox.BackColor = Color.Maroon;
+            customerNameTextBox.BorderStyle = BorderStyle.None;
             customerNameTextBox.Font = new Font("Segoe UI", 15F);
             customerNameTextBox.ForeColor = Color.White;
             customerNameTextBox.Location = new Point(228, 7);
             customerNameTextBox.Margin = new Padding(0);
             customerNameTextBox.MaxLength = 40;
             customerNameTextBox.Name = "customerNameTextBox";
-            customerNameTextBox.Size = new Size(550, 34);
+            customerNameTextBox.Size = new Size(550, 27);
             customerNameTextBox.TabIndex = 1;
             // 
             // label1
@@ -136,13 +137,14 @@
             // regNameTextBox
             // 
             regNameTextBox.BackColor = Color.Maroon;
+            regNameTextBox.BorderStyle = BorderStyle.None;
             regNameTextBox.Font = new Font("Segoe UI", 15F);
             regNameTextBox.ForeColor = Color.White;
             regNameTextBox.Location = new Point(228, 41);
             regNameTextBox.Margin = new Padding(0);
             regNameTextBox.MaxLength = 40;
             regNameTextBox.Name = "regNameTextBox";
-            regNameTextBox.Size = new Size(550, 34);
+            regNameTextBox.Size = new Size(550, 27);
             regNameTextBox.TabIndex = 2;
             // 
             // label2
@@ -159,13 +161,14 @@
             // phoneMaskedTextBox
             // 
             phoneMaskedTextBox.BackColor = Color.Maroon;
+            phoneMaskedTextBox.BorderStyle = BorderStyle.None;
             phoneMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             phoneMaskedTextBox.Font = new Font("Segoe UI", 15F);
             phoneMaskedTextBox.ForeColor = Color.White;
             phoneMaskedTextBox.Location = new Point(228, 75);
             phoneMaskedTextBox.Mask = "(999) 000-0000";
             phoneMaskedTextBox.Name = "phoneMaskedTextBox";
-            phoneMaskedTextBox.Size = new Size(174, 34);
+            phoneMaskedTextBox.Size = new Size(174, 27);
             phoneMaskedTextBox.TabIndex = 3;
             phoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -183,13 +186,14 @@
             // extensionTextBox
             // 
             extensionTextBox.BackColor = Color.Maroon;
+            extensionTextBox.BorderStyle = BorderStyle.None;
             extensionTextBox.Font = new Font("Segoe UI", 15F);
             extensionTextBox.ForeColor = Color.White;
             extensionTextBox.Location = new Point(465, 75);
             extensionTextBox.Margin = new Padding(0);
             extensionTextBox.MaxLength = 5;
             extensionTextBox.Name = "extensionTextBox";
-            extensionTextBox.Size = new Size(75, 34);
+            extensionTextBox.Size = new Size(75, 27);
             extensionTextBox.TabIndex = 4;
             // 
             // label3
@@ -206,13 +210,14 @@
             // activeTextBox
             // 
             activeTextBox.BackColor = Color.Maroon;
+            activeTextBox.BorderStyle = BorderStyle.None;
             activeTextBox.Font = new Font("Segoe UI", 15F);
             activeTextBox.ForeColor = Color.White;
             activeTextBox.Location = new Point(1242, 7);
             activeTextBox.Margin = new Padding(0);
             activeTextBox.MaxLength = 1;
             activeTextBox.Name = "activeTextBox";
-            activeTextBox.Size = new Size(41, 34);
+            activeTextBox.Size = new Size(41, 27);
             activeTextBox.TabIndex = 6;
             // 
             // label4
@@ -229,13 +234,14 @@
             // internationalTextBox
             // 
             internationalTextBox.BackColor = Color.Maroon;
+            internationalTextBox.BorderStyle = BorderStyle.None;
             internationalTextBox.Font = new Font("Segoe UI", 15F);
             internationalTextBox.ForeColor = Color.White;
             internationalTextBox.Location = new Point(1242, 41);
             internationalTextBox.Margin = new Padding(0);
             internationalTextBox.MaxLength = 1;
             internationalTextBox.Name = "internationalTextBox";
-            internationalTextBox.Size = new Size(41, 34);
+            internationalTextBox.Size = new Size(41, 27);
             internationalTextBox.TabIndex = 7;
             // 
             // label5
@@ -252,13 +258,14 @@
             // faxMaskedTextBox
             // 
             faxMaskedTextBox.BackColor = Color.Maroon;
+            faxMaskedTextBox.BorderStyle = BorderStyle.None;
             faxMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             faxMaskedTextBox.Font = new Font("Segoe UI", 15F);
             faxMaskedTextBox.ForeColor = Color.White;
             faxMaskedTextBox.Location = new Point(604, 75);
             faxMaskedTextBox.Mask = "(999) 000-0000";
             faxMaskedTextBox.Name = "faxMaskedTextBox";
-            faxMaskedTextBox.Size = new Size(174, 34);
+            faxMaskedTextBox.Size = new Size(174, 27);
             faxMaskedTextBox.TabIndex = 5;
             faxMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -298,13 +305,14 @@
             // streetTextBox
             // 
             streetTextBox.BackColor = Color.Maroon;
+            streetTextBox.BorderStyle = BorderStyle.None;
             streetTextBox.Font = new Font("Segoe UI", 15F);
             streetTextBox.ForeColor = Color.White;
             streetTextBox.Location = new Point(100, 140);
             streetTextBox.Margin = new Padding(0);
             streetTextBox.MaxLength = 40;
             streetTextBox.Name = "streetTextBox";
-            streetTextBox.Size = new Size(530, 34);
+            streetTextBox.Size = new Size(530, 27);
             streetTextBox.TabIndex = 8;
             // 
             // label10
@@ -321,13 +329,14 @@
             // cityTextBox
             // 
             cityTextBox.BackColor = Color.Maroon;
+            cityTextBox.BorderStyle = BorderStyle.None;
             cityTextBox.Font = new Font("Segoe UI", 15F);
             cityTextBox.ForeColor = Color.White;
             cityTextBox.Location = new Point(100, 174);
             cityTextBox.Margin = new Padding(0);
             cityTextBox.MaxLength = 20;
             cityTextBox.Name = "cityTextBox";
-            cityTextBox.Size = new Size(530, 34);
+            cityTextBox.Size = new Size(530, 27);
             cityTextBox.TabIndex = 9;
             // 
             // label11
@@ -344,13 +353,14 @@
             // stateTextBox
             // 
             stateTextBox.BackColor = Color.Maroon;
+            stateTextBox.BorderStyle = BorderStyle.None;
             stateTextBox.Font = new Font("Segoe UI", 15F);
             stateTextBox.ForeColor = Color.White;
             stateTextBox.Location = new Point(100, 208);
             stateTextBox.Margin = new Padding(0);
             stateTextBox.MaxLength = 2;
             stateTextBox.Name = "stateTextBox";
-            stateTextBox.Size = new Size(58, 34);
+            stateTextBox.Size = new Size(58, 27);
             stateTextBox.TabIndex = 10;
             // 
             // label12
@@ -367,25 +377,27 @@
             // zip4TextBox
             // 
             zip4TextBox.BackColor = Color.Maroon;
+            zip4TextBox.BorderStyle = BorderStyle.None;
             zip4TextBox.Font = new Font("Segoe UI", 15F);
             zip4TextBox.ForeColor = Color.White;
             zip4TextBox.Location = new Point(309, 208);
             zip4TextBox.Margin = new Padding(0);
             zip4TextBox.MaxLength = 4;
             zip4TextBox.Name = "zip4TextBox";
-            zip4TextBox.Size = new Size(59, 34);
+            zip4TextBox.Size = new Size(59, 27);
             zip4TextBox.TabIndex = 12;
             // 
             // zipTextBox
             // 
             zipTextBox.BackColor = Color.Maroon;
+            zipTextBox.BorderStyle = BorderStyle.None;
             zipTextBox.Font = new Font("Segoe UI", 15F);
             zipTextBox.ForeColor = Color.White;
             zipTextBox.Location = new Point(228, 208);
             zipTextBox.Margin = new Padding(0);
             zipTextBox.MaxLength = 5;
             zipTextBox.Name = "zipTextBox";
-            zipTextBox.Size = new Size(72, 34);
+            zipTextBox.Size = new Size(72, 27);
             zipTextBox.TabIndex = 11;
             // 
             // label13
@@ -402,13 +414,14 @@
             // iLine1TextBox
             // 
             iLine1TextBox.BackColor = Color.Maroon;
+            iLine1TextBox.BorderStyle = BorderStyle.None;
             iLine1TextBox.Font = new Font("Segoe UI", 15F);
             iLine1TextBox.ForeColor = Color.White;
             iLine1TextBox.Location = new Point(753, 140);
             iLine1TextBox.Margin = new Padding(0);
             iLine1TextBox.MaxLength = 35;
             iLine1TextBox.Name = "iLine1TextBox";
-            iLine1TextBox.Size = new Size(530, 34);
+            iLine1TextBox.Size = new Size(530, 27);
             iLine1TextBox.TabIndex = 13;
             // 
             // label14
@@ -425,13 +438,14 @@
             // iLine2TextBox
             // 
             iLine2TextBox.BackColor = Color.Maroon;
+            iLine2TextBox.BorderStyle = BorderStyle.None;
             iLine2TextBox.Font = new Font("Segoe UI", 15F);
             iLine2TextBox.ForeColor = Color.White;
             iLine2TextBox.Location = new Point(753, 174);
             iLine2TextBox.Margin = new Padding(0);
             iLine2TextBox.MaxLength = 35;
             iLine2TextBox.Name = "iLine2TextBox";
-            iLine2TextBox.Size = new Size(530, 34);
+            iLine2TextBox.Size = new Size(530, 27);
             iLine2TextBox.TabIndex = 14;
             // 
             // label15
@@ -448,13 +462,14 @@
             // iLine3TextBox
             // 
             iLine3TextBox.BackColor = Color.Maroon;
+            iLine3TextBox.BorderStyle = BorderStyle.None;
             iLine3TextBox.Font = new Font("Segoe UI", 15F);
             iLine3TextBox.ForeColor = Color.White;
             iLine3TextBox.Location = new Point(753, 208);
             iLine3TextBox.Margin = new Padding(0);
             iLine3TextBox.MaxLength = 35;
             iLine3TextBox.Name = "iLine3TextBox";
-            iLine3TextBox.Size = new Size(530, 34);
+            iLine3TextBox.Size = new Size(530, 27);
             iLine3TextBox.TabIndex = 15;
             // 
             // label16
@@ -482,13 +497,14 @@
             // creditLimitTextBox
             // 
             creditLimitTextBox.BackColor = Color.Maroon;
+            creditLimitTextBox.BorderStyle = BorderStyle.None;
             creditLimitTextBox.Font = new Font("Segoe UI", 15F);
             creditLimitTextBox.ForeColor = Color.White;
             creditLimitTextBox.Location = new Point(171, 326);
             creditLimitTextBox.Margin = new Padding(0);
             creditLimitTextBox.MaxLength = 7;
             creditLimitTextBox.Name = "creditLimitTextBox";
-            creditLimitTextBox.Size = new Size(86, 34);
+            creditLimitTextBox.Size = new Size(86, 27);
             creditLimitTextBox.TabIndex = 17;
             // 
             // label17
@@ -571,12 +587,13 @@
             // dateReviewedMaskBox
             // 
             dateReviewedMaskBox.BackColor = Color.Maroon;
+            dateReviewedMaskBox.BorderStyle = BorderStyle.None;
             dateReviewedMaskBox.Font = new Font("Segoe UI", 15F);
             dateReviewedMaskBox.ForeColor = Color.White;
             dateReviewedMaskBox.Location = new Point(200, 395);
             dateReviewedMaskBox.Mask = "00/00/0000";
             dateReviewedMaskBox.Name = "dateReviewedMaskBox";
-            dateReviewedMaskBox.Size = new Size(124, 34);
+            dateReviewedMaskBox.Size = new Size(124, 27);
             dateReviewedMaskBox.TabIndex = 18;
             dateReviewedMaskBox.ValidatingType = typeof(DateTime);
             // 
@@ -605,25 +622,27 @@
             // credRqsTextBox
             // 
             credRqsTextBox.BackColor = Color.Maroon;
+            credRqsTextBox.BorderStyle = BorderStyle.None;
             credRqsTextBox.Font = new Font("Segoe UI", 15F);
             credRqsTextBox.ForeColor = Color.White;
             credRqsTextBox.Location = new Point(19, 462);
             credRqsTextBox.Margin = new Padding(0);
             credRqsTextBox.MaxLength = 32;
             credRqsTextBox.Name = "credRqsTextBox";
-            credRqsTextBox.Size = new Size(530, 34);
+            credRqsTextBox.Size = new Size(530, 27);
             credRqsTextBox.TabIndex = 19;
             // 
             // federatedCustomerTextBox
             // 
             federatedCustomerTextBox.BackColor = Color.Maroon;
+            federatedCustomerTextBox.BorderStyle = BorderStyle.None;
             federatedCustomerTextBox.Font = new Font("Segoe UI", 15F);
             federatedCustomerTextBox.ForeColor = Color.White;
             federatedCustomerTextBox.Location = new Point(327, 496);
             federatedCustomerTextBox.Margin = new Padding(0);
             federatedCustomerTextBox.MaxLength = 1;
             federatedCustomerTextBox.Name = "federatedCustomerTextBox";
-            federatedCustomerTextBox.Size = new Size(41, 34);
+            federatedCustomerTextBox.Size = new Size(41, 27);
             federatedCustomerTextBox.TabIndex = 20;
             // 
             // label20
@@ -640,13 +659,14 @@
             // pOMessageTextBox
             // 
             pOMessageTextBox.BackColor = Color.Maroon;
+            pOMessageTextBox.BorderStyle = BorderStyle.None;
             pOMessageTextBox.Font = new Font("Segoe UI", 15F);
             pOMessageTextBox.ForeColor = Color.White;
             pOMessageTextBox.Location = new Point(116, 568);
             pOMessageTextBox.Margin = new Padding(0);
             pOMessageTextBox.MaxLength = 20;
             pOMessageTextBox.Name = "pOMessageTextBox";
-            pOMessageTextBox.Size = new Size(530, 34);
+            pOMessageTextBox.Size = new Size(530, 27);
             pOMessageTextBox.TabIndex = 21;
             // 
             // label24
@@ -663,13 +683,14 @@
             // noteTextBox
             // 
             noteTextBox.BackColor = Color.Maroon;
+            noteTextBox.BorderStyle = BorderStyle.None;
             noteTextBox.Font = new Font("Segoe UI", 15F);
             noteTextBox.ForeColor = Color.White;
             noteTextBox.Location = new Point(116, 602);
             noteTextBox.Margin = new Padding(0);
             noteTextBox.MaxLength = 20;
             noteTextBox.Name = "noteTextBox";
-            noteTextBox.Size = new Size(1128, 34);
+            noteTextBox.Size = new Size(1128, 27);
             noteTextBox.TabIndex = 22;
             // 
             // label25
@@ -686,25 +707,27 @@
             // note2TextBox
             // 
             note2TextBox.BackColor = Color.Maroon;
+            note2TextBox.BorderStyle = BorderStyle.None;
             note2TextBox.Font = new Font("Segoe UI", 15F);
             note2TextBox.ForeColor = Color.White;
             note2TextBox.Location = new Point(116, 636);
             note2TextBox.Margin = new Padding(0);
             note2TextBox.MaxLength = 20;
             note2TextBox.Name = "note2TextBox";
-            note2TextBox.Size = new Size(1128, 34);
+            note2TextBox.Size = new Size(1128, 27);
             note2TextBox.TabIndex = 23;
             // 
             // incentiveSalesTextBox
             // 
             incentiveSalesTextBox.BackColor = Color.Maroon;
+            incentiveSalesTextBox.BorderStyle = BorderStyle.None;
             incentiveSalesTextBox.Font = new Font("Segoe UI", 15F);
             incentiveSalesTextBox.ForeColor = Color.White;
             incentiveSalesTextBox.Location = new Point(870, 250);
             incentiveSalesTextBox.Margin = new Padding(0);
             incentiveSalesTextBox.MaxLength = 20;
             incentiveSalesTextBox.Name = "incentiveSalesTextBox";
-            incentiveSalesTextBox.Size = new Size(338, 34);
+            incentiveSalesTextBox.Size = new Size(338, 27);
             incentiveSalesTextBox.TabIndex = 16;
             // 
             // label26
@@ -732,13 +755,14 @@
             // creditAppTextBox
             // 
             creditAppTextBox.BackColor = Color.Maroon;
+            creditAppTextBox.BorderStyle = BorderStyle.None;
             creditAppTextBox.Font = new Font("Segoe UI", 15F);
             creditAppTextBox.ForeColor = Color.White;
             creditAppTextBox.Location = new Point(962, 324);
             creditAppTextBox.Margin = new Padding(0);
             creditAppTextBox.MaxLength = 1;
             creditAppTextBox.Name = "creditAppTextBox";
-            creditAppTextBox.Size = new Size(41, 34);
+            creditAppTextBox.Size = new Size(41, 27);
             creditAppTextBox.TabIndex = 24;
             // 
             // label29
@@ -755,37 +779,40 @@
             // creditAppDateMaskedTextBox
             // 
             creditAppDateMaskedTextBox.BackColor = Color.Maroon;
+            creditAppDateMaskedTextBox.BorderStyle = BorderStyle.None;
             creditAppDateMaskedTextBox.Font = new Font("Segoe UI", 15F);
             creditAppDateMaskedTextBox.ForeColor = Color.White;
             creditAppDateMaskedTextBox.Location = new Point(1041, 324);
             creditAppDateMaskedTextBox.Mask = "00/00/0000";
             creditAppDateMaskedTextBox.Name = "creditAppDateMaskedTextBox";
-            creditAppDateMaskedTextBox.Size = new Size(124, 34);
+            creditAppDateMaskedTextBox.Size = new Size(124, 27);
             creditAppDateMaskedTextBox.TabIndex = 25;
             creditAppDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
             // financialDateMaskedTextBox
             // 
             financialDateMaskedTextBox.BackColor = Color.Maroon;
+            financialDateMaskedTextBox.BorderStyle = BorderStyle.None;
             financialDateMaskedTextBox.Font = new Font("Segoe UI", 15F);
             financialDateMaskedTextBox.ForeColor = Color.White;
             financialDateMaskedTextBox.Location = new Point(1041, 358);
             financialDateMaskedTextBox.Mask = "00/00/0000";
             financialDateMaskedTextBox.Name = "financialDateMaskedTextBox";
-            financialDateMaskedTextBox.Size = new Size(124, 34);
+            financialDateMaskedTextBox.Size = new Size(124, 27);
             financialDateMaskedTextBox.TabIndex = 27;
             financialDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
             // financialStatementTextBox
             // 
             financialStatementTextBox.BackColor = Color.Maroon;
+            financialStatementTextBox.BorderStyle = BorderStyle.None;
             financialStatementTextBox.Font = new Font("Segoe UI", 15F);
             financialStatementTextBox.ForeColor = Color.White;
             financialStatementTextBox.Location = new Point(962, 358);
             financialStatementTextBox.Margin = new Padding(0);
             financialStatementTextBox.MaxLength = 1;
             financialStatementTextBox.Name = "financialStatementTextBox";
-            financialStatementTextBox.Size = new Size(41, 34);
+            financialStatementTextBox.Size = new Size(41, 27);
             financialStatementTextBox.TabIndex = 26;
             // 
             // label30
@@ -802,25 +829,27 @@
             // maskedTextBox3
             // 
             maskedTextBox3.BackColor = Color.Maroon;
+            maskedTextBox3.BorderStyle = BorderStyle.None;
             maskedTextBox3.Font = new Font("Segoe UI", 15F);
             maskedTextBox3.ForeColor = Color.White;
             maskedTextBox3.Location = new Point(1041, 391);
             maskedTextBox3.Mask = "00/00/0000";
             maskedTextBox3.Name = "maskedTextBox3";
-            maskedTextBox3.Size = new Size(124, 34);
+            maskedTextBox3.Size = new Size(124, 27);
             maskedTextBox3.TabIndex = 29;
             maskedTextBox3.ValidatingType = typeof(DateTime);
             // 
             // dAndBReportTextBox
             // 
             dAndBReportTextBox.BackColor = Color.Maroon;
+            dAndBReportTextBox.BorderStyle = BorderStyle.None;
             dAndBReportTextBox.Font = new Font("Segoe UI", 15F);
             dAndBReportTextBox.ForeColor = Color.White;
             dAndBReportTextBox.Location = new Point(962, 391);
             dAndBReportTextBox.Margin = new Padding(0);
             dAndBReportTextBox.MaxLength = 1;
             dAndBReportTextBox.Name = "dAndBReportTextBox";
-            dAndBReportTextBox.Size = new Size(41, 34);
+            dAndBReportTextBox.Size = new Size(41, 27);
             dAndBReportTextBox.TabIndex = 28;
             // 
             // label31
@@ -837,25 +866,27 @@
             // credDateMaskedTextBox
             // 
             credDateMaskedTextBox.BackColor = Color.Maroon;
+            credDateMaskedTextBox.BorderStyle = BorderStyle.None;
             credDateMaskedTextBox.Font = new Font("Segoe UI", 15F);
             credDateMaskedTextBox.ForeColor = Color.White;
             credDateMaskedTextBox.Location = new Point(1041, 424);
             credDateMaskedTextBox.Mask = "00/00/0000";
             credDateMaskedTextBox.Name = "credDateMaskedTextBox";
-            credDateMaskedTextBox.Size = new Size(124, 34);
+            credDateMaskedTextBox.Size = new Size(124, 27);
             credDateMaskedTextBox.TabIndex = 31;
             credDateMaskedTextBox.ValidatingType = typeof(DateTime);
             // 
             // letterOfCredTextBox
             // 
             letterOfCredTextBox.BackColor = Color.Maroon;
+            letterOfCredTextBox.BorderStyle = BorderStyle.None;
             letterOfCredTextBox.Font = new Font("Segoe UI", 15F);
             letterOfCredTextBox.ForeColor = Color.White;
             letterOfCredTextBox.Location = new Point(962, 424);
             letterOfCredTextBox.Margin = new Padding(0);
             letterOfCredTextBox.MaxLength = 1;
             letterOfCredTextBox.Name = "letterOfCredTextBox";
-            letterOfCredTextBox.Size = new Size(41, 34);
+            letterOfCredTextBox.Size = new Size(41, 27);
             letterOfCredTextBox.TabIndex = 30;
             // 
             // label32

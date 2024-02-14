@@ -46,13 +46,14 @@
             // confirmationInput
             // 
             confirmationInput.BackColor = Color.Maroon;
+            confirmationInput.BorderStyle = BorderStyle.None;
             confirmationInput.Font = new Font("Segoe UI", 15F);
             confirmationInput.ForeColor = Color.White;
             confirmationInput.Location = new Point(1034, 26);
             confirmationInput.Margin = new Padding(0);
             confirmationInput.MaxLength = 2;
             confirmationInput.Name = "confirmationInput";
-            confirmationInput.Size = new Size(40, 34);
+            confirmationInput.Size = new Size(40, 27);
             confirmationInput.TabIndex = 47;
             confirmationInput.KeyDown += confirmationInput_KeyDown;
             // 

@@ -96,11 +96,12 @@
             // selectedItemNumber
             // 
             selectedItemNumber.BackColor = Color.Maroon;
+            selectedItemNumber.BorderStyle = BorderStyle.None;
             selectedItemNumber.Font = new Font("Segoe UI", 18F);
             selectedItemNumber.ForeColor = Color.White;
             selectedItemNumber.Location = new Point(282, 555);
             selectedItemNumber.Name = "selectedItemNumber";
-            selectedItemNumber.Size = new Size(45, 39);
+            selectedItemNumber.Size = new Size(45, 32);
             selectedItemNumber.TabIndex = 3;
             selectedItemNumber.TextChanged += selectedItemNumber_TextChanged;
             selectedItemNumber.KeyDown += selectedItemNumber_KeyDown;

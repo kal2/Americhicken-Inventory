@@ -46,13 +46,14 @@
             // actionInput
             // 
             actionInput.BackColor = Color.Maroon;
+            actionInput.BorderStyle = BorderStyle.None;
             actionInput.Font = new Font("Segoe UI", 15F);
             actionInput.ForeColor = Color.White;
             actionInput.Location = new Point(114, 23);
             actionInput.Margin = new Padding(0);
             actionInput.MaxLength = 2;
             actionInput.Name = "actionInput";
-            actionInput.Size = new Size(40, 34);
+            actionInput.Size = new Size(40, 27);
             actionInput.TabIndex = 46;
             // 
             // textBoxLabel

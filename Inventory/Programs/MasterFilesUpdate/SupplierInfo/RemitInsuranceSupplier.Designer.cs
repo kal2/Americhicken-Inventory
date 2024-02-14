@@ -230,13 +230,14 @@
             // insTp1TextBox
             // 
             insTp1TextBox.BackColor = Color.Maroon;
+            insTp1TextBox.BorderStyle = BorderStyle.None;
             insTp1TextBox.Font = new Font("Segoe UI", 15F);
             insTp1TextBox.ForeColor = Color.White;
             insTp1TextBox.Location = new Point(20, 43);
             insTp1TextBox.Margin = new Padding(0);
             insTp1TextBox.MaxLength = 1;
             insTp1TextBox.Name = "insTp1TextBox";
-            insTp1TextBox.Size = new Size(34, 34);
+            insTp1TextBox.Size = new Size(34, 27);
             insTp1TextBox.TabIndex = 1;
             // 
             // label10
@@ -409,265 +410,287 @@
             // genBeginDateMaskBox
             // 
             genBeginDateMaskBox.BackColor = Color.Maroon;
+            genBeginDateMaskBox.BorderStyle = BorderStyle.None;
             genBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             genBeginDateMaskBox.ForeColor = Color.White;
             genBeginDateMaskBox.Location = new Point(766, 43);
             genBeginDateMaskBox.Mask = "00/00/0000";
             genBeginDateMaskBox.Name = "genBeginDateMaskBox";
-            genBeginDateMaskBox.Size = new Size(124, 34);
+            genBeginDateMaskBox.Size = new Size(124, 27);
             genBeginDateMaskBox.TabIndex = 3;
             genBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // genEndDateMaskBox
             // 
             genEndDateMaskBox.BackColor = Color.Maroon;
+            genEndDateMaskBox.BorderStyle = BorderStyle.None;
             genEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             genEndDateMaskBox.ForeColor = Color.White;
             genEndDateMaskBox.Location = new Point(968, 43);
             genEndDateMaskBox.Mask = "00/00/0000";
             genEndDateMaskBox.Name = "genEndDateMaskBox";
-            genEndDateMaskBox.Size = new Size(124, 34);
+            genEndDateMaskBox.Size = new Size(124, 27);
             genEndDateMaskBox.TabIndex = 4;
             genEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // genLetterSentDateMaskBox
             // 
             genLetterSentDateMaskBox.BackColor = Color.Maroon;
+            genLetterSentDateMaskBox.BorderStyle = BorderStyle.None;
             genLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             genLetterSentDateMaskBox.ForeColor = Color.White;
             genLetterSentDateMaskBox.Location = new Point(1146, 43);
             genLetterSentDateMaskBox.Mask = "00/00/0000";
             genLetterSentDateMaskBox.Name = "genLetterSentDateMaskBox";
-            genLetterSentDateMaskBox.Size = new Size(124, 34);
+            genLetterSentDateMaskBox.Size = new Size(124, 27);
             genLetterSentDateMaskBox.TabIndex = 5;
             genLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // autoLetterSentDateMaskBox
             // 
             autoLetterSentDateMaskBox.BackColor = Color.Maroon;
+            autoLetterSentDateMaskBox.BorderStyle = BorderStyle.None;
             autoLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             autoLetterSentDateMaskBox.ForeColor = Color.White;
             autoLetterSentDateMaskBox.Location = new Point(1146, 198);
             autoLetterSentDateMaskBox.Mask = "00/00/0000";
             autoLetterSentDateMaskBox.Name = "autoLetterSentDateMaskBox";
-            autoLetterSentDateMaskBox.Size = new Size(124, 34);
+            autoLetterSentDateMaskBox.Size = new Size(124, 27);
             autoLetterSentDateMaskBox.TabIndex = 16;
             autoLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // autoEndDateMaskBox
             // 
             autoEndDateMaskBox.BackColor = Color.Maroon;
+            autoEndDateMaskBox.BorderStyle = BorderStyle.None;
             autoEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             autoEndDateMaskBox.ForeColor = Color.White;
             autoEndDateMaskBox.Location = new Point(968, 198);
             autoEndDateMaskBox.Mask = "00/00/0000";
             autoEndDateMaskBox.Name = "autoEndDateMaskBox";
-            autoEndDateMaskBox.Size = new Size(124, 34);
+            autoEndDateMaskBox.Size = new Size(124, 27);
             autoEndDateMaskBox.TabIndex = 15;
             autoEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // autoBeginDateMaskBox
             // 
             autoBeginDateMaskBox.BackColor = Color.Maroon;
+            autoBeginDateMaskBox.BorderStyle = BorderStyle.None;
             autoBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             autoBeginDateMaskBox.ForeColor = Color.White;
             autoBeginDateMaskBox.Location = new Point(766, 198);
             autoBeginDateMaskBox.Mask = "00/00/0000";
             autoBeginDateMaskBox.Name = "autoBeginDateMaskBox";
-            autoBeginDateMaskBox.Size = new Size(124, 34);
+            autoBeginDateMaskBox.Size = new Size(124, 27);
             autoBeginDateMaskBox.TabIndex = 14;
             autoBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // excessLetterSentDateMaskBox
             // 
             excessLetterSentDateMaskBox.BackColor = Color.Maroon;
+            excessLetterSentDateMaskBox.BorderStyle = BorderStyle.None;
             excessLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             excessLetterSentDateMaskBox.ForeColor = Color.White;
             excessLetterSentDateMaskBox.Location = new Point(1146, 317);
             excessLetterSentDateMaskBox.Mask = "00/00/0000";
             excessLetterSentDateMaskBox.Name = "excessLetterSentDateMaskBox";
-            excessLetterSentDateMaskBox.Size = new Size(124, 34);
+            excessLetterSentDateMaskBox.Size = new Size(124, 27);
             excessLetterSentDateMaskBox.TabIndex = 25;
             excessLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // excessEndDateMaskBox
             // 
             excessEndDateMaskBox.BackColor = Color.Maroon;
+            excessEndDateMaskBox.BorderStyle = BorderStyle.None;
             excessEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             excessEndDateMaskBox.ForeColor = Color.White;
             excessEndDateMaskBox.Location = new Point(968, 317);
             excessEndDateMaskBox.Mask = "00/00/0000";
             excessEndDateMaskBox.Name = "excessEndDateMaskBox";
-            excessEndDateMaskBox.Size = new Size(124, 34);
+            excessEndDateMaskBox.Size = new Size(124, 27);
             excessEndDateMaskBox.TabIndex = 24;
             excessEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // excessBeginDateMaskBox
             // 
             excessBeginDateMaskBox.BackColor = Color.Maroon;
+            excessBeginDateMaskBox.BorderStyle = BorderStyle.None;
             excessBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             excessBeginDateMaskBox.ForeColor = Color.White;
             excessBeginDateMaskBox.Location = new Point(766, 317);
             excessBeginDateMaskBox.Mask = "00/00/0000";
             excessBeginDateMaskBox.Name = "excessBeginDateMaskBox";
-            excessBeginDateMaskBox.Size = new Size(124, 34);
+            excessBeginDateMaskBox.Size = new Size(124, 27);
             excessBeginDateMaskBox.TabIndex = 23;
             excessBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // workLetterSentDateMaskBox
             // 
             workLetterSentDateMaskBox.BackColor = Color.Maroon;
+            workLetterSentDateMaskBox.BorderStyle = BorderStyle.None;
             workLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             workLetterSentDateMaskBox.ForeColor = Color.White;
             workLetterSentDateMaskBox.Location = new Point(1146, 402);
             workLetterSentDateMaskBox.Mask = "00/00/0000";
             workLetterSentDateMaskBox.Name = "workLetterSentDateMaskBox";
-            workLetterSentDateMaskBox.Size = new Size(124, 34);
+            workLetterSentDateMaskBox.Size = new Size(124, 27);
             workLetterSentDateMaskBox.TabIndex = 32;
             workLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // workEndDateMaskBox
             // 
             workEndDateMaskBox.BackColor = Color.Maroon;
+            workEndDateMaskBox.BorderStyle = BorderStyle.None;
             workEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             workEndDateMaskBox.ForeColor = Color.White;
             workEndDateMaskBox.Location = new Point(968, 402);
             workEndDateMaskBox.Mask = "00/00/0000";
             workEndDateMaskBox.Name = "workEndDateMaskBox";
-            workEndDateMaskBox.Size = new Size(124, 34);
+            workEndDateMaskBox.Size = new Size(124, 27);
             workEndDateMaskBox.TabIndex = 31;
             workEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // workBeginDateMaskBox
             // 
             workBeginDateMaskBox.BackColor = Color.Maroon;
+            workBeginDateMaskBox.BorderStyle = BorderStyle.None;
             workBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             workBeginDateMaskBox.ForeColor = Color.White;
             workBeginDateMaskBox.Location = new Point(766, 402);
             workBeginDateMaskBox.Mask = "00/00/0000";
             workBeginDateMaskBox.Name = "workBeginDateMaskBox";
-            workBeginDateMaskBox.Size = new Size(124, 34);
+            workBeginDateMaskBox.Size = new Size(124, 27);
             workBeginDateMaskBox.TabIndex = 30;
             workBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // recallLetterSentDateMaskBox
             // 
             recallLetterSentDateMaskBox.BackColor = Color.Maroon;
+            recallLetterSentDateMaskBox.BorderStyle = BorderStyle.None;
             recallLetterSentDateMaskBox.Font = new Font("Segoe UI", 15F);
             recallLetterSentDateMaskBox.ForeColor = Color.White;
             recallLetterSentDateMaskBox.Location = new Point(1146, 521);
             recallLetterSentDateMaskBox.Mask = "00/00/0000";
             recallLetterSentDateMaskBox.Name = "recallLetterSentDateMaskBox";
-            recallLetterSentDateMaskBox.Size = new Size(124, 34);
+            recallLetterSentDateMaskBox.Size = new Size(124, 27);
             recallLetterSentDateMaskBox.TabIndex = 40;
             recallLetterSentDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // recallEndDateMaskBox
             // 
             recallEndDateMaskBox.BackColor = Color.Maroon;
+            recallEndDateMaskBox.BorderStyle = BorderStyle.None;
             recallEndDateMaskBox.Font = new Font("Segoe UI", 15F);
             recallEndDateMaskBox.ForeColor = Color.White;
             recallEndDateMaskBox.Location = new Point(968, 521);
             recallEndDateMaskBox.Mask = "00/00/0000";
             recallEndDateMaskBox.Name = "recallEndDateMaskBox";
-            recallEndDateMaskBox.Size = new Size(124, 34);
+            recallEndDateMaskBox.Size = new Size(124, 27);
             recallEndDateMaskBox.TabIndex = 39;
             recallEndDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // recallBeginDateMaskBox
             // 
             recallBeginDateMaskBox.BackColor = Color.Maroon;
+            recallBeginDateMaskBox.BorderStyle = BorderStyle.None;
             recallBeginDateMaskBox.Font = new Font("Segoe UI", 15F);
             recallBeginDateMaskBox.ForeColor = Color.White;
             recallBeginDateMaskBox.Location = new Point(766, 521);
             recallBeginDateMaskBox.Mask = "00/00/0000";
             recallBeginDateMaskBox.Name = "recallBeginDateMaskBox";
-            recallBeginDateMaskBox.Size = new Size(124, 34);
+            recallBeginDateMaskBox.Size = new Size(124, 27);
             recallBeginDateMaskBox.TabIndex = 38;
             recallBeginDateMaskBox.ValidatingType = typeof(DateTime);
             // 
             // policy1TextBox
             // 
             policy1TextBox.BackColor = Color.Maroon;
+            policy1TextBox.BorderStyle = BorderStyle.None;
             policy1TextBox.Font = new Font("Segoe UI", 15F);
             policy1TextBox.ForeColor = Color.White;
             policy1TextBox.Location = new Point(369, 43);
             policy1TextBox.Margin = new Padding(0);
             policy1TextBox.MaxLength = 20;
             policy1TextBox.Name = "policy1TextBox";
-            policy1TextBox.Size = new Size(345, 34);
+            policy1TextBox.Size = new Size(345, 27);
             policy1TextBox.TabIndex = 2;
             // 
             // genCov4TextBox
             // 
             genCov4TextBox.BackColor = Color.Maroon;
+            genCov4TextBox.BorderStyle = BorderStyle.None;
             genCov4TextBox.Font = new Font("Segoe UI", 15F);
             genCov4TextBox.ForeColor = Color.White;
             genCov4TextBox.Location = new Point(559, 88);
             genCov4TextBox.Margin = new Padding(0);
             genCov4TextBox.MaxLength = 8;
             genCov4TextBox.Name = "genCov4TextBox";
-            genCov4TextBox.Size = new Size(124, 34);
+            genCov4TextBox.Size = new Size(124, 27);
             genCov4TextBox.TabIndex = 6;
             // 
             // genCov5TextBox
             // 
             genCov5TextBox.BackColor = Color.Maroon;
+            genCov5TextBox.BorderStyle = BorderStyle.None;
             genCov5TextBox.Font = new Font("Segoe UI", 15F);
             genCov5TextBox.ForeColor = Color.White;
             genCov5TextBox.Location = new Point(559, 122);
             genCov5TextBox.Margin = new Padding(0);
             genCov5TextBox.MaxLength = 8;
             genCov5TextBox.Name = "genCov5TextBox";
-            genCov5TextBox.Size = new Size(124, 34);
+            genCov5TextBox.Size = new Size(124, 27);
             genCov5TextBox.TabIndex = 7;
             // 
             // genCov6TextBox
             // 
             genCov6TextBox.BackColor = Color.Maroon;
+            genCov6TextBox.BorderStyle = BorderStyle.None;
             genCov6TextBox.Font = new Font("Segoe UI", 15F);
             genCov6TextBox.ForeColor = Color.White;
             genCov6TextBox.Location = new Point(559, 156);
             genCov6TextBox.Margin = new Padding(0);
             genCov6TextBox.MaxLength = 8;
             genCov6TextBox.Name = "genCov6TextBox";
-            genCov6TextBox.Size = new Size(124, 34);
+            genCov6TextBox.Size = new Size(124, 27);
             genCov6TextBox.TabIndex = 8;
             // 
             // genCov2TextBox
             // 
             genCov2TextBox.BackColor = Color.Maroon;
+            genCov2TextBox.BorderStyle = BorderStyle.None;
             genCov2TextBox.Font = new Font("Segoe UI", 15F);
             genCov2TextBox.ForeColor = Color.White;
             genCov2TextBox.Location = new Point(1146, 156);
             genCov2TextBox.Margin = new Padding(0);
             genCov2TextBox.MaxLength = 8;
             genCov2TextBox.Name = "genCov2TextBox";
-            genCov2TextBox.Size = new Size(124, 34);
+            genCov2TextBox.Size = new Size(124, 27);
             genCov2TextBox.TabIndex = 11;
             // 
             // genCov1TextBox
             // 
             genCov1TextBox.BackColor = Color.Maroon;
+            genCov1TextBox.BorderStyle = BorderStyle.None;
             genCov1TextBox.Font = new Font("Segoe UI", 15F);
             genCov1TextBox.ForeColor = Color.White;
             genCov1TextBox.Location = new Point(1146, 122);
             genCov1TextBox.Margin = new Padding(0);
             genCov1TextBox.MaxLength = 8;
             genCov1TextBox.Name = "genCov1TextBox";
-            genCov1TextBox.Size = new Size(124, 34);
+            genCov1TextBox.Size = new Size(124, 27);
             genCov1TextBox.TabIndex = 10;
             // 
             // genCov3TextBox
             // 
             genCov3TextBox.BackColor = Color.Maroon;
+            genCov3TextBox.BorderStyle = BorderStyle.None;
             genCov3TextBox.Font = new Font("Segoe UI", 15F);
             genCov3TextBox.ForeColor = Color.White;
             genCov3TextBox.Location = new Point(1146, 88);
             genCov3TextBox.Margin = new Padding(0);
             genCov3TextBox.MaxLength = 8;
             genCov3TextBox.Name = "genCov3TextBox";
-            genCov3TextBox.Size = new Size(124, 34);
+            genCov3TextBox.Size = new Size(124, 27);
             genCov3TextBox.TabIndex = 9;
             // 
             // label26
@@ -706,169 +729,183 @@
             // insTp2TextBox
             // 
             insTp2TextBox.BackColor = Color.Maroon;
+            insTp2TextBox.BorderStyle = BorderStyle.None;
             insTp2TextBox.Font = new Font("Segoe UI", 15F);
             insTp2TextBox.ForeColor = Color.White;
             insTp2TextBox.Location = new Point(20, 198);
             insTp2TextBox.Margin = new Padding(0);
             insTp2TextBox.MaxLength = 1;
             insTp2TextBox.Name = "insTp2TextBox";
-            insTp2TextBox.Size = new Size(34, 34);
+            insTp2TextBox.Size = new Size(34, 27);
             insTp2TextBox.TabIndex = 12;
             // 
             // insTp3TextBox
             // 
             insTp3TextBox.BackColor = Color.Maroon;
+            insTp3TextBox.BorderStyle = BorderStyle.None;
             insTp3TextBox.Font = new Font("Segoe UI", 15F);
             insTp3TextBox.ForeColor = Color.White;
             insTp3TextBox.Location = new Point(20, 317);
             insTp3TextBox.Margin = new Padding(0);
             insTp3TextBox.MaxLength = 1;
             insTp3TextBox.Name = "insTp3TextBox";
-            insTp3TextBox.Size = new Size(34, 34);
+            insTp3TextBox.Size = new Size(34, 27);
             insTp3TextBox.TabIndex = 21;
             // 
             // insTp4TextBox
             // 
             insTp4TextBox.BackColor = Color.Maroon;
+            insTp4TextBox.BorderStyle = BorderStyle.None;
             insTp4TextBox.Font = new Font("Segoe UI", 15F);
             insTp4TextBox.ForeColor = Color.White;
             insTp4TextBox.Location = new Point(20, 402);
             insTp4TextBox.Margin = new Padding(0);
             insTp4TextBox.MaxLength = 1;
             insTp4TextBox.Name = "insTp4TextBox";
-            insTp4TextBox.Size = new Size(34, 34);
+            insTp4TextBox.Size = new Size(34, 27);
             insTp4TextBox.TabIndex = 28;
             // 
             // insTp5TextBox
             // 
             insTp5TextBox.BackColor = Color.Maroon;
+            insTp5TextBox.BorderStyle = BorderStyle.None;
             insTp5TextBox.Font = new Font("Segoe UI", 15F);
             insTp5TextBox.ForeColor = Color.White;
             insTp5TextBox.Location = new Point(20, 521);
             insTp5TextBox.Margin = new Padding(0);
             insTp5TextBox.MaxLength = 1;
             insTp5TextBox.Name = "insTp5TextBox";
-            insTp5TextBox.Size = new Size(34, 34);
+            insTp5TextBox.Size = new Size(34, 27);
             insTp5TextBox.TabIndex = 36;
             // 
             // autoCov2TextBox
             // 
             autoCov2TextBox.BackColor = Color.Maroon;
+            autoCov2TextBox.BorderStyle = BorderStyle.None;
             autoCov2TextBox.Font = new Font("Segoe UI", 15F);
             autoCov2TextBox.ForeColor = Color.White;
             autoCov2TextBox.Location = new Point(559, 277);
             autoCov2TextBox.Margin = new Padding(0);
             autoCov2TextBox.MaxLength = 8;
             autoCov2TextBox.Name = "autoCov2TextBox";
-            autoCov2TextBox.Size = new Size(124, 34);
+            autoCov2TextBox.Size = new Size(124, 27);
             autoCov2TextBox.TabIndex = 18;
             // 
             // autoCov1TextBox
             // 
             autoCov1TextBox.BackColor = Color.Maroon;
+            autoCov1TextBox.BorderStyle = BorderStyle.None;
             autoCov1TextBox.Font = new Font("Segoe UI", 15F);
             autoCov1TextBox.ForeColor = Color.White;
             autoCov1TextBox.Location = new Point(559, 243);
             autoCov1TextBox.Margin = new Padding(0);
             autoCov1TextBox.MaxLength = 8;
             autoCov1TextBox.Name = "autoCov1TextBox";
-            autoCov1TextBox.Size = new Size(124, 34);
+            autoCov1TextBox.Size = new Size(124, 27);
             autoCov1TextBox.TabIndex = 17;
             // 
             // policy2TextBox
             // 
             policy2TextBox.BackColor = Color.Maroon;
+            policy2TextBox.BorderStyle = BorderStyle.None;
             policy2TextBox.Font = new Font("Segoe UI", 15F);
             policy2TextBox.ForeColor = Color.White;
             policy2TextBox.Location = new Point(369, 198);
             policy2TextBox.Margin = new Padding(0);
             policy2TextBox.MaxLength = 20;
             policy2TextBox.Name = "policy2TextBox";
-            policy2TextBox.Size = new Size(345, 34);
+            policy2TextBox.Size = new Size(345, 27);
             policy2TextBox.TabIndex = 13;
             // 
             // workCov2TextBox
             // 
             workCov2TextBox.BackColor = Color.Maroon;
+            workCov2TextBox.BorderStyle = BorderStyle.None;
             workCov2TextBox.Font = new Font("Segoe UI", 15F);
             workCov2TextBox.ForeColor = Color.White;
             workCov2TextBox.Location = new Point(559, 481);
             workCov2TextBox.Margin = new Padding(0);
             workCov2TextBox.MaxLength = 8;
             workCov2TextBox.Name = "workCov2TextBox";
-            workCov2TextBox.Size = new Size(124, 34);
+            workCov2TextBox.Size = new Size(124, 27);
             workCov2TextBox.TabIndex = 34;
             // 
             // workCov1TextBox
             // 
             workCov1TextBox.BackColor = Color.Maroon;
+            workCov1TextBox.BorderStyle = BorderStyle.None;
             workCov1TextBox.Font = new Font("Segoe UI", 15F);
             workCov1TextBox.ForeColor = Color.White;
             workCov1TextBox.Location = new Point(559, 447);
             workCov1TextBox.Margin = new Padding(0);
             workCov1TextBox.MaxLength = 8;
             workCov1TextBox.Name = "workCov1TextBox";
-            workCov1TextBox.Size = new Size(124, 34);
+            workCov1TextBox.Size = new Size(124, 27);
             workCov1TextBox.TabIndex = 33;
             // 
             // policy4TextBox
             // 
             policy4TextBox.BackColor = Color.Maroon;
+            policy4TextBox.BorderStyle = BorderStyle.None;
             policy4TextBox.Font = new Font("Segoe UI", 15F);
             policy4TextBox.ForeColor = Color.White;
             policy4TextBox.Location = new Point(369, 402);
             policy4TextBox.Margin = new Padding(0);
             policy4TextBox.MaxLength = 20;
             policy4TextBox.Name = "policy4TextBox";
-            policy4TextBox.Size = new Size(345, 34);
+            policy4TextBox.Size = new Size(345, 27);
             policy4TextBox.TabIndex = 29;
             // 
             // excessCov1TextBox
             // 
             excessCov1TextBox.BackColor = Color.Maroon;
+            excessCov1TextBox.BorderStyle = BorderStyle.None;
             excessCov1TextBox.Font = new Font("Segoe UI", 15F);
             excessCov1TextBox.ForeColor = Color.White;
             excessCov1TextBox.Location = new Point(559, 362);
             excessCov1TextBox.Margin = new Padding(0);
             excessCov1TextBox.MaxLength = 8;
             excessCov1TextBox.Name = "excessCov1TextBox";
-            excessCov1TextBox.Size = new Size(124, 34);
+            excessCov1TextBox.Size = new Size(124, 27);
             excessCov1TextBox.TabIndex = 26;
             // 
             // policy3TextBox
             // 
             policy3TextBox.BackColor = Color.Maroon;
+            policy3TextBox.BorderStyle = BorderStyle.None;
             policy3TextBox.Font = new Font("Segoe UI", 15F);
             policy3TextBox.ForeColor = Color.White;
             policy3TextBox.Location = new Point(369, 317);
             policy3TextBox.Margin = new Padding(0);
             policy3TextBox.MaxLength = 20;
             policy3TextBox.Name = "policy3TextBox";
-            policy3TextBox.Size = new Size(345, 34);
+            policy3TextBox.Size = new Size(345, 27);
             policy3TextBox.TabIndex = 22;
             // 
             // autoCov4TextBox
             // 
             autoCov4TextBox.BackColor = Color.Maroon;
+            autoCov4TextBox.BorderStyle = BorderStyle.None;
             autoCov4TextBox.Font = new Font("Segoe UI", 15F);
             autoCov4TextBox.ForeColor = Color.White;
             autoCov4TextBox.Location = new Point(1146, 277);
             autoCov4TextBox.Margin = new Padding(0);
             autoCov4TextBox.MaxLength = 8;
             autoCov4TextBox.Name = "autoCov4TextBox";
-            autoCov4TextBox.Size = new Size(124, 34);
+            autoCov4TextBox.Size = new Size(124, 27);
             autoCov4TextBox.TabIndex = 20;
             // 
             // autoCov3TextBox
             // 
             autoCov3TextBox.BackColor = Color.Maroon;
+            autoCov3TextBox.BorderStyle = BorderStyle.None;
             autoCov3TextBox.Font = new Font("Segoe UI", 15F);
             autoCov3TextBox.ForeColor = Color.White;
             autoCov3TextBox.Location = new Point(1146, 243);
             autoCov3TextBox.Margin = new Padding(0);
             autoCov3TextBox.MaxLength = 8;
             autoCov3TextBox.Name = "autoCov3TextBox";
-            autoCov3TextBox.Size = new Size(124, 34);
+            autoCov3TextBox.Size = new Size(124, 27);
             autoCov3TextBox.TabIndex = 19;
             // 
             // label30
@@ -896,13 +933,14 @@
             // workCov3TextBox
             // 
             workCov3TextBox.BackColor = Color.Maroon;
+            workCov3TextBox.BorderStyle = BorderStyle.None;
             workCov3TextBox.Font = new Font("Segoe UI", 15F);
             workCov3TextBox.ForeColor = Color.White;
             workCov3TextBox.Location = new Point(1146, 447);
             workCov3TextBox.Margin = new Padding(0);
             workCov3TextBox.MaxLength = 8;
             workCov3TextBox.Name = "workCov3TextBox";
-            workCov3TextBox.Size = new Size(124, 34);
+            workCov3TextBox.Size = new Size(124, 27);
             workCov3TextBox.TabIndex = 35;
             // 
             // label33
@@ -919,13 +957,14 @@
             // excessCov2TextBox
             // 
             excessCov2TextBox.BackColor = Color.Maroon;
+            excessCov2TextBox.BorderStyle = BorderStyle.None;
             excessCov2TextBox.Font = new Font("Segoe UI", 15F);
             excessCov2TextBox.ForeColor = Color.White;
             excessCov2TextBox.Location = new Point(1146, 362);
             excessCov2TextBox.Margin = new Padding(0);
             excessCov2TextBox.MaxLength = 8;
             excessCov2TextBox.Name = "excessCov2TextBox";
-            excessCov2TextBox.Size = new Size(124, 34);
+            excessCov2TextBox.Size = new Size(124, 27);
             excessCov2TextBox.TabIndex = 27;
             // 
             // label32
@@ -942,37 +981,40 @@
             // recallCov1TextBox
             // 
             recallCov1TextBox.BackColor = Color.Maroon;
+            recallCov1TextBox.BorderStyle = BorderStyle.None;
             recallCov1TextBox.Font = new Font("Segoe UI", 15F);
             recallCov1TextBox.ForeColor = Color.White;
             recallCov1TextBox.Location = new Point(559, 566);
             recallCov1TextBox.Margin = new Padding(0);
             recallCov1TextBox.MaxLength = 8;
             recallCov1TextBox.Name = "recallCov1TextBox";
-            recallCov1TextBox.Size = new Size(124, 34);
+            recallCov1TextBox.Size = new Size(124, 27);
             recallCov1TextBox.TabIndex = 42;
             // 
             // policy5TextBox
             // 
             policy5TextBox.BackColor = Color.Maroon;
+            policy5TextBox.BorderStyle = BorderStyle.None;
             policy5TextBox.Font = new Font("Segoe UI", 15F);
             policy5TextBox.ForeColor = Color.White;
             policy5TextBox.Location = new Point(369, 521);
             policy5TextBox.Margin = new Padding(0);
             policy5TextBox.MaxLength = 20;
             policy5TextBox.Name = "policy5TextBox";
-            policy5TextBox.Size = new Size(345, 34);
+            policy5TextBox.Size = new Size(345, 27);
             policy5TextBox.TabIndex = 37;
             // 
             // cancellationTextBox
             // 
             cancellationTextBox.BackColor = Color.Maroon;
+            cancellationTextBox.BorderStyle = BorderStyle.None;
             cancellationTextBox.Font = new Font("Segoe UI", 15F);
             cancellationTextBox.ForeColor = Color.White;
             cancellationTextBox.Location = new Point(559, 601);
             cancellationTextBox.Margin = new Padding(0);
             cancellationTextBox.MaxLength = 2;
             cancellationTextBox.Name = "cancellationTextBox";
-            cancellationTextBox.Size = new Size(51, 34);
+            cancellationTextBox.Size = new Size(51, 27);
             cancellationTextBox.TabIndex = 43;
             // 
             // label34
@@ -986,7 +1028,7 @@
             label34.TabIndex = 241;
             label34.UseMnemonic = false;
             // 
-            // RemitInsurance
+            // RemitInsuranceSupplier
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -1068,7 +1110,7 @@
             Controls.Add(label1);
             Controls.Add(label12);
             ForeColor = Color.White;
-            Name = "RemitInsurance";
+            Name = "RemitInsuranceSupplier";
             Size = new Size(1290, 637);
             ResumeLayout(false);
             PerformLayout();

@@ -64,13 +64,14 @@
             // salespersonNameTextBox
             // 
             salespersonNameTextBox.BackColor = Color.Maroon;
+            salespersonNameTextBox.BorderStyle = BorderStyle.None;
             salespersonNameTextBox.Font = new Font("Segoe UI", 15F);
             salespersonNameTextBox.ForeColor = Color.White;
             salespersonNameTextBox.Location = new Point(397, 31);
             salespersonNameTextBox.Margin = new Padding(0);
             salespersonNameTextBox.MaxLength = 40;
             salespersonNameTextBox.Name = "salespersonNameTextBox";
-            salespersonNameTextBox.Size = new Size(646, 34);
+            salespersonNameTextBox.Size = new Size(646, 27);
             salespersonNameTextBox.TabIndex = 137;
             // 
             // label1
@@ -87,13 +88,14 @@
             // addressTextBox
             // 
             addressTextBox.BackColor = Color.Maroon;
+            addressTextBox.BorderStyle = BorderStyle.None;
             addressTextBox.Font = new Font("Segoe UI", 15F);
             addressTextBox.ForeColor = Color.White;
             addressTextBox.Location = new Point(397, 89);
             addressTextBox.Margin = new Padding(0);
             addressTextBox.MaxLength = 40;
             addressTextBox.Name = "addressTextBox";
-            addressTextBox.Size = new Size(651, 34);
+            addressTextBox.Size = new Size(651, 27);
             addressTextBox.TabIndex = 139;
             // 
             // label2
@@ -110,13 +112,14 @@
             // cityTextBox
             // 
             cityTextBox.BackColor = Color.Maroon;
+            cityTextBox.BorderStyle = BorderStyle.None;
             cityTextBox.Font = new Font("Segoe UI", 15F);
             cityTextBox.ForeColor = Color.White;
             cityTextBox.Location = new Point(397, 123);
             cityTextBox.Margin = new Padding(0);
             cityTextBox.MaxLength = 20;
             cityTextBox.Name = "cityTextBox";
-            cityTextBox.Size = new Size(322, 34);
+            cityTextBox.Size = new Size(322, 27);
             cityTextBox.TabIndex = 141;
             // 
             // label3
@@ -133,13 +136,14 @@
             // stateTextBox
             // 
             stateTextBox.BackColor = Color.Maroon;
+            stateTextBox.BorderStyle = BorderStyle.None;
             stateTextBox.Font = new Font("Segoe UI", 15F);
             stateTextBox.ForeColor = Color.White;
             stateTextBox.Location = new Point(800, 123);
             stateTextBox.Margin = new Padding(0);
             stateTextBox.MaxLength = 2;
             stateTextBox.Name = "stateTextBox";
-            stateTextBox.Size = new Size(50, 34);
+            stateTextBox.Size = new Size(50, 27);
             stateTextBox.TabIndex = 143;
             // 
             // label4
@@ -156,13 +160,14 @@
             // zipTextBox
             // 
             zipTextBox.BackColor = Color.Maroon;
+            zipTextBox.BorderStyle = BorderStyle.None;
             zipTextBox.Font = new Font("Segoe UI", 15F);
             zipTextBox.ForeColor = Color.White;
             zipTextBox.Location = new Point(916, 123);
             zipTextBox.Margin = new Padding(0);
             zipTextBox.MaxLength = 5;
             zipTextBox.Name = "zipTextBox";
-            zipTextBox.Size = new Size(97, 34);
+            zipTextBox.Size = new Size(97, 27);
             zipTextBox.TabIndex = 145;
             // 
             // label5
@@ -179,25 +184,27 @@
             // zip4TextBox
             // 
             zip4TextBox.BackColor = Color.Maroon;
+            zip4TextBox.BorderStyle = BorderStyle.None;
             zip4TextBox.Font = new Font("Segoe UI", 15F);
             zip4TextBox.ForeColor = Color.White;
             zip4TextBox.Location = new Point(1022, 123);
             zip4TextBox.Margin = new Padding(0);
             zip4TextBox.MaxLength = 4;
             zip4TextBox.Name = "zip4TextBox";
-            zip4TextBox.Size = new Size(72, 34);
+            zip4TextBox.Size = new Size(72, 27);
             zip4TextBox.TabIndex = 147;
             // 
             // salespersonCodeTextBox
             // 
             salespersonCodeTextBox.BackColor = Color.Maroon;
+            salespersonCodeTextBox.BorderStyle = BorderStyle.None;
             salespersonCodeTextBox.Font = new Font("Segoe UI", 15F);
             salespersonCodeTextBox.ForeColor = Color.White;
             salespersonCodeTextBox.Location = new Point(397, 202);
             salespersonCodeTextBox.Margin = new Padding(0);
             salespersonCodeTextBox.MaxLength = 2;
             salespersonCodeTextBox.Name = "salespersonCodeTextBox";
-            salespersonCodeTextBox.Size = new Size(50, 34);
+            salespersonCodeTextBox.Size = new Size(50, 27);
             salespersonCodeTextBox.TabIndex = 149;
             // 
             // label6
@@ -214,13 +221,14 @@
             // commisionPercent1TextBox
             // 
             commisionPercent1TextBox.BackColor = Color.Maroon;
+            commisionPercent1TextBox.BorderStyle = BorderStyle.None;
             commisionPercent1TextBox.Font = new Font("Segoe UI", 15F);
             commisionPercent1TextBox.ForeColor = Color.White;
             commisionPercent1TextBox.Location = new Point(397, 296);
             commisionPercent1TextBox.Margin = new Padding(0);
             commisionPercent1TextBox.MaxLength = 3;
             commisionPercent1TextBox.Name = "commisionPercent1TextBox";
-            commisionPercent1TextBox.Size = new Size(50, 34);
+            commisionPercent1TextBox.Size = new Size(50, 27);
             commisionPercent1TextBox.TabIndex = 151;
             // 
             // label7
@@ -237,13 +245,14 @@
             // commisionPercent2TextBox
             // 
             commisionPercent2TextBox.BackColor = Color.Maroon;
+            commisionPercent2TextBox.BorderStyle = BorderStyle.None;
             commisionPercent2TextBox.Font = new Font("Segoe UI", 15F);
             commisionPercent2TextBox.ForeColor = Color.White;
             commisionPercent2TextBox.Location = new Point(397, 330);
             commisionPercent2TextBox.Margin = new Padding(0);
             commisionPercent2TextBox.MaxLength = 3;
             commisionPercent2TextBox.Name = "commisionPercent2TextBox";
-            commisionPercent2TextBox.Size = new Size(50, 34);
+            commisionPercent2TextBox.Size = new Size(50, 27);
             commisionPercent2TextBox.TabIndex = 153;
             // 
             // label8
@@ -260,13 +269,14 @@
             // commisionPercent3TextBox
             // 
             commisionPercent3TextBox.BackColor = Color.Maroon;
+            commisionPercent3TextBox.BorderStyle = BorderStyle.None;
             commisionPercent3TextBox.Font = new Font("Segoe UI", 15F);
             commisionPercent3TextBox.ForeColor = Color.White;
             commisionPercent3TextBox.Location = new Point(397, 364);
             commisionPercent3TextBox.Margin = new Padding(0);
             commisionPercent3TextBox.MaxLength = 3;
             commisionPercent3TextBox.Name = "commisionPercent3TextBox";
-            commisionPercent3TextBox.Size = new Size(50, 34);
+            commisionPercent3TextBox.Size = new Size(50, 27);
             commisionPercent3TextBox.TabIndex = 155;
             // 
             // label9
@@ -283,12 +293,13 @@
             // effectiveDate1MaskedTextBox
             // 
             effectiveDate1MaskedTextBox.BackColor = Color.Maroon;
+            effectiveDate1MaskedTextBox.BorderStyle = BorderStyle.None;
             effectiveDate1MaskedTextBox.Font = new Font("Segoe UI", 15F);
             effectiveDate1MaskedTextBox.ForeColor = Color.White;
             effectiveDate1MaskedTextBox.Location = new Point(739, 296);
             effectiveDate1MaskedTextBox.Mask = "00/00/0000";
             effectiveDate1MaskedTextBox.Name = "effectiveDate1MaskedTextBox";
-            effectiveDate1MaskedTextBox.Size = new Size(124, 34);
+            effectiveDate1MaskedTextBox.Size = new Size(124, 27);
             effectiveDate1MaskedTextBox.TabIndex = 346;
             effectiveDate1MaskedTextBox.ValidatingType = typeof(DateTime);
             // 
@@ -317,12 +328,13 @@
             // effectiveDate2MaskedTextBox
             // 
             effectiveDate2MaskedTextBox.BackColor = Color.Maroon;
+            effectiveDate2MaskedTextBox.BorderStyle = BorderStyle.None;
             effectiveDate2MaskedTextBox.Font = new Font("Segoe UI", 15F);
             effectiveDate2MaskedTextBox.ForeColor = Color.White;
             effectiveDate2MaskedTextBox.Location = new Point(739, 330);
             effectiveDate2MaskedTextBox.Mask = "00/00/0000";
             effectiveDate2MaskedTextBox.Name = "effectiveDate2MaskedTextBox";
-            effectiveDate2MaskedTextBox.Size = new Size(124, 34);
+            effectiveDate2MaskedTextBox.Size = new Size(124, 27);
             effectiveDate2MaskedTextBox.TabIndex = 348;
             effectiveDate2MaskedTextBox.ValidatingType = typeof(DateTime);
             // 
@@ -340,24 +352,26 @@
             // effectiveDate3MaskedTextBox
             // 
             effectiveDate3MaskedTextBox.BackColor = Color.Maroon;
+            effectiveDate3MaskedTextBox.BorderStyle = BorderStyle.None;
             effectiveDate3MaskedTextBox.Font = new Font("Segoe UI", 15F);
             effectiveDate3MaskedTextBox.ForeColor = Color.White;
             effectiveDate3MaskedTextBox.Location = new Point(739, 364);
             effectiveDate3MaskedTextBox.Mask = "00/00/0000";
             effectiveDate3MaskedTextBox.Name = "effectiveDate3MaskedTextBox";
-            effectiveDate3MaskedTextBox.Size = new Size(124, 34);
+            effectiveDate3MaskedTextBox.Size = new Size(124, 27);
             effectiveDate3MaskedTextBox.TabIndex = 350;
             effectiveDate3MaskedTextBox.ValidatingType = typeof(DateTime);
             // 
             // socialMaskedTextBox
             // 
             socialMaskedTextBox.BackColor = Color.Maroon;
+            socialMaskedTextBox.BorderStyle = BorderStyle.None;
             socialMaskedTextBox.Font = new Font("Segoe UI", 15F);
             socialMaskedTextBox.ForeColor = Color.White;
             socialMaskedTextBox.Location = new Point(397, 453);
             socialMaskedTextBox.Mask = "000-00-0000";
             socialMaskedTextBox.Name = "socialMaskedTextBox";
-            socialMaskedTextBox.Size = new Size(124, 34);
+            socialMaskedTextBox.Size = new Size(124, 27);
             socialMaskedTextBox.TabIndex = 352;
             // 
             // label13
@@ -385,24 +399,26 @@
             // taxIDMakedTextBox
             // 
             taxIDMakedTextBox.BackColor = Color.Maroon;
+            taxIDMakedTextBox.BorderStyle = BorderStyle.None;
             taxIDMakedTextBox.Font = new Font("Segoe UI", 15F);
             taxIDMakedTextBox.ForeColor = Color.White;
             taxIDMakedTextBox.Location = new Point(397, 493);
             taxIDMakedTextBox.Mask = "00-0000000";
             taxIDMakedTextBox.Name = "taxIDMakedTextBox";
-            taxIDMakedTextBox.Size = new Size(124, 34);
+            taxIDMakedTextBox.Size = new Size(124, 27);
             taxIDMakedTextBox.TabIndex = 354;
             // 
             // textBox1
             // 
             textBox1.BackColor = Color.Maroon;
+            textBox1.BorderStyle = BorderStyle.None;
             textBox1.Font = new Font("Segoe UI", 15F);
             textBox1.ForeColor = Color.White;
             textBox1.Location = new Point(471, 559);
             textBox1.Margin = new Padding(0);
             textBox1.MaxLength = 1;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(50, 34);
+            textBox1.Size = new Size(50, 27);
             textBox1.TabIndex = 357;
             // 
             // label15

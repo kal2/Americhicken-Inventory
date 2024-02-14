@@ -105,25 +105,27 @@
             // freightNameTextBox
             // 
             freightNameTextBox.BackColor = Color.Maroon;
+            freightNameTextBox.BorderStyle = BorderStyle.None;
             freightNameTextBox.Font = new Font("Segoe UI", 15F);
             freightNameTextBox.ForeColor = Color.White;
             freightNameTextBox.Location = new Point(120, 49);
             freightNameTextBox.Margin = new Padding(0);
             freightNameTextBox.MaxLength = 40;
             freightNameTextBox.Name = "freightNameTextBox";
-            freightNameTextBox.Size = new Size(522, 34);
+            freightNameTextBox.Size = new Size(522, 27);
             freightNameTextBox.TabIndex = 133;
             // 
             // freightStreetTextBox
             // 
             freightStreetTextBox.BackColor = Color.Maroon;
+            freightStreetTextBox.BorderStyle = BorderStyle.None;
             freightStreetTextBox.Font = new Font("Segoe UI", 15F);
             freightStreetTextBox.ForeColor = Color.White;
             freightStreetTextBox.Location = new Point(120, 83);
             freightStreetTextBox.Margin = new Padding(0);
             freightStreetTextBox.MaxLength = 40;
             freightStreetTextBox.Name = "freightStreetTextBox";
-            freightStreetTextBox.Size = new Size(522, 34);
+            freightStreetTextBox.Size = new Size(522, 27);
             freightStreetTextBox.TabIndex = 135;
             // 
             // label3
@@ -140,13 +142,14 @@
             // freightStateTextBox
             // 
             freightStateTextBox.BackColor = Color.Maroon;
+            freightStateTextBox.BorderStyle = BorderStyle.None;
             freightStateTextBox.Font = new Font("Segoe UI", 15F);
             freightStateTextBox.ForeColor = Color.White;
             freightStateTextBox.Location = new Point(120, 153);
             freightStateTextBox.Margin = new Padding(0);
             freightStateTextBox.MaxLength = 2;
             freightStateTextBox.Name = "freightStateTextBox";
-            freightStateTextBox.Size = new Size(49, 34);
+            freightStateTextBox.Size = new Size(49, 27);
             freightStateTextBox.TabIndex = 137;
             // 
             // label4
@@ -163,13 +166,14 @@
             // freightZipTextBox
             // 
             freightZipTextBox.BackColor = Color.Maroon;
+            freightZipTextBox.BorderStyle = BorderStyle.None;
             freightZipTextBox.Font = new Font("Segoe UI", 15F);
             freightZipTextBox.ForeColor = Color.White;
             freightZipTextBox.Location = new Point(359, 153);
             freightZipTextBox.Margin = new Padding(0);
             freightZipTextBox.MaxLength = 5;
             freightZipTextBox.Name = "freightZipTextBox";
-            freightZipTextBox.Size = new Size(72, 34);
+            freightZipTextBox.Size = new Size(72, 27);
             freightZipTextBox.TabIndex = 139;
             // 
             // label5
@@ -186,38 +190,41 @@
             // freightZip4TextBox
             // 
             freightZip4TextBox.BackColor = Color.Maroon;
+            freightZip4TextBox.BorderStyle = BorderStyle.None;
             freightZip4TextBox.Font = new Font("Segoe UI", 15F);
             freightZip4TextBox.ForeColor = Color.White;
             freightZip4TextBox.Location = new Point(440, 153);
             freightZip4TextBox.Margin = new Padding(0);
             freightZip4TextBox.MaxLength = 4;
             freightZip4TextBox.Name = "freightZip4TextBox";
-            freightZip4TextBox.Size = new Size(59, 34);
+            freightZip4TextBox.Size = new Size(59, 27);
             freightZip4TextBox.TabIndex = 140;
             // 
             // freightFaxMaskedTextBox
             // 
             freightFaxMaskedTextBox.BackColor = Color.Maroon;
+            freightFaxMaskedTextBox.BorderStyle = BorderStyle.None;
             freightFaxMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             freightFaxMaskedTextBox.Font = new Font("Segoe UI", 15F);
             freightFaxMaskedTextBox.ForeColor = Color.White;
             freightFaxMaskedTextBox.Location = new Point(359, 188);
             freightFaxMaskedTextBox.Mask = "(999) 000-0000";
             freightFaxMaskedTextBox.Name = "freightFaxMaskedTextBox";
-            freightFaxMaskedTextBox.Size = new Size(174, 34);
+            freightFaxMaskedTextBox.Size = new Size(174, 27);
             freightFaxMaskedTextBox.TabIndex = 142;
             freightFaxMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // freightPhoneMaskedTextBox
             // 
             freightPhoneMaskedTextBox.BackColor = Color.Maroon;
+            freightPhoneMaskedTextBox.BorderStyle = BorderStyle.None;
             freightPhoneMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             freightPhoneMaskedTextBox.Font = new Font("Segoe UI", 15F);
             freightPhoneMaskedTextBox.ForeColor = Color.White;
             freightPhoneMaskedTextBox.Location = new Point(120, 188);
             freightPhoneMaskedTextBox.Mask = "(999) 000-0000";
             freightPhoneMaskedTextBox.Name = "freightPhoneMaskedTextBox";
-            freightPhoneMaskedTextBox.Size = new Size(174, 34);
+            freightPhoneMaskedTextBox.Size = new Size(174, 27);
             freightPhoneMaskedTextBox.TabIndex = 141;
             freightPhoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -246,13 +253,14 @@
             // contactTextBox
             // 
             contactTextBox.BackColor = Color.Maroon;
+            contactTextBox.BorderStyle = BorderStyle.None;
             contactTextBox.Font = new Font("Segoe UI", 15F);
             contactTextBox.ForeColor = Color.White;
             contactTextBox.Location = new Point(120, 225);
             contactTextBox.Margin = new Padding(0);
             contactTextBox.MaxLength = 32;
             contactTextBox.Name = "contactTextBox";
-            contactTextBox.Size = new Size(1164, 34);
+            contactTextBox.Size = new Size(1164, 27);
             contactTextBox.TabIndex = 187;
             // 
             // label7
@@ -291,26 +299,28 @@
             // payFaxMaskedTextBox
             // 
             payFaxMaskedTextBox.BackColor = Color.Maroon;
+            payFaxMaskedTextBox.BorderStyle = BorderStyle.None;
             payFaxMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             payFaxMaskedTextBox.Font = new Font("Segoe UI", 15F);
             payFaxMaskedTextBox.ForeColor = Color.White;
             payFaxMaskedTextBox.Location = new Point(1001, 188);
             payFaxMaskedTextBox.Mask = "(999) 000-0000";
             payFaxMaskedTextBox.Name = "payFaxMaskedTextBox";
-            payFaxMaskedTextBox.Size = new Size(174, 34);
+            payFaxMaskedTextBox.Size = new Size(174, 27);
             payFaxMaskedTextBox.TabIndex = 185;
             payFaxMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // payPhoneMaskedTextBox
             // 
             payPhoneMaskedTextBox.BackColor = Color.Maroon;
+            payPhoneMaskedTextBox.BorderStyle = BorderStyle.None;
             payPhoneMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             payPhoneMaskedTextBox.Font = new Font("Segoe UI", 15F);
             payPhoneMaskedTextBox.ForeColor = Color.White;
             payPhoneMaskedTextBox.Location = new Point(762, 188);
             payPhoneMaskedTextBox.Mask = "(999) 000-0000";
             payPhoneMaskedTextBox.Name = "payPhoneMaskedTextBox";
-            payPhoneMaskedTextBox.Size = new Size(174, 34);
+            payPhoneMaskedTextBox.Size = new Size(174, 27);
             payPhoneMaskedTextBox.TabIndex = 184;
             payPhoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -339,25 +349,27 @@
             // payZip4TextBox
             // 
             payZip4TextBox.BackColor = Color.Maroon;
+            payZip4TextBox.BorderStyle = BorderStyle.None;
             payZip4TextBox.Font = new Font("Segoe UI", 15F);
             payZip4TextBox.ForeColor = Color.White;
             payZip4TextBox.Location = new Point(1082, 153);
             payZip4TextBox.Margin = new Padding(0);
             payZip4TextBox.MaxLength = 4;
             payZip4TextBox.Name = "payZip4TextBox";
-            payZip4TextBox.Size = new Size(59, 34);
+            payZip4TextBox.Size = new Size(59, 27);
             payZip4TextBox.TabIndex = 183;
             // 
             // payZipTextBox
             // 
             payZipTextBox.BackColor = Color.Maroon;
+            payZipTextBox.BorderStyle = BorderStyle.None;
             payZipTextBox.Font = new Font("Segoe UI", 15F);
             payZipTextBox.ForeColor = Color.White;
             payZipTextBox.Location = new Point(1001, 153);
             payZipTextBox.Margin = new Padding(0);
             payZipTextBox.MaxLength = 5;
             payZipTextBox.Name = "payZipTextBox";
-            payZipTextBox.Size = new Size(72, 34);
+            payZipTextBox.Size = new Size(72, 27);
             payZipTextBox.TabIndex = 182;
             // 
             // label11
@@ -374,13 +386,14 @@
             // payStateTextBox
             // 
             payStateTextBox.BackColor = Color.Maroon;
+            payStateTextBox.BorderStyle = BorderStyle.None;
             payStateTextBox.Font = new Font("Segoe UI", 15F);
             payStateTextBox.ForeColor = Color.White;
             payStateTextBox.Location = new Point(762, 153);
             payStateTextBox.Margin = new Padding(0);
             payStateTextBox.MaxLength = 2;
             payStateTextBox.Name = "payStateTextBox";
-            payStateTextBox.Size = new Size(49, 34);
+            payStateTextBox.Size = new Size(49, 27);
             payStateTextBox.TabIndex = 180;
             // 
             // label12
@@ -397,13 +410,14 @@
             // payAddressTextBox
             // 
             payAddressTextBox.BackColor = Color.Maroon;
+            payAddressTextBox.BorderStyle = BorderStyle.None;
             payAddressTextBox.Font = new Font("Segoe UI", 15F);
             payAddressTextBox.ForeColor = Color.White;
             payAddressTextBox.Location = new Point(762, 83);
             payAddressTextBox.Margin = new Padding(0);
             payAddressTextBox.MaxLength = 40;
             payAddressTextBox.Name = "payAddressTextBox";
-            payAddressTextBox.Size = new Size(522, 34);
+            payAddressTextBox.Size = new Size(522, 27);
             payAddressTextBox.TabIndex = 178;
             // 
             // label13
@@ -420,13 +434,14 @@
             // payNameTextBox
             // 
             payNameTextBox.BackColor = Color.Maroon;
+            payNameTextBox.BorderStyle = BorderStyle.None;
             payNameTextBox.Font = new Font("Segoe UI", 15F);
             payNameTextBox.ForeColor = Color.White;
             payNameTextBox.Location = new Point(762, 49);
             payNameTextBox.Margin = new Padding(0);
             payNameTextBox.MaxLength = 40;
             payNameTextBox.Name = "payNameTextBox";
-            payNameTextBox.Size = new Size(522, 34);
+            payNameTextBox.Size = new Size(522, 27);
             payNameTextBox.TabIndex = 176;
             // 
             // label14
@@ -465,25 +480,27 @@
             // activeHoldTextBox
             // 
             activeHoldTextBox.BackColor = Color.Maroon;
+            activeHoldTextBox.BorderStyle = BorderStyle.None;
             activeHoldTextBox.Font = new Font("Segoe UI", 15F);
             activeHoldTextBox.ForeColor = Color.White;
             activeHoldTextBox.Location = new Point(265, 294);
             activeHoldTextBox.Margin = new Padding(0);
             activeHoldTextBox.MaxLength = 1;
             activeHoldTextBox.Name = "activeHoldTextBox";
-            activeHoldTextBox.Size = new Size(35, 34);
+            activeHoldTextBox.Size = new Size(35, 27);
             activeHoldTextBox.TabIndex = 189;
             // 
             // noteTextBox
             // 
             noteTextBox.BackColor = Color.Maroon;
+            noteTextBox.BorderStyle = BorderStyle.None;
             noteTextBox.Font = new Font("Segoe UI", 15F);
             noteTextBox.ForeColor = Color.White;
             noteTextBox.Location = new Point(112, 350);
             noteTextBox.Margin = new Padding(0);
             noteTextBox.MaxLength = 65;
             noteTextBox.Name = "noteTextBox";
-            noteTextBox.Size = new Size(1145, 34);
+            noteTextBox.Size = new Size(1145, 27);
             noteTextBox.TabIndex = 191;
             // 
             // label18
@@ -500,13 +517,14 @@
             // dInsuranceTextBox
             // 
             dInsuranceTextBox.BackColor = Color.Maroon;
+            dInsuranceTextBox.BorderStyle = BorderStyle.None;
             dInsuranceTextBox.Font = new Font("Segoe UI", 15F);
             dInsuranceTextBox.ForeColor = Color.White;
             dInsuranceTextBox.Location = new Point(379, 582);
             dInsuranceTextBox.Margin = new Padding(0);
             dInsuranceTextBox.MaxLength = 32;
             dInsuranceTextBox.Name = "dInsuranceTextBox";
-            dInsuranceTextBox.Size = new Size(705, 34);
+            dInsuranceTextBox.Size = new Size(705, 27);
             dInsuranceTextBox.TabIndex = 196;
             // 
             // label24
@@ -523,13 +541,14 @@
             // cInsuranceTextBox
             // 
             cInsuranceTextBox.BackColor = Color.Maroon;
+            cInsuranceTextBox.BorderStyle = BorderStyle.None;
             cInsuranceTextBox.Font = new Font("Segoe UI", 15F);
             cInsuranceTextBox.ForeColor = Color.White;
             cInsuranceTextBox.Location = new Point(378, 540);
             cInsuranceTextBox.Margin = new Padding(0);
             cInsuranceTextBox.MaxLength = 32;
             cInsuranceTextBox.Name = "cInsuranceTextBox";
-            cInsuranceTextBox.Size = new Size(705, 34);
+            cInsuranceTextBox.Size = new Size(705, 27);
             cInsuranceTextBox.TabIndex = 195;
             // 
             // label25
@@ -546,13 +565,14 @@
             // bInsuranceTextBox
             // 
             bInsuranceTextBox.BackColor = Color.Maroon;
+            bInsuranceTextBox.BorderStyle = BorderStyle.None;
             bInsuranceTextBox.Font = new Font("Segoe UI", 15F);
             bInsuranceTextBox.ForeColor = Color.White;
             bInsuranceTextBox.Location = new Point(378, 498);
             bInsuranceTextBox.Margin = new Padding(0);
             bInsuranceTextBox.MaxLength = 32;
             bInsuranceTextBox.Name = "bInsuranceTextBox";
-            bInsuranceTextBox.Size = new Size(705, 34);
+            bInsuranceTextBox.Size = new Size(705, 27);
             bInsuranceTextBox.TabIndex = 194;
             // 
             // label23
@@ -569,13 +589,14 @@
             // aInsuranceTextBox
             // 
             aInsuranceTextBox.BackColor = Color.Maroon;
+            aInsuranceTextBox.BorderStyle = BorderStyle.None;
             aInsuranceTextBox.Font = new Font("Segoe UI", 15F);
             aInsuranceTextBox.ForeColor = Color.White;
             aInsuranceTextBox.Location = new Point(377, 456);
             aInsuranceTextBox.Margin = new Padding(0);
             aInsuranceTextBox.MaxLength = 32;
             aInsuranceTextBox.Name = "aInsuranceTextBox";
-            aInsuranceTextBox.Size = new Size(705, 34);
+            aInsuranceTextBox.Size = new Size(705, 27);
             aInsuranceTextBox.TabIndex = 193;
             // 
             // label22
@@ -614,13 +635,14 @@
             // payCityTextBox
             // 
             payCityTextBox.BackColor = Color.Maroon;
+            payCityTextBox.BorderStyle = BorderStyle.None;
             payCityTextBox.Font = new Font("Segoe UI", 15F);
             payCityTextBox.ForeColor = Color.White;
             payCityTextBox.Location = new Point(762, 117);
             payCityTextBox.Margin = new Padding(0);
             payCityTextBox.MaxLength = 20;
             payCityTextBox.Name = "payCityTextBox";
-            payCityTextBox.Size = new Size(522, 34);
+            payCityTextBox.Size = new Size(522, 27);
             payCityTextBox.TabIndex = 179;
             // 
             // label19
@@ -637,13 +659,14 @@
             // freightCityTextBox
             // 
             freightCityTextBox.BackColor = Color.Maroon;
+            freightCityTextBox.BorderStyle = BorderStyle.None;
             freightCityTextBox.Font = new Font("Segoe UI", 15F);
             freightCityTextBox.ForeColor = Color.White;
             freightCityTextBox.Location = new Point(120, 117);
             freightCityTextBox.Margin = new Padding(0);
             freightCityTextBox.MaxLength = 20;
             freightCityTextBox.Name = "freightCityTextBox";
-            freightCityTextBox.Size = new Size(522, 34);
+            freightCityTextBox.Size = new Size(522, 27);
             freightCityTextBox.TabIndex = 136;
             // 
             // label26

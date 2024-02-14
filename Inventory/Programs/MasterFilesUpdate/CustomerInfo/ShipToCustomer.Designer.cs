@@ -94,13 +94,14 @@
             // customerShipToTextBox
             // 
             customerShipToTextBox.BackColor = Color.Maroon;
+            customerShipToTextBox.BorderStyle = BorderStyle.None;
             customerShipToTextBox.Font = new Font("Segoe UI", 15F);
             customerShipToTextBox.ForeColor = Color.White;
             customerShipToTextBox.Location = new Point(443, 11);
             customerShipToTextBox.Margin = new Padding(0);
             customerShipToTextBox.MaxLength = 40;
             customerShipToTextBox.Name = "customerShipToTextBox";
-            customerShipToTextBox.Size = new Size(625, 34);
+            customerShipToTextBox.Size = new Size(625, 27);
             customerShipToTextBox.TabIndex = 1;
             // 
             // label1
@@ -117,13 +118,14 @@
             // phoneNumberMaskedTextBox
             // 
             phoneNumberMaskedTextBox.BackColor = Color.Maroon;
+            phoneNumberMaskedTextBox.BorderStyle = BorderStyle.None;
             phoneNumberMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             phoneNumberMaskedTextBox.Font = new Font("Segoe UI", 15F);
             phoneNumberMaskedTextBox.ForeColor = Color.White;
             phoneNumberMaskedTextBox.Location = new Point(443, 46);
             phoneNumberMaskedTextBox.Mask = "(999) 000-0000";
             phoneNumberMaskedTextBox.Name = "phoneNumberMaskedTextBox";
-            phoneNumberMaskedTextBox.Size = new Size(174, 34);
+            phoneNumberMaskedTextBox.Size = new Size(174, 27);
             phoneNumberMaskedTextBox.TabIndex = 2;
             phoneNumberMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -141,13 +143,14 @@
             // faxNumberMaskedTextBox
             // 
             faxNumberMaskedTextBox.BackColor = Color.Maroon;
+            faxNumberMaskedTextBox.BorderStyle = BorderStyle.None;
             faxNumberMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             faxNumberMaskedTextBox.Font = new Font("Segoe UI", 15F);
             faxNumberMaskedTextBox.ForeColor = Color.White;
             faxNumberMaskedTextBox.Location = new Point(894, 46);
             faxNumberMaskedTextBox.Mask = "(999) 000-0000";
             faxNumberMaskedTextBox.Name = "faxNumberMaskedTextBox";
-            faxNumberMaskedTextBox.Size = new Size(174, 34);
+            faxNumberMaskedTextBox.Size = new Size(174, 27);
             faxNumberMaskedTextBox.TabIndex = 3;
             faxNumberMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -165,13 +168,14 @@
             // contactName1TextBox
             // 
             contactName1TextBox.BackColor = Color.Maroon;
+            contactName1TextBox.BorderStyle = BorderStyle.None;
             contactName1TextBox.Font = new Font("Segoe UI", 15F);
             contactName1TextBox.ForeColor = Color.White;
             contactName1TextBox.Location = new Point(443, 84);
             contactName1TextBox.Margin = new Padding(0);
             contactName1TextBox.MaxLength = 42;
             contactName1TextBox.Name = "contactName1TextBox";
-            contactName1TextBox.Size = new Size(625, 34);
+            contactName1TextBox.Size = new Size(625, 27);
             contactName1TextBox.TabIndex = 4;
             // 
             // label3
@@ -188,13 +192,14 @@
             // contactName2TextBox
             // 
             contactName2TextBox.BackColor = Color.Maroon;
+            contactName2TextBox.BorderStyle = BorderStyle.None;
             contactName2TextBox.Font = new Font("Segoe UI", 15F);
             contactName2TextBox.ForeColor = Color.White;
             contactName2TextBox.Location = new Point(443, 118);
             contactName2TextBox.Margin = new Padding(0);
             contactName2TextBox.MaxLength = 42;
             contactName2TextBox.Name = "contactName2TextBox";
-            contactName2TextBox.Size = new Size(625, 34);
+            contactName2TextBox.Size = new Size(625, 27);
             contactName2TextBox.TabIndex = 5;
             // 
             // label4
@@ -211,13 +216,14 @@
             // contactPhoneMaskedTextBox
             // 
             contactPhoneMaskedTextBox.BackColor = Color.Maroon;
+            contactPhoneMaskedTextBox.BorderStyle = BorderStyle.None;
             contactPhoneMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             contactPhoneMaskedTextBox.Font = new Font("Segoe UI", 15F);
             contactPhoneMaskedTextBox.ForeColor = Color.White;
             contactPhoneMaskedTextBox.Location = new Point(443, 153);
             contactPhoneMaskedTextBox.Mask = "(999) 000-0000";
             contactPhoneMaskedTextBox.Name = "contactPhoneMaskedTextBox";
-            contactPhoneMaskedTextBox.Size = new Size(174, 34);
+            contactPhoneMaskedTextBox.Size = new Size(174, 27);
             contactPhoneMaskedTextBox.TabIndex = 6;
             contactPhoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -235,13 +241,14 @@
             // freightContactPhoneMaskedTextBox
             // 
             freightContactPhoneMaskedTextBox.BackColor = Color.Maroon;
+            freightContactPhoneMaskedTextBox.BorderStyle = BorderStyle.None;
             freightContactPhoneMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             freightContactPhoneMaskedTextBox.Font = new Font("Segoe UI", 15F);
             freightContactPhoneMaskedTextBox.ForeColor = Color.White;
             freightContactPhoneMaskedTextBox.Location = new Point(443, 188);
             freightContactPhoneMaskedTextBox.Mask = "(999) 000-0000";
             freightContactPhoneMaskedTextBox.Name = "freightContactPhoneMaskedTextBox";
-            freightContactPhoneMaskedTextBox.Size = new Size(174, 34);
+            freightContactPhoneMaskedTextBox.Size = new Size(174, 27);
             freightContactPhoneMaskedTextBox.TabIndex = 8;
             freightContactPhoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -259,13 +266,14 @@
             // contactFaxMaskedTextBox
             // 
             contactFaxMaskedTextBox.BackColor = Color.Maroon;
+            contactFaxMaskedTextBox.BorderStyle = BorderStyle.None;
             contactFaxMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             contactFaxMaskedTextBox.Font = new Font("Segoe UI", 15F);
             contactFaxMaskedTextBox.ForeColor = Color.White;
             contactFaxMaskedTextBox.Location = new Point(894, 153);
             contactFaxMaskedTextBox.Mask = "(999) 000-0000";
             contactFaxMaskedTextBox.Name = "contactFaxMaskedTextBox";
-            contactFaxMaskedTextBox.Size = new Size(174, 34);
+            contactFaxMaskedTextBox.Size = new Size(174, 27);
             contactFaxMaskedTextBox.TabIndex = 7;
             contactFaxMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -283,13 +291,14 @@
             // deliveryPhoneMaskedTextBox
             // 
             deliveryPhoneMaskedTextBox.BackColor = Color.Maroon;
+            deliveryPhoneMaskedTextBox.BorderStyle = BorderStyle.None;
             deliveryPhoneMaskedTextBox.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             deliveryPhoneMaskedTextBox.Font = new Font("Segoe UI", 15F);
             deliveryPhoneMaskedTextBox.ForeColor = Color.White;
             deliveryPhoneMaskedTextBox.Location = new Point(894, 188);
             deliveryPhoneMaskedTextBox.Mask = "(999) 000-0000";
             deliveryPhoneMaskedTextBox.Name = "deliveryPhoneMaskedTextBox";
-            deliveryPhoneMaskedTextBox.Size = new Size(174, 34);
+            deliveryPhoneMaskedTextBox.Size = new Size(174, 27);
             deliveryPhoneMaskedTextBox.TabIndex = 9;
             deliveryPhoneMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -307,13 +316,14 @@
             // deliveryEmailTextBox
             // 
             deliveryEmailTextBox.BackColor = Color.Maroon;
+            deliveryEmailTextBox.BorderStyle = BorderStyle.None;
             deliveryEmailTextBox.Font = new Font("Segoe UI", 15F);
             deliveryEmailTextBox.ForeColor = Color.White;
             deliveryEmailTextBox.Location = new Point(324, 225);
             deliveryEmailTextBox.Margin = new Padding(0);
             deliveryEmailTextBox.MaxLength = 28;
             deliveryEmailTextBox.Name = "deliveryEmailTextBox";
-            deliveryEmailTextBox.Size = new Size(449, 34);
+            deliveryEmailTextBox.Size = new Size(449, 27);
             deliveryEmailTextBox.TabIndex = 10;
             // 
             // label10
@@ -330,13 +340,14 @@
             // receivingHoursTextBox
             // 
             receivingHoursTextBox.BackColor = Color.Maroon;
+            receivingHoursTextBox.BorderStyle = BorderStyle.None;
             receivingHoursTextBox.Font = new Font("Segoe UI", 15F);
             receivingHoursTextBox.ForeColor = Color.White;
             receivingHoursTextBox.Location = new Point(955, 225);
             receivingHoursTextBox.Margin = new Padding(0);
             receivingHoursTextBox.MaxLength = 12;
             receivingHoursTextBox.Name = "receivingHoursTextBox";
-            receivingHoursTextBox.Size = new Size(207, 34);
+            receivingHoursTextBox.Size = new Size(207, 27);
             receivingHoursTextBox.TabIndex = 11;
             // 
             // label26
@@ -353,13 +364,14 @@
             // receivingMondayTextBox
             // 
             receivingMondayTextBox.BackColor = Color.Maroon;
+            receivingMondayTextBox.BorderStyle = BorderStyle.None;
             receivingMondayTextBox.Font = new Font("Segoe UI", 15F);
             receivingMondayTextBox.ForeColor = Color.White;
             receivingMondayTextBox.Location = new Point(311, 274);
             receivingMondayTextBox.Margin = new Padding(0);
             receivingMondayTextBox.MaxLength = 15;
             receivingMondayTextBox.Name = "receivingMondayTextBox";
-            receivingMondayTextBox.Size = new Size(248, 34);
+            receivingMondayTextBox.Size = new Size(248, 27);
             receivingMondayTextBox.TabIndex = 12;
             // 
             // label11
@@ -398,13 +410,14 @@
             // receivingTuesdayTextBox
             // 
             receivingTuesdayTextBox.BackColor = Color.Maroon;
+            receivingTuesdayTextBox.BorderStyle = BorderStyle.None;
             receivingTuesdayTextBox.Font = new Font("Segoe UI", 15F);
             receivingTuesdayTextBox.ForeColor = Color.White;
             receivingTuesdayTextBox.Location = new Point(636, 274);
             receivingTuesdayTextBox.Margin = new Padding(0);
             receivingTuesdayTextBox.MaxLength = 15;
             receivingTuesdayTextBox.Name = "receivingTuesdayTextBox";
-            receivingTuesdayTextBox.Size = new Size(248, 34);
+            receivingTuesdayTextBox.Size = new Size(248, 27);
             receivingTuesdayTextBox.TabIndex = 13;
             // 
             // label14
@@ -421,13 +434,14 @@
             // receivingWednesdayTextBox
             // 
             receivingWednesdayTextBox.BackColor = Color.Maroon;
+            receivingWednesdayTextBox.BorderStyle = BorderStyle.None;
             receivingWednesdayTextBox.Font = new Font("Segoe UI", 15F);
             receivingWednesdayTextBox.ForeColor = Color.White;
             receivingWednesdayTextBox.Location = new Point(961, 274);
             receivingWednesdayTextBox.Margin = new Padding(0);
             receivingWednesdayTextBox.MaxLength = 15;
             receivingWednesdayTextBox.Name = "receivingWednesdayTextBox";
-            receivingWednesdayTextBox.Size = new Size(248, 34);
+            receivingWednesdayTextBox.Size = new Size(248, 27);
             receivingWednesdayTextBox.TabIndex = 14;
             // 
             // label15
@@ -444,13 +458,14 @@
             // receivingSaturdayTextBox
             // 
             receivingSaturdayTextBox.BackColor = Color.Maroon;
+            receivingSaturdayTextBox.BorderStyle = BorderStyle.None;
             receivingSaturdayTextBox.Font = new Font("Segoe UI", 15F);
             receivingSaturdayTextBox.ForeColor = Color.White;
             receivingSaturdayTextBox.Location = new Point(961, 308);
             receivingSaturdayTextBox.Margin = new Padding(0);
             receivingSaturdayTextBox.MaxLength = 15;
             receivingSaturdayTextBox.Name = "receivingSaturdayTextBox";
-            receivingSaturdayTextBox.Size = new Size(248, 34);
+            receivingSaturdayTextBox.Size = new Size(248, 27);
             receivingSaturdayTextBox.TabIndex = 17;
             // 
             // label16
@@ -467,13 +482,14 @@
             // receivingFridayTextBox
             // 
             receivingFridayTextBox.BackColor = Color.Maroon;
+            receivingFridayTextBox.BorderStyle = BorderStyle.None;
             receivingFridayTextBox.Font = new Font("Segoe UI", 15F);
             receivingFridayTextBox.ForeColor = Color.White;
             receivingFridayTextBox.Location = new Point(636, 308);
             receivingFridayTextBox.Margin = new Padding(0);
             receivingFridayTextBox.MaxLength = 15;
             receivingFridayTextBox.Name = "receivingFridayTextBox";
-            receivingFridayTextBox.Size = new Size(248, 34);
+            receivingFridayTextBox.Size = new Size(248, 27);
             receivingFridayTextBox.TabIndex = 16;
             // 
             // label17
@@ -490,13 +506,14 @@
             // receivingThursdayTextBox
             // 
             receivingThursdayTextBox.BackColor = Color.Maroon;
+            receivingThursdayTextBox.BorderStyle = BorderStyle.None;
             receivingThursdayTextBox.Font = new Font("Segoe UI", 15F);
             receivingThursdayTextBox.ForeColor = Color.White;
             receivingThursdayTextBox.Location = new Point(311, 308);
             receivingThursdayTextBox.Margin = new Padding(0);
             receivingThursdayTextBox.MaxLength = 15;
             receivingThursdayTextBox.Name = "receivingThursdayTextBox";
-            receivingThursdayTextBox.Size = new Size(248, 34);
+            receivingThursdayTextBox.Size = new Size(248, 27);
             receivingThursdayTextBox.TabIndex = 15;
             // 
             // label18
@@ -513,13 +530,14 @@
             // receivingSundayTextBox
             // 
             receivingSundayTextBox.BackColor = Color.Maroon;
+            receivingSundayTextBox.BorderStyle = BorderStyle.None;
             receivingSundayTextBox.Font = new Font("Segoe UI", 15F);
             receivingSundayTextBox.ForeColor = Color.White;
             receivingSundayTextBox.Location = new Point(311, 342);
             receivingSundayTextBox.Margin = new Padding(0);
             receivingSundayTextBox.MaxLength = 15;
             receivingSundayTextBox.Name = "receivingSundayTextBox";
-            receivingSundayTextBox.Size = new Size(248, 34);
+            receivingSundayTextBox.Size = new Size(248, 27);
             receivingSundayTextBox.TabIndex = 18;
             // 
             // label19
@@ -547,25 +565,27 @@
             // shipToAddressTextBox
             // 
             shipToAddressTextBox.BackColor = Color.Maroon;
+            shipToAddressTextBox.BorderStyle = BorderStyle.None;
             shipToAddressTextBox.Font = new Font("Segoe UI", 15F);
             shipToAddressTextBox.ForeColor = Color.White;
             shipToAddressTextBox.Location = new Point(289, 396);
             shipToAddressTextBox.Margin = new Padding(0);
             shipToAddressTextBox.MaxLength = 40;
             shipToAddressTextBox.Name = "shipToAddressTextBox";
-            shipToAddressTextBox.Size = new Size(628, 34);
+            shipToAddressTextBox.Size = new Size(628, 27);
             shipToAddressTextBox.TabIndex = 19;
             // 
             // shipToCityTextBox
             // 
             shipToCityTextBox.BackColor = Color.Maroon;
+            shipToCityTextBox.BorderStyle = BorderStyle.None;
             shipToCityTextBox.Font = new Font("Segoe UI", 15F);
             shipToCityTextBox.ForeColor = Color.White;
             shipToCityTextBox.Location = new Point(289, 430);
             shipToCityTextBox.Margin = new Padding(0);
             shipToCityTextBox.MaxLength = 40;
             shipToCityTextBox.Name = "shipToCityTextBox";
-            shipToCityTextBox.Size = new Size(550, 34);
+            shipToCityTextBox.Size = new Size(550, 27);
             shipToCityTextBox.TabIndex = 20;
             // 
             // label20
@@ -582,13 +602,14 @@
             // noteTextBox
             // 
             noteTextBox.BackColor = Color.Maroon;
+            noteTextBox.BorderStyle = BorderStyle.None;
             noteTextBox.Font = new Font("Segoe UI", 15F);
             noteTextBox.ForeColor = Color.White;
             noteTextBox.Location = new Point(289, 464);
             noteTextBox.Margin = new Padding(0);
             noteTextBox.MaxLength = 60;
             noteTextBox.Name = "noteTextBox";
-            noteTextBox.Size = new Size(912, 34);
+            noteTextBox.Size = new Size(912, 27);
             noteTextBox.TabIndex = 24;
             // 
             // label22
@@ -627,13 +648,14 @@
             // groupCodeTextBox
             // 
             groupCodeTextBox.BackColor = Color.Maroon;
+            groupCodeTextBox.BorderStyle = BorderStyle.None;
             groupCodeTextBox.Font = new Font("Segoe UI", 15F);
             groupCodeTextBox.ForeColor = Color.White;
             groupCodeTextBox.Location = new Point(554, 498);
             groupCodeTextBox.Margin = new Padding(0);
             groupCodeTextBox.MaxLength = 4;
             groupCodeTextBox.Name = "groupCodeTextBox";
-            groupCodeTextBox.Size = new Size(79, 34);
+            groupCodeTextBox.Size = new Size(79, 27);
             groupCodeTextBox.TabIndex = 25;
             // 
             // label24
@@ -650,13 +672,14 @@
             // groupDescriptionTextBox
             // 
             groupDescriptionTextBox.BackColor = Color.Maroon;
+            groupDescriptionTextBox.BorderStyle = BorderStyle.None;
             groupDescriptionTextBox.Font = new Font("Segoe UI", 15F);
             groupDescriptionTextBox.ForeColor = Color.White;
             groupDescriptionTextBox.Location = new Point(769, 498);
             groupDescriptionTextBox.Margin = new Padding(0);
             groupDescriptionTextBox.MaxLength = 20;
             groupDescriptionTextBox.Name = "groupDescriptionTextBox";
-            groupDescriptionTextBox.Size = new Size(335, 34);
+            groupDescriptionTextBox.Size = new Size(335, 27);
             groupDescriptionTextBox.TabIndex = 26;
             // 
             // label25
@@ -673,25 +696,27 @@
             // shipToZip4TextBox
             // 
             shipToZip4TextBox.BackColor = Color.Maroon;
+            shipToZip4TextBox.BorderStyle = BorderStyle.None;
             shipToZip4TextBox.Font = new Font("Segoe UI", 15F);
             shipToZip4TextBox.ForeColor = Color.White;
             shipToZip4TextBox.Location = new Point(1142, 430);
             shipToZip4TextBox.Margin = new Padding(0);
             shipToZip4TextBox.MaxLength = 4;
             shipToZip4TextBox.Name = "shipToZip4TextBox";
-            shipToZip4TextBox.Size = new Size(59, 34);
+            shipToZip4TextBox.Size = new Size(59, 27);
             shipToZip4TextBox.TabIndex = 23;
             // 
             // shipToZipTextBox
             // 
             shipToZipTextBox.BackColor = Color.Maroon;
+            shipToZipTextBox.BorderStyle = BorderStyle.None;
             shipToZipTextBox.Font = new Font("Segoe UI", 15F);
             shipToZipTextBox.ForeColor = Color.White;
             shipToZipTextBox.Location = new Point(1061, 430);
             shipToZipTextBox.Margin = new Padding(0);
             shipToZipTextBox.MaxLength = 5;
             shipToZipTextBox.Name = "shipToZipTextBox";
-            shipToZipTextBox.Size = new Size(72, 34);
+            shipToZipTextBox.Size = new Size(72, 27);
             shipToZipTextBox.TabIndex = 22;
             // 
             // label27
@@ -708,13 +733,14 @@
             // shipToStateTextBox
             // 
             shipToStateTextBox.BackColor = Color.Maroon;
+            shipToStateTextBox.BorderStyle = BorderStyle.None;
             shipToStateTextBox.Font = new Font("Segoe UI", 15F);
             shipToStateTextBox.ForeColor = Color.White;
             shipToStateTextBox.Location = new Point(933, 430);
             shipToStateTextBox.Margin = new Padding(0);
             shipToStateTextBox.MaxLength = 2;
             shipToStateTextBox.Name = "shipToStateTextBox";
-            shipToStateTextBox.Size = new Size(58, 34);
+            shipToStateTextBox.Size = new Size(58, 27);
             shipToStateTextBox.TabIndex = 21;
             // 
             // label29
@@ -731,13 +757,14 @@
             // principalBillToNameTextBox
             // 
             principalBillToNameTextBox.BackColor = Color.Maroon;
+            principalBillToNameTextBox.BorderStyle = BorderStyle.None;
             principalBillToNameTextBox.Font = new Font("Segoe UI", 15F);
             principalBillToNameTextBox.ForeColor = Color.White;
             principalBillToNameTextBox.Location = new Point(468, 532);
             principalBillToNameTextBox.Margin = new Padding(0);
             principalBillToNameTextBox.MaxLength = 40;
             principalBillToNameTextBox.Name = "principalBillToNameTextBox";
-            principalBillToNameTextBox.Size = new Size(636, 34);
+            principalBillToNameTextBox.Size = new Size(636, 27);
             principalBillToNameTextBox.TabIndex = 27;
             // 
             // label30
