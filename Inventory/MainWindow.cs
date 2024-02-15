@@ -115,22 +115,22 @@ namespace Inventory
             userActionInputMain.userActionCommandsLabel.Text = text;
         }
 
-        public void AttachTextBoxTextChangedHandler(EventHandler handler)
+        public void AttachActionInputTextChangedHandler(EventHandler handler)
         {
             userActionInputMain.actionInput.TextChanged += handler;
         }
 
-        public void DetachTextBoxTextChangedHandler(EventHandler handler)
+        public void DetachActionInputChangedHandler(EventHandler handler)
         {
             userActionInputMain.actionInput.TextChanged -= handler;
         }
 
-        public void AttachTextBoxKeyDownHandler(KeyEventHandler handler)
+        public void AttachActionInputKeyDownHandler(KeyEventHandler handler)
         {
             userActionInputMain.actionInput.KeyDown += handler;
         }
 
-        public void DetachTextBoxKeyDownHandler(KeyEventHandler handler)
+        public void DetachActionInputKeyDownHandler(KeyEventHandler handler)
         {
             userActionInputMain.actionInput.KeyDown -= handler;
         }

@@ -2,6 +2,7 @@
 using Inventory.Services;
 using Microsoft.EntityFrameworkCore;
 using Inventory.Interfaces;
+using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory.Views.UserControls
 {
@@ -18,11 +19,13 @@ namespace Inventory.Views.UserControls
         {
             public List<object> SearchResults { get; }
             public string TableSelected { get; }
+            public string NewEntryName { get; }
 
-            public SearchResultsEventArgs(List<object> searchResults, string tableSelected)
+            public SearchResultsEventArgs(List<object> searchResults, string tableSelected, string newEntryName)
             {
                 SearchResults = searchResults;
                 TableSelected = tableSelected;
+                NewEntryName = newEntryName;
             }
         }
 
@@ -92,12 +95,26 @@ namespace Inventory.Views.UserControls
                 if (searchResults.Count == 0)
                 {
                     //No Results Found. Woud you like to add a new entry?
+                    _mainWindow.AttachConfirmationEventListener(AddNewEntry);
+                    _mainWindow.AskUserConfirmation("No results found. Would you like to add a new entry?");
+                   
+                    void AddNewEntry(object sender, UserConfirmationEventArgs e)
+                    {
+                        if (e.UserChoice == true)
+                        {
+                            SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null!, selectedTable, searchInput));
+                        }
+                        else
+                        {
+                            ExitControl();
+                        }
+                        _mainWindow.DetachConfirmationEventListener(AddNewEntry);
+                    }
 
-                    SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null!, selectedTable));
                 }
                 else
                 {
-                    SearchCompleted?.Invoke(this, new SearchResultsEventArgs(searchResults, selectedTable));
+                    SearchCompleted?.Invoke(this, new SearchResultsEventArgs(searchResults, selectedTable, null!));
                     _mainWindow.DisposeControl(this);
                 }
             }
@@ -117,9 +134,16 @@ namespace Inventory.Views.UserControls
                 {
                     { "1", () => SearchDatabase(searchQuereyTextBox.Text) },
                     { "2", () => searchQuereyTextBox.Clear() },
-                    { "3", () => {_mainWindow.DisposeControl(this); _mainWindow.DisplayLastMenu(); } }
+                    { "3", () => ExitControl() }
                 };
             }
+        }
+
+        private void ExitControl()
+        {
+            _mainWindow.DisposeControl(this); 
+            _mainWindow.DisplayLastMenu();
+
         }
 
         public void PerformAction(string userInput)

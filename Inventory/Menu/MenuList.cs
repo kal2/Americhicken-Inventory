@@ -91,6 +91,7 @@ namespace Inventory
                 {
                     LoadProgram(selectedMenuItem.LoadProgram);
                 }
+                _mainWindow.ClearTextBox();
             }
         }
 

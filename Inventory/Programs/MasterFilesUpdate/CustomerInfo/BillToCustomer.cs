@@ -24,7 +24,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
 
         public void SetProgramLabels()
         {
-            _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE BILL TO CUSTOMER INFORMATION");
+            _mainWindow.SetProgramLabel("ADD/CHANGE/DELETE BILL TO CUSTOMER INFORMATION");
             _mainWindow.SetTextBoxLabel("Action: ");
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
         }

@@ -14,8 +14,8 @@ namespace Inventory.Services
         public ActiveControlManager(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
-            _mainWindow.AttachTextBoxTextChangedHandler(HandleUserInput);
-            _mainWindow.AttachTextBoxKeyDownHandler(HandleEnterKeyPressed);
+            _mainWindow.AttachActionInputTextChangedHandler(HandleActionUserInput);
+            _mainWindow.AttachActionInputKeyDownHandler(HandleActionInputEnterKeyPressed);
         }
 
         // -- Methods -- //
@@ -25,9 +25,10 @@ namespace Inventory.Services
             _mainWindow.DisplayControl(_activeControl as UserControl);
             _activeControl.SetProgramLabels();
             AttachKeyPressEventHandlers(_activeControl as UserControl);
+            AttachGotFocusEventToTextBoxes(_activeControl as UserControl);
         }
 
-        private void HandleUserInput(object sender, EventArgs e)
+        private void HandleActionUserInput(object sender, EventArgs e)
         {
             if (_activeControl != null)
             {
@@ -35,25 +36,28 @@ namespace Inventory.Services
                 if (!string.IsNullOrEmpty(userInput))
                 {
                     var actionsCopy = new Dictionary<string, Action>(_activeControl.AvailableActions);
-
+                    int i=0;
                     foreach (var action in actionsCopy)
                     {
-                        if (action.Key == userInput) // Check for exact match
+                        if (action.Key.StartsWith(userInput))
                         {
-                            _mainWindow.SetCommandsLabel("");
-                            _activeControl.PerformAction(userInput);
-                            _mainWindow.ClearTextBox();
+                            i++;
                         }
-                        else if (action.Key.StartsWith(userInput))
-                        {
-                            _mainWindow.SetCommandsLabel("Close match or multiple matches found. Press ENTER to submit choice.");
-                        }
+                    }
+                    if (i > 1)
+                    {
+                        _mainWindow.SetCommandsLabel("Close match or multiple matches found. Press ENTER to submit choice.");
+                    }
+                    else if (actionsCopy.ContainsKey(userInput))
+                    {
+                        _mainWindow.SetCommandsLabel("");
+                        _activeControl.PerformAction(userInput);
                     }
                 }
             }
         }
 
-        private void HandleEnterKeyPressed(object sender, KeyEventArgs e)
+        private void HandleActionInputEnterKeyPressed(object sender, KeyEventArgs e)
         {
             if (_activeControl != null && e.KeyCode == Keys.Enter)
             {
@@ -66,17 +70,13 @@ namespace Inventory.Services
             }
         }
 
-
-
-
-
         private void AttachKeyPressEventHandlers(Control control)
         {
             foreach (Control c in control.Controls)
             {
-                if (c is TextBox)
+                if (c is TextBoxBase)
                 {
-                    ((TextBox)c).KeyPress += TextBox_KeyPress;
+                    ((TextBoxBase)c).KeyPress += TextBox_KeyPress;
                 }
                 else if (c.Controls.Count > 0)
                 {
@@ -88,15 +88,40 @@ namespace Inventory.Services
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = Char.ToUpperInvariant(e.KeyChar);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true; // Prevent the enter key from being processed by the TextBox
+                SendKeys.Send("{TAB}"); // Send a tab key press
+            }
         }
 
+        private void AttachGotFocusEventToTextBoxes(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c is TextBox || c is MaskedTextBox) // Include MaskedTextBox
+                {
+                    if (c is TextBox)
+                    {
+                        ((TextBox)c).GotFocus += TextBox_GotFocus;
+                    }
+                    else if (c is MaskedTextBox) // Handle MaskedTextBox separately
+                    {
+                        ((MaskedTextBox)c).GotFocus += TextBox_GotFocus;
+                    }
+                }
+                else
+                {
+                    AttachGotFocusEventToTextBoxes(c);
+                }
+            }
+        }
 
-
-
-
-
-
-
+        private void TextBox_GotFocus(object sender, EventArgs e)
+        {
+            TextBoxBase textBox = (TextBoxBase)sender; // Use TextBoxBase to handle both TextBox and MaskedTextBox
+            textBox.SelectAll();
+        }
 
     }
 }
