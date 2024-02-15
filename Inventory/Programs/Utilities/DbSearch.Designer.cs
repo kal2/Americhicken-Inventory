@@ -90,7 +90,6 @@
             ForeColor = Color.White;
             Name = "DbSearch";
             Size = new Size(1290, 600);
-            Load += DbSearch_Load;
             ResumeLayout(false);
             PerformLayout();
         }

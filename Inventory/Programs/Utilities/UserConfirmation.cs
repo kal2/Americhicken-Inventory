@@ -43,6 +43,12 @@ namespace Inventory.Programs.Utilities
             warningLabel.Text = message;
         }
 
+        //Set keypress event to confirmationInput so all input is uppercase
+        private void confirmationInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = Char.ToUpperInvariant(e.KeyChar);
+        }
+
         private void confirmationInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

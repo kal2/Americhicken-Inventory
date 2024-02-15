@@ -34,6 +34,8 @@ namespace Inventory.Views.UserControls
             InitializeComponent();
             _mainWindow = mainWindow;
             _activeControlManager = activeControlManager;
+
+            Load += (s, e) => searchQuereyTextBox.Focus();
         }
 
         public void SetTable(string tableName)
@@ -96,7 +98,7 @@ namespace Inventory.Views.UserControls
                 {
                     //No Results Found. Woud you like to add a new entry?
                     _mainWindow.AttachConfirmationEventListener(AddNewEntry);
-                    _mainWindow.AskUserConfirmation("No results found. Would you like to add a new entry?");
+                            _mainWindow.AskUserConfirmation("No results found. Would you like to add a new entry?");
                    
                     void AddNewEntry(object sender, UserConfirmationEventArgs e)
                     {
@@ -198,12 +200,8 @@ namespace Inventory.Views.UserControls
             if (e.KeyCode == Keys.Enter)
             {
                 SearchDatabase(searchQuereyTextBox.Text);
+                e.Handled = true;
             }
-        }
-
-        private void DbSearch_Load(object sender, EventArgs e)
-        {
-            BeginInvoke(() => searchQuereyTextBox.Focus());
         }
     }
 }

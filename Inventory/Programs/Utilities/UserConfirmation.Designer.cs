@@ -56,6 +56,7 @@
             confirmationInput.Size = new Size(40, 27);
             confirmationInput.TabIndex = 47;
             confirmationInput.KeyDown += confirmationInput_KeyDown;
+            confirmationInput.KeyPress += confirmationInput_KeyPress;
             // 
             // UserConfirmation
             // 
