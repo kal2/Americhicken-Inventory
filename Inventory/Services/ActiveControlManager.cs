@@ -1,5 +1,6 @@
 ﻿using Inventory.Interfaces;
 using Inventory.UI.Data;
+using Inventory.Views.UserControls;
 using System.Diagnostics.Eventing.Reader;
 
 namespace Inventory.Services
@@ -52,6 +53,7 @@ namespace Inventory.Services
                     {
                         _mainWindow.SetCommandsLabel("");
                         _activeControl.PerformAction(userInput);
+                        _mainWindow.ClearTextBox();
                     }
                 }
             }
@@ -72,6 +74,10 @@ namespace Inventory.Services
 
         private void AttachKeyPressEventHandlers(Control control)
         {
+            if (control.GetType() == typeof(DbSearch) || control.GetType() == typeof(MatchSelect)) // Skip DbSearchControl
+            {
+                return;
+            }
             foreach (Control c in control.Controls)
             {
                 if (c is TextBoxBase)
@@ -87,7 +93,6 @@ namespace Inventory.Services
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.KeyChar = Char.ToUpperInvariant(e.KeyChar);
             if (e.KeyChar == (char)Keys.Enter)
             {
                 e.Handled = true; // Prevent the enter key from being processed by the TextBox

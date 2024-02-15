@@ -58,6 +58,7 @@ namespace Inventory
 
         public void AskUserConfirmation(string? message)
         {
+            mainUserConfirmation.confirmationInput.Clear();
             DisplayUserConfirmation(message);
         }
 
@@ -140,6 +141,10 @@ namespace Inventory
             _lastMenuDisplayed = currentMenu;
         }
 
+        private void MainWindow_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = Char.ToUpperInvariant(e.KeyChar);
+        }
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.PageDown)
