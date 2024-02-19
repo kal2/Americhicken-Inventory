@@ -159,6 +159,8 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             existingRemSup.recal_let = string.IsNullOrEmpty(recallLetterSentDateMaskBox.Text) ? null : DateTime.TryParse(recallLetterSentDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var recallLet) ? recallLet : null;
             existingRemSup.reca_cov1 = decimal.Parse(recallCov1TextBox.Text);
             existingRemSup.cancel = decimal.Parse(cancellationTextBox.Text);
+
+            _remitData = existingRemSup;
         }
 
         private void LoadSupplierProgram()
