@@ -73,47 +73,47 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             {
                 //Display Freight Insurance Data
                 _freightData = freightData;
-                insTp1TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP1);
-                insTp2TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP2);
-                insTp3TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP3);
-                insTp4TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP4);
-                insTp5TextBox.Text = StringServices.TrimOrNull(_freightData.INS_TP5);
-                policy1TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY1);
-                policy2TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY2);
-                policy3TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY3);
-                policy4TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY4);
-                policy5TextBox.Text = StringServices.TrimOrNull(_freightData.POLICY5);
-                genBeginDateMaskBox.Text = _freightData.GEN_BEG?.ToString("MM/dd/yyyy").Trim();
-                genEndDateMaskBox.Text = _freightData.GEN_END?.ToString("MM/dd/yyyy").Trim();
-                genLetterSentDateMaskBox.Text = _freightData.GEN_LET?.ToString("MM/dd/yyyy").Trim();
+                insTp1TextBox.Text = _freightData.INS_TP1;
+                insTp2TextBox.Text = _freightData.INS_TP2;
+                insTp3TextBox.Text = _freightData.INS_TP3;
+                insTp4TextBox.Text = _freightData.INS_TP4;
+                insTp5TextBox.Text = _freightData.INS_TP5;
+                policy1TextBox.Text = _freightData.POLICY1;
+                policy2TextBox.Text = _freightData.POLICY2;
+                policy3TextBox.Text = _freightData.POLICY3;
+                policy4TextBox.Text = _freightData.POLICY4;
+                policy5TextBox.Text = _freightData.POLICY5;
+                genBeginDateMaskBox.Text = _freightData.GEN_BEG?.ToString("MM/dd/yyyy");
+                genEndDateMaskBox.Text = _freightData.GEN_END?.ToString("MM/dd/yyyy");
+                genLetterSentDateMaskBox.Text = _freightData.GEN_LET?.ToString("MM/dd/yyyy");
                 genCov4TextBox.Text = _freightData.GEN_COV4?.ToString();
                 genCov5TextBox.Text = _freightData.GEN_COV5?.ToString();
                 genCov6TextBox.Text = _freightData.GEN_COV6?.ToString();
                 genCov3TextBox.Text = _freightData.GEN_COV3?.ToString();
                 genCov2TextBox.Text = _freightData.GEN_COV2?.ToString();
                 genCov1TextBox.Text = _freightData.GEN_COV1?.ToString();
-                autoBeginDateMaskBox.Text = _freightData.AUTO_BEG?.ToString("MM/dd/yyyy").Trim();
-                autoEndDateMaskBox.Text = _freightData.AUTO_END?.ToString("MM/dd/yyyy").Trim();
-                autoLetterSentDateMaskBox.Text = _freightData.AUTO_LET?.ToString("MM/dd/yyyy").Trim();
+                autoBeginDateMaskBox.Text = _freightData.AUTO_BEG?.ToString("MM/dd/yyyy");
+                autoEndDateMaskBox.Text = _freightData.AUTO_END?.ToString("MM/dd/yyyy");
+                autoLetterSentDateMaskBox.Text = _freightData.AUTO_LET?.ToString("MM/dd/yyyy");
                 autoCov1TextBox.Text = _freightData.AUTO_COV1?.ToString();
                 autoCov2TextBox.Text = _freightData.AUTO_COV2?.ToString();
                 autoCov3TextBox.Text = _freightData.AUTO_COV3?.ToString();
                 autoCov4TextBox.Text = _freightData.AUTO_COV4?.ToString();
-                compBeginDateMaskBox.Text = _freightData.WORK_BEG?.ToString("MM/dd/yyyy").Trim();
-                compEndDateMaskBox.Text = _freightData.WORK_END?.ToString("MM/dd/yyyy").Trim();
-                compLetterSentDateMaskBox.Text = _freightData.WORK_LET?.ToString("MM/dd/yyyy").Trim();
+                compBeginDateMaskBox.Text = _freightData.WORK_BEG?.ToString("MM/dd/yyyy");
+                compEndDateMaskBox.Text = _freightData.WORK_END?.ToString("MM/dd/yyyy");
+                compLetterSentDateMaskBox.Text = _freightData.WORK_LET?.ToString("MM/dd/yyyy");
                 compCov1TextBox.Text = _freightData.WORK_COV1?.ToString();
                 compCov2TextBox.Text = _freightData.WORK_COV2?.ToString();
                 compCov3TextBox.Text = _freightData.WORK_COV3?.ToString();
-                cargoBeginDateMaskBox.Text = _freightData.CARGO_BEG?.ToString("MM/dd/yyyy").Trim();
-                cargoEndDateMaskBox.Text = _freightData.CARGO_END?.ToString("MM/dd/yyyy").Trim();
-                cargoLetterSentDateMaskBox.Text = _freightData.CARGO_LET?.ToString("MM/dd/yyyy").Trim();
+                cargoBeginDateMaskBox.Text = _freightData.CARGO_BEG?.ToString("MM/dd/yyyy");
+                cargoEndDateMaskBox.Text = _freightData.CARGO_END?.ToString("MM/dd/yyyy");
+                cargoLetterSentDateMaskBox.Text = _freightData.CARGO_LET?.ToString("MM/dd/yyyy");
                 cargoCov1TextBox.Text = _freightData.CARG_COV1?.ToString();
                 cargoCov2TextBox.Text = _freightData.CARG_COV2?.ToString();
                 cargoCov3TextBox.Text = _freightData.CARG_COV3?.ToString();
                 cargoCov4TextBox.Text = _freightData.CARG_COV4?.ToString();
-                damageBeginDateMaskBox.Text = _freightData.PHY_BEG?.ToString("MM/dd/yyyy").Trim();
-                damageEndDateMaskBox.Text = _freightData.PHY_END?.ToString("MM/dd/yyyy").Trim();
+                damageBeginDateMaskBox.Text = _freightData.PHY_BEG?.ToString("MM/dd/yyyy");
+                damageEndDateMaskBox.Text = _freightData.PHY_END?.ToString("MM/dd/yyyy");
                 damageCov1TextBox.Text = _freightData.PHY_COV1?.ToString();
                 damageCov2TextBox.Text = _freightData.PHY_COV2?.ToString();
                 cancellationTextBox.Text = _freightData.CANCEL?.ToString();
@@ -127,6 +127,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                 {
                     UpdateExistingFreight(freightData);
                 }
+                LoadFreightCarriers();
             }
             else
             {

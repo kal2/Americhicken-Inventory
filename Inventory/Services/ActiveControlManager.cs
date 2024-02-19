@@ -51,7 +51,6 @@ namespace Inventory.Services
                     }
                     else if (actionsCopy.ContainsKey(userInput))
                     {
-                        _mainWindow.SetCommandsLabel("");
                         _activeControl.PerformAction(userInput);
                         _mainWindow.ClearTextBox();
                     }

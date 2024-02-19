@@ -1,6 +1,4 @@
 using Inventory.Services;
-using Inventory.Programs.Utilities;
-using System.Runtime.CompilerServices;
 using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory
@@ -112,7 +110,6 @@ namespace Inventory
 
         public void SetCommandsLabel(string text)
         {
-            userActionInputMain.userActionCommandsLabel.Text = "";
             userActionInputMain.userActionCommandsLabel.Text = text;
         }
 

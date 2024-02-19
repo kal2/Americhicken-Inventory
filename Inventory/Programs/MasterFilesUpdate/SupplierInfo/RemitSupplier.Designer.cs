@@ -321,7 +321,6 @@
             activeTextBox.Name = "activeTextBox";
             activeTextBox.Size = new Size(48, 27);
             activeTextBox.TabIndex = 10;
-            activeTextBox.TextChanged += activeTextBox_TextChanged;
             // 
             // label5
             // 

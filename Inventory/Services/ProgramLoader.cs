@@ -41,12 +41,12 @@ namespace Inventory.Services
                     break;
             }
         }
-    //Remit To Supplier
+        //Remit To Supplier
         public void LoadRemitToSupplier()
         {
             _mainWindow.SetLastMenuDisplayed("masterfileupdate");
-            RemitSupplier remitToUpdateInfo = new (_mainWindow, _activeControlManager);
-            DbSearch dbSearch = new (_mainWindow, _activeControlManager);
+            RemitSupplier remitToUpdateInstance = new(_mainWindow, _activeControlManager);
+            DbSearch dbSearch = new(_mainWindow, _activeControlManager);
             dbSearch.SetTable("remitTo");
             dbSearch.SearchCompleted += (f3, f4) => HandleRemitToSearchCompleted(f3!, f4);
             _activeControlManager.SetActiveControl(dbSearch);
@@ -55,30 +55,36 @@ namespace Inventory.Services
             {
                 if (e.SearchResults == null)
                 {
-                    _activeControlManager.SetActiveControl(remitToUpdateInfo);
+                    _activeControlManager.SetActiveControl(remitToUpdateInstance);
                 }
                 else
                 {
-                    MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
+                    MatchSelect matchSelectInstance = new(_mainWindow, _activeControlManager);
                     matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedRemitToSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Remit To");
                     matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
-                    _activeControlManager.SetActiveControl(matchSelectInstance);
+                    if (e.SearchResults.Count > 1)
+                    {
+                        _activeControlManager.SetActiveControl(matchSelectInstance);
+                    }
                 }
             }
 
             void HandleSelectedRemitToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
-                remitToUpdateInfo.DisplayRemitToData((rem_sup)e!.SelectedResult);
-                _activeControlManager.SetActiveControl(remitToUpdateInfo);
+                if (e.SelectedResult != null)
+                {
+                    remitToUpdateInstance.DisplayRemitToData((rem_sup)e!.SelectedResult);
+                }
+                _activeControlManager.SetActiveControl(remitToUpdateInstance);
             }
         }
-    //Ship From Supplier
+        //Ship From Supplier
         public void LoadShipFromSupplier()
         {
             _mainWindow.SetLastMenuDisplayed("masterfileupdate");
-            ShipFromSupplier shipFromUpdateInfo = new (_mainWindow, _activeControlManager);
-            DbSearch dbSearch = new (_mainWindow, _activeControlManager);
+            ShipFromSupplier shipFromUpdateInstance = new(_mainWindow, _activeControlManager);
+            DbSearch dbSearch = new(_mainWindow, _activeControlManager);
             dbSearch.SetTable("supplier");
             dbSearch.SearchCompleted += (f3, f4) => HandleSupplierSearchCompleted(f3!, f4);
             _activeControlManager.SetActiveControl(dbSearch);
@@ -87,25 +93,31 @@ namespace Inventory.Services
             {
                 if (e.SearchResults == null)
                 {
-                    _activeControlManager.SetActiveControl(shipFromUpdateInfo);
+                    _activeControlManager.SetActiveControl(shipFromUpdateInstance);
                 }
                 else
                 {
-                    MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
+                    MatchSelect matchSelectInstance = new(_mainWindow, _activeControlManager);
                     matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedSupplierSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Supplier");
                     matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
-                    _activeControlManager.SetActiveControl(matchSelectInstance);
+                    if (e.SearchResults.Count > 1)
+                    {
+                        _activeControlManager.SetActiveControl(matchSelectInstance);
+                    }
                 }
             }
 
             void HandleSelectedSupplierSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
             {
-                shipFromUpdateInfo.GetShipFromData((supplier)e!.SelectedResult);
-                _activeControlManager.SetActiveControl(shipFromUpdateInfo);
+                if (e.SelectedResult != null)
+                {
+                    shipFromUpdateInstance.GetShipFromData((supplier)e!.SelectedResult);
+                }
+                _activeControlManager.SetActiveControl(shipFromUpdateInstance);
             }
         }
-    //Freight Carrier
+        //Freight Carrier
         public void LoadFreightCarrier()
         {
             _mainWindow.SetLastMenuDisplayed("masterfileupdate");
@@ -147,8 +159,8 @@ namespace Inventory.Services
         public void LoadShipToCustomer()
         {
             _mainWindow.SetLastMenuDisplayed("masterfileupdate");
-            ShipToCustomer shipToCustomer = new (_mainWindow, _activeControlManager);
-            DbSearch dbSearch = new (_mainWindow, _activeControlManager);
+            ShipToCustomer shipToCustomerInstance = new(_mainWindow, _activeControlManager);
+            DbSearch dbSearch = new(_mainWindow, _activeControlManager);
             dbSearch.SetTable("buyer");
             dbSearch.SearchCompleted += (f3, f4) => HandleBuyerSearchCompleted(f3!, f4);
             _activeControlManager.SetActiveControl(dbSearch);
@@ -157,11 +169,11 @@ namespace Inventory.Services
             {
                 if (e.SearchResults == null)
                 {
-                    _activeControlManager.SetActiveControl(shipToCustomer);
+                    _activeControlManager.SetActiveControl(shipToCustomerInstance);
                 }
                 else
                 {
-                    MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
+                    MatchSelect matchSelectInstance = new(_mainWindow, _activeControlManager);
                     matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedBuyerSearchResult(f!, f2);
                     matchSelectInstance.SetMatchSelectLabel("Buyer");
                     matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
@@ -176,9 +188,9 @@ namespace Inventory.Services
             {
                 if (e.SelectedResult != null)
                 {
-                    shipToCustomer.DisplayShipToCustomerData((buyer)e!.SelectedResult);
+                    shipToCustomerInstance.DisplayShipToCustomerData((buyer)e!.SelectedResult);
                 }
-                _activeControlManager.SetActiveControl(shipToCustomer);
+                _activeControlManager.SetActiveControl(shipToCustomerInstance);
             }
         }
         //Bill To Customer

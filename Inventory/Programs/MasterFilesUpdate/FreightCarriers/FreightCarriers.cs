@@ -1,7 +1,6 @@
 ﻿using Inventory.Interfaces;
 using Inventory.Models;
 using Inventory.Services;
-using System.Windows.Forms;
 using static Inventory.Programs.Utilities.UserConfirmation;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
@@ -69,7 +68,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             }
             else
             {
-                CreateNewFreight();
+                AddNewFreight();
             }
         }
 
@@ -115,7 +114,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             }
         }
 
-        private void CreateNewFreight()
+        private void AddNewFreight()
         {
             _mainWindow.AttachConfirmationEventListener(HandleUserConfirmation);
             _mainWindow.AskUserConfirmation("You are about to add a new freight carrier. Would you like to continue?   (Y/N)");
