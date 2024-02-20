@@ -11,7 +11,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         // -- class variables -- //
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
-        private rem_sup _remitData;
+        private rem_sup? _remitData;
         private readonly AmerichickenContext dbContext;
 
         public RemitSupplier(MainWindow mainWindow, ActiveControlManager activeControlManager)
@@ -43,7 +43,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 MessageBox.Show("ERROR: Invalid input, please try again or contact developer");
             }
         }
-
+        
         public Dictionary<string, Action> AvailableActions
         {
             get
@@ -58,7 +58,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 };
             }
         }
-        public void UpdateRemitData(rem_sup remitToData)
+        public void UpdateRemitData(rem_sup? remitToData)
         {
             if (remitToData != null)
             {
@@ -66,12 +66,12 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 {
                     UpdateExistingRemitToSupplier(remitToData);
                 }
-                
             }
             else
             {
                 AddNewRemitToSupplier();
             }
+            ExitProgram();
         }
 
         public bool IsDataModified(rem_sup remitToData)
@@ -85,13 +85,13 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 remitToData.state != remitStateTextBox.Text ||
                 remitToData.zip != remitZipTextBox.Text ||
                 remitToData.zip4 != remitZip4TextBox.Text ||
-                remitToData.net_days != int.Parse(payNetDaysTextBox.Text) ||
+                remitToData.net_days != Converter.ParseInt(payNetDaysTextBox.Text) ||
                 remitToData.indem_flg != indemnityContractTextBox.Text ||
                 remitToData.active != activeTextBox.Text ||
-                remitToData.indem_dt != DateTime.Parse(contractDateMaskedBox.Text, new CultureInfo("en-US")) ||
-                remitToData.cred_lim != int.Parse(creditLimitTextBox.Text) ||
-                remitToData.beg_date != DateTime.Parse(beginDateMaskedBox.Text, new CultureInfo("en-US")) ||
-                remitToData.end_date != DateTime.Parse(expireDateMaskedBox.Text, new CultureInfo("en-US")) ||
+                remitToData.indem_dt != Converter.ParseDateTime(contractDateMaskedBox.Text) ||
+                remitToData.cred_lim != Converter.ParseInt(creditLimitTextBox.Text) ||
+                remitToData.beg_date != Converter.ParseDateTime(beginDateMaskedBox.Text) ||
+                remitToData.end_date != Converter.ParseDateTime(expireDateMaskedBox.Text) ||
                 remitToData.guaran != guarantorTextBox.Text ||
                 remitToData.note != noteTextBox.Text ||
                 remitToData.ins_co1 != aInsuranceTextBox.Text ||
@@ -147,14 +147,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             existingRemData.state = remitStateTextBox.Text;
             existingRemData.zip = remitZipTextBox.Text;
             existingRemData.zip4 = remitZip4TextBox.Text;
-            existingRemData.net_days = string.IsNullOrEmpty(payNetDaysTextBox.Text) ? null : int.TryParse(payNetDaysTextBox.Text, out var netDays) ? netDays : null;
+            existingRemData.net_days = Converter.ParseInt(payNetDaysTextBox.Text);
             existingRemData.indem_flg = indemnityContractTextBox.Text;
             existingRemData.active = activeTextBox.Text;
-            existingRemData.indem_dt = string.IsNullOrEmpty(contractDateMaskedBox.Text) ? null : DateTime.TryParse(contractDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var indemDt) ? indemDt : null;
-            existingRemData.cred_lim = string.IsNullOrEmpty(creditLimitTextBox.Text) ? null : int.TryParse(creditLimitTextBox.Text, out var credLim) ? credLim : null;
-            existingRemData.let_crd = string.IsNullOrEmpty(letterOfCreditTextBox.Text) ? null : int.TryParse(letterOfCreditTextBox.Text, out var letCrd) ? letCrd : null;
-            existingRemData.beg_date = string.IsNullOrEmpty(beginDateMaskedBox.Text) ? null : DateTime.TryParse(beginDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var begDate) ? begDate : null;
-            existingRemData.end_date = string.IsNullOrEmpty(expireDateMaskedBox.Text) ? null : DateTime.TryParse(expireDateMaskedBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var endDate) ? endDate : null;
+            existingRemData.indem_dt = Converter.ParseDateTime(contractDateMaskedBox.Text);
+            existingRemData.cred_lim = Converter.ParseInt(creditLimitTextBox.Text);
+            existingRemData.let_crd = Converter.ParseInt(letterOfCreditTextBox.Text);
+            existingRemData.beg_date = Converter.ParseDateTime(beginDateMaskedBox.Text);
+            existingRemData.end_date = Converter.ParseDateTime(expireDateMaskedBox.Text);
             existingRemData.guaran = guarantorTextBox.Text;
             existingRemData.note = noteTextBox.Text;
             existingRemData.ins_co1 = aInsuranceTextBox.Text;
@@ -163,8 +163,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             existingRemData.ins_co4 = dInsuranceTextBox.Text;
             existingRemData.ins_co5 = eInsuranceTextBox.Text;
         }
-        public void DeleteRemitTo(rem_sup remitToData)
+
+        public void DeleteRemitTo(rem_sup? remitToData)
         {
+            if (remitToData == null)
+            {
+                MessageBox.Show("ERROR: No Remit To data found. Please try again or contact developer.");
+                return;
+            }
             _mainWindow.AttachConfirmationEventListener(HandleUserConfirmation);
             _mainWindow.AskUserConfirmation("You are about to delete this Remit To entry. Would you like to continue?  (Y/N)");
 
@@ -216,29 +222,29 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         public void DisplayRemitToData(rem_sup remitToObject)
         {
             _remitData = remitToObject;
-            RemitNameTextBox.Text = StringServices.TrimOrNull(_remitData.name);
-            phoneMaskTextBox.Text = StringServices.TrimOrNull(_remitData.phone);
-            faxMaskTextBox.Text = StringServices.TrimOrNull(_remitData.fax);
-            remitStreetTextBox.Text = StringServices.TrimOrNull(_remitData.street);
-            remitCityTextBox.Text = StringServices.TrimOrNull(_remitData.city);
-            remitStateTextBox.Text = StringServices.TrimOrNull(_remitData.state);
-            remitZipTextBox.Text = StringServices.TrimOrNull(_remitData.zip);
-            remitZip4TextBox.Text = StringServices.TrimOrNull(_remitData.zip4);
-            payNetDaysTextBox.Text = StringServices.TrimOrNull(_remitData.net_days.ToString());
-            indemnityContractTextBox.Text = StringServices.TrimOrNull(_remitData.indem_flg);
-            activeTextBox.Text = StringServices.TrimOrNull(_remitData.active);
-            contractDateMaskedBox.Text = StringServices.TrimOrNull(_remitData.indem_dt?.ToString("MM/dd/yyyy"));
-            creditLimitTextBox.Text = StringServices.TrimOrNull(_remitData.cred_lim?.ToString());
-            letterOfCreditTextBox.Text = StringServices.TrimOrNull(_remitData.let_crd?.ToString());
-            beginDateMaskedBox.Text = StringServices.TrimOrNull(_remitData.beg_date?.ToString("MM/dd/yyyy"));
-            expireDateMaskedBox.Text = StringServices.TrimOrNull(_remitData.end_date?.ToString("MM/dd/yyyy"));
-            guarantorTextBox.Text = StringServices.TrimOrNull(_remitData.guaran);
-            noteTextBox.Text = StringServices.TrimOrNull(_remitData.note);
-            aInsuranceTextBox.Text = StringServices.TrimOrNull(_remitData.ins_co1);
-            bInsuranceTextBox.Text = StringServices.TrimOrNull(_remitData.ins_co2);
-            cInsuranceTextBox.Text = StringServices.TrimOrNull(_remitData.ins_co3);
-            dInsuranceTextBox.Text = StringServices.TrimOrNull(_remitData.ins_co4);
-            eInsuranceTextBox.Text = StringServices.TrimOrNull(_remitData.ins_co5);
+            RemitNameTextBox.Text = _remitData.name;
+            phoneMaskTextBox.Text = _remitData.phone;
+            faxMaskTextBox.Text = _remitData.fax;
+            remitStreetTextBox.Text = _remitData.street;
+            remitCityTextBox.Text = _remitData.city;
+            remitStateTextBox.Text = _remitData.state;
+            remitZipTextBox.Text = _remitData.zip;
+            remitZip4TextBox.Text = _remitData.zip4;
+            payNetDaysTextBox.Text = _remitData.net_days.ToString();
+            indemnityContractTextBox.Text = _remitData.indem_flg;
+            activeTextBox.Text = _remitData.active;
+            contractDateMaskedBox.Text = _remitData.indem_dt?.ToString("MM/dd/yyyy");
+            creditLimitTextBox.Text = _remitData.cred_lim?.ToString();
+            letterOfCreditTextBox.Text = _remitData.let_crd?.ToString();
+            beginDateMaskedBox.Text = _remitData.beg_date?.ToString("MM/dd/yyyy");
+            expireDateMaskedBox.Text = _remitData.end_date?.ToString("MM/dd/yyyy");
+            guarantorTextBox.Text = _remitData.guaran;
+            noteTextBox.Text = _remitData.note;
+            aInsuranceTextBox.Text = _remitData.ins_co1;
+            bInsuranceTextBox.Text = _remitData.ins_co2;
+            cInsuranceTextBox.Text = _remitData.ins_co3;
+            dInsuranceTextBox.Text = _remitData.ins_co4;
+            eInsuranceTextBox.Text = _remitData.ins_co5;
         }
     }
 }
