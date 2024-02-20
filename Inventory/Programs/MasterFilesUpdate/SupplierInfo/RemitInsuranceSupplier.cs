@@ -1,9 +1,6 @@
 ﻿using Inventory.Interfaces;
 using Inventory.Models;
-using System.Globalization;
 using Inventory.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
