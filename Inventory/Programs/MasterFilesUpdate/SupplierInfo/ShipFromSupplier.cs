@@ -6,7 +6,8 @@ using static Inventory.Programs.Utilities.UserConfirmation;
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
     public partial class ShipFromSupplier : UserControl, IActiveControlManager
-    {private readonly MainWindow _mainWindow;
+    {
+        private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
         private supplier? _supplierData;
         private rem_sup? remitToObject;
@@ -194,7 +195,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     string userInput = remitToNameTextBox.Text;
                     DbSearch dbSearchInstance = new(_mainWindow, _activeControlManager);
                     dbSearchInstance.SearchCompleted += (f, f2) => HandleSearchCompleted(f!, f2);
-                    dbSearchInstance.PerformSearch("remitTo", userInput);
+                    dbSearchInstance.PerformSearch("rem_sup", userInput);
                     dbSearchInstance.Dispose();
                 }
                 else

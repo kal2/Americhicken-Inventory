@@ -47,7 +47,7 @@ namespace Inventory.Services
             _mainWindow.SetLastMenuDisplayed("masterfileupdate");
             RemitSupplier remitToUpdateInstance = new(_mainWindow, _activeControlManager);
             DbSearch dbSearch = new(_mainWindow, _activeControlManager);
-            dbSearch.SetTable("remitTo");
+            dbSearch.SetTable("rem_sup");
             dbSearch.SearchCompleted += (f3, f4) => HandleRemitToSearchCompleted(f3!, f4);
             _activeControlManager.SetActiveControl(dbSearch);
 

@@ -44,7 +44,7 @@ namespace Inventory.Views.UserControls
             {
                 MessageBox.Show("ERROR: No db table selected to search, please contact developer");
             }
-            else if (tableName != "supplier" && tableName != "remitTo" && tableName != "freight" && tableName != "bil_buy" && tableName != "buyer")
+            else if (tableName != "supplier" && tableName != "rem_sup" && tableName != "freight" && tableName != "bil_buy" && tableName != "buyer")
             {
                 MessageBox.Show("ERROR: Invalid db table name, please contact developer");
             }
@@ -74,7 +74,7 @@ namespace Inventory.Views.UserControls
                         searchResults = context.supplier.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
                         break;
 
-                    case "remitTo":
+                    case "rem_sup":
                         searchResults = context.rem_sup.Where(s => EF.Functions.Like(s.name, searchInput + "%")).ToList().Cast<object>().ToList();
                         break;
 

@@ -69,6 +69,7 @@ namespace Inventory.Views.UserControls
             {
                 _results = results;
                 _selectedTable = selectedTable;
+
                 DisplayResults(_results, _selectedTable);
             }
         }
@@ -92,6 +93,14 @@ namespace Inventory.Views.UserControls
                 return;
             }
 
+            // Sort the results list alphabetically by name
+            results.Sort((a, b) =>
+            {
+                string nameA = GetName(a, selectedTable);
+                string nameB = GetName(b, selectedTable);
+                return string.Compare(nameA, nameB);
+            });
+
             int startIndex = (_currentPage - 1) * _pageSize;
             int endIndex = Math.Min(startIndex + _pageSize, results.Count);
 
@@ -101,9 +110,28 @@ namespace Inventory.Views.UserControls
                 if (item != null)
                 {
                     ListViewItem listViewItem = displayHandlers[selectedTable.Trim()](item);
-                    listViewItem.Text = (i+1).ToString();
+                    listViewItem.Text = (i + 1).ToString();
                     resultSelectionListView.Items.Add(listViewItem);
                 }
+            }
+        }
+
+        private string GetName(object item, string selectedTable)
+        {
+            switch (selectedTable.Trim())
+            {
+                case "supplier":
+                    return (item as supplier)?.name;
+                case "rem_sup":
+                    return (item as rem_sup)?.name;
+                case "freight":
+                    return (item as freight)?.NAME;
+                case "bil_buy":
+                    return (item as bil_buy)?.name;
+                case "buyer":
+                    return (item as buyer)?.name;
+                default:
+                    return string.Empty;
             }
         }
 
