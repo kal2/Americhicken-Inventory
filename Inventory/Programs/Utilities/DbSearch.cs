@@ -94,11 +94,12 @@ namespace Inventory.Views.UserControls
                         break;
                 }
 
+                //Need to add exclusion for searchResults.Count == 0 if coming from performSearch method
+
                 if (searchResults.Count == 0)
                 {
-                    //No Results Found. Woud you like to add a new entry?
                     _mainWindow.AttachConfirmationEventListener(AddNewEntry);
-                            _mainWindow.AskUserConfirmation("No results found. Would you like to add a new entry?");
+                    _mainWindow.AskUserConfirmation("No results found. Would you like to add a new entry?");
                    
                     void AddNewEntry(object sender, UserConfirmationEventArgs e)
                     {

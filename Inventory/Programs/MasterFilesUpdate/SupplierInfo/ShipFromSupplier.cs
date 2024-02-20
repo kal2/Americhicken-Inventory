@@ -171,19 +171,20 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private bool IsDataModified(supplier supplierData)
         {
-            return supplierData == null || supnameTextBox.Text != supplierData.name ||
-                   phoneMaskTextBox.Text != supplierData.phone ||
-                   faxMaskTextBox.Text != supplierData.fax ||
-                   contactNameTextBox.Text != supplierData.cont_name ||
-                   contactPhoneMaskTextBox.Text != supplierData.cont_phone ||
-                   contactFaxMaskTextBox.Text != supplierData.cont_fax ||
-                   freightPhoneMaskTextBox.Text != supplierData.freight_phone ||
-                   freightEmailTextBox.Text != supplierData.freight_email ||
-                   shipFromStreetTextBox.Text != supplierData.street ||
-                   shipFromCityTextBox.Text != supplierData.city ||
-                   shipFromStateTextBox.Text != supplierData.state ||
-                   shipFromZipTextBox.Text != supplierData.zip ||
-                   remitToObject!.rsupcode != supplierData.rsupcode;
+            return supplierData == null || 
+                supnameTextBox.Text != supplierData.name ||
+                phoneMaskTextBox.Text != supplierData.phone ||
+                faxMaskTextBox.Text != supplierData.fax ||
+                contactNameTextBox.Text != supplierData.cont_name ||
+                contactPhoneMaskTextBox.Text != supplierData.cont_phone ||
+                contactFaxMaskTextBox.Text != supplierData.cont_fax ||
+                freightPhoneMaskTextBox.Text != supplierData.freight_phone ||
+                freightEmailTextBox.Text != supplierData.freight_email ||
+                shipFromStreetTextBox.Text != supplierData.street ||
+                shipFromCityTextBox.Text != supplierData.city ||
+                shipFromStateTextBox.Text != supplierData.state ||
+                shipFromZipTextBox.Text != supplierData.zip ||
+                remitToObject!.rsupcode != supplierData.rsupcode;
         }
 
         private void RemitToNameTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -197,6 +198,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     dbSearchInstance.SearchCompleted += (f, f2) => HandleSearchCompleted(f!, f2);
                     dbSearchInstance.PerformSearch("rem_sup", userInput);
                     dbSearchInstance.Dispose();
+                    dbSearchInstance.SearchCompleted -= HandleSearchCompleted;
                 }
                 else
                 {
@@ -208,19 +210,28 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         public void HandleSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
         {
-            MatchSelect matchSelectInstance = new (_mainWindow, _activeControlManager);
-            matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedRemitToSearchResult(f!, f2);
-            matchSelectInstance.SetMatchSelectLabel("Remit To");
-            matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
-
-            if (e.SearchResults.Count > 1)
+            if (e.SearchResults.Count == 0)
             {
-                _activeControlManager.SetActiveControl(matchSelectInstance);
+                _activeControlManager.SetActiveControl(this);
             }
             else
             {
-                _mainWindow.DisposeControl(matchSelectInstance);
-                _activeControlManager.SetActiveControl(this);
+                MatchSelect matchSelectInstance = new(_mainWindow, _activeControlManager);
+                matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedRemitToSearchResult(f!, f2);
+                matchSelectInstance.SetMatchSelectLabel("Remit To");
+                matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
+
+                if (e.SearchResults.Count > 1)
+                {
+                    _activeControlManager.SetActiveControl(matchSelectInstance);
+                }
+                else
+                {
+                    _mainWindow.DisposeControl(matchSelectInstance);
+                    matchSelectInstance.SelectedSearchResult -= HandleSelectedRemitToSearchResult;
+                    _activeControlManager.SetActiveControl(this);
+                }
+
             }
         }
 
