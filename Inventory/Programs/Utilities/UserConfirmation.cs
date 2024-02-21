@@ -45,17 +45,22 @@ namespace Inventory.Programs.Utilities
 
         private void confirmationInput_TextChanged(object sender, EventArgs e)
         {
+            UserChoice -= confirmationInput_TextChanged;
             string userInput = confirmationInput.Text;
-            if (userInput == "Y" || userInput == "N")
+            if (!string.IsNullOrEmpty(userInput))
             {
-                bool userChoice = userInput == "Y" ? true : false;
-                UserChoice?.Invoke(this, new UserConfirmationEventArgs(userChoice));
+                if (userInput == "Y" || userInput == "N")
+                {
+                    bool userChoice = userInput == "Y" ? true : false;
+                    UserChoice?.Invoke(this, new UserConfirmationEventArgs(userChoice));
+                }
+                else
+                {
+                    MessageBox.Show("Invalid input. Please try again.");
+                }
             }
-            else
-            {
-                MessageBox.Show("Invalid input. Please try again.");
-                confirmationInput.Clear();
-            }
+            confirmationInput.Clear();
+            UserChoice += confirmationInput_TextChanged;
         }
     }
 }

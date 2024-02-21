@@ -51,8 +51,10 @@ namespace Inventory.Services
                     }
                     else if (actionsCopy.ContainsKey(userInput))
                     {
+                        _mainWindow.DetachActionInputChangedHandler(HandleActionUserInput);
                         _activeControl.PerformAction(userInput);
                         _mainWindow.ClearTextBox();
+                        _mainWindow.AttachActionInputTextChangedHandler(HandleActionUserInput);
                     }
                 }
             }
@@ -123,8 +125,8 @@ namespace Inventory.Services
 
         private void TextBox_GotFocus(object sender, EventArgs e)
         {
-            TextBoxBase textBox = (TextBoxBase)sender; // Use TextBoxBase to handle both TextBox and MaskedTextBox
-            textBox.SelectAll();
+            TextBoxBase textBox = (TextBoxBase)sender;
+            textBox.SelectionStart = 0;
         }
 
     }

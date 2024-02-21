@@ -1,6 +1,7 @@
 ﻿using Inventory.Interfaces;
 using Inventory.Models;
 using Inventory.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 {
@@ -9,14 +10,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         // --- class variables --- //
         private readonly ActiveControlManager _activeControlHelper;
         private readonly MainWindow _mainWindow;
-        private readonly AmerichickenContext _dbContext;
+        private readonly AmerichickenContext dbContext;
         private rem_sup _remitData;
         public RemitInsuranceSupplier(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
             InitializeComponent();
             _activeControlHelper = activeControlManager;
             _mainWindow = mainWindow;
-            _dbContext = new AmerichickenContext();
+            dbContext = new();
             this.Load += (s, e) => insTp1TextBox.Focus();
         }
         public void SetProgramLabels()
@@ -82,9 +83,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 {
                     UpdateExistingRemitInsurance(remitToData);
 
-                    var existingRemData = _dbContext.rem_sup.Find(remitToData.PK_rem_sup);
+                    var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
 
-                    _dbContext.SaveChanges();
+                    dbContext.SaveChanges();
                     _remitData = existingRemData;
                 }
                 LoadSupplierProgram();
@@ -144,11 +145,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private void UpdateExistingRemitInsurance(rem_sup remitToData)
         {
-            var existingRemData = _dbContext.rem_sup.Find(remitToData.PK_rem_sup);
+            var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
             if (existingRemData != null)
             {
                 SetRemitToInsuranceProperties(existingRemData);
-                _dbContext.SaveChanges();
+                dbContext.SaveChanges();
             }
             else
             {

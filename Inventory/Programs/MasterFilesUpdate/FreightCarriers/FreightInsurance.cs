@@ -1,6 +1,7 @@
 ﻿using Inventory.Interfaces;
 using Inventory.Models;
 using Inventory.Services;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
 namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
@@ -11,7 +12,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
         private freight _freightData;
-        private readonly AmerichickenContext _dbContext;
 
         public FreightInsurance(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
@@ -19,23 +19,15 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
 
             _mainWindow = mainWindow;
             _activeControlManager = activeControlManager;
-            _dbContext = new();
 
             this.Load += (s, e) => insTp1TextBox.Focus();
         }
+
         public void SetProgramLabels()
         {
             _mainWindow.SetProgramLabel("VIEW/CHANGE FREIGHT INSURANCE INFORMATION");
             _mainWindow.SetTextBoxLabel("Action: ");
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Cancel");
-        }
-
-        private void LoadFreightCarriers()
-        {
-            FreightCarriers freightCarriers = new FreightCarriers(_mainWindow, _activeControlManager);
-            freightCarriers.DisplayFreightCarrierData(_freightData);
-            _mainWindow.DisposeControl(this);
-            _activeControlManager.SetActiveControl(freightCarriers);
         }
 
         public Dictionary<string, Action> AvailableActions 
@@ -81,15 +73,18 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
 
         private void UpdateExistingFreight(freight freightData)
         {
-            var existingFreightData = _dbContext.freight.Find(freightData.PK_freight);
-            if (existingFreightData != null)
+            using (AmerichickenContext dbContext = new())
             {
-                SetFreightProperties(existingFreightData);
-                _dbContext.SaveChanges();
-            }
-            else
-            {
-                MessageBox.Show("ERROR: Freight Insurance Data not found, please try again or contact developer");
+                var existingFreightData = dbContext.freight.Find(freightData.PK_freight);
+                if (existingFreightData != null)
+                {
+                    SetFreightProperties(existingFreightData);
+                    dbContext.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Freight Insurance Data not found, please try again or contact developer");
+                }
             }
         }
 
@@ -106,40 +101,40 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             existingFreightData.POLICY3 = policy3TextBox.Text;
             existingFreightData.POLICY4 = policy4TextBox.Text;
             existingFreightData.POLICY5 = policy5TextBox.Text;
-            existingFreightData.GEN_BEG = string.IsNullOrEmpty(genBeginDateMaskBox.Text) ? null : DateTime.TryParse(genBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var genBeg) ? genBeg : null;
-            existingFreightData.GEN_END = string.IsNullOrEmpty(genEndDateMaskBox.Text) ? null : DateTime.TryParse(genEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var genEnd) ? genEnd : null;
-            existingFreightData.GEN_LET = string.IsNullOrEmpty(genLetterSentDateMaskBox.Text) ? null : DateTime.TryParse(genLetterSentDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var genLetter) ? genLetter : null;
-            existingFreightData.GEN_COV4 = string.IsNullOrEmpty(genCov4TextBox.Text) ? null : int.Parse(genCov4TextBox.Text);
-            existingFreightData.GEN_COV5 = string.IsNullOrEmpty(genCov5TextBox.Text) ? null : int.Parse(genCov5TextBox.Text);
-            existingFreightData.GEN_COV6 = string.IsNullOrEmpty(genCov6TextBox.Text) ? null : int.Parse(genCov6TextBox.Text);
-            existingFreightData.GEN_COV3 = string.IsNullOrEmpty(genCov3TextBox.Text) ? null : int.Parse(genCov3TextBox.Text);
-            existingFreightData.GEN_COV2 = string.IsNullOrEmpty(genCov2TextBox.Text) ? null : int.Parse(genCov2TextBox.Text);
-            existingFreightData.GEN_COV1 = string.IsNullOrEmpty(genCov1TextBox.Text) ? null : int.Parse(genCov1TextBox.Text);
-            existingFreightData.AUTO_BEG = string.IsNullOrEmpty(autoBeginDateMaskBox.Text) ? null : DateTime.TryParse(autoBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var autoBeg) ? autoBeg : null;
-            existingFreightData.AUTO_END = string.IsNullOrEmpty(autoEndDateMaskBox.Text) ? null : DateTime.TryParse(autoEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var autoEnd) ? autoEnd : null;
-            existingFreightData.AUTO_LET = string.IsNullOrEmpty(autoLetterSentDateMaskBox.Text) ? null : DateTime.TryParse(autoLetterSentDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var autoLetter) ? autoLetter : null;
-            existingFreightData.AUTO_COV1 = string.IsNullOrEmpty(autoCov1TextBox.Text) ? null : int.Parse(autoCov1TextBox.Text);
-            existingFreightData.AUTO_COV2 = string.IsNullOrEmpty(autoCov2TextBox.Text) ? null : int.Parse(autoCov2TextBox.Text);
-            existingFreightData.AUTO_COV3 = string.IsNullOrEmpty(autoCov3TextBox.Text) ? null : int.Parse(autoCov3TextBox.Text);
-            existingFreightData.AUTO_COV4 = string.IsNullOrEmpty(autoCov4TextBox.Text) ? null : int.Parse(autoCov4TextBox.Text);
-            existingFreightData.WORK_BEG = string.IsNullOrEmpty(compBeginDateMaskBox.Text) ? null : DateTime.TryParse(compBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var compBeg) ? compBeg : null;
-            existingFreightData.WORK_END = string.IsNullOrEmpty(compEndDateMaskBox.Text) ? null : DateTime.TryParse(compEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var compEnd) ? compEnd : null;
-            existingFreightData.WORK_LET = string.IsNullOrEmpty(compLetterSentDateMaskBox.Text) ? null : DateTime.TryParse(compLetterSentDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var compLetter) ? compLetter : null;
-            existingFreightData.WORK_COV1 = string.IsNullOrEmpty(compCov1TextBox.Text) ? null : int.Parse(compCov1TextBox.Text);
-            existingFreightData.WORK_COV2 = string.IsNullOrEmpty(compCov2TextBox.Text) ? null : int.Parse(compCov2TextBox.Text);
-            existingFreightData.WORK_COV3 = string.IsNullOrEmpty(compCov3TextBox.Text) ? null : int.Parse(compCov3TextBox.Text);
-            existingFreightData.CARGO_BEG = string.IsNullOrEmpty(cargoBeginDateMaskBox.Text) ? null : DateTime.TryParse(cargoBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var cargoBeg) ? cargoBeg : null;
-            existingFreightData.CARGO_END = string.IsNullOrEmpty(cargoEndDateMaskBox.Text) ? null : DateTime.TryParse(cargoEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var cargoEnd) ? cargoEnd : null;
-            existingFreightData.CARGO_LET = string.IsNullOrEmpty(cargoLetterSentDateMaskBox.Text) ? null : DateTime.TryParse(cargoLetterSentDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var cargoLetter) ? cargoLetter : null;
-            existingFreightData.CARG_COV1 = string.IsNullOrEmpty(cargoCov1TextBox.Text) ? null : int.Parse(cargoCov1TextBox.Text);
-            existingFreightData.CARG_COV2 = string.IsNullOrEmpty(cargoCov2TextBox.Text) ? null : int.Parse(cargoCov2TextBox.Text);
-            existingFreightData.CARG_COV3 = string.IsNullOrEmpty(cargoCov3TextBox.Text) ? null : int.Parse(cargoCov3TextBox.Text);
-            existingFreightData.CARG_COV4 = string.IsNullOrEmpty(cargoCov4TextBox.Text) ? null : int.Parse(cargoCov4TextBox.Text);
-            existingFreightData.PHY_BEG = string.IsNullOrEmpty(damageBeginDateMaskBox.Text) ? null : DateTime.TryParse(damageBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var damageBeg) ? damageBeg : null;
-            existingFreightData.PHY_END = string.IsNullOrEmpty(damageEndDateMaskBox.Text) ? null : DateTime.TryParse(damageEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var damageEnd) ? damageEnd : null;
-            existingFreightData.PHY_COV1 = string.IsNullOrEmpty(damageCov1TextBox.Text) ? null : int.Parse(damageCov1TextBox.Text);
-            existingFreightData.PHY_COV2 = string.IsNullOrEmpty(damageCov2TextBox.Text) ? null : int.Parse(damageCov2TextBox.Text);
-            existingFreightData.CANCEL = string.IsNullOrEmpty(cancellationTextBox.Text) ? null : int.Parse(cancellationTextBox.Text);
+            existingFreightData.GEN_BEG = Converter.ParseDateTime(genBeginDateMaskBox.Text);
+            existingFreightData.GEN_END = Converter.ParseDateTime(genEndDateMaskBox.Text);
+            existingFreightData.GEN_LET = Converter.ParseDateTime(genLetterSentDateMaskBox.Text);
+            existingFreightData.GEN_COV4 = Converter.ParseInt(genCov4TextBox.Text);
+            existingFreightData.GEN_COV5 = Converter.ParseInt(genCov5TextBox.Text);
+            existingFreightData.GEN_COV6 = Converter.ParseInt(genCov6TextBox.Text);
+            existingFreightData.GEN_COV3 = Converter.ParseInt(genCov3TextBox.Text);
+            existingFreightData.GEN_COV2 = Converter.ParseInt(genCov2TextBox.Text);
+            existingFreightData.GEN_COV1 = Converter.ParseInt(genCov1TextBox.Text);
+            existingFreightData.AUTO_BEG = Converter.ParseDateTime(autoBeginDateMaskBox.Text);
+            existingFreightData.AUTO_END = Converter.ParseDateTime(autoEndDateMaskBox.Text);
+            existingFreightData.AUTO_LET = Converter.ParseDateTime(autoLetterSentDateMaskBox.Text);
+            existingFreightData.AUTO_COV1 = Converter.ParseInt(autoCov1TextBox.Text);
+            existingFreightData.AUTO_COV2 = Converter.ParseInt(autoCov2TextBox.Text);
+            existingFreightData.AUTO_COV3 = Converter.ParseInt(autoCov3TextBox.Text);
+            existingFreightData.AUTO_COV4 = Converter.ParseInt(autoCov4TextBox.Text);
+            existingFreightData.WORK_BEG = Converter.ParseDateTime(compBeginDateMaskBox.Text);
+            existingFreightData.WORK_END = Converter.ParseDateTime(compEndDateMaskBox.Text);
+            existingFreightData.WORK_LET = Converter.ParseDateTime(compLetterSentDateMaskBox.Text);
+            existingFreightData.WORK_COV1 = Converter.ParseInt(compCov1TextBox.Text);
+            existingFreightData.WORK_COV2 = Converter.ParseInt(compCov2TextBox.Text);
+            existingFreightData.WORK_COV3 = Converter.ParseInt(compCov3TextBox.Text);
+            existingFreightData.CARGO_BEG = Converter.ParseDateTime(cargoBeginDateMaskBox.Text);
+            existingFreightData.CARGO_END = Converter.ParseDateTime(cargoEndDateMaskBox.Text);
+            existingFreightData.CARGO_LET = Converter.ParseDateTime(cargoLetterSentDateMaskBox.Text);
+            existingFreightData.CARG_COV1 = Converter.ParseInt(cargoCov1TextBox.Text);
+            existingFreightData.CARG_COV2 = Converter.ParseInt(cargoCov2TextBox.Text);
+            existingFreightData.CARG_COV3 = Converter.ParseInt(cargoCov3TextBox.Text);
+            existingFreightData.CARG_COV4 = Converter.ParseInt(cargoCov4TextBox.Text);
+            existingFreightData.PHY_BEG = Converter.ParseDateTime(damageBeginDateMaskBox.Text);
+            existingFreightData.PHY_END = Converter.ParseDateTime(damageEndDateMaskBox.Text);
+            existingFreightData.PHY_COV1 = Converter.ParseInt(damageCov1TextBox.Text);
+            existingFreightData.PHY_COV2 = Converter.ParseInt(damageCov2TextBox.Text);
+            existingFreightData.CANCEL = Converter.ParseInt(cancellationTextBox.Text);
 
             _freightData = existingFreightData;
         }
@@ -155,37 +150,37 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                 freightData.POLICY3 != policy3TextBox.Text ||
                 freightData.POLICY4 != policy4TextBox.Text ||
                 freightData.POLICY5 != policy5TextBox.Text ||
-                freightData.GEN_BEG != (string.IsNullOrEmpty(genBeginDateMaskBox.Text) ? null : DateTime.TryParse(genBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var genBeg) ? genBeg : null) ||
-                freightData.GEN_END != (string.IsNullOrEmpty(genEndDateMaskBox.Text) ? null : DateTime.TryParse(genEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var genEnd) ? genEnd : null) ||
-                freightData.GEN_LET != (string.IsNullOrEmpty(genLetterSentDateMaskBox.Text) ? null : DateTime.TryParse(genLetterSentDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var genLetter) ? genLetter : null) ||
+                freightData.GEN_BEG != Converter.ParseDateTime(genBeginDateMaskBox.Text) ||
+                freightData.GEN_END != Converter.ParseDateTime(genEndDateMaskBox.Text) ||
+                freightData.GEN_LET != Converter.ParseDateTime(genLetterSentDateMaskBox.Text) ||
                 freightData.GEN_COV4 != (string.IsNullOrEmpty(genCov4TextBox.Text) ? null : int.Parse(genCov4TextBox.Text)) ||
                 freightData.GEN_COV5 != (string.IsNullOrEmpty(genCov5TextBox.Text) ? null : int.Parse(genCov5TextBox.Text)) ||
                 freightData.GEN_COV6 != (string.IsNullOrEmpty(genCov6TextBox.Text) ? null : int.Parse(genCov6TextBox.Text)) ||
                 freightData.GEN_COV3 != (string.IsNullOrEmpty(genCov3TextBox.Text) ? null : int.Parse(genCov3TextBox.Text)) ||
                 freightData.GEN_COV2 != (string.IsNullOrEmpty(genCov2TextBox.Text) ? null : int.Parse(genCov2TextBox.Text)) ||
                 freightData.GEN_COV1 != (string.IsNullOrEmpty(genCov1TextBox.Text) ? null : int.Parse(genCov1TextBox.Text)) ||
-                freightData.AUTO_BEG != (string.IsNullOrEmpty(autoBeginDateMaskBox.Text) ? null : DateTime.TryParse(autoBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var autoBeg) ? autoBeg : null) ||
-                freightData.AUTO_END != (string.IsNullOrEmpty(autoEndDateMaskBox.Text) ? null : DateTime.TryParse(autoEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var autoEnd) ? autoEnd : null) ||
-                freightData.AUTO_LET != (string.IsNullOrEmpty(autoLetterSentDateMaskBox.Text) ? null : DateTime.TryParse(autoLetterSentDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var autoLetter) ? autoLetter : null) ||
+                freightData.AUTO_BEG != Converter.ParseDateTime(autoBeginDateMaskBox.Text) ||
+                freightData.AUTO_END != Converter.ParseDateTime(autoEndDateMaskBox.Text) ||
+                freightData.AUTO_LET != Converter.ParseDateTime(autoLetterSentDateMaskBox.Text) ||
                 freightData.AUTO_COV1 != (string.IsNullOrEmpty(autoCov1TextBox.Text) ? null : int.Parse(autoCov1TextBox.Text)) ||
                 freightData.AUTO_COV2 != (string.IsNullOrEmpty(autoCov2TextBox.Text) ? null : int.Parse(autoCov2TextBox.Text)) ||
                 freightData.AUTO_COV3 != (string.IsNullOrEmpty(autoCov3TextBox.Text) ? null : int.Parse(autoCov3TextBox.Text)) ||
                 freightData.AUTO_COV4 != (string.IsNullOrEmpty(autoCov4TextBox.Text) ? null : int.Parse(autoCov4TextBox.Text)) ||
-                freightData.WORK_BEG != (string.IsNullOrEmpty(compBeginDateMaskBox.Text) ? null : DateTime.TryParse(compBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var compBeg) ? compBeg : null) ||
-                freightData.WORK_END != (string.IsNullOrEmpty(compEndDateMaskBox.Text) ? null : DateTime.TryParse(compEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var compEnd) ? compEnd : null) ||
-                freightData.WORK_LET != (string.IsNullOrEmpty(compLetterSentDateMaskBox.Text) ? null : DateTime.TryParse(compLetterSentDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var compLetter) ? compLetter : null) ||
+                freightData.WORK_BEG != Converter.ParseDateTime(compBeginDateMaskBox.Text) ||
+                freightData.WORK_END != Converter.ParseDateTime(compEndDateMaskBox.Text) ||
+                freightData.WORK_LET != Converter.ParseDateTime(compLetterSentDateMaskBox.Text) ||
                 freightData.WORK_COV1 != (string.IsNullOrEmpty(compCov1TextBox.Text) ? null : int.Parse(compCov1TextBox.Text)) ||
                 freightData.WORK_COV2 != (string.IsNullOrEmpty(compCov2TextBox.Text) ? null : int.Parse(compCov2TextBox.Text)) ||
                 freightData.WORK_COV3 != (string.IsNullOrEmpty(compCov3TextBox.Text) ? null : int.Parse(compCov3TextBox.Text)) ||
-                freightData.CARGO_BEG != (string.IsNullOrEmpty(cargoBeginDateMaskBox.Text) ? null : DateTime.TryParse(cargoBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var cargoBeg) ? cargoBeg : null) ||
-                freightData.CARGO_END != (string.IsNullOrEmpty(cargoEndDateMaskBox.Text) ? null : DateTime.TryParse(cargoEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var cargoEnd) ? cargoEnd : null) ||
-                freightData.CARGO_LET != (string.IsNullOrEmpty(cargoLetterSentDateMaskBox.Text) ? null : DateTime.TryParse(cargoLetterSentDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var cargoLetter) ? cargoLetter : null) ||
+                freightData.CARGO_BEG != Converter.ParseDateTime(cargoBeginDateMaskBox.Text) ||
+                freightData.CARGO_END != Converter.ParseDateTime(cargoEndDateMaskBox.Text) ||
+                freightData.CARGO_LET != Converter.ParseDateTime(cargoLetterSentDateMaskBox.Text) ||
                 freightData.CARG_COV1 != (string.IsNullOrEmpty(cargoCov1TextBox.Text) ? null : int.Parse(cargoCov1TextBox.Text)) ||
                 freightData.CARG_COV2 != (string.IsNullOrEmpty(cargoCov2TextBox.Text) ? null : int.Parse(cargoCov2TextBox.Text)) ||
                 freightData.CARG_COV3 != (string.IsNullOrEmpty(cargoCov3TextBox.Text) ? null : int.Parse(cargoCov3TextBox.Text)) ||
                 freightData.CARG_COV4 != (string.IsNullOrEmpty(cargoCov4TextBox.Text) ? null : int.Parse(cargoCov4TextBox.Text)) ||
-                freightData.PHY_BEG != (string.IsNullOrEmpty(damageBeginDateMaskBox.Text) ? null : DateTime.TryParse(damageBeginDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var damageBeg) ? damageBeg : null) ||
-                freightData.PHY_END != (string.IsNullOrEmpty(damageEndDateMaskBox.Text) ? null : DateTime.TryParse(damageEndDateMaskBox.Text, new CultureInfo("en-US"), DateTimeStyles.None, out var damageEnd) ? damageEnd : null) ||
+                freightData.PHY_BEG != Converter.ParseDateTime(damageBeginDateMaskBox.Text) ||
+                freightData.PHY_END != Converter.ParseDateTime(damageEndDateMaskBox.Text) ||
                 freightData.PHY_COV1 != (string.IsNullOrEmpty(damageCov1TextBox.Text) ? null : int.Parse(damageCov1TextBox.Text)) ||
                 freightData.PHY_COV2 != (string.IsNullOrEmpty(damageCov2TextBox.Text) ? null : int.Parse(damageCov2TextBox.Text)) ||
                 freightData.CANCEL != (string.IsNullOrEmpty(cancellationTextBox.Text) ? null : int.Parse(cancellationTextBox.Text));
@@ -245,6 +240,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                 damageCov2TextBox.Text = _freightData.PHY_COV2?.ToString();
                 cancellationTextBox.Text = _freightData.CANCEL?.ToString();
             }
+        }
+
+        private void LoadFreightCarriers()
+        {
+            FreightCarriers freightCarriers = new FreightCarriers(_mainWindow, _activeControlManager);
+            freightCarriers.DisplayFreightCarrierData(_freightData);
+            _mainWindow.DisposeControl(this);
+            _activeControlManager.SetActiveControl(freightCarriers);
         }
 
     }

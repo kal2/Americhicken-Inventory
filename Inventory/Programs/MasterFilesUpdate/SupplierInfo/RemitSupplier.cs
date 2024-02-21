@@ -12,7 +12,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
         private rem_sup? _remitData;
-        private readonly AmerichickenContext dbContext;
 
         public RemitSupplier(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
@@ -20,7 +19,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
             _mainWindow = mainWindow;
             _activeControlManager = activeControlManager;
-            dbContext = new AmerichickenContext();
 
             //wait for control to load then focus remitnametextbox
             this.Load += (s, e) => RemitNameTextBox.Focus();
@@ -28,8 +26,8 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         public void SetProgramLabels()
         {
             _mainWindow.SetProgramLabel("VIEW/CHANGE/DELETE REMIT TO SUPPLIER INFORMATION");
-            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel    5. Save/Update Insurance");
             _mainWindow.SetTextBoxLabel("ACTION:");
+            _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel    5. Save/Update Insurance");
         }
 
         public void PerformAction(string userInput)
@@ -58,6 +56,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 };
             }
         }
+
         public void UpdateRemitData(rem_sup? remitToData)
         {
             if (remitToData != null)
@@ -103,11 +102,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         public void UpdateExistingRemitToSupplier(rem_sup remitToData)
         {
-            var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
-            if (existingRemData != null)
+            using (AmerichickenContext dbContext = new())
             {
-                SetRemitToProperties(existingRemData);
-                dbContext.SaveChanges();
+                var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
+                if (existingRemData != null)
+                {
+                    SetRemitToProperties(existingRemData);
+                    dbContext.SaveChanges();
+                }
             }
         }
         public void AddNewRemitToSupplier()
@@ -119,11 +121,14 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             {
                 if (e.UserChoice == true)
                 {
-                    rem_sup newRemitTo = new();
-                    SetRemitToProperties(newRemitTo);
-                    _remitData = newRemitTo;
-                    dbContext.rem_sup.Add(newRemitTo);
-                    dbContext.SaveChanges();
+                    using (AmerichickenContext dbContext = new())
+                    {
+                        rem_sup newRemitTo = new();
+                        SetRemitToProperties(newRemitTo);
+                        _remitData = newRemitTo;
+                        dbContext.rem_sup.Add(newRemitTo);
+                        dbContext.SaveChanges();
+                    }
                 }
                 else if (e.UserChoice == false)
                 {
@@ -178,16 +183,20 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             {
                 if (e.UserChoice == true)
                 {
-                    var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
-                    if (existingRemData != null)
+                    using (AmerichickenContext dbContext = new())
                     {
-                        dbContext.rem_sup.Remove(existingRemData);
-                        dbContext.SaveChanges();
+                        var existingRemData = dbContext.rem_sup.Find(remitToData.PK_rem_sup);
+                        if (existingRemData != null)
+                        {
+                            dbContext.rem_sup.Remove(existingRemData);
+                            dbContext.SaveChanges();
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR: Remit Data not found in database. Please try again or contact developer.");
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("ERROR: Remit Data not found in database. Please try again or contact developer.");
-                    }
+                    
 
                 }
                 _mainWindow.DetachConfirmationEventListener(HandleUserConfirmation);

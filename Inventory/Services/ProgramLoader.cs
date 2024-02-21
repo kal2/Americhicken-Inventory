@@ -8,9 +8,10 @@ namespace Inventory.Services
 {
     public class ProgramLoader(MainWindow _mainWindow, ActiveControlManager _activeControlManager) : IDisposable
     {
+        //set dispose function here to satisfy IDisposable
         public void Dispose()
         {
-            
+
         }
         public void LoadProgram(string programName)
         {
@@ -94,6 +95,7 @@ namespace Inventory.Services
             {
                 if (e.SearchResults == null)
                 {
+                    shipFromUpdateInstance.SetName(e.NewEntryName);
                     _activeControlManager.SetActiveControl(shipFromUpdateInstance);
                 }
                 else
@@ -170,6 +172,7 @@ namespace Inventory.Services
             {
                 if (e.SearchResults == null)
                 {
+                    shipToCustomerInstance.SetName(e.NewEntryName);
                     _activeControlManager.SetActiveControl(shipToCustomerInstance);
                 }
                 else

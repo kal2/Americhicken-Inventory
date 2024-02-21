@@ -29,6 +29,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _mainWindow.SetCommandsLabel("1. Save    2. Edit    3. Delete    4. Cancel");
             _mainWindow.SetTextBoxLabel("ACTION:");
         }
+
         public void PerformAction(string userInput)
         {
             if (AvailableActions.TryGetValue(userInput, out var action))
@@ -150,6 +151,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                 }
                 _mainWindow.DetachConfirmationEventListener(HandleUserInput);
             }
+        }
+
+        public void SetName(string name)
+        {
+            supnameTextBox.Text = name;
         }
 
         private void ExitProgram()
