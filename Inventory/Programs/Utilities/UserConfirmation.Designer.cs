@@ -34,10 +34,11 @@
             // 
             // warningLabel
             // 
+            warningLabel.Anchor = AnchorStyles.Right;
             warningLabel.AutoSize = true;
             warningLabel.Font = new Font("Segoe UI", 16F);
             warningLabel.ForeColor = Color.White;
-            warningLabel.Location = new Point(235, 28);
+            warningLabel.Location = new Point(235, 25);
             warningLabel.Name = "warningLabel";
             warningLabel.Size = new Size(796, 30);
             warningLabel.TabIndex = 0;
@@ -51,12 +52,11 @@
             confirmationInput.ForeColor = Color.White;
             confirmationInput.Location = new Point(1034, 26);
             confirmationInput.Margin = new Padding(0);
-            confirmationInput.MaxLength = 2;
+            confirmationInput.MaxLength = 1;
             confirmationInput.Name = "confirmationInput";
             confirmationInput.Size = new Size(40, 27);
             confirmationInput.TabIndex = 47;
-            confirmationInput.KeyDown += confirmationInput_KeyDown;
-            confirmationInput.KeyPress += confirmationInput_KeyPress;
+            confirmationInput.TextChanged += confirmationInput_TextChanged;
             // 
             // UserConfirmation
             // 

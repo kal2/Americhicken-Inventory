@@ -43,29 +43,18 @@ namespace Inventory.Programs.Utilities
             warningLabel.Text = message;
         }
 
-        //Set keypress event to confirmationInput so all input is uppercase
-        private void confirmationInput_KeyPress(object sender, KeyPressEventArgs e)
+        private void confirmationInput_TextChanged(object sender, EventArgs e)
         {
-            e.KeyChar = Char.ToUpperInvariant(e.KeyChar);
-        }
-
-        private void confirmationInput_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            string userInput = confirmationInput.Text;
+            if (userInput == "Y" || userInput == "N")
             {
-                if (confirmationInput.Text.ToUpper() == "Y")
-                {
-                    UserChoice?.Invoke(this, new UserConfirmationEventArgs(true));
-                }
-                else if (confirmationInput.Text.ToUpper() == "N")
-                {
-                    UserChoice?.Invoke(this, new UserConfirmationEventArgs(false));
-                }
-                else
-                {
-                    MessageBox.Show("Invalid input. Please try again.");
-                    confirmationInput.Clear();
-                }
+                bool userChoice = userInput == "Y" ? true : false;
+                UserChoice?.Invoke(this, new UserConfirmationEventArgs(userChoice));
+            }
+            else
+            {
+                MessageBox.Show("Invalid input. Please try again.");
+                confirmationInput.Clear();
             }
         }
     }

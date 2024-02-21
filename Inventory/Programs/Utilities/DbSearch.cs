@@ -54,7 +54,7 @@ namespace Inventory.Views.UserControls
             }
         }
 
-        public void SearchDatabase(string searchInput)
+        public void SearchDatabase(string searchInput, bool addNewPrompt)
         {
             if (ValidationHelper.IsEmpty(searchInput))
             {
@@ -94,24 +94,30 @@ namespace Inventory.Views.UserControls
                         break;
                 }
 
-                //Need to add exclusion for searchResults.Count == 0 if coming from performSearch method
-
                 if (searchResults.Count == 0)
                 {
-                    _mainWindow.AttachConfirmationEventListener(AddNewEntry);
-                    _mainWindow.AskUserConfirmation("No results found. Would you like to add a new entry?");
-                   
-                    void AddNewEntry(object sender, UserConfirmationEventArgs e)
+                    if (addNewPrompt == false)
                     {
-                        if (e.UserChoice == true)
+                        MessageBox.Show("No results found.");
+                        return;
+                    }
+                    else
+                    {
+                        _mainWindow.AttachConfirmationEventListener(AddNewEntry);
+                        _mainWindow.AskUserConfirmation("No results found. Would you like to add a new entry? (Y/N)");
+
+                        void AddNewEntry(object sender, UserConfirmationEventArgs e)
                         {
-                            SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null!, selectedTable, searchInput));
+                            if (e.UserChoice == true)
+                            {
+                                SearchCompleted?.Invoke(this, new SearchResultsEventArgs(null!, selectedTable, searchInput));
+                            }
+                            else
+                            {
+                                ExitControl();
+                            }
+                            _mainWindow.DetachConfirmationEventListener(AddNewEntry);
                         }
-                        else
-                        {
-                            ExitControl();
-                        }
-                        _mainWindow.DetachConfirmationEventListener(AddNewEntry);
                     }
 
                 }
@@ -126,7 +132,7 @@ namespace Inventory.Views.UserControls
         public void PerformSearch(string dbTable, string searchQuery)
         {
             SetTable(dbTable);
-            SearchDatabase(searchQuery);
+            SearchDatabase(searchQuery, false);
         }
 
         public Dictionary<string, Action> AvailableActions
@@ -135,7 +141,7 @@ namespace Inventory.Views.UserControls
             {
                 return new Dictionary<string, Action>
                 {
-                    { "1", () => SearchDatabase(searchQuereyTextBox.Text) },
+                    { "1", () => SearchDatabase(searchQuereyTextBox.Text, true) },
                     { "2", () => searchQuereyTextBox.Clear() },
                     { "3", () => ExitControl() }
                 };
@@ -146,7 +152,6 @@ namespace Inventory.Views.UserControls
         {
             _mainWindow.DisposeControl(this); 
             _mainWindow.DisplayLastMenu();
-
         }
 
         public void PerformAction(string userInput)
@@ -200,7 +205,7 @@ namespace Inventory.Views.UserControls
         {
             if (e.KeyCode == Keys.Enter)
             {
-                SearchDatabase(searchQuereyTextBox.Text);
+                SearchDatabase(searchQuereyTextBox.Text, true);
                 e.Handled = true;
             }
         }

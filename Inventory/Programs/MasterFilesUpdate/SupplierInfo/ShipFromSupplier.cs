@@ -148,14 +148,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                         MessageBox.Show("ERROR: Supplier not found in database. Please try again or contact developer.");
                     }
                 }
-                else if (e.UserChoice == false)
-                {
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("ERROR: Something went wrong deleting the supplier, please contact developer");
-                }
                 _mainWindow.DetachConfirmationEventListener(HandleUserInput);
             }
         }

@@ -190,14 +190,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
                     }
 
                 }
-                else if (e.UserChoice == false)
-                {
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("ERROR: Something went wrong. Please try again or contact developer.");
-                }
+                _mainWindow.DetachConfirmationEventListener(HandleUserConfirmation);
             }
         }
 
