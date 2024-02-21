@@ -194,6 +194,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             }
         }
 
+        public void SetName(string name)
+        {
+            RemitNameTextBox.Text = name;
+        }
+
         private void ExitProgram()
         {
             using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))

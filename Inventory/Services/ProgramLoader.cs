@@ -55,6 +55,7 @@ namespace Inventory.Services
             {
                 if (e.SearchResults == null)
                 {
+                    remitToUpdateInstance.SetName(e.NewEntryName);
                     _activeControlManager.SetActiveControl(remitToUpdateInstance);
                 }
                 else
