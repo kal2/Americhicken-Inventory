@@ -9,11 +9,6 @@ namespace Inventory.Services
 {
     internal static class Converter
     {
-        internal static string TrimOrNull(string text)
-        {
-            var trimmedText = text?.Trim();
-            return string.IsNullOrEmpty(trimmedText) ? null : trimmedText;
-        }
         internal static DateTime? ParseDateTime(string input)
         {
             if (string.IsNullOrEmpty(input))
