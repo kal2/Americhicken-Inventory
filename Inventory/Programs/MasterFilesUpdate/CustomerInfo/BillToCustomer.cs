@@ -111,6 +111,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                     SetBillToProperties(existingBillTo);
 
                     dbContext.SaveChanges();
+                    ExitProgram();
                 }
                 else
                 {
@@ -135,6 +136,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                         _bil_Buy = bil_Buy;
                         dbContext.bil_buy.Add(bil_Buy);
                         dbContext.SaveChanges();
+                        ExitProgram();
                     }
                 }
                 _mainWindow.DetachConfirmationEventListener(HandleUserInput);
@@ -193,6 +195,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                         var existingBillTo = dbContext.bil_buy.Find(bil_Buy.PK_bil_buy);
                         dbContext.bil_buy.Remove(existingBillTo!);
                         dbContext.SaveChanges();
+                        ExitProgram();
                     }
                 }
                 _mainWindow.DetachConfirmationEventListener(HandleUserConfirmation);

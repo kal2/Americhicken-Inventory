@@ -2,7 +2,9 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Microsoft.EntityFrameworkCore;
+using Windows.Security.Cryptography.Certificates;
 
 namespace Inventory.Models;
 
@@ -33,7 +35,7 @@ public partial class AmerichickenContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=MIRACLE\\MSSQLSERVER01;Initial Catalog=Americhicken;Integrated Security=True;Encrypt=True; Trust Server Certificate = true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -44,7 +46,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.PK_bil_buy).HasDefaultValueSql("(newid())");
             entity.Property(e => e.active).HasMaxLength(1);
             entity.Property(e => e.bal_calc).HasColumnType("numeric(9, 2)");
-            entity.Property(e => e.bbuycode).HasMaxLength(4);
+            entity.Property(e => e.bbuycode).HasMaxLength(50);
             entity.Property(e => e.beg_date).HasColumnType("date");
             entity.Property(e => e.city).HasMaxLength(20);
             entity.Property(e => e.country).HasMaxLength(28);
@@ -81,7 +83,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.internat).HasMaxLength(1);
             entity.Property(e => e.istreet).HasMaxLength(28);
             entity.Property(e => e.istreet2).HasMaxLength(28);
-            entity.Property(e => e.led_code).HasMaxLength(4);
+            entity.Property(e => e.led_code).HasMaxLength(50);
             entity.Property(e => e.let_crd).HasColumnType("numeric(7, 0)");
             entity.Property(e => e.letter_c).HasMaxLength(1);
             entity.Property(e => e.name).HasMaxLength(40);
@@ -124,8 +126,8 @@ public partial class AmerichickenContext : DbContext
             entity.HasKey(e => e.PK_buyer);
 
             entity.Property(e => e.PK_buyer).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.bbuycode).HasMaxLength(4);
-            entity.Property(e => e.buy_code).HasMaxLength(4);
+            entity.Property(e => e.bbuycode).HasMaxLength(50);
+            entity.Property(e => e.buy_code).HasMaxLength(50);
             entity.Property(e => e.city).HasMaxLength(20);
             entity.Property(e => e.cont_fax)
                 .HasMaxLength(10)
@@ -161,7 +163,7 @@ public partial class AmerichickenContext : DbContext
                 .HasMaxLength(10)
                 .IsFixedLength();
             entity.Property(e => e.grp_code)
-                .HasMaxLength(4)
+                .HasMaxLength(16)
                 .IsFixedLength();
             entity.Property(e => e.grp_desc)
                 .HasMaxLength(20)
@@ -480,7 +482,7 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.refer_cov).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.refer_end).HasColumnType("date");
             entity.Property(e => e.refer_let).HasColumnType("date");
-            entity.Property(e => e.rsupcode).HasMaxLength(4);
+            entity.Property(e => e.rsupcode).HasMaxLength(50);
             entity.Property(e => e.state).HasMaxLength(2);
             entity.Property(e => e.street).HasMaxLength(40);
             entity.Property(e => e.temp).HasMaxLength(1);
@@ -543,10 +545,10 @@ public partial class AmerichickenContext : DbContext
             entity.Property(e => e.note).HasMaxLength(60);
             entity.Property(e => e.phone).HasMaxLength(10);
             entity.Property(e => e.pu_code).HasMaxLength(4);
-            entity.Property(e => e.rsupcode).HasMaxLength(4);
+            entity.Property(e => e.rsupcode).HasMaxLength(50);
             entity.Property(e => e.state).HasMaxLength(50);
             entity.Property(e => e.street).HasMaxLength(40);
-            entity.Property(e => e.sup_code).HasMaxLength(4);
+            entity.Property(e => e.sup_code).HasMaxLength(50);
             entity.Property(e => e.used).HasMaxLength(1);
             entity.Property(e => e.zip).HasMaxLength(5);
             entity.Property(e => e.zip4).HasMaxLength(4);

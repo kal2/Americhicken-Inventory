@@ -11,7 +11,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
         private readonly ActiveControlManager _activeControlManager;
         private supplier? _supplierData;
         private rem_sup? remitToObject;
-        private readonly AmerichickenContext dbContext;
 
         public ShipFromSupplier(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
@@ -19,7 +18,6 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _mainWindow = mainWindow;
             _activeControlManager = activeControlManager;
 
-            dbContext = new AmerichickenContext();
             Load += (s, e) => supnameTextBox.Focus();
         }
 
@@ -72,15 +70,19 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
         private void UpdateExistingSupplier(supplier supplierData)
         {
-            var existingSupplier = dbContext.supplier.Find(supplierData.PK_supplier);
-            if(existingSupplier != null)
+            using (AmerichickenContext dbContext = new())
             {
-                SetSupplierProperties(existingSupplier);
-                dbContext.SaveChanges();
-            }
-            else
-            {
-                MessageBox.Show("ERROR: Supplier not found in database. Please try again or contact developer.");
+                var existingSupplier = dbContext.supplier.Find(supplierData.PK_supplier);
+                if (existingSupplier != null)
+                {
+                    SetSupplierProperties(existingSupplier);
+                    dbContext.SaveChanges();
+                    ExitProgram();
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Supplier not found in database. Please try again or contact developer.");
+                }
             }
         }
 
@@ -92,20 +94,15 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             {
                 if (e.UserChoice == true)
                 {
-                    supplier newSupplier = new();
-                    SetSupplierProperties(newSupplier);
-                    _supplierData = newSupplier;
-                    dbContext.supplier.Add(newSupplier);
-                    dbContext.SaveChanges();
-                }
-                else if (e.UserChoice == false)
-                {
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("ERROR: Something went wrong adding a new supplier, please contact developer");
-                    return;
+                    using (AmerichickenContext dbContext = new())
+                    {
+                        supplier newSupplier = new();
+                        SetSupplierProperties(newSupplier);
+                        _supplierData = newSupplier;
+                        dbContext.supplier.Add(newSupplier);
+                        dbContext.SaveChanges();
+                        ExitProgram();
+                    }
                 }
                 _mainWindow.DetachConfirmationEventListener(HandleUserInput);
             }
@@ -126,7 +123,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             existingSupplier.state = shipFromStateTextBox.Text;
             existingSupplier.zip = shipFromZipTextBox.Text;
             existingSupplier.note = noteTextBox.Text;
-            existingSupplier.rsupcode = remitToObject?.rsupcode;
+            existingSupplier.rsupcode = remitToObject?.PK_rem_sup.ToString();
         }
 
         private void DeleteSupplier(supplier supplierData)
@@ -138,18 +135,23 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             {
                 if (e.UserChoice == true)
                 {
-                    var existingSupplier = dbContext.supplier.Find(supplierData.PK_supplier);
-                    if (existingSupplier != null)
+                    using (AmerichickenContext dbContext = new())
                     {
-                        dbContext.supplier.Remove(existingSupplier);
-                        dbContext.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("ERROR: Supplier not found in database. Please try again or contact developer.");
+                        var existingSupplier = dbContext.supplier.Find(supplierData.PK_supplier);
+                        if (existingSupplier != null)
+                        {
+                            dbContext.supplier.Remove(existingSupplier);
+                            dbContext.SaveChanges();
+                            ExitProgram();
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR: Supplier not found in database. Please try again or contact developer.");
+                        }
                     }
                 }
                 _mainWindow.DetachConfirmationEventListener(HandleUserInput);
+                ExitProgram();
             }
         }
 
@@ -241,7 +243,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
             _activeControlManager.SetActiveControl(this);
         }
 
-        public void GetShipFromData(supplier supplierObject)
+        public void DisplayShipFromData(supplier supplierObject)
         {
             _supplierData = supplierObject;
             supnameTextBox.Text = supplierObject.name;
@@ -260,8 +262,10 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.RemitToSuppliers
 
             if (supplierObject.rsupcode != null)
             {
-                remitToObject = dbContext.rem_sup.SingleOrDefault(s => s.rsupcode == supplierObject.rsupcode);
-
+                using (AmerichickenContext dbContext = new())
+                {
+                    remitToObject = dbContext.rem_sup.SingleOrDefault(s => s.rsupcode == supplierObject.rsupcode || s.PK_rem_sup.ToString() == supplierObject.rsupcode);
+                }
                 if (remitToObject != null)
                 {
                     DisplayRemitData(remitToObject);

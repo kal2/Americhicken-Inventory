@@ -86,7 +86,7 @@
             principalBillToNameTextBox = new TextBox();
             label30 = new Label();
             principalStreetDisplayLabel = new Label();
-            pricipalCityStateDisplayLabel = new Label();
+            principalCityStateDisplayLabel = new Label();
             label32 = new Label();
             label31 = new Label();
             SuspendLayout();
@@ -766,6 +766,7 @@
             principalBillToNameTextBox.Name = "principalBillToNameTextBox";
             principalBillToNameTextBox.Size = new Size(636, 27);
             principalBillToNameTextBox.TabIndex = 27;
+            principalBillToNameTextBox.KeyDown += PrincipalBillToNameTextBox_KeyDown;
             // 
             // label30
             // 
@@ -783,22 +784,22 @@
             principalStreetDisplayLabel.AutoSize = true;
             principalStreetDisplayLabel.Font = new Font("Segoe UI", 16F);
             principalStreetDisplayLabel.ForeColor = Color.White;
-            principalStreetDisplayLabel.Location = new Point(554, 566);
+            principalStreetDisplayLabel.Location = new Point(468, 568);
             principalStreetDisplayLabel.Name = "principalStreetDisplayLabel";
             principalStreetDisplayLabel.Size = new Size(84, 30);
             principalStreetDisplayLabel.TabIndex = 379;
             principalStreetDisplayLabel.Text = "STREET";
             // 
-            // pricipalCityStateDisplayLabel
+            // principalCityStateDisplayLabel
             // 
-            pricipalCityStateDisplayLabel.AutoSize = true;
-            pricipalCityStateDisplayLabel.Font = new Font("Segoe UI", 16F);
-            pricipalCityStateDisplayLabel.ForeColor = Color.White;
-            pricipalCityStateDisplayLabel.Location = new Point(554, 596);
-            pricipalCityStateDisplayLabel.Name = "pricipalCityStateDisplayLabel";
-            pricipalCityStateDisplayLabel.Size = new Size(162, 30);
-            pricipalCityStateDisplayLabel.TabIndex = 380;
-            pricipalCityStateDisplayLabel.Text = "CITY, STATE ZIP";
+            principalCityStateDisplayLabel.AutoSize = true;
+            principalCityStateDisplayLabel.Font = new Font("Segoe UI", 16F);
+            principalCityStateDisplayLabel.ForeColor = Color.White;
+            principalCityStateDisplayLabel.Location = new Point(468, 598);
+            principalCityStateDisplayLabel.Name = "principalCityStateDisplayLabel";
+            principalCityStateDisplayLabel.Size = new Size(162, 30);
+            principalCityStateDisplayLabel.TabIndex = 380;
+            principalCityStateDisplayLabel.Text = "CITY, STATE ZIP";
             // 
             // label32
             // 
@@ -829,7 +830,7 @@
             BackColor = Color.FromArgb(1, 0, 128);
             Controls.Add(label31);
             Controls.Add(label32);
-            Controls.Add(pricipalCityStateDisplayLabel);
+            Controls.Add(principalCityStateDisplayLabel);
             Controls.Add(principalStreetDisplayLabel);
             Controls.Add(principalBillToNameTextBox);
             Controls.Add(label30);
@@ -955,7 +956,7 @@
         private TextBox principalBillToNameTextBox;
         private Label label30;
         private Label principalStreetDisplayLabel;
-        private Label pricipalCityStateDisplayLabel;
+        private Label principalCityStateDisplayLabel;
         private Label label32;
         private Label label31;
     }

@@ -97,7 +97,7 @@ namespace Inventory.Services
             if (e.KeyChar == (char)Keys.Enter)
             {
                 e.Handled = true; // Prevent the enter key from being processed by the TextBox
-                    SendKeys.Send("{TAB}"); // Send a tab key press
+                        SendKeys.Send("{TAB}"); // Send a tab key press
             }
         }
 

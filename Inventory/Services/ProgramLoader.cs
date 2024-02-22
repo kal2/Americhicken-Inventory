@@ -115,7 +115,7 @@ namespace Inventory.Services
             {
                 if (e.SelectedResult != null)
                 {
-                    shipFromUpdateInstance.GetShipFromData((supplier)e!.SelectedResult);
+                    shipFromUpdateInstance.DisplayShipFromData((supplier)e!.SelectedResult);
                 }
                 _activeControlManager.SetActiveControl(shipFromUpdateInstance);
             }

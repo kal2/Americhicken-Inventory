@@ -9,7 +9,8 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
     {
         private readonly MainWindow _mainWindow;
         private readonly ActiveControlManager _activeControlManager;
-        private buyer _buyer;
+        private buyer? buyer;
+        private bil_buy? billBuyer;
 
         public ShipToCustomer(MainWindow mainWindow, ActiveControlManager activeControlManager)
         {
@@ -44,9 +45,9 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             {
                 return new Dictionary<string, Action>
                 {
-                    { "1", () => UpdateShipToCustomer(_buyer) },
+                    { "1", () => UpdateShipToCustomer(buyer) },
                     { "2", () => customerShipToTextBox.Focus() },
-                    { "3", () => DeleteShipToCustomer(_buyer) },
+                    { "3", () => DeleteShipToCustomer(buyer) },
                     { "4", () => ExitProgram() }
                 };
             }
@@ -94,8 +95,8 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                 buyer.zip4 != shipToZip4TextBox.Text ||
                 buyer.note != noteTextBox.Text ||
                 buyer.grp_code != groupCodeTextBox.Text ||
-                buyer.grp_desc != groupDescriptionTextBox.Text;
-               // buyer.bbuycode != principalBillToNameTextBox.Text;
+                buyer.grp_desc != groupDescriptionTextBox.Text ||
+                buyer.bbuycode != billBuyer?.PK_bil_buy.ToString();
         }
 
         private void UpdateExistingShipToCustomer(buyer buyerData)
@@ -107,6 +108,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                 {
                     SetShipToCustomerProperties(existingBuyer);
                     dbContext.SaveChanges();
+                    ExitProgram();
                 }
                 else
                 {
@@ -130,42 +132,44 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                         SetShipToCustomerProperties(buyer);
                         dbContext.buyer.Add(buyer);
                         dbContext.SaveChanges();
+                        ExitProgram();
                     }
                 }
                 _mainWindow.DetachConfirmationEventListener(HandleUserInput);
             }
         }
 
-        private void SetShipToCustomerProperties(buyer buyer)
+        private void SetShipToCustomerProperties(buyer buyerObject)
         {
-            buyer.name = customerShipToTextBox.Text;
-            buyer.phone = phoneNumberMaskedTextBox.Text;
-            buyer.fax = faxNumberMaskedTextBox.Text;
-            buyer.cont_name = contactName1TextBox.Text;
-            buyer.cont_nam2 = contactName2TextBox.Text;
-            buyer.cont_ph = contactPhoneMaskedTextBox.Text;
-            buyer.cont_fax = contactFaxMaskedTextBox.Text;
-            buyer.frt_ph = freightContactPhoneMaskedTextBox.Text;
-            buyer.del_ph = deliveryPhoneMaskedTextBox.Text;
-            buyer.del_mail = deliveryEmailTextBox.Text;
-            buyer.del_time = receivingHoursTextBox.Text;
-            buyer.mon_recv = receivingMondayTextBox.Text;
-            buyer.tue_recv = receivingTuesdayTextBox.Text;
-            buyer.wed_recv = receivingWednesdayTextBox.Text;
-            buyer.thu_recv = receivingThursdayTextBox.Text;
-            buyer.fri_recv = receivingFridayTextBox.Text;
-            buyer.sat_recv = receivingSaturdayTextBox.Text;
-            buyer.sun_recv = receivingSundayTextBox.Text;
-            buyer.street = shipToAddressTextBox.Text;
-            buyer.city = shipToCityTextBox.Text;
-            buyer.state = shipToStateTextBox.Text;
-            buyer.zip = shipToZipTextBox.Text;
-            buyer.zip4 = shipToZip4TextBox.Text;
-            buyer.note = noteTextBox.Text;
-            buyer.grp_code = groupCodeTextBox.Text;
-            buyer.grp_desc = groupDescriptionTextBox.Text;
-           // buyer.bbuycode = principalBillToNameTextBox.Text;
-            _buyer = buyer;
+            buyerObject.name = customerShipToTextBox.Text;
+            buyerObject.phone = phoneNumberMaskedTextBox.Text;
+            buyerObject.fax = faxNumberMaskedTextBox.Text;
+            buyerObject.cont_name = contactName1TextBox.Text;
+            buyerObject.cont_nam2 = contactName2TextBox.Text;
+            buyerObject.cont_ph = contactPhoneMaskedTextBox.Text;
+            buyerObject.cont_fax = contactFaxMaskedTextBox.Text;
+            buyerObject.frt_ph = freightContactPhoneMaskedTextBox.Text;
+            buyerObject.del_ph = deliveryPhoneMaskedTextBox.Text;
+            buyerObject.del_mail = deliveryEmailTextBox.Text;
+            buyerObject.del_time = receivingHoursTextBox.Text;
+            buyerObject.mon_recv = receivingMondayTextBox.Text;
+            buyerObject.tue_recv = receivingTuesdayTextBox.Text;
+            buyerObject.wed_recv = receivingWednesdayTextBox.Text;
+            buyerObject.thu_recv = receivingThursdayTextBox.Text;
+            buyerObject.fri_recv = receivingFridayTextBox.Text;
+            buyerObject.sat_recv = receivingSaturdayTextBox.Text;
+            buyerObject.sun_recv = receivingSundayTextBox.Text;
+            buyerObject.street = shipToAddressTextBox.Text;
+            buyerObject.city = shipToCityTextBox.Text;
+            buyerObject.state = shipToStateTextBox.Text;
+            buyerObject.zip = shipToZipTextBox.Text;
+            buyerObject.zip4 = shipToZip4TextBox.Text;
+            buyerObject.note = noteTextBox.Text;
+            buyerObject.grp_code = groupCodeTextBox.Text;
+            buyerObject.grp_desc = groupDescriptionTextBox.Text;
+            buyerObject.bbuycode = billBuyer?.PK_bil_buy.ToString();
+            
+            buyer = buyerObject;
         }
 
         private void DeleteShipToCustomer(buyer buyer)
@@ -183,6 +187,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
                         {
                             dbContext.buyer.Remove(existingBuyer);
                             dbContext.SaveChanges();
+                            ExitProgram();
                         }
                         else
                         {
@@ -208,40 +213,113 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.CustomerInfo
             }
         }
 
-        public void DisplayShipToCustomerData(buyer buyer)
+        private void PrincipalBillToNameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            _buyer = buyer;
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (principalBillToNameTextBox.Text.Length != 0)
+                {
+                    string userInput = principalBillToNameTextBox.Text;
+                    DbSearch dbSearchInstance = new(_mainWindow, _activeControlManager); 
+                    dbSearchInstance.SearchCompleted += (f, f2) => HandleSearchCompleted(f!, f2);
+                    dbSearchInstance.PerformSearch("bil_buy", userInput);
+                    dbSearchInstance.Dispose();
+                    dbSearchInstance.SearchCompleted -= HandleSearchCompleted;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR: Please enter a valid bill to name");
+                }
+                e.Handled = true;
+            }
+        }
 
-            customerShipToTextBox.Text = _buyer.name;
-            phoneNumberMaskedTextBox.Text = _buyer.phone;
-            faxNumberMaskedTextBox.Text = _buyer.fax;
-            contactName1TextBox.Text = _buyer.cont_name;
-            contactName2TextBox.Text = _buyer.cont_nam2;
-            contactPhoneMaskedTextBox.Text = _buyer.cont_ph;
-            contactFaxMaskedTextBox.Text = _buyer.cont_fax;
-            freightContactPhoneMaskedTextBox.Text = _buyer.frt_ph;
-            deliveryPhoneMaskedTextBox.Text = _buyer.del_ph;
-            deliveryEmailTextBox.Text = _buyer.del_mail;
-            receivingHoursTextBox.Text = _buyer.del_time;
-            receivingMondayTextBox.Text = _buyer.mon_recv;
-            receivingTuesdayTextBox.Text = _buyer.tue_recv;
-            receivingWednesdayTextBox.Text = _buyer.wed_recv;
-            receivingThursdayTextBox.Text = _buyer.thu_recv;
-            receivingFridayTextBox.Text = _buyer.fri_recv;
-            receivingSaturdayTextBox.Text = _buyer.sat_recv;
-            receivingSundayTextBox.Text = _buyer.sun_recv;
-            shipToAddressTextBox.Text = _buyer.street;
-            shipToCityTextBox.Text = _buyer.city;
-            shipToStateTextBox.Text = _buyer.state;
-            shipToZipTextBox.Text = _buyer.zip;
-            shipToZip4TextBox.Text = _buyer.zip4;
-            noteTextBox.Text = _buyer.note;
-            groupCodeTextBox.Text = _buyer.grp_code;
-            groupDescriptionTextBox.Text = _buyer.grp_desc;
+        public void HandleSearchCompleted(object sender, DbSearch.SearchResultsEventArgs e)
+        {
+            if (e.SearchResults.Count == 0)
+            {
+                _activeControlManager.SetActiveControl(this);
+            }
+            else
+            {
+                MatchSelect matchSelectInstance = new(_mainWindow, _activeControlManager);
+                matchSelectInstance.SelectedSearchResult += (f, f2) => HandleSelectedBillToSearchResult(f!, f2);
+                matchSelectInstance.SetMatchSelectLabel("Bill To");
+                matchSelectInstance.GetResults(e.SearchResults, e.TableSelected);
+                if (e.SearchResults.Count > 1)
+                {
+                    _activeControlManager.SetActiveControl(matchSelectInstance);
+                }
+                else
+                {
+                    _mainWindow.DisposeControl(matchSelectInstance);
+                    matchSelectInstance.SelectedSearchResult -= HandleSelectedBillToSearchResult;
+                    _activeControlManager.SetActiveControl(this);
+                }
+            }
+        }
 
-            //TODO: Add logic to display data from other tables
-           // principalBillToNameTextBox.Text = _buyer.bbuycode;
+        private void HandleSelectedBillToSearchResult(object sender, MatchSelect.SelectedSearchResultEventArgs e)
+        {
+            bil_buy? selectedResult = e.SelectedResult as bil_buy;
 
+            DisplayRemitToData(selectedResult!);
+            _activeControlManager.SetActiveControl(this);
+        }
+
+        public void DisplayShipToCustomerData(buyer buyerData)
+        {
+            buyer = buyerData;
+
+            customerShipToTextBox.Text = buyer.name;
+            phoneNumberMaskedTextBox.Text = buyer.phone;
+            faxNumberMaskedTextBox.Text = buyer.fax;
+            contactName1TextBox.Text = buyer.cont_name;
+            contactName2TextBox.Text = buyer.cont_nam2;
+            contactPhoneMaskedTextBox.Text = buyer.cont_ph;
+            contactFaxMaskedTextBox.Text = buyer.cont_fax;
+            freightContactPhoneMaskedTextBox.Text = buyer.frt_ph;
+            deliveryPhoneMaskedTextBox.Text = buyer.del_ph;
+            deliveryEmailTextBox.Text = buyer.del_mail;
+            receivingHoursTextBox.Text = buyer.del_time;
+            receivingMondayTextBox.Text = buyer.mon_recv;
+            receivingTuesdayTextBox.Text = buyer.tue_recv;
+            receivingWednesdayTextBox.Text = buyer.wed_recv;
+            receivingThursdayTextBox.Text = buyer.thu_recv;
+            receivingFridayTextBox.Text = buyer.fri_recv;
+            receivingSaturdayTextBox.Text = buyer.sat_recv;
+            receivingSundayTextBox.Text = buyer.sun_recv;
+            shipToAddressTextBox.Text = buyer.street;
+            shipToCityTextBox.Text = buyer.city;
+            shipToStateTextBox.Text = buyer.state;
+            shipToZipTextBox.Text = buyer.zip;
+            shipToZip4TextBox.Text = buyer.zip4;
+            noteTextBox.Text = buyer.note;
+            groupCodeTextBox.Text = buyer.grp_code;
+            groupDescriptionTextBox.Text = buyer.grp_desc;
+
+           if (buyer.bbuycode != null)
+           {
+                using (AmerichickenContext dbContext = new())
+                {
+                    billBuyer = dbContext.bil_buy.SingleOrDefault(s => s.bbuycode == buyer.bbuycode || s.PK_bil_buy.ToString() == buyer.bbuycode);
+                }
+                if (billBuyer != null)
+                {
+                    DisplayRemitToData(billBuyer);
+                }
+           }
+        }
+
+        private void DisplayRemitToData(bil_buy billBuyerData)
+        {
+            billBuyer = billBuyerData;
+            if (billBuyer != null)
+            {
+                principalBillToNameTextBox.Text = billBuyerData.name;
+                principalStreetDisplayLabel.Text = billBuyerData.street;
+                principalCityStateDisplayLabel.Text = billBuyerData.city + ", " + billBuyerData.state + " " + billBuyerData.zip;
+            }
         }
     }
 }

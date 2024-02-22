@@ -108,6 +108,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                 {
                     SetFreightProperties(existingFreight);
                     dbContext.SaveChanges();
+                    ExitProgram();
                 }
                 else
                 {
@@ -132,6 +133,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                         _freightData = newFreight;
                         dbContext.freight.Add(newFreight);
                         dbContext.SaveChanges();
+                        ExitProgram();
                     }
                 }
                 _mainWindow.DetachConfirmationEventListener(HandleUserConfirmation);
@@ -180,6 +182,7 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
                         {
                             dbContext.freight.Remove(existingFreightData);
                             dbContext.SaveChanges();
+                            ExitProgram();
                         }
                         else
                         {
