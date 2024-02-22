@@ -45,7 +45,6 @@ namespace Inventory.Programs.Utilities
 
         private void confirmationInput_TextChanged(object sender, EventArgs e)
         {
-            UserChoice -= confirmationInput_TextChanged;
             string userInput = confirmationInput.Text;
             if (!string.IsNullOrEmpty(userInput))
             {
@@ -58,9 +57,8 @@ namespace Inventory.Programs.Utilities
                 {
                     MessageBox.Show("Invalid input. Please try again.");
                 }
+                confirmationInput.Clear();
             }
-            confirmationInput.Clear();
-            UserChoice += confirmationInput_TextChanged;
         }
     }
 }

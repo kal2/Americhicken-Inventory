@@ -134,6 +134,7 @@ namespace Inventory.Services
             {
                 if (e.SearchResults == null)
                 {
+                    freightCarrierInstance.SetName(e.NewEntryName);
                     _activeControlManager.SetActiveControl(freightCarrierInstance);
                 }
                 else
@@ -211,6 +212,7 @@ namespace Inventory.Services
             {
                 if (e.SearchResults == null)
                 {
+                    billToCustomerInstance.SetName(e.NewEntryName);
                     _activeControlManager.SetActiveControl(billToCustomerInstance);
                 }
                 else

@@ -56,7 +56,6 @@ namespace Inventory
 
         public void AskUserConfirmation(string? message)
         {
-            mainUserConfirmation.confirmationInput.Clear();
             DisplayUserConfirmation(message);
         }
 

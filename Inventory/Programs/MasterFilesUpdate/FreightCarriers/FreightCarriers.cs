@@ -191,6 +191,11 @@ namespace Inventory.Views.UserControls.MasterFilesUpdate.FreightCarriers
             }
         }
 
+        public void SetName(string name)
+        {
+            freightNameTextBox.Text = name;
+        }
+
         private void ExitProgram()
         {
             using (var _programLoader = new ProgramLoader(_mainWindow, _activeControlManager))
